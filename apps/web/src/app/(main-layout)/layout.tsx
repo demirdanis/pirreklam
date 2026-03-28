@@ -5,6 +5,7 @@ import Header from '@/components/header/header';
 import type { Metadata } from 'next';
 import { fontVariables } from '@/lib/fonts';
 import { getCategoryBarData } from './_helpers/service/getCategoryBar/getCategoryBar.mock';
+import { getCategoryBarDataWithCache } from './_helpers/service/getCategoryBar/getCategoryBar.service';
 import { getFeaturedProductsData } from './_helpers/service/getFeaturedProducts/getFeaturedProducts.mock';
 import { getFooterData } from './_helpers/service/getFooter/getFooter.mock';
 import { getHeaderData } from './_helpers/service/getHeader/getHeader.mock';
@@ -48,12 +49,13 @@ export default async function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [headerData, footerData, featuredProductsData, categoryBarData] = await Promise.all([
-    getHeaderData(),
-    getFooterData(),
-    getFeaturedProductsData(),
-    getCategoryBarData(),
-  ]);
+  const [headerData, footerData, featuredProductsData, categoryBarData] =
+    await Promise.all([
+      getHeaderData(),
+      getFooterData(),
+      getFeaturedProductsData(),
+      getCategoryBarDataWithCache(),
+    ]);
 
   return (
     <html className={fontVariables}>

@@ -1,0 +1,13 @@
+query GetCategoryBar {
+  main_categories {
+    id
+    name
+    slug
+    order
+    sub_categories {
+      name
+      slug
+      order
+    }
+  }
+}

@@ -41,6 +41,7 @@ npm-debug.log*
 # Misc
 .DS_Store
 *.pem
+.env.*
 
 debug-storybook.log
 storybook-static/

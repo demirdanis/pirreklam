@@ -7,8 +7,8 @@ interface FeaturedProductsProps {
 
 export default function FeaturedProducts({ data }: FeaturedProductsProps) {
   return (
-    <div className="bg-white border-b border-[#2a2d2d]">
-      <div className="bg-header-menu-reversed mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="bg-header-menu-reversed border-b border-[#2a2d2d]">
+      <div className=" mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2 overflow-x-auto py-3 scrollbar-none [scrollbar-width:none]">
           {data.products.map((product) => (
             <Link

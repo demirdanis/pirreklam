@@ -2,13 +2,13 @@
 
 import type { Category, CategoryBarData } from './category-bar.types';
 import { ChevronDown, Grid2x2, Search, X } from 'lucide-react';
+import { useRef, useState } from 'react';
 
 import Link from 'next/link';
-import { useState } from 'react';
 
 function CategoryDropdown({ category }: { category: Category }) {
   return (
-    <div className="absolute left-0 top-full z-50 mt-px w-56 rounded-b-lg bg-white shadow-xl border border-surface-secondary-light-b overflow-hidden">
+    <div className="w-56 rounded-b-lg bg-white shadow-xl border border-surface-secondary-light-b overflow-hidden">
       {category.subItems.map((sub, i) => (
         <Link
           key={sub.href}
@@ -87,9 +87,32 @@ export default function CategoryBar({ data }: CategoryBarProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [mobileActiveId, setMobileActiveId] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [dropdownLeft, setDropdownLeft] = useState(0);
+
+  const navRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const closeTimeout = useRef<ReturnType<typeof setTimeout>>(null);
 
   const mobileActiveCategory =
     data.categories.find((c) => c.id === mobileActiveId) ?? null;
+
+  const activeCategory = data.categories.find((c) => c.id === activeId) ?? null;
+
+  const handleMouseEnter = (id: string) => {
+    if (closeTimeout.current) clearTimeout(closeTimeout.current);
+    setActiveId(id);
+    const itemEl = itemRefs.current[id];
+    const navEl = navRef.current;
+    if (itemEl && navEl) {
+      const itemRect = itemEl.getBoundingClientRect();
+      const navRect = navEl.getBoundingClientRect();
+      setDropdownLeft(itemRect.left - navRect.left);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    closeTimeout.current = setTimeout(() => setActiveId(null), 100);
+  };
 
   return (
     <>
@@ -103,37 +126,57 @@ export default function CategoryBar({ data }: CategoryBarProps) {
               </span>
             </div>
 
-            <div className="flex flex-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {data.categories.map((cat) => (
-                <div
-                  key={cat.id}
-                  className="relative shrink-0"
-                  onMouseEnter={() => setActiveId(cat.id)}
-                  onMouseLeave={() => setActiveId(null)}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setMobileActiveId(cat.id)}
-                    className={`flex items-center gap-1.5 px-5 py-3.5 text-sm font-medium transition-colors whitespace-nowrap ${
-                      activeId === cat.id
-                        ? 'text-white bg-white/5'
-                        : 'text-white/60 hover:text-white'
-                    }`}
+            <div className="relative flex-1" ref={navRef}>
+              <div className="flex overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {data.categories.map((cat) => (
+                  <div
+                    key={cat.id}
+                    ref={(el) => {
+                      itemRefs.current[cat.id] = el;
+                    }}
+                    className="shrink-0"
+                    onMouseEnter={() => handleMouseEnter(cat.id)}
+                    onMouseLeave={handleMouseLeave}
                   >
-                    {cat.label}
-                    {cat.subItems.length > 0 && (
-                      <ChevronDown
-                        className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                          activeId === cat.id ? 'rotate-180 text-[#e32231]' : ''
-                        }`}
-                      />
-                    )}
-                  </button>
-                  {activeId === cat.id && cat.subItems.length > 0 && (
-                    <CategoryDropdown category={cat} />
-                  )}
-                </div>
-              ))}
+                    <button
+                      type="button"
+                      onClick={() => setMobileActiveId(cat.id)}
+                      className={`flex items-center gap-1.5 px-5 py-3.5 text-sm font-medium transition-colors whitespace-nowrap ${
+                        activeId === cat.id
+                          ? 'text-white bg-white/5'
+                          : 'text-white/60 hover:text-white'
+                      }`}
+                    >
+                      {cat.label}
+                      {cat.subItems.length > 0 && (
+                        <ChevronDown
+                          className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                            activeId === cat.id
+                              ? 'rotate-180 text-[#e32231]'
+                              : ''
+                          }`}
+                        />
+                      )}
+                    </button>
+                  </div>
+                ))}
+              </div>
+              {activeId &&
+                activeCategory &&
+                activeCategory.subItems.length > 0 && (
+                  <div
+                    className="absolute top-full z-50"
+                    style={{ left: dropdownLeft }}
+                    onMouseEnter={() => {
+                      if (closeTimeout.current)
+                        clearTimeout(closeTimeout.current);
+                      setActiveId(activeId);
+                    }}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <CategoryDropdown category={activeCategory} />
+                  </div>
+                )}
             </div>
 
             {/* Search button — right side */}
