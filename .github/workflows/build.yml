@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  
+
   build_and_push_cms:
     name: Build and Push CMS
-    runs-on: ["self-hosted"]
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
