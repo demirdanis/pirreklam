@@ -30,8 +30,8 @@ export default function HeroCarousel({ data }: HeroCarouselProps) {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-[#090a0a]"
-      style={{ height: 'clamp(240px, 50vw, 660px)' }}
+      className="relative w-full overflow-hidden bg-[#091530]"
+      style={{ height: 'clamp(240px, 50vw, 420px)' }}
     >
       {slides.map((slide, i) => (
         <div
@@ -60,15 +60,15 @@ export default function HeroCarousel({ data }: HeroCarouselProps) {
                 <span className="inline-block rounded-full border border-[#e32231]/40 bg-[#e32231]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#f74e56] mb-4">
                   {slide.badge ?? "Pir Reklam'da"}
                 </span>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight font-alt">
+                <h2 className="text-1xl sm:text-3xl lg:text-5xl font-bold text-white leading-tight font-alt">
                   {slide.title}
                 </h2>
-                <p className="mt-4 text-sm sm:text-base text-white/70 max-w-sm leading-relaxed">
+                <p className="mt-4 text-xs sm:text-base text-white/70 max-w-sm leading-relaxed">
                   {slide.subtitle}
                 </p>
                 <Link
                   href={slide.ctaHref}
-                  className="mt-7 inline-flex items-center gap-2 rounded-lg bg-[#e32231] px-7 py-3 text-sm font-semibold text-white hover:bg-[#f74e56] transition-colors"
+                  className="mt-7 inline-flex items-center gap-2 rounded-lg bg-[#e32231] px-3 py-1 sm:px-7 sm:py-3 text-xs sm:text-sm font-semibold text-white hover:bg-[#f74e56] transition-colors"
                 >
                   {slide.ctaLabel}
                   <ChevronRight className="h-4 w-4" />

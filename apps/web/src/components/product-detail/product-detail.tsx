@@ -7,15 +7,16 @@ import {
   X,
   ZoomIn,
 } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useCallback, useMemo, useRef, useState } from 'react';
 import type {
   ColorOption,
   OptionItem,
   ProductDetailData,
   VariantData,
 } from '@/app/(main-layout)/_helpers/service/getProductDetail/getProductDetail.mock';
+import { useCallback, useMemo, useRef, useState } from 'react';
+
+import Image from 'next/image';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -171,7 +172,7 @@ function ColorSwatch({
       className={cn(
         'relative h-9 w-9 rounded-full transition-all flex items-center justify-center',
         selected
-          ? 'ring-2 ring-[#e32231] ring-offset-2 ring-offset-[#090a0a] scale-110'
+          ? 'ring-2 ring-[#e32231] ring-offset-2 ring-offset-[#091530] scale-110'
           : compatible
             ? 'ring-1 ring-white/10 hover:ring-white/30 hover:scale-105'
             : 'opacity-35 hover:opacity-55'
@@ -473,7 +474,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
   const waUrl = `https://wa.me/905442338003?text=${waMsg}`;
 
   return (
-    <div className="bg-[#090a0a] min-h-screen">
+    <div className="bg-[#091530] min-h-screen">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <nav className="mb-6 flex flex-wrap items-center gap-1 text-xs text-white/35">

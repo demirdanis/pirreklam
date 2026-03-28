@@ -10,14 +10,20 @@ const nextConfig: NextConfig = {
   },
   output: 'standalone',
   images: {
-    remotePatterns: directusHostname
-      ? [
-          {
-            protocol: 'https',
-            hostname: directusHostname,
-          },
-        ]
-      : [],
+    remotePatterns: [
+      ...(directusHostname
+        ? [
+            {
+              protocol: 'https' as const,
+              hostname: directusHostname,
+            },
+          ]
+        : []),
+      {
+        protocol: 'https',
+        hostname: 'pirreklam.com.tr',
+      },
+    ],
     unoptimized: true,
   },
 };

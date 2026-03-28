@@ -39,7 +39,7 @@ function ProductCard({
         </div>
         {/* Product code badge */}
         {product.code && (
-          <span className="absolute top-2 left-2 rounded bg-[#090a0a]/80 px-1.5 py-0.5 text-[10px] font-bold text-[#e32231] tracking-wide border border-[#e32231]/30">
+          <span className="absolute top-2 left-2 rounded bg-[#091530]/80 px-1.5 py-0.5 text-[10px] font-bold text-[#e32231] tracking-wide border border-[#e32231]/30">
             {product.code}
           </span>
         )}
@@ -136,7 +136,7 @@ export default function ProductCategoryList({
   );
 
   return (
-    <section className="bg-[#090a0a] min-h-screen">
+    <section className="bg-[#091530] min-h-screen">
       {/* Sticky subcategory nav */}
       <div className="sticky top-25.5 z-40 bg-[#0d0e0e]/95 backdrop-blur-md border-b border-white/6">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

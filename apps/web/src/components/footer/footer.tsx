@@ -71,7 +71,7 @@ interface FooterProps {
 
 export default function Footer({ data }: FooterProps) {
   return (
-    <footer className="bg-[#090a0a] border-t border-[#2a2d2d]">
+    <footer className="bg-[#091530] border-t border-[#2a2d2d]">
       {/* Main Footer Content */}
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">

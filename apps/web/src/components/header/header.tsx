@@ -1,8 +1,17 @@
 'use client';
 
+import {
+  ChevronDown,
+  Menu,
+  MessageCircle,
+  Phone,
+  Search,
+  X,
+} from 'lucide-react';
 import type { HeaderData, HeaderSocialLink } from './header.types';
-import { Menu, MessageCircle, Phone, Search, X } from 'lucide-react';
 
+import type { Category } from '../category-bar/category-bar.types';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -70,46 +79,28 @@ function SocialIcon({ platform }: { platform: HeaderSocialLink['platform'] }) {
 
 interface HeaderProps {
   data: HeaderData;
+  categories?: Category[];
 }
 
-export default function Header({ data }: HeaderProps) {
-  const [mobileOpen, setMobileOpen] = useState(false);
+export default function Header({ data, categories = [] }: HeaderProps) {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const [mobileCatOpen, setMobileCatOpen] = useState(false);
+  const [mobileCatExpandedId, setMobileCatExpandedId] = useState<string | null>(
+    null
+  );
 
   return (
     <header className="sticky top-0 z-50 w-full">
-      {/* Top Bar */}
-      <div className="bg-[#090a0a] border-b border-[#2a2d2d]">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
-          {/* Contacts */}
-          <div className="flex items-center gap-4">
-            {data.contacts.map((contact) => (
-              <a
-                key={contact.href}
-                href={contact.href}
-                className="flex items-center gap-1.5 text-xs text-white/70 transition-colors hover:text-white"
-              >
-                {contact.icon === 'phone' ? (
-                  <Phone className="h-3.5 w-3.5 text-[#e32231]" />
-                ) : (
-                  <MessageCircle className="h-3.5 w-3.5 text-[#e32231]" />
-                )}
-                <span className="hidden sm:block text-white/50 text-[10px] uppercase tracking-wide">
-                  {contact.label}
-                </span>
-                <span className="font-medium">{contact.value}</span>
-              </a>
-            ))}
-          </div>
-
-          {/* Right: Social + Search (mobile) */}
-          <div className="flex items-center gap-3">
-            {/* Mobile search button — visible only on mobile */}
+      {/* Mobile-only category trigger strip */}
+      <div className="lg:hidden bg-[#091530] border-b border-[#000000]">
+        <div className="flex items-center justify-between px-4 py-2">
+          <div />
+          <div className="flex items-center gap-1">
             <button
               type="button"
-              aria-label="Ara"
               onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-              className="flex md:hidden h-7 w-7 items-center justify-center rounded-full text-white/60 transition-colors hover:text-white hover:bg-white/10"
+              aria-label="Ara"
+              className="flex h-7 w-7 items-center justify-center text-white/60 hover:text-white transition-colors"
             >
               {mobileSearchOpen ? (
                 <X className="h-4 w-4" />
@@ -117,62 +108,37 @@ export default function Header({ data }: HeaderProps) {
                 <Search className="h-4 w-4" />
               )}
             </button>
-            <div className="hidden md:flex items-center gap-2">
-              {data.socialLinks.map((social) => (
-                <a
-                  key={social.platform}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="flex h-6 w-6 items-center justify-center rounded-full text-white/50 transition-colors hover:text-white hover:bg-white/10"
-                >
-                  <SocialIcon platform={social.platform} />
-                </a>
-              ))}
-            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setMobileCatOpen(!mobileCatOpen);
+                setMobileCatExpandedId(null);
+              }}
+              className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
+            >
+              {mobileCatOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+              <span className="text-xs font-bold uppercase tracking-[0.12em]">
+                Kategoriler
+              </span>
+            </button>
           </div>
         </div>
-
-        {/* Mobile search bar */}
-        {mobileSearchOpen && (
-          <div className="md:hidden border-t border-[#2a2d2d] px-4 py-2.5">
-            <div className="flex items-center gap-2 rounded-md border border-[#2a2d2d] bg-surface-dark px-3 py-1.5 focus-within:border-[#e32231] transition-colors">
-              <Search className="h-3.5 w-3.5 text-white/40 shrink-0" />
-              <input
-                type="search"
-                placeholder="Ürün ara..."
-                autoFocus
-                className="w-full bg-transparent text-sm text-white placeholder-white/30 outline-none"
-              />
-            </div>
-          </div>
-        )}
       </div>
 
-      {/* Main Nav */}
-      <nav className="bg-header-menu border-b border-[#2a2d2d] shadow-header-menu">
-        <div className="mx-auto flex max-w-7xl items-center px-4 py-3 sm:px-6 lg:px-8">
-          {/* Logo */}
-          <Link
-            href={data.logo.href}
-            className="flex flex-col leading-none group"
-          >
-            <span className="text-xl font-bold tracking-tight text-white group-hover:text-[#f74e56] transition-colors font-alt">
-              {data.logo.text}
-            </span>
-            <span className="text-[9px] uppercase tracking-[0.2em] text-[#e32231] font-medium">
-              {data.logo.tagline}
-            </span>
-          </Link>
-
-          {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-1 ml-auto">
+      {/* Top Bar — desktop only */}
+      <div className="hidden lg:block bg-[#091530] border-b border-[#000000]">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
+          {/* Nav Links */}
+          <div className="flex items-center">
             {data.navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="relative px-4 py-2 text-sm font-medium text-white/80 transition-colors hover:text-white group"
+                className="relative px-4 py-1 text-xs font-medium text-white/70 transition-colors hover:text-white group"
                 {...(item.isExternal
                   ? { target: '_blank', rel: 'noopener noreferrer' }
                   : {})}
@@ -183,55 +149,256 @@ export default function Header({ data }: HeaderProps) {
             ))}
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Menü"
-            className="ml-auto flex h-9 w-9 items-center justify-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white lg:hidden"
-          >
-            {mobileOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </button>
+          {/* Right: Social icons */}
+          <div className="flex items-center gap-2">
+            {data.socialLinks.map((social) => (
+              <a
+                key={social.platform}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="flex h-6 w-6 items-center justify-center rounded-full text-white/50 transition-colors hover:text-white hover:bg-white/10"
+              >
+                <SocialIcon platform={social.platform} />
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Main Nav */}
+      <nav className="bg-header-menu border-b border-[#000000] shadow-header-menu relative overflow-hidden">
+        {/* Stars background */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-30 pointer-events-none"
+          style={{ backgroundImage: "url('/assets/stars-back.png')" }}
+        />
+        {/* Desktop layout */}
+        <div className="hidden lg:flex mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 items-center justify-between gap-4 py-3">
+          <div className="grid grid-cols-1 gap-2 w-44">
+            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-left font-semibold">
+              Ruhsat Kabı
+            </button>
+            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-left font-semibold">
+              Plakalık
+            </button>
+            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-left font-semibold">
+              Pasaport Kılıfı
+            </button>
+            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-left font-semibold">
+              Vesikalık Kabı
+            </button>
+          </div>
+
+          {/* Center — Phone + Logo + WhatsApp */}
+          <div className="flex flex-1 items-center justify-center gap-x-24">
+            <a
+              href="tel:4441030"
+              className="flex flex-col items-center gap-1 group w-fit"
+            >
+              <span className="flex items-center justify-center gap-1.5 text-[12px] tracking-[0.2em] text-white/60 font-semibold">
+                <Phone className="h-6 w-6 text-[#e32231]" />
+                Türkiye&apos;nin her yerinden
+              </span>
+              <span className="text-4xl font-bold text-white tracking-tight transition-colors">
+                444 10 30
+              </span>
+            </a>
+            <Link href="/" className="flex justify-center shrink-0">
+              <div className="flex rounded-full bg-white p-8 gradient-shadow-white-636b7f items-center justify-center">
+                <Image
+                  src="https://pirreklam.com.tr/wp-content/uploads/2026/01/cropped-Adsiz-tasarim.png"
+                  alt="Pir Reklam"
+                  width={108}
+                  height={108}
+                  className="h-24 w-auto object-contain -mt-3"
+                  priority
+                />
+              </div>
+            </Link>
+            <a
+              href="https://wa.me/905442338003"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center gap-1 group w-fit"
+            >
+              <span className="flex items-center justify-center gap-1.5 text-[12px] text-white/60 font-semibold">
+                WhatsApp Sipariş
+                <MessageCircle className="h-6 w-6 text-[#25d366]" />
+              </span>
+              <span className="text-4xl font-bold text-white tracking-tight group-hover:text-[#25d366] transition-colors">
+                0544 233 80 03
+              </span>
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 gap-2 w-44">
+            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-right font-semibold">
+              Kredi Kartlık
+            </button>
+            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-right font-semibold">
+              Döviz Kabı
+            </button>
+            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-right font-semibold">
+              Evlilik Cüzdanı Kılıfı
+            </button>
+            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-right font-semibold">
+              Veteriner Aşı Karnesi Kabı
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Menu */}
-        {mobileOpen && (
-          <div className="border-t border-[#2a2d2d] bg-surface-dark lg:hidden">
-            <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 ">
-              <nav className="flex flex-col gap-1">
-                {data.navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="flex items-center rounded-md px-3 py-2.5 text-sm font-medium text-white/80 transition-colors hover:bg-white/5 hover:text-white"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-
-              <div className="mt-4 border-t border-[#2a2d2d] pt-4 flex items-center gap-3">
-                {data.socialLinks.map((social) => (
-                  <a
-                    key={social.platform}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="flex h-8 w-8 items-center justify-center rounded-full text-white/50 transition-colors hover:text-white hover:bg-white/10"
-                  >
-                    <SocialIcon platform={social.platform} />
-                  </a>
-                ))}
+        {/* Mobile layout: logo centered, 8 buttons scattered around */}
+        <div className="lg:hidden h-24 w-full overflow-hidden">
+          <div className="relative h-full ml-[clamp(3%,10%,20%)] mx-auto">
+            <Link
+              href="/"
+              className="fixed left-[16px] top-[16px] z-9999999 flex"
+            >
+              <div className="flex rounded-full bg-white p-3 gradient-shadow-white-636b7f items-center justify-center">
+                <Image
+                  src="https://pirreklam.com.tr/wp-content/uploads/2026/01/cropped-Adsiz-tasarim.png"
+                  alt="Pir Reklam"
+                  width={48}
+                  height={48}
+                  className="h-12 w-auto object-contain"
+                  priority
+                />
               </div>
-            </div>
+            </Link>
+
+            <button className="absolute top-[10%] left-[22%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-left transition-all">
+              Ruhsat Kabı
+            </button>
+            <button className="absolute top-[38%] left-[24%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-left transition-all">
+              Plakalık
+            </button>
+
+            <button className="absolute top-[44%] left-[70%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-left transition-all">
+              Pasaport Kılıfı
+            </button>
+            <button className="absolute top-[81%] left-[2%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-left transition-all">
+              Vesikalık Kabı
+            </button>
+
+            <button className="absolute  top-[59%] left-[8%] text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-right transition-all">
+              Kredi Kartlık
+            </button>
+            <button className="absolute top-[45%] left-[45%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-right transition-all">
+              Döviz Kabı
+            </button>
+
+            <button className="absolute top-[12%] left-[60%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-right transition-all">
+              Evlilik Cüzdanı Kılıfı
+            </button>
+            <button className="absolute top-[73%] left-[43%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-right transition-all">
+              Veteriner Aşı Karnesi Kabı
+            </button>
           </div>
-        )}
+        </div>
       </nav>
+
+      {/* Mobile Phone Bar */}
+      <div className="lg:hidden bg-[#091530] border-b border-[#000000]">
+        <div className="flex items-center justify-around px-4 py-2 gap-2">
+          <a href="tel:4441030" className="flex items-center gap-1.5 group">
+            <Phone className="h-3.5 w-3.5 text-[#e32231] shrink-0" />
+            <div className="flex flex-col">
+              <span className="text-[11px] text-white/50 leading-none">
+                Türkiye&apos;nin her yerinden
+              </span>
+              <span className="text-[16px] font-bold text-white group-hover:text-[#e32231] transition-colors leading-tight">
+                444 10 30
+              </span>
+            </div>
+          </a>
+          <div className="w-px h-8 bg-white/10" />
+          <a
+            href="https://wa.me/905442338003"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 group"
+          >
+            <div className="flex flex-col items-end">
+              <span className="text-[11px] text-white/50 leading-none">
+                WhatsApp Sipariş
+              </span>
+              <span className="text-[16px]  font-bold text-white transition-colors leading-tight">
+                0544 233 80 03
+              </span>
+            </div>
+            <MessageCircle className="h-3.5 w-3.5 text-[#25d366] shrink-0" />
+          </a>
+        </div>
+      </div>
+
+      {/* Mobile Search Input — below Phone Bar */}
+      {mobileSearchOpen && (
+        <div className="lg:hidden border-t border-[#2a2d2d] bg-[#091530] px-4 py-2.5">
+          <div className="flex items-center gap-2 rounded-md border border-[#2a2d2d] bg-[#091530] px-3 py-1.5 focus-within:border-[#e32231] transition-colors">
+            <Search className="h-3.5 w-3.5 text-white/40 shrink-0" />
+            <input
+              type="search"
+              placeholder="Ürün ara..."
+              autoFocus
+              className="w-full bg-transparent text-sm text-white placeholder-white/30 outline-none"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Categories Accordion Drawer */}
+      {mobileCatOpen && (
+        <div className="lg:hidden bg-[#0d1e3a] border-b border-[#000000] max-h-[70vh] overflow-y-auto">
+          {categories.map((cat) => (
+            <div key={cat.id} className="border-b border-[#1a2d4a]">
+              <button
+                type="button"
+                onClick={() =>
+                  setMobileCatExpandedId(
+                    mobileCatExpandedId === cat.id ? null : cat.id
+                  )
+                }
+                className="flex w-full items-center justify-between px-4 py-3.5 text-sm font-medium text-white/80 hover:text-white hover:bg-white/5 transition-colors"
+              >
+                <span>{cat.label}</span>
+                {cat.subItems.length > 0 && (
+                  <ChevronDown
+                    className={`h-4 w-4 text-white/40 transition-transform duration-200 ${
+                      mobileCatExpandedId === cat.id
+                        ? 'rotate-180 text-[#e32231]'
+                        : ''
+                    }`}
+                  />
+                )}
+              </button>
+              {mobileCatExpandedId === cat.id && cat.subItems.length > 0 && (
+                <div className="bg-[#091530] pb-1">
+                  {cat.subItems.map((sub) => (
+                    <Link
+                      key={sub.href}
+                      href={sub.href}
+                      onClick={() => setMobileCatOpen(false)}
+                      className="flex items-center gap-2.5 px-6 py-2.5 text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      <span className="h-1 w-1 rounded-full bg-[#e32231]/50 shrink-0" />
+                      {sub.label}
+                    </Link>
+                  ))}
+                  <Link
+                    href={cat.href}
+                    onClick={() => setMobileCatOpen(false)}
+                    className="flex items-center justify-center gap-1.5 mx-4 mb-2 mt-1 rounded py-2 text-xs font-semibold text-[#e32231] border border-[#e32231]/30 hover:bg-[#e32231] hover:text-white transition-colors"
+                  >
+                    Tümünü Gör
+                  </Link>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </header>
   );
 }

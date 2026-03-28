@@ -32,16 +32,14 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
     GROUP_IMAGES[activeId] ?? GROUP_IMAGES[data.groups[0]?.id ?? ''] ?? '';
 
   return (
-    <section className="bg-[#f5f6f7] py-16 overflow-hidden">
+    <section className="bg-[#f5f6f7] py-4 md:py-8 lg:py-16 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-10">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#e32231] mb-2">
-            Sektöre Özel Çözümler
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#090a0a] font-alt">
+        <div className="mb-10 text-center lg:text-left">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#091530] font-alt">
             {data.title}
           </h2>
+          <div className="mx-auto lg:mx-0 mt-4 h-1 w-16 rounded-full bg-[#e32231]" />
         </div>
 
         {/* Desktop Layout */}
@@ -71,7 +69,7 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
                                 ? 'text-white font-semibold'
                                 : 'text-white/70 text-xs mt-0.5'
                               : i === 0
-                                ? 'text-[#090a0a] font-semibold'
+                                ? 'text-[#091530] font-semibold'
                                 : 'text-[#888] text-xs mt-0.5'
                           }`}
                         >
@@ -122,7 +120,7 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
                   <p className="text-[10px] uppercase tracking-[0.18em] text-[#e32231] mb-1 font-bold">
                     Önerilen Ürünler
                   </p>
-                  <h3 className="text-xl font-bold text-[#090a0a]">
+                  <h3 className="text-xl font-bold text-[#091530]">
                     {activeGroup?.sectors[0]}
                   </h3>
                   {activeGroup && activeGroup.sectors.length > 1 && (

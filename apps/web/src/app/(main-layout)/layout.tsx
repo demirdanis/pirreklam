@@ -1,10 +1,8 @@
 import CategoryBar from '@/components/category-bar/category-bar';
-import FeaturedProducts from '@/components/featured-products/featured-products';
 import Footer from '@/components/footer/footer';
 import Header from '@/components/header/header';
 import type { Metadata } from 'next';
 import { fontVariables } from '@/lib/fonts';
-import { getCategoryBarData } from './_helpers/service/getCategoryBar/getCategoryBar.mock';
 import { getCategoryBarDataWithCache } from './_helpers/service/getCategoryBar/getCategoryBar.service';
 import { getFeaturedProductsData } from './_helpers/service/getFeaturedProducts/getFeaturedProducts.mock';
 import { getFooterData } from './_helpers/service/getFooter/getFooter.mock';
@@ -62,9 +60,8 @@ export default async function MainLayout({
       <head></head>
       <body className="font-sans">
         <div className="relative flex min-h-screen flex-col">
-          <Header data={headerData} />
+          <Header data={headerData} categories={categoryBarData.categories} />
           <CategoryBar data={categoryBarData} />
-          <FeaturedProducts data={featuredProductsData} />
           <main className="flex-1">{children}</main>
           <Footer data={footerData} />
         </div>

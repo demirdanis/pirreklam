@@ -25,9 +25,9 @@ export async function getHeaderData(): Promise<HeaderData> {
     cartHref: '/sepet',
     navItems: [
       { label: 'Anasayfa', href: '/' },
-      { label: 'Kurumsal', href: '/kurumsal' },
-      { label: 'İletişim', href: '/iletisim' },
-      { label: 'Banka Hesapları', href: '/banka-hesaplari' },
+      { label: 'Kurumsal', href: '/#kurumsal' },
+      { label: 'İletişim', href: '/#iletisim' },
+      { label: 'Banka Hesapları', href: '/#banka-hesaplari' },
     ],
     socialLinks: [
       {

@@ -36,8 +36,8 @@ function PopularProductCard({
         </div>
       </div>
       {/* Title */}
-      <div className="flex items-center justify-between px-4 py-3.5 bg-foreground">
-        <p className="text-sm font-semibold text-white/80 uppercase tracking-wide leading-snug group-hover:text-white transition-colors">
+      <div className="flex items-center justify-between px-2 md:px-4 py-1 md:py-3.5 bg-foreground">
+        <p className="text-[12px] md:text-[14px] font-semibold text-white/80 uppercase tracking-wide leading-snug group-hover:text-white transition-colors">
           {title}
         </p>
         <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/5 text-white/30 transition-all group-hover:bg-[#e32231] group-hover:text-white">
@@ -54,24 +54,24 @@ interface PopularProductsProps {
 
 export default function PopularProducts({ data }: PopularProductsProps) {
   return (
-    <section className="bg-[#090a0a] py-14">
+    <section className="bg-[#091530] py-4 md:py-8 lg:py-14">
       <div className=" mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8 flex items-end justify-between">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#e32231] mb-1">
-              En Çok Tercih Edilenler
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white font-alt">
-              {data.title}
-            </h2>
-            <p className="mt-1.5 text-sm text-white/40">{data.subtitle}</p>
-          </div>
+        <div className="mb-8 text-center lg:text-left">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white font-alt">
+            {data.title}
+          </h2>
+          <div className="mx-auto lg:mx-0 mt-4 h-1 w-16 rounded-full bg-[#e32231]" />
+          <p className="mt-4 text-sm text-white/40">{data.subtitle}</p>
+        </div>
+
+        {/* Mobile: show all link */}
+        <div className="mb-6 flex justify-center lg:hidden">
           <Link
             href="/"
-            className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#e32231] hover:text-[#f74e56] transition-colors"
+            className="flex items-center gap-1.5 rounded-lg border border-[#e32231]/30 px-5 py-2.5 text-sm font-semibold text-[#e32231] hover:bg-[#e32231] hover:text-white transition-colors"
           >
-            Tümünü Gör
+            Tüm Ürünleri Gör
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -87,17 +87,6 @@ export default function PopularProducts({ data }: PopularProductsProps) {
               imageAlt={product.imageAlt}
             />
           ))}
-        </div>
-
-        {/* Mobile: show all link */}
-        <div className="mt-6 flex justify-center sm:hidden">
-          <Link
-            href="/"
-            className="flex items-center gap-1.5 rounded-lg border border-[#e32231]/30 px-5 py-2.5 text-sm font-semibold text-[#e32231] hover:bg-[#e32231] hover:text-white transition-colors"
-          >
-            Tüm Ürünleri Gör
-            <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
       </div>
     </section>

@@ -8,8 +8,8 @@
   /* ============================================
        SYSTEM COLORS (Background & Foreground)
        ============================================ */
-  --color-background: #000000;
-  --color-foreground: #171717;
+  --color-background: #16223f;
+  --color-foreground: #e32231;
 
   /* ============================================
        SURFACE COLORS
@@ -26,13 +26,13 @@
   /* ============================================
        TEXT COLORS
        ============================================ */
-  --color-text-primary-dark: #090a0a;
+  --color-text-primary-dark: #16223f;
   --color-text-secondary-dark: #585d5d;
   --color-text-primary-on-dark: #ffffff;
   --color-text-secondary-on-dark: rgba(255, 255, 255, 0.8);
   --color-text-mute: #898f8f;
   --color-text-action-primary: #e32231;
-  --color-text-action-secondary: #090a0a;
+  --color-text-action-secondary: #16223f;
   --color-text-action-tertiary: #585d5d;
   --color-text-warning: #ca3500;
   --color-text-error: #ac1723;
@@ -42,7 +42,7 @@
        ============================================ */
   --color-fill-primary-red: #e32231;
   --color-fill-primary-red-hover: #f74e56;
-  --color-fill-dark: #090a0a;
+  --color-fill-dark: #16223f;
   --color-fill-light: #ffffff;
   --color-fill-neutral: #c4c4c4;
   --color-fill-transparent-dark: rgba(9, 10, 10, 0.4);
@@ -129,7 +129,7 @@
   --color-dark-70: rgba(9, 10, 10, 0.7);
   --color-dark-80: rgba(9, 10, 10, 0.8);
   --color-dark-90: rgba(9, 10, 10, 0.9);
-  --color-dark-100: #090a0a;
+  --color-dark-100: #16223f;
 
   /* ============================================
        TRANSPARENT PRIMARY VARIANTS
@@ -271,13 +271,25 @@ select:-webkit-autofill {
    HEADER MENU UTILITIES
    ============================================ */
 .bg-header-menu {
-  background:
-    linear-gradient(
-      218deg,
-      rgba(255, 67, 81, 0) 36.86%,
-      rgba(255, 67, 81, 0.2) 84.69%
-    ),
-    #090a0a;
+  /* Arka plan rengini sabit tutuyoruz */
+  background-color: #16223f;
+
+  background-image: radial-gradient(
+    circle at center,
+    #091530 0%,
+    #16223f 20%,
+    #091530 75%
+  );
+
+  /* Logoyu ve menüyü ortalamak için ek ayarlar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  .bg-header-menu {
+    padding: 16px 0;
+  }
 }
 
 .bg-header-menu-reversed {
@@ -287,7 +299,7 @@ select:-webkit-autofill {
       rgba(255, 67, 81, 0) 36.86%,
       rgba(255, 67, 81, 0.2) 84.69%
     ),
-    #090a0a;
+    #16223f;
 }
 
 .shadow-header-menu {
@@ -399,6 +411,27 @@ select:-webkit-autofill {
 
 .menu-animate-close {
   animation: menu-fade-out 0.2s ease-in forwards;
+}
+
+.gradient-shadow-white-636b7f {
+  position: relative;
+  /* Multi-layer glow: bright white center -> deep #16223f outer halo */
+  box-shadow:
+    0 0px 12px #fffffff2,
+    0 0px 40px #ffffffb3,
+    0 0px 80px #f5f5fa73,
+    0 0px 140px #d2d7e152,
+    0 0px 200px #aab4c842,
+    0 0px 280px #7882962e,
+    0 0px 360px #16223f47;
+  /* ensure shadow is visible outside the element bounds */
+  overflow: visible;
+}
+
+@media (min-width: 1024px) {
+  .gradient-shadow-white-636b7f {
+    height: 160px;
+  }
 }
 
 /* ============================================
