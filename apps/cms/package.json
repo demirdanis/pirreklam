@@ -1,0 +1,32 @@
+{
+  "name": "pirreklam-cms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "env-cmd -f .env.development directus start",
+    "dev:prod": "env-cmd -f .env.production directus start",
+    "start": "directus start",
+    "bootstrap": "directus bootstrap",
+    "apply-snapshot": "env-cmd -f .env.development directus schema apply --yes ./snapshots/latest.yaml",
+    "apply-snapshot:prod": "env-cmd -f .env.production directus schema apply --yes ./snapshots/latest.yaml",
+    "apply-snapshot:coolify": "directus schema apply --yes ./snapshots/latest.yaml",
+    "create-snapshot:backup": "env-cmd -f .env.development bunx directus schema snapshot ./snapshots/\"$(date \"+%F\")\"-snapshot-\"$(date \"+%s\")\".yaml",
+    "create-snapshot": "env-cmd -f .env.development bunx directus schema snapshot ./snapshots/latest.yaml",
+    "create-snapshot-with-backup": "pnpm run create-snapshot:backup && pnpm run create-snapshot",
+    "create-snapshot:prod:backup": "env-cmd -f .env.production bunx directus schema snapshot ./snapshots/\"$(date \"+%F\")\"-snapshot-\"$(date \"+%s\")\".yaml",
+    "create-snapshot:prod": "pnpm run create-snapshot:prod:backup && env-cmd -f .env.production bunx directus schema snapshot ./snapshots/latest.yaml",
+    "test": "echo \"Hello world!\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "directus": "^11.9.3",
+    "pg": "^8.14.1"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
+  }
+}

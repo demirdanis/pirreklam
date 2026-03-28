@@ -1,0 +1,18 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "styled-components.vscode-styled-components",
+    "christian-kohler.path-intellisense",
+    "amatiasq.sort-imports",
+    "streetsidesoftware.code-spell-checker",
+    "jameshampton.autocomplete-css-variables",
+    "stylelint.vscode-stylelint",
+    "steoates.autoimport",
+    "xabikos.ReactSnippets",
+    "oderwat.indent-rainbow",
+    "PKief.material-icon-theme",
+    "vscodeshift.mui-snippets",
+    "zitup.classnametocss"
+  ]
+}

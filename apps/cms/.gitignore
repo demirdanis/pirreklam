@@ -1,0 +1,7 @@
+/uploads/*
+.env.production
+.env.staging
+.env.development
+.env.local
+.env.test
+.env.test.local

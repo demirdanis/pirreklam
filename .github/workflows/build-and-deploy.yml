@@ -1,0 +1,90 @@
+name: Deploy PirReklam Web & CMS
+
+env:
+  DEPLOY_HOST: 100.127.59.100
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_push_website:
+    name: Build and Push Website
+    runs-on: ["self-hosted"]
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and Push Website
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: apps/web/Dockerfile
+          push: true
+          tags: ghcr.io/demirdanis/pirreklam-web:latest
+
+  build_and_push_cms:
+    name: Build and Push CMS
+    runs-on: ["self-hosted"]
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and Push CMS
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: apps/cms/Dockerfile
+          push: true
+          tags: ghcr.io/demirdanis/pirreklam-cms:latest
+
+  deploy_website:
+    name: Deploy Website
+    runs-on: ["self-hosted"]
+    needs: build_and_push_website
+    steps:
+      - name: Deploy Website
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ env.DEPLOY_HOST }}
+          username: root
+          password: root
+          script: |
+            cd /root/pirreklam-web
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker compose pull web
+            docker compose up -d web
+            docker image prune -f
+
+  deploy_cms:
+    name: Deploy CMS
+    runs-on: ["self-hosted"]
+    needs: build_and_push_cms
+    steps:
+      - name: Deploy CMS
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ env.DEPLOY_HOST }}
+          username: root
+          password: root
+          script: |
+            cd /root/pirreklam-web
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker compose pull cms
+            docker compose up -d cms
+            docker image prune -f

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "start": {
+      "dependsOn": ["^build"],
+      "cache": true,
+      "persistent": true,
+      "env": [
+        "DIRECTUS_URL",
+        "DIRECTUS_GRAPHQL_URL",
+        "DIRECTUS_STATIC_TOKEN",
+        "DISABLE_CACHE",
+        "ASSETS_URL",
+        "BASE_URL",
+        "GEMINI_API_KEY",
+        "TRANSLATE_ENDPOINT_TOKEN"
+      ]
+    }
+  }
+}

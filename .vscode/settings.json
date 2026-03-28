@@ -1,0 +1,20 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "gitlens.blame.highlight.enabled": true,
+  "gitlens.blame.ignoreWhitespace": true,
+  "gitlens.currentLine.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "prettier.singleQuote": true,
+  "prettier.requireConfig": true,
+
+  "svg.preview.background": "black",
+  "stylelint.validate": ["scss"],
+  "cSpell.words": ["hasura", "İlçe", "TCKN", "testid", "testprops", "Ünvan"],
+  "cSpell.language": "en,lorem,tr"
+}

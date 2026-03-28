@@ -1,0 +1,50 @@
+{
+  "name": "pirreklam-monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build:web": "turbo build --filter=pirreklam-web",
+    "start:web": "turbo start --filter=pirreklam-web",
+    "start:cms": "turbo start --filter=pirreklam-cms",
+    "dev:cms": "turbo dev --filter=pirreklam-cms",
+    "dev:prod": "turbo dev:prod",
+    "dev:web": "turbo dev --filter=pirreklam-web",
+    "create-snapshot-with-backup": "turbo create-snapshot-with-backup --filter=pirreklam-cms",
+    "create-snapshot": "turbo create-snapshot --filter=pirreklam-cms",
+    "generate:graphql:web": "turbo generate:graphql --filter=pirreklam-web",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+     "docker:up": "docker compose up -d postgres redis",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f"
+   },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.8",
+    "@types/jest": "^30.0.0",
+    "@workspace/eslint-config": "workspace:*",
+    "@workspace/typescript-config": "workspace:*",
+    "jest": "^30.2.0",
+    "prettier": "^3.2.5",
+    "ts-jest": "^29.4.6",
+    "tsx": "^4.21.0",
+    "turbo": "^2.3.0",
+    "typescript": "5.5.4"
+  },
+  "trustedDependencies": [
+    "sharp",
+    "unrs-resolver"
+  ],
+  "packageManager": "bun@1.2.18",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.27.3",
+    "react-rating": "^2.0.5"
+  }
+}
