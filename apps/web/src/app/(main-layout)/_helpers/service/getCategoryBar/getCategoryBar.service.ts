@@ -10,6 +10,9 @@ import { directusGraphqlQuery } from '@/lib/graphql-client';
 import { unstable_cache } from 'next/cache';
 
 export async function getCategoryBarDataWithCache(): Promise<CategoryBarData> {
+  if (!process.env.DIRECTUS_URL) {
+    return { categories: [] };
+  }
   if (process.env.DISABLE_CACHE) {
     return getCategoryBarData();
   }

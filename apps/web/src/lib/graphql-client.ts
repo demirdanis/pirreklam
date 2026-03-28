@@ -10,9 +10,14 @@ export async function directusGraphqlQuery<
   TResult extends Response = Response,
   TVariables extends Variables = Variables,
 >(document: string | DocumentNode, variables?: TVariables): Promise<TResult> {
+  const directusUrl = process.env.DIRECTUS_URL;
+  if (!directusUrl) {
+    throw new Error('DIRECTUS_URL environment variable is not set');
+  }
+
   const bearerToken = process.env.DIRECTUS_STATIC_TOKEN || '';
 
-  const client = createDirectus(process.env.DIRECTUS_URL as string)
+  const client = createDirectus(directusUrl)
     .with(graphql())
     .with(staticToken(bearerToken));
 

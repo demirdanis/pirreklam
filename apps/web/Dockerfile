@@ -5,6 +5,13 @@ COPY package.json bun.lock ./
 COPY . .
 
 ARG GITHUB_TOKEN
+ARG DIRECTUS_URL
+ARG DIRECTUS_STATIC_TOKEN
+ARG BASE_URL
+
+ENV DIRECTUS_URL=$DIRECTUS_URL \
+    DIRECTUS_STATIC_TOKEN=$DIRECTUS_STATIC_TOKEN \
+    BASE_URL=$BASE_URL
 
 RUN --mount=type=cache,id=bun,target=/root/.bun/install/cache bun install --frozen-lockfile
 RUN bun run build:web
