@@ -8,6 +8,7 @@ import { getFooterData } from './_helpers/service/getFooter/getFooter.mock';
 import { getHeaderData } from './_helpers/service/getHeader/getHeader.mock';
 
 export async function generateMetadata(): Promise<Metadata> {
+  const baseUrl = process.env.BASE_URL || 'https://pirreklam.com.tr';
   return {
     title: 'Pir Reklam',
     description: 'Pir Reklam',
@@ -24,10 +25,10 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       siteName: 'Pir Reklam',
       locale: 'tr_TR',
-      url: `${process.env.BASE_URL}`,
+      url: baseUrl,
       images: [
         {
-          url: `${process.env.BASE_URL}/assets/og-default.jpg`,
+          url: `${baseUrl}/assets/og-default.jpg`,
           width: 1200,
           height: 628,
           alt: 'Pir Reklam',
