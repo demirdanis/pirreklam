@@ -1,7 +1,7 @@
 FROM oven/bun:1-alpine AS builder
 WORKDIR /app
 
-COPY package.json bun.lockb ./
+COPY package.json bun.lock ./
 COPY . .
 
 ARG GITHUB_TOKEN

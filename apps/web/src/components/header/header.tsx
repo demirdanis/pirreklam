@@ -252,10 +252,7 @@ export default function Header({ data, categories = [] }: HeaderProps) {
         {/* Mobile layout: logo centered, 8 buttons scattered around */}
         <div className="lg:hidden h-24 w-full overflow-hidden">
           <div className="relative h-full ml-[clamp(3%,10%,20%)] mx-auto">
-            <Link
-              href="/"
-              className="fixed left-[16px] top-[16px] z-9999999 flex"
-            >
+            <Link href="/" className="fixed left-4 top-4 z-9999999 flex">
               <div className="flex rounded-full bg-white p-3 gradient-shadow-white-636b7f items-center justify-center">
                 <Image
                   src="https://pirreklam.com.tr/wp-content/uploads/2026/01/cropped-Adsiz-tasarim.png"
