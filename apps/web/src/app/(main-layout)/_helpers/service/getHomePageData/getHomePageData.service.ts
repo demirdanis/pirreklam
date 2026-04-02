@@ -9,9 +9,15 @@ import type { HomePageData } from './getHomePageData.mapper';
 import { directusGraphqlQuery } from '@/lib/graphql-client';
 import { unstable_cache } from 'next/cache';
 
+const EMPTY_HOME_PAGE: HomePageData = {
+  banners: { slides: [] },
+  sectoralProducts: { title: '', groups: [] },
+  popularSubCategories: { title: '', subtitle: '', products: [] },
+};
+
 export async function getHomePageDataWithCache(): Promise<HomePageData | null> {
   if (!process.env.DIRECTUS_URL) {
-    return null;
+    return EMPTY_HOME_PAGE;
   }
   if (process.env.DISABLE_CACHE) {
     return getHomePageData();

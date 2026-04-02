@@ -9,9 +9,16 @@ import { directusGraphqlQuery } from '@/lib/graphql-client';
 import { getCorporateMapper } from './getCorporate.mapper';
 import { unstable_cache } from 'next/cache';
 
+const EMPTY_CORPORATE: CorporateData = {
+  title: '',
+  content: '',
+  stats: [],
+  features: [],
+};
+
 export async function getCorporateDataWithCache(): Promise<CorporateData> {
   if (!process.env.DIRECTUS_URL) {
-    return {} as CorporateData;
+    return EMPTY_CORPORATE;
   }
   if (process.env.DISABLE_CACHE) {
     return getCorporateData();
