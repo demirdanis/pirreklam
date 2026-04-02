@@ -1,8 +1,10 @@
 FROM node:20-alpine AS builder
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache curl unzip bash && \
+    curl -fsSL https://bun.sh/install | bash
+ENV PATH="/root/.bun/bin:$PATH"
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
+COPY package.json bun.lock ./
 COPY . .
 
 ARG GITHUB_TOKEN
@@ -12,11 +14,10 @@ ARG BASE_URL
 
 ENV DIRECTUS_URL=$DIRECTUS_URL \
     DIRECTUS_STATIC_TOKEN=$DIRECTUS_STATIC_TOKEN \
-    BASE_URL=$BASE_URL \
-    NODE_ENV=production
+    BASE_URL=$BASE_URL
 
-RUN npm install --frozen-lockfile
-RUN npm run build:web
+RUN --mount=type=cache,id=bun,target=/root/.bun/install/cache bun install --frozen-lockfile
+RUN bun run build:web
 
 FROM node:20-alpine AS runner
 
@@ -31,5 +32,4 @@ COPY --from=builder /app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=builder /app/apps/web/public ./apps/web/public
 
 EXPOSE 3000
-
 CMD ["node", "apps/web/server.js"]
