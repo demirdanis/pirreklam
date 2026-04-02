@@ -9,12 +9,9 @@ import type { HomePageData } from './getHomePageData.mapper';
 import { directusGraphqlQuery } from '@/lib/graphql-client';
 import { unstable_cache } from 'next/cache';
 
-export async function getHomePageDataWithCache(): Promise<HomePageData> {
+export async function getHomePageDataWithCache(): Promise<HomePageData | null> {
   if (!process.env.DIRECTUS_URL) {
-    return {
-      banners: { slides: [] },
-      sectoralProducts: { title: '', groups: [] },
-    };
+    return null;
   }
   if (process.env.DISABLE_CACHE) {
     return getHomePageData();
@@ -28,7 +25,7 @@ export async function getHomePageDataWithCache(): Promise<HomePageData> {
   )();
 }
 
-const getHomePageData = async (): Promise<HomePageData> => {
+const getHomePageData = async (): Promise<HomePageData | null> => {
   const data = await directusGraphqlQuery<
     GetHomePageDataQuery,
     GetHomePageDataQueryVariables

@@ -18,11 +18,20 @@ export default async function HomePage() {
       getBankAccountsWithCache(),
     ]);
 
+  if (
+    homePageData === null ||
+    corporateData === null ||
+    contactData === null ||
+    bankAccountsData === null
+  ) {
+    throw new Error('Required data is missing');
+  }
+
   return (
     <>
-      <HeroCarousel data={homePageData.banners} />
-      <SectoralProducts data={homePageData.sectoralProducts} />
-      <PopularProducts data={homePageData.popularSubCategories} />
+      <HeroCarousel data={homePageData?.banners} />
+      <SectoralProducts data={homePageData?.sectoralProducts} />
+      <PopularProducts data={homePageData?.popularSubCategories} />
       <Corporate data={corporateData} />
       <Contact data={contactData} />
       <BankAccounts data={bankAccountsData} />
