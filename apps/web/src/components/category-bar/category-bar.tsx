@@ -19,12 +19,6 @@ function CategoryDropdown({ category }: { category: Category }) {
           {sub.label}
         </Link>
       ))}
-      <Link
-        href={category.href}
-        className="flex items-center justify-center gap-1 border-t border-surface-secondary-light-b bg-surface-secondary-light-a px-4 py-2 text-xs font-semibold text-[#730912] hover:bg-[#730912] hover:text-white transition-colors"
-      >
-        Tümünü Gör
-      </Link>
     </div>
   );
 }

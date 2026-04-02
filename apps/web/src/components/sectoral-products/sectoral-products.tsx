@@ -119,12 +119,6 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
                     </p>
                   )}
                 </div>
-                <Link
-                  href={`/sektor/${activeId}`}
-                  className="flex items-center gap-1 text-xs text-[#730912] hover:text-[#c01f2b] font-semibold transition-colors whitespace-nowrap ml-4"
-                >
-                  Tümünü gör <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
               </div>
 
               {/* Product chips */}
@@ -177,15 +171,6 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
                 <span className="leading-tight">{product.label}</span>
               </Link>
             ))}
-          </div>
-
-          <div className="mt-5 flex justify-center">
-            <Link
-              href={`/sektor/${activeId}`}
-              className="flex items-center gap-1.5 text-sm font-semibold text-[#730912] hover:text-[#c01f2b] transition-colors"
-            >
-              Tümünü Gör <ArrowRight className="h-4 w-4" />
-            </Link>
           </div>
         </div>
       </div>

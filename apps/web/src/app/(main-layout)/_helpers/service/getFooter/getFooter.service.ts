@@ -9,9 +9,26 @@ import { GetFooterDataMapper } from './getFooter.mapper';
 import { directusGraphqlQuery } from '@/lib/graphql-client';
 import { unstable_cache } from 'next/cache';
 
+const EMPTY_FOOTER: FooterData = {
+  logo: { text: '', tagline: '', description: '', href: '/' },
+  contact: {
+    address: '',
+    email: '',
+    phone: '',
+    phoneHref: '',
+    whatsapp: '',
+    whatsappHref: '',
+  },
+  copyright: '',
+  etbisHref: '',
+  googleReviewHref: '',
+  sections: [],
+  socialLinks: [],
+};
+
 export async function getFooterDataWithCache(): Promise<FooterData> {
   if (!process.env.DIRECTUS_URL) {
-    return {} as FooterData;
+    return EMPTY_FOOTER;
   }
   if (process.env.DISABLE_CACHE) {
     return getFooterData();

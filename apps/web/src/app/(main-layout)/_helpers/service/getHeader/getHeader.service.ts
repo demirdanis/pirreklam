@@ -9,9 +9,15 @@ import type { HeaderData } from '@/components/header/header.types';
 import { directusGraphqlQuery } from '@/lib/graphql-client';
 import { unstable_cache } from 'next/cache';
 
+const EMPTY_HEADER: HeaderData = {
+  contacts: [],
+  navItems: [],
+  socialLinks: [],
+};
+
 export async function getHeaderDataWithCache(): Promise<HeaderData> {
   if (!process.env.DIRECTUS_URL) {
-    return {} as HeaderData;
+    return EMPTY_HEADER;
   }
   if (process.env.DISABLE_CACHE) {
     return getHeaderData();

@@ -8,9 +8,9 @@ import {
   Search,
   X,
 } from 'lucide-react';
-import type { HeaderData } from './header.types';
 
 import type { Category } from '../category-bar/category-bar.types';
+import type { HeaderData } from './header.types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -320,13 +320,6 @@ export default function Header({ data, categories = [] }: HeaderProps) {
                       {sub.label}
                     </Link>
                   ))}
-                  <Link
-                    href={cat.href}
-                    onClick={() => setMobileCatOpen(false)}
-                    className="flex items-center justify-center gap-1.5 mx-4 mb-2 mt-1 rounded py-2 text-xs font-semibold text-[#730912] border border-[#730912]/30 hover:bg-[#730912] hover:text-white transition-colors"
-                  >
-                    Tümünü Gör
-                  </Link>
                 </div>
               )}
             </div>
