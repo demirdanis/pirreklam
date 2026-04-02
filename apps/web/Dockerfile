@@ -1,7 +1,8 @@
-FROM oven/bun:1-alpine AS builder
+FROM node:20-alpine AS builder
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package.json bun.lock ./
+COPY package.json package-lock.json* ./
 COPY . .
 
 ARG GITHUB_TOKEN
@@ -11,12 +12,13 @@ ARG BASE_URL
 
 ENV DIRECTUS_URL=$DIRECTUS_URL \
     DIRECTUS_STATIC_TOKEN=$DIRECTUS_STATIC_TOKEN \
-    BASE_URL=$BASE_URL
+    BASE_URL=$BASE_URL \
+    NODE_ENV=production
 
-RUN --mount=type=cache,id=bun,target=/root/.bun/install/cache bun install --frozen-lockfile
-RUN bun run build:web
+RUN npm install --frozen-lockfile
+RUN npm run build:web
 
-FROM oven/bun:1-alpine AS runner
+FROM node:20-alpine AS runner
 
 WORKDIR /app
 
@@ -29,4 +31,5 @@ COPY --from=builder /app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=builder /app/apps/web/public ./apps/web/public
 
 EXPOSE 3000
-CMD ["bun", "apps/web/server.js"]
+
+CMD ["node", "apps/web/server.js"]
