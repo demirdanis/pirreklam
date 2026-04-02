@@ -5135,7 +5135,7 @@ export type GetHeaderDataQuery = { __typename?: 'Query', header?: { __typename?:
 export type GetHomePageDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetHomePageDataQuery = { __typename?: 'Query', page__home?: { __typename?: 'page__home', banners?: Array<{ __typename?: 'home_banners', id: string, category?: string | null, title?: string | null, description?: string | null, button_text?: string | null, button_url?: string | null, web_image?: string | null, mobile_image?: string | null, order?: number | null } | null> | null, sectoral_sub_categories?: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, order?: number | null, sector?: Array<{ __typename?: 'sub_categories_sectors', id: string } | null> | null } | null> | null, popular_sub_categories?: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, order?: number | null, card_image?: string | null } | null> | null } | null, sectors: Array<{ __typename?: 'sectors', id: string, name?: string | null, description?: string | null, web_image?: string | null }> };
+export type GetHomePageDataQuery = { __typename?: 'Query', page__home?: { __typename?: 'page__home', banners?: Array<{ __typename?: 'home_banners', id: string, category?: string | null, title?: string | null, description?: string | null, button_text?: string | null, button_url?: string | null, web_image?: string | null, mobile_image?: string | null, order?: number | null } | null> | null, sectoral_sub_categories?: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, order?: number | null, sector?: Array<{ __typename?: 'sub_categories_sectors', sectors_id?: { __typename?: 'sectors', id: string } | null } | null> | null } | null> | null, popular_sub_categories?: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, order?: number | null, card_image?: string | null } | null> | null } | null, sectors: Array<{ __typename?: 'sectors', id: string, name?: string | null, description?: string | null, web_image?: string | null }> };
 
 export type GetProductListQueryVariables = Exact<{
   subcategorySlug: Scalars['String']['input'];
@@ -5265,7 +5265,9 @@ export const GetHomePageDataDocument = gql`
       slug
       order
       sector {
-        id
+        sectors_id {
+          id
+        }
       }
     }
     popular_sub_categories {

@@ -35,7 +35,7 @@ export function GetHomePageDataMapper(
       imageUrl: getImageUrl(sector.web_image),
       products: (data.page__home?.sectoral_sub_categories ?? [])
         .filter((subCat) =>
-          (subCat?.sector ?? []).some((s) => s?.id === sector.id)
+          (subCat?.sector ?? []).some((s) => s?.sectors_id?.id === sector.id)
         )
         .map((subCat) => ({
           label: subCat?.name ?? '',

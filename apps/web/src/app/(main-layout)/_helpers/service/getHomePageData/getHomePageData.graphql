@@ -17,7 +17,9 @@ query GetHomePageData {
       slug
       order
       sector {
-        id
+        sectors_id {
+          id
+        }
       }
     }
 
