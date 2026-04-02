@@ -1,0 +1,64 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: pirreklam_postgres
+    env_file:
+      - .env.postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports: 
+      - "5551:5432"
+    networks:
+      - pirreklam
+
+  web:
+    image: ghcr.io/demirdanis/pirreklam-web:latest
+    env_file: ./.env.web
+    depends_on:
+      - cms
+    ports:
+      - "3000:3000"
+    networks:
+      - pirreklam
+
+  cms:
+    image: ghcr.io/demirdanis/pirreklam-cms:latest
+    container_name: pirreklam_cms
+    env_file: ./.env.cms
+    volumes:
+      - cms_uploads:/directus/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports: 
+      - "8055:8055"
+    networks:
+      - pirreklam
+ 
+  redis:
+    image: redis:7.2-alpine
+    container_name: pirreklam_redis
+    restart: unless-stopped
+    env_file:
+      - .env.redis
+    command: >
+      sh -c 'redis-server --requirepass "$${REDIS_PASSWORD}"'
+    ports:
+      - "6379:6379"
+    networks:
+      - pirreklam
+  
+networks:
+  pirreklam:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  cms_uploads:
+    driver: local

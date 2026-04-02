@@ -12,20 +12,12 @@ export interface HeaderContactItem {
 }
 
 export interface HeaderSocialLink {
-  platform: 'facebook' | 'instagram' | 'youtube' | 'pinterest' | 'linkedin';
   href: string;
-  label: string;
+  logoUrl: string;
 }
 
 export interface HeaderData {
-  logo: {
-    text: string;
-    tagline: string;
-    href: string;
-  };
   contacts: HeaderContactItem[];
-  loginHref: string;
-  cartHref: string;
   navItems: HeaderNavItem[];
   socialLinks: HeaderSocialLink[];
 }

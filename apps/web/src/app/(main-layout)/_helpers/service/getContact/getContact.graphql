@@ -1,0 +1,13 @@
+query GetContact {
+  contact {
+    phone
+    whatsapp
+    email
+    address
+    work_hours_mid_week
+    work_hours_saturday
+    work_hours_sunday
+    latitude
+    longitude
+  }
+}

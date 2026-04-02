@@ -1,0 +1,14 @@
+query GetCorporate {
+  about_us {
+    title
+    content
+    specs(sort: ["order"]) {
+      title
+      description
+    }
+    features(sort: ["order"]) {
+      title
+      description
+    }
+  }
+}

@@ -9,12 +9,12 @@
        SYSTEM COLORS (Background & Foreground)
        ============================================ */
   --color-background: #16223f;
-  --color-foreground: #e32231;
+  --color-foreground: #730912;
 
   /* ============================================
        SURFACE COLORS
        ============================================ */
-  --color-surface-primary-red: #e32231;
+  --color-surface-primary-red: #730912;
   --color-surface-secondary-red-a: #f74e56;
   --color-surface-secondary-red-b: #ac1723;
   --color-surface-overlay: rgba(9, 10, 10, 0.7);
@@ -31,7 +31,7 @@
   --color-text-primary-on-dark: #ffffff;
   --color-text-secondary-on-dark: rgba(255, 255, 255, 0.8);
   --color-text-mute: #898f8f;
-  --color-text-action-primary: #e32231;
+  --color-text-action-primary: #730912;
   --color-text-action-secondary: #16223f;
   --color-text-action-tertiary: #585d5d;
   --color-text-warning: #ca3500;
@@ -40,7 +40,7 @@
   /* ============================================
        FILL COLORS
        ============================================ */
-  --color-fill-primary-red: #e32231;
+  --color-fill-primary-red: #730912;
   --color-fill-primary-red-hover: #f74e56;
   --color-fill-dark: #16223f;
   --color-fill-light: #ffffff;
@@ -51,7 +51,7 @@
   /* ============================================
        STROKE COLORS
        ============================================ */
-  --color-stroke-primary-red: #e32231;
+  --color-stroke-primary-red: #730912;
   --color-stroke-dark: #2a2d2d;
   --color-stroke-on-dark: #ffffff;
   --color-stroke-on-dark-transparent: rgba(255, 255, 255, 0.6);
@@ -61,7 +61,7 @@
   /* ============================================
        BORDER COLORS
        ============================================ */
-  --color-border-primary-red: #e32231;
+  --color-border-primary-red: #730912;
   --color-border-dark: #2a2d2d;
   --color-border-on-dark: #ffffff;
   --color-border-on-dark-transparent: rgba(255, 255, 255, 0.6);
@@ -147,7 +147,7 @@
   --color-primary-70: rgba(227, 34, 49, 0.7);
   --color-primary-80: rgba(227, 34, 49, 0.8);
   --color-primary-90: rgba(227, 34, 49, 0.9);
-  --color-primary-100: #e32231;
+  --color-primary-100: #730912;
 
   /* ============================================
        TRANSPARENT SECONDARY VARIANTS
@@ -487,4 +487,18 @@ select:-webkit-autofill {
 
 .animate-fade-in {
   animation: fade-in 0.25s ease-out both;
+}
+
+@keyframes brightnessPulse {
+  0%,
+  100% {
+    filter: brightness(0.5);
+  }
+  50% {
+    filter: brightness(1);
+  }
+}
+
+.animate-brightness {
+  animation: brightnessPulse 3s ease-in-out infinite;
 }

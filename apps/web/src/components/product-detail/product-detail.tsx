@@ -93,7 +93,7 @@ function ImageGallery({
               className={cn(
                 'shrink-0 h-16 w-16 rounded-lg overflow-hidden border-2 transition-all bg-white',
                 activeIndex === i
-                  ? 'border-[#e32231] shadow-md shadow-[#e32231]/20'
+                  ? 'border-[#730912] shadow-md shadow-[#730912]/20'
                   : 'border-white/10 opacity-60 hover:opacity-100'
               )}
             >
@@ -134,7 +134,7 @@ function OptionButton({
       className={cn(
         'rounded-lg border px-3 py-2 text-xs font-semibold transition-all text-left',
         selected
-          ? 'border-[#e32231] bg-[#e32231] text-white shadow-md shadow-[#e32231]/30'
+          ? 'border-[#730912] bg-[#730912] text-white shadow-md shadow-[#730912]/30'
           : compatible
             ? 'border-white/15 bg-white/5 text-white/75 hover:border-white/30 hover:text-white'
             : 'border-dashed border-white/10 bg-transparent text-white/25 hover:border-white/20 hover:text-white/40'
@@ -172,7 +172,7 @@ function ColorSwatch({
       className={cn(
         'relative h-9 w-9 rounded-full transition-all flex items-center justify-center',
         selected
-          ? 'ring-2 ring-[#e32231] ring-offset-2 ring-offset-[#091530] scale-110'
+          ? 'ring-2 ring-[#730912] ring-offset-2 ring-offset-[#091530] scale-110'
           : compatible
             ? 'ring-1 ring-white/10 hover:ring-white/30 hover:scale-105'
             : 'opacity-35 hover:opacity-55'
@@ -249,7 +249,7 @@ function RelatedCard({
   return (
     <Link
       href={product.href}
-      className="group shrink-0 w-36 sm:w-44 flex flex-col overflow-hidden rounded-xl border border-white/8 bg-surface-dark transition-all hover:border-[#e32231]/50 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#e32231]/10"
+      className="group shrink-0 w-36 sm:w-44 flex flex-col overflow-hidden rounded-xl border border-white/8 bg-surface-dark transition-all hover:border-[#730912]/50 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#730912]/10"
     >
       <div className="relative aspect-square overflow-hidden rounded-t-lg bg-white">
         <Image
@@ -259,13 +259,13 @@ function RelatedCard({
           className="object-cover p-2 transition-transform duration-500 group-hover:scale-108"
           unoptimized
         />
-        <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#e32231] transition-all duration-300 group-hover:w-full" />
+        <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#730912] transition-all duration-300 group-hover:w-full" />
       </div>
       <div className="flex items-center justify-between gap-1 px-3 py-2.5 bg-foreground">
         <p className="text-[11px] font-semibold text-white/70 group-hover:text-white transition-colors line-clamp-2 leading-snug">
           {product.title}
         </p>
-        <ChevronRight className="h-3 w-3 shrink-0 text-white/30 group-hover:text-[#e32231] transition-colors" />
+        <ChevronRight className="h-3 w-3 shrink-0 text-white/30 group-hover:text-[#730912] transition-colors" />
       </div>
     </Link>
   );
@@ -510,7 +510,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
           <div className="flex flex-col gap-6">
             {/* Title + code */}
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#e32231] mb-1">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#730912] mb-1">
                 {data.subcategoryTitle}
               </p>
               <h1 className="text-2xl sm:text-3xl font-bold text-white font-alt leading-tight">
@@ -521,7 +521,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
                   <span className="text-[10px] text-white/40 uppercase tracking-wider">
                     Stok Kodu
                   </span>
-                  <span className="text-xs font-bold text-[#e32231] font-mono">
+                  <span className="text-xs font-bold text-[#730912] font-mono">
                     {currentVariant.productCode}
                   </span>
                 </div>
@@ -630,14 +630,14 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
                     className={cn(
                       'flex flex-col items-center rounded-xl border px-2 py-3.5 transition-all',
                       selQty === tier.qty
-                        ? 'border-[#e32231] bg-[#e32231]/10 shadow-md shadow-[#e32231]/20'
+                        ? 'border-[#730912] bg-[#730912]/10 shadow-md shadow-[#730912]/20'
                         : 'border-white/10 bg-white/3 hover:border-white/25'
                     )}
                   >
                     <span
                       className={cn(
                         'text-[11px] font-semibold',
-                        selQty === tier.qty ? 'text-[#e32231]' : 'text-white/45'
+                        selQty === tier.qty ? 'text-[#730912]' : 'text-white/45'
                       )}
                     >
                       {tier.qty.toLocaleString('tr-TR')} Adet
@@ -680,7 +680,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
                   <span className="text-sm font-medium text-white/70">
                     Toplam (KDV Dahil %20)
                   </span>
-                  <span className="text-lg font-bold text-[#e32231]">
+                  <span className="text-lg font-bold text-[#730912]">
                     {fmt(totalIncVat)} ₺
                   </span>
                 </div>
@@ -745,7 +745,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
                   'Toplu alımlarda özel fiyat için teklif isteyiniz',
                 ].map((line) => (
                   <li key={line} className="flex gap-2">
-                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#e32231]/50" />
+                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#730912]/50" />
                     {line}
                   </li>
                 ))}
@@ -758,7 +758,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
         {data.relatedProducts.length > 0 && (
           <div className="mt-16 border-t border-white/8 pt-12">
             <div className="mb-6">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#e32231] mb-1">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#730912] mb-1">
                 Benzer Ürünler
               </p>
               <h2 className="text-xl font-bold text-white font-alt">

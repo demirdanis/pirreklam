@@ -1,0 +1,12 @@
+query GetBankAccounts {
+  bank_accounts {
+    id
+    bank_name
+    bank_branch
+    currency
+    account_owner
+    iban
+    account_no
+    order
+  }
+}

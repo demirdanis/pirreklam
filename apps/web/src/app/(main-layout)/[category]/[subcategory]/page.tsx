@@ -1,10 +1,9 @@
 import ProductCategoryList from '@/components/product-category-list/product-category-list';
-import { getProductCategoryData } from '@/app/(main-layout)/_helpers/service/getProductCategory/getProductCategory.mock';
+import { getProductCategoryData } from '@/app/(main-layout)/_helpers/service/getProductCategory/getProductCategory.service';
 import { notFound } from 'next/navigation';
 
-interface ProductCategoryPageProps {
+export interface ProductCategoryPageProps {
   params: Promise<{
-    category: string;
     subcategory: string;
   }>;
 }
@@ -12,12 +11,12 @@ interface ProductCategoryPageProps {
 export default async function ProductCategoryPage({
   params,
 }: ProductCategoryPageProps) {
-  const { category, subcategory } = await params;
-  const data = await getProductCategoryData(category, subcategory);
+  const { subcategory } = await params;
+  const data = await getProductCategoryData(subcategory);
 
   if (!data) {
     notFound();
   }
 
-  return <ProductCategoryList data={data} />;
+  return <ProductCategoryList {...data} />;
 }

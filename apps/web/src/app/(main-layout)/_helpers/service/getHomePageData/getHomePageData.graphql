@@ -1,0 +1,39 @@
+query GetHomePageData {
+  page__home {
+    banners {
+      id
+      category
+      title
+      description
+      button_text
+      button_url
+      web_image
+      mobile_image
+      order
+    }
+    sectoral_sub_categories {
+      id
+      name
+      slug
+      order
+      sector {
+        id
+      }
+    }
+
+    popular_sub_categories {
+      id
+      name
+      slug
+      order
+      card_image
+    }
+  }
+
+  sectors {
+    id
+    name
+    description
+    web_image
+  }
+}

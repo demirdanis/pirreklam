@@ -1,0 +1,14 @@
+query GetHeaderData {
+  header {
+    phone
+    phone_text
+    whatsapp
+    whatsapp_text
+  }
+
+  social_medias {
+    icon
+    url
+    order
+  }
+}

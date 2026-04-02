@@ -1,0 +1,28 @@
+query GetProductList($subcategorySlug: String!) {
+  sub_categories(filter: { slug: { _eq: $subcategorySlug } }, limit: 1) {
+    id
+    name
+    slug
+    variations {
+      name
+      order
+      products {
+        name
+        slug
+        variatins(limit: 1) {
+          main_option(
+            filter: { category: { name: { _eq: "Baskı Seçenekleri" } } }
+          ) {
+            name
+            category {
+              name
+            }
+          }
+          images(limit: 1) {
+            big_image
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,8 +4,8 @@ import Header from '@/components/header/header';
 import type { Metadata } from 'next';
 import { fontVariables } from '@/lib/fonts';
 import { getCategoryBarDataWithCache } from './_helpers/service/getCategoryBar/getCategoryBar.service';
-import { getFooterData } from './_helpers/service/getFooter/getFooter.mock';
-import { getHeaderData } from './_helpers/service/getHeader/getHeader.mock';
+import { getFooterDataWithCache } from './_helpers/service/getFooter/getFooter.service';
+import { getHeaderDataWithCache } from './_helpers/service/getHeader/getHeader.service';
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = process.env.BASE_URL || 'https://pirreklam.com.tr';
@@ -48,11 +48,12 @@ export default async function MainLayout({
   children: React.ReactNode;
 }) {
   const [headerData, footerData, categoryBarData] = await Promise.all([
-    getHeaderData(),
-    getFooterData(),
+    getHeaderDataWithCache(),
+    getFooterDataWithCache(),
     getCategoryBarDataWithCache(),
   ]);
 
+  console.log('headerData', headerData);
   return (
     <html className={fontVariables}>
       <head></head>

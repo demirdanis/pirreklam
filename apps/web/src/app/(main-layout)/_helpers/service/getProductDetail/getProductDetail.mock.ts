@@ -528,7 +528,7 @@ const CIT_CIT_KAPAKLI: ProductDetailData = {
   colors: [
     { id: 'beyaz', label: 'Beyaz', hex: '#e8e8e8' },
     { id: 'siyah', label: 'Siyah', hex: '#1c1c1c' },
-    { id: 'kirmizi', label: 'Kırmızı', hex: '#e32231' },
+    { id: 'kirmizi', label: 'Kırmızı', hex: '#730912' },
     { id: 'mavi', label: 'Mavi', hex: '#1e4d8c' },
     { id: 'sari', label: 'Sarı', hex: '#f5c518' },
     { id: 'yesil', label: 'Yeşil', hex: '#2d6a4f' },

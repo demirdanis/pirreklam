@@ -10,9 +10,8 @@ export interface FooterNavSection {
 }
 
 export interface FooterSocialLink {
-  platform: 'facebook' | 'instagram' | 'youtube' | 'pinterest' | 'linkedin';
   href: string;
-  label: string;
+  logoUrl: string;
 }
 
 export interface FooterContactInfo {
@@ -34,7 +33,7 @@ export interface FooterData {
   contact: FooterContactInfo;
   sections: FooterNavSection[];
   socialLinks: FooterSocialLink[];
-  socialHandle: string;
+
   googleReviewHref: string;
   etbisHref: string;
   copyright: string;

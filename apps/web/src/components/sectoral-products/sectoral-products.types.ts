@@ -7,6 +7,7 @@ export interface SectoralGroup {
   id: string;
   sectors: string[];
   products: SectoralProductLink[];
+  imageUrl?: string;
 }
 
 export interface SectoralProductsData {
