@@ -9,9 +9,18 @@ import { directusGraphqlQuery } from '@/lib/graphql-client';
 import { getContactMapper } from './getContact.mapper';
 import { unstable_cache } from 'next/cache';
 
+const EMPTY_CONTACT: ContactData = {
+  phone: '',
+  whatsapp: '',
+  email: '',
+  address: '',
+  mapEmbedUrl: '',
+  workingHours: [],
+};
+
 export async function getContactDataWithCache(): Promise<ContactData> {
   if (!process.env.DIRECTUS_URL) {
-    return {} as ContactData;
+    return EMPTY_CONTACT;
   }
   if (process.env.DISABLE_CACHE) {
     return getContactData();
