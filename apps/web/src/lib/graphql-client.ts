@@ -11,6 +11,15 @@ export async function directusGraphqlQuery<
   TVariables extends Variables = Variables,
 >(document: string | DocumentNode, variables?: TVariables): Promise<TResult> {
   const directusUrl = process.env.DIRECTUS_URL;
+  const graphqlUrl = process.env.DIRECTUS_GRAPHQL_URL;
+
+  console.log('[graphql-client] DIRECTUS_URL:', directusUrl);
+  console.log('[graphql-client] DIRECTUS_GRAPHQL_URL:', graphqlUrl);
+  console.log(
+    '[graphql-client] DIRECTUS_STATIC_TOKEN:',
+    process.env.DIRECTUS_STATIC_TOKEN ? 'SET' : 'NOT SET'
+  );
+
   if (!directusUrl) {
     throw new Error('DIRECTUS_URL environment variable is not set');
   }
@@ -23,6 +32,14 @@ export async function directusGraphqlQuery<
 
   const query = typeof document === 'string' ? document : print(document);
 
-  const data = await client.query<TResult>(query, variables);
-  return data;
+  console.log('[graphql-client] Querying:', directusUrl);
+
+  try {
+    const data = await client.query<TResult>(query, variables);
+    console.log('[graphql-client] Success, keys:', Object.keys(data ?? {}));
+    return data;
+  } catch (err) {
+    console.error('[graphql-client] Query FAILED:', err);
+    throw err;
+  }
 }

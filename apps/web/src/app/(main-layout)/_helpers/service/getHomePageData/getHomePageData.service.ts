@@ -16,8 +16,11 @@ const EMPTY_HOME_PAGE: HomePageData = {
 };
 
 export async function getHomePageDataWithCache(): Promise<HomePageData | null> {
-  console.log('DIRECTUS_URL', process.env.DIRECTUS_URL);
+  console.log('[getHomePageData] DIRECTUS_URL:', process.env.DIRECTUS_URL);
   if (!process.env.DIRECTUS_URL) {
+    console.warn(
+      '[getHomePageData] DIRECTUS_URL is not set, returning empty home page'
+    );
     return EMPTY_HOME_PAGE;
   }
   if (process.env.DISABLE_CACHE) {
@@ -33,12 +36,33 @@ export async function getHomePageDataWithCache(): Promise<HomePageData | null> {
 }
 
 const getHomePageData = async (): Promise<HomePageData | null> => {
-  const data = await directusGraphqlQuery<
-    GetHomePageDataQuery,
-    GetHomePageDataQueryVariables
-  >(GetHomePageDataDocument, {});
+  console.log('[getHomePageData] Fetching...');
+  try {
+    const data = await directusGraphqlQuery<
+      GetHomePageDataQuery,
+      GetHomePageDataQueryVariables
+    >(GetHomePageDataDocument, {});
 
-  const mappedData = GetHomePageDataMapper(data);
+    console.log('[getHomePageData] Raw data keys:', Object.keys(data ?? {}));
 
-  return mappedData;
+    const mappedData = GetHomePageDataMapper(data);
+
+    console.log(
+      '[getHomePageData] Mapped banners count:',
+      mappedData?.banners?.slides?.length
+    );
+    console.log(
+      '[getHomePageData] Mapped sectoralProducts groups:',
+      mappedData?.sectoralProducts?.groups?.length
+    );
+    console.log(
+      '[getHomePageData] Mapped popularSubCategories:',
+      mappedData?.popularSubCategories?.products?.length
+    );
+
+    return mappedData;
+  } catch (err) {
+    console.error('[getHomePageData] FAILED:', err);
+    return null;
+  }
 };
