@@ -271,15 +271,7 @@ select:-webkit-autofill {
    HEADER MENU UTILITIES
    ============================================ */
 .bg-header-menu {
-  /* Arka plan rengini sabit tutuyoruz */
   background-color: #16223f;
-
-  background-image: radial-gradient(
-    circle at center,
-    #091530 0%,
-    #16223f 20%,
-    #091530 75%
-  );
 
   /* Logoyu ve menüyü ortalamak için ek ayarlar */
   display: flex;

@@ -108,12 +108,12 @@ export default function Header({ data, categories = [] }: HeaderProps) {
       <nav className="bg-header-menu border-b border-[#000000] shadow-header-menu relative overflow-hidden">
         {/* Background — desktop */}
         <div
-          className="hidden lg:block absolute inset-0 bg-cover bg-center opacity-30 z-0 pointer-events-none"
+          className="hidden lg:block absolute inset-0 bg-cover bg-center z-0 pointer-events-none"
           style={{ backgroundImage: "url('/assets/header_back_web.webp')" }}
         />
         {/* Background — mobile */}
         <div
-          className="lg:hidden absolute inset-0 bg-cover bg-center opacity-30 z-0 pointer-events-none"
+          className="lg:hidden absolute inset-0 bg-cover bg-center z-0 pointer-events-none"
           style={{ backgroundImage: "url('/assets/header_back_mobile.webp')" }}
         />
         {/* Desktop layout */}
