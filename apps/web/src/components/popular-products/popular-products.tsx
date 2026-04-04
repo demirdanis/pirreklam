@@ -19,7 +19,7 @@ function PopularProductCard({
   return (
     <Link
       href={href}
-      className="group relative flex flex-col overflow-hidden rounded-xl bg-white border border-[#e2e5e8] shadow-sm transition-all duration-300 hover:border-[#730912] hover:shadow-md hover:-translate-y-0.5"
+      className="group relative flex flex-col overflow-hidden rounded-xl bg-white border border-[#e2e5e8]  transition-all duration-300 hover:border-[#730912] hover:shadow-md hover:-translate-y-0.5"
     >
       {/* Image */}
       <div className="relative p-0 pb-0">

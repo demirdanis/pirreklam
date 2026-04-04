@@ -319,7 +319,7 @@ function ProductCard({
   return (
     <Link
       href={`/${product.slug}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl bg-white border border-[#e2e5e8] shadow-sm transition-all duration-300 hover:border-[#730912] hover:shadow-md hover:-translate-y-0.5"
+      className="group relative flex flex-col overflow-hidden rounded-xl bg-white border border-[#e2e5e8]  transition-all duration-300 hover:border-[#730912] hover:shadow-md hover:-translate-y-0.5"
     >
       <div className="relative">
         <div className="relative aspect-square overflow-hidden rounded-t-xl bg-white">

@@ -37,7 +37,7 @@ export default function Corporate({ data }: CorporateProps) {
               return (
                 <div
                   key={feature.title}
-                  className="group rounded-2xl border border-surface-secondary-light-b bg-white p-2 md:p-4 shadow-sm transition-shadow hover:shadow-md"
+                  className="group rounded-2xl border border-surface-secondary-light-b bg-white p-2 md:p-4  transition-shadow hover:shadow-md"
                 >
                   <div className="mb-2 flex items-start gap-4">
                     <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#e32231]/10 group-hover:bg-[#e32231] transition-colors">

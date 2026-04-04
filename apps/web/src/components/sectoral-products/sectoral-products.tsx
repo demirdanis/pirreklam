@@ -1,10 +1,11 @@
 'use client';
 
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import type { SectoralProductsData } from './sectoral-products.types';
-import { useState } from 'react';
 
 interface SectoralProductsProps {
   data: SectoralProductsData;
@@ -12,6 +13,12 @@ interface SectoralProductsProps {
 
 export default function SectoralProducts({ data }: SectoralProductsProps) {
   const [activeId, setActiveId] = useState(data.groups[0]?.id ?? '');
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const tabScrollContainerRef = useRef<HTMLDivElement>(null);
+  const isDraggingRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragStartScrollLeftRef = useRef(0);
 
   const activeGroup =
     data.groups.find((g) => g.id === activeId) ?? data.groups[0];
@@ -21,11 +28,62 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
     data.groups[0]?.imageUrl ??
     '';
 
+  const checkScroll = () => {
+    if (tabScrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } =
+        tabScrollContainerRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  useLayoutEffect(() => {
+    checkScroll();
+    const container = tabScrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', checkScroll);
+      window.addEventListener('resize', checkScroll);
+      return () => {
+        container.removeEventListener('scroll', checkScroll);
+        window.removeEventListener('resize', checkScroll);
+      };
+    }
+  }, []);
+
+  const scroll = (direction: 'left' | 'right') => {
+    const container = tabScrollContainerRef.current;
+    if (container) {
+      const scrollAmount = 150;
+      container.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDraggingRef.current = true;
+    dragStartXRef.current = e.clientX;
+    dragStartScrollLeftRef.current =
+      tabScrollContainerRef.current?.scrollLeft ?? 0;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDraggingRef.current || !tabScrollContainerRef.current) return;
+    const diff = e.clientX - dragStartXRef.current;
+    tabScrollContainerRef.current.scrollLeft =
+      dragStartScrollLeftRef.current - diff;
+  };
+
+  const handleMouseUp = () => {
+    isDraggingRef.current = false;
+  };
+
   return (
     <section className="bg-white py-4 md:py-8 lg:py-16 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-10 text-center lg:text-left">
+        <div className="mb-3 lg:mb-10 text-center lg:text-left">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#091530] font-alt">
             {data.title}
           </h2>
@@ -33,7 +91,7 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
         </div>
 
         {/* Desktop Layout */}
-        <div className="hidden lg:flex gap-0 rounded-xl overflow-hidden shadow-sm border border-[#e8eaec]">
+        <div className="hidden lg:flex gap-0 rounded-xl overflow-hidden  border border-[#e8eaec]">
           {/* Sector Selector */}
           <div className="w-64 shrink-0 bg-white border-r border-[#e8eaec] flex flex-col">
             {data.groups.map((group) => {
@@ -105,7 +163,7 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
 
             <div className="relative z-10 p-10">
               {/* Sector heading */}
-              <div className="mb-6 flex items-end justify-between bg-white/70 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/80 shadow-sm">
+              <div className="mb-6 flex items-end justify-between bg-white/70 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/80 ">
                 <div>
                   <p className="text-[10px]  tracking-[0.18em] text-[#730912] mb-1 font-bold">
                     Önerilen Ürünler
@@ -128,7 +186,7 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
                     key={product.href}
                     href={product.href}
                     style={{ animationDelay: `${i * 30}ms` }}
-                    className="group flex items-center gap-2.5 rounded-lg border border-[#e2e5e8] bg-white/90 px-3.5 py-3 text-sm text-[#444] shadow-sm transition-all hover:bg-[#730912] hover:border-[#730912] hover:text-white hover:shadow-md animate-fade-in"
+                    className="group flex items-center gap-2.5 rounded-lg border border-[#e2e5e8] bg-white/90 px-3.5 py-3 text-sm text-[#444]  transition-all hover:bg-[#730912] hover:border-[#730912] hover:text-white hover:shadow-md animate-fade-in"
                   >
                     <span className="leading-tight">{product.label}</span>
                   </Link>
@@ -140,24 +198,52 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
 
         {/* Mobile Layout */}
         <div className="lg:hidden">
-          {/* Sector tabs */}
-          <div className="flex gap-2 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden mb-5">
-            {data.groups.map((group) => {
-              const isActive = group.id === activeId;
-              return (
-                <button
-                  key={group.id}
-                  onClick={() => setActiveId(group.id)}
-                  className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-all ${
-                    isActive
-                      ? 'border-[#730912] bg-[#730912] text-white font-semibold'
-                      : 'border-[#ddd] bg-white text-[#555] hover:border-[#730912]/50'
-                  }`}
-                >
-                  <span className="whitespace-nowrap">{group.sectors[0]}</span>
-                </button>
-              );
-            })}
+          {/* Sector tabs with chevrons */}
+          <div className="relative mb-5 border-b border-[#e8eaec]">
+            {canScrollLeft && (
+              <button
+                onClick={() => scroll('left')}
+                className="absolute left-[-24px] top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-8 h-8 hover:bg-[#f0f0f0] transition-colors rounded"
+              >
+                <ChevronLeft className="h-5 w-5 text-[#555]" />
+              </button>
+            )}
+
+            {canScrollRight && (
+              <button
+                onClick={() => scroll('right')}
+                className="absolute right-[-24px] top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-8 h-8 hover:bg-[#f0f0f0] transition-colors rounded"
+              >
+                <ChevronRight className="h-5 w-5 text-[#555]" />
+              </button>
+            )}
+
+            <div
+              ref={tabScrollContainerRef}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              className="flex gap-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden cursor-grab active:cursor-grabbing"
+            >
+              {data.groups.map((group) => {
+                const isActive = group.id === activeId;
+                return (
+                  <button
+                    key={group.id}
+                    onClick={() => setActiveId(group.id)}
+                    className={`relative shrink-0 px-4 py-3 text-sm whitespace-nowrap transition-all font-medium ${
+                      isActive ? 'text-[#730912]' : 'text-[#888]'
+                    }`}
+                  >
+                    {group.sectors[0]}
+                    {isActive && (
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#730912]" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Product grid */}
@@ -166,7 +252,7 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
               <Link
                 key={product.href}
                 href={product.href}
-                className="group flex items-center gap-2 rounded-lg border border-[#e2e5e8] bg-white px-3 py-3 text-sm text-[#444] shadow-sm transition-all hover:bg-[#730912] hover:border-[#730912] hover:text-white"
+                className="group flex items-center gap-2 rounded-lg border border-[#e2e5e8] bg-white px-3 py-3 text-sm text-[#444]  transition-all hover:bg-[#730912] hover:border-[#730912] hover:text-white"
               >
                 <span className="leading-tight">{product.label}</span>
               </Link>

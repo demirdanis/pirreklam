@@ -26,7 +26,7 @@ export default function Contact({ data }: ContactProps) {
           <div className="lg:col-span-2 flex flex-col gap-4">
             <a
               href={`tel:${data.phone.replace(/\s/g, '')}`}
-              className="group flex items-start gap-4 rounded-2xl border border-surface-secondary-light-b bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+              className="group flex items-start gap-4 rounded-2xl border border-surface-secondary-light-b bg-white p-6  transition-shadow hover:shadow-md"
             >
               <div className="shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e32231]/10 group-hover:bg-[#e32231] transition-colors">
                 <Phone className="h-5 w-5 text-[#e32231] group-hover:text-white transition-colors" />
@@ -48,7 +48,7 @@ export default function Contact({ data }: ContactProps) {
               href={`https://wa.me/90${data.whatsapp.replace(/\s|^0/g, '')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-start gap-4 rounded-2xl border border-surface-secondary-light-b bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+              className="group flex items-start gap-4 rounded-2xl border border-surface-secondary-light-b bg-white p-6  transition-shadow hover:shadow-md"
             >
               <div className="shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e32231]/10 group-hover:bg-[#e32231] transition-colors">
                 <MessageCircle className="h-5 w-5 text-[#e32231] group-hover:text-white transition-colors" />
@@ -68,7 +68,7 @@ export default function Contact({ data }: ContactProps) {
 
             <a
               href={`mailto:${data.email}`}
-              className="group flex items-start gap-4 rounded-2xl border border-surface-secondary-light-b bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+              className="group flex items-start gap-4 rounded-2xl border border-surface-secondary-light-b bg-white p-6  transition-shadow hover:shadow-md"
             >
               <div className="shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e32231]/10 group-hover:bg-[#e32231] transition-colors">
                 <Mail className="h-5 w-5 text-[#e32231] group-hover:text-white transition-colors" />
@@ -83,7 +83,7 @@ export default function Contact({ data }: ContactProps) {
               </div>
             </a>
 
-            <div className="flex items-start gap-4 rounded-2xl border border-surface-secondary-light-b bg-white p-6 shadow-sm">
+            <div className="flex items-start gap-4 rounded-2xl border border-surface-secondary-light-b bg-white p-6 ">
               <div className="shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e32231]/10">
                 <MapPin className="h-5 w-5 text-[#e32231]" />
               </div>
@@ -97,7 +97,7 @@ export default function Contact({ data }: ContactProps) {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 rounded-2xl border border-surface-secondary-light-b bg-white p-6 shadow-sm">
+            <div className="flex items-start gap-4 rounded-2xl border border-surface-secondary-light-b bg-white p-6 ">
               <div className="shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e32231]/10">
                 <Clock className="h-5 w-5 text-[#e32231]" />
               </div>
@@ -118,7 +118,7 @@ export default function Contact({ data }: ContactProps) {
           </div>
 
           {/* Right — map */}
-          <div className="lg:col-span-3 rounded-2xl overflow-hidden shadow-sm border border-surface-secondary-light-b min-h-60  lg:min-h-158 h-60">
+          <div className="lg:col-span-3 rounded-2xl overflow-hidden  border border-surface-secondary-light-b min-h-60  lg:min-h-158 h-60">
             <iframe
               src={data.mapEmbedUrl}
               width="100%"

@@ -32,7 +32,7 @@ function CopyButton({ text }: { text: string }) {
 
 function BankCard({ account }: { account: BankAccount }) {
   return (
-    <div className="rounded-2xl border border-[#f0f0f0] bg-white shadow-sm overflow-hidden">
+    <div className="rounded-2xl border border-[#f0f0f0] bg-white overflow-hidden">
       {/* Colored top bar */}
       <div className="h-1.5 w-full" style={{ backgroundColor: '#730912' }} />
       <div className="p-6">
