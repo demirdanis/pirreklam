@@ -31,3 +31,5 @@ jobs:
             DIRECTUS_URL=${{ secrets.DIRECTUS_URL }}
             DIRECTUS_STATIC_TOKEN=${{ secrets.DIRECTUS_STATIC_TOKEN }}
             BASE_URL=${{ secrets.BASE_URL }}
+            ASSETS_URL=${{ secrets.ASSETS_URL }}
+            DIRECTUS_GRAPHQL_URL=${{ secrets.DIRECTUS_GRAPHQL_URL }}

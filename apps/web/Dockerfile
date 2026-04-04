@@ -36,4 +36,4 @@ COPY --from=builder /app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=builder /app/apps/web/public ./apps/web/public
 
 EXPOSE 3000
-CMD ["node", "apps/web/server.js"]
+CMD ["sh", "-c", "echo '=== ENVIRONMENT VARIABLES ==='; echo DIRECTUS_URL=$DIRECTUS_URL; echo DIRECTUS_GRAPHQL_URL=$DIRECTUS_GRAPHQL_URL; echo ASSETS_URL=$ASSETS_URL; echo BASE_URL=$BASE_URL; echo DIRECTUS_STATIC_TOKEN=${DIRECTUS_STATIC_TOKEN:+SET}; echo PORT=$PORT; echo NODE_ENV=$NODE_ENV; echo '=== STARTING SERVER ==='; node apps/web/server.js"]
