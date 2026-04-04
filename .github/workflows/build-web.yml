@@ -8,6 +8,7 @@ jobs:
   build_and_push_website:
     name: Build and Push Website
     runs-on: ubuntu-latest
+    environment: prod
     permissions:
       contents: read
       packages: write
