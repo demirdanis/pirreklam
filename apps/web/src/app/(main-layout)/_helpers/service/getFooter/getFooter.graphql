@@ -13,6 +13,9 @@ query GetFooterData {
     popular_sub_categories {
       name
       slug
+      main_categories_id {
+        slug
+      }
     }
   }
 

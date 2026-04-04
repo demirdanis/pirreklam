@@ -38,7 +38,7 @@ export function GetHomePageDataMapper(
         )
         .map((subCat) => ({
           label: subCat?.name ?? '',
-          href: `/${subCat?.slug ?? ''}`,
+          href: `/${subCat?.main_categories_id?.slug ?? ''}/${subCat?.slug ?? ''}`,
         })),
     })),
   };
@@ -49,7 +49,7 @@ export function GetHomePageDataMapper(
     products: (data.page__home?.popular_sub_categories ?? []).map((subCat) => ({
       id: subCat?.id ?? '',
       title: subCat?.name ?? '',
-      href: `/${subCat?.slug ?? ''}`,
+      href: `/${subCat?.main_categories_id?.slug ?? ''}/${subCat?.slug ?? ''}`,
       imageUrl: getImageUrl(subCat?.card_image),
       imageAlt: subCat?.name ?? '',
     })),

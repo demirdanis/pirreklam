@@ -27,7 +27,7 @@ export function GetFooterDataMapper(data: GetFooterDataQuery): FooterData {
         links:
           data.footer?.popular_sub_categories?.map((p) => ({
             label: p?.name ?? '',
-            href: `/urun/${p?.slug ?? ''}`,
+            href: `/${p?.main_categories_id?.slug ?? ''}/${p?.slug ?? ''}`,
           })) ?? [],
       },
       {

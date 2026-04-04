@@ -5139,7 +5139,7 @@ export type GetCorporateQuery = { __typename?: 'Query', about_us?: { __typename?
 export type GetFooterDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetFooterDataQuery = { __typename?: 'Query', footer?: { __typename?: 'footer', title?: string | null, description?: string | null, phone?: string | null, whatsapp?: string | null, email?: string | null, address?: string | null, review_url?: string | null, long_description?: string | null, etbis_url?: string | null, copyright?: string | null, popular_sub_categories?: Array<{ __typename?: 'sub_categories', name?: string | null, slug?: string | null } | null> | null } | null, social_medias: Array<{ __typename?: 'social_medias', icon?: string | null, url?: string | null, order?: number | null }> };
+export type GetFooterDataQuery = { __typename?: 'Query', footer?: { __typename?: 'footer', title?: string | null, description?: string | null, phone?: string | null, whatsapp?: string | null, email?: string | null, address?: string | null, review_url?: string | null, long_description?: string | null, etbis_url?: string | null, copyright?: string | null, popular_sub_categories?: Array<{ __typename?: 'sub_categories', name?: string | null, slug?: string | null, main_categories_id?: { __typename?: 'main_categories', slug?: string | null } | null } | null> | null } | null, social_medias: Array<{ __typename?: 'social_medias', icon?: string | null, url?: string | null, order?: number | null }> };
 
 export type GetHeaderDataQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5149,7 +5149,7 @@ export type GetHeaderDataQuery = { __typename?: 'Query', header?: { __typename?:
 export type GetHomePageDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetHomePageDataQuery = { __typename?: 'Query', page__home?: { __typename?: 'page__home', banners?: Array<{ __typename?: 'home_banners', id: string, category?: string | null, title?: string | null, description?: string | null, button_text?: string | null, button_url?: string | null, web_image?: string | null, mobile_image?: string | null, order?: number | null } | null> | null, sectoral_sub_categories?: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, order?: number | null, sector?: Array<{ __typename?: 'sub_categories_sectors', sectors_id?: { __typename?: 'sectors', id: string } | null } | null> | null } | null> | null, popular_sub_categories?: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, order?: number | null, card_image?: string | null } | null> | null } | null, sectors: Array<{ __typename?: 'sectors', id: string, name?: string | null, description?: string | null, web_image?: string | null }> };
+export type GetHomePageDataQuery = { __typename?: 'Query', page__home?: { __typename?: 'page__home', banners?: Array<{ __typename?: 'home_banners', id: string, category?: string | null, title?: string | null, description?: string | null, button_text?: string | null, button_url?: string | null, web_image?: string | null, mobile_image?: string | null, order?: number | null } | null> | null, sectoral_sub_categories?: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, order?: number | null, main_categories_id?: { __typename?: 'main_categories', slug?: string | null } | null, sector?: Array<{ __typename?: 'sub_categories_sectors', sectors_id?: { __typename?: 'sectors', id: string } | null } | null> | null } | null> | null, popular_sub_categories?: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, order?: number | null, card_image?: string | null, main_categories_id?: { __typename?: 'main_categories', slug?: string | null } | null } | null> | null } | null, sectors: Array<{ __typename?: 'sectors', id: string, name?: string | null, description?: string | null, web_image?: string | null }> };
 
 export type GetProductListQueryVariables = Exact<{
   subcategorySlug: Scalars['String']['input'];
@@ -5243,6 +5243,9 @@ export const GetFooterDataDocument = gql`
     popular_sub_categories {
       name
       slug
+      main_categories_id {
+        slug
+      }
     }
   }
   social_medias {
@@ -5286,6 +5289,9 @@ export const GetHomePageDataDocument = gql`
       name
       slug
       order
+      main_categories_id {
+        slug
+      }
       sector {
         sectors_id {
           id
@@ -5298,6 +5304,9 @@ export const GetHomePageDataDocument = gql`
       slug
       order
       card_image
+      main_categories_id {
+        slug
+      }
     }
   }
   sectors {

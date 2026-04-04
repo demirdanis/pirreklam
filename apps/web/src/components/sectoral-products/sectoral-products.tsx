@@ -12,6 +12,7 @@ interface SectoralProductsProps {
 }
 
 export default function SectoralProducts({ data }: SectoralProductsProps) {
+  console.log('data', data);
   const [activeId, setActiveId] = useState(data.groups[0]?.id ?? '');
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
