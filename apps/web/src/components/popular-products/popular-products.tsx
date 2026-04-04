@@ -66,15 +66,6 @@ export default function PopularProducts({ data }: PopularProductsProps) {
         </div>
 
         {/* Mobile: show all link */}
-        <div className="mb-6 flex justify-center lg:hidden">
-          <Link
-            href="/"
-            className="flex items-center gap-1.5 rounded-lg border border-[#730912]/40 px-5 py-2.5 text-sm font-semibold text-[#730912] hover:bg-[#730912] hover:text-white transition-colors"
-          >
-            Tüm Ürünleri Gör
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
 
         {/* Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
