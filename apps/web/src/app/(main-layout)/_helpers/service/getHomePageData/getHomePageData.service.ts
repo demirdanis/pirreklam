@@ -16,6 +16,7 @@ const EMPTY_HOME_PAGE: HomePageData = {
 };
 
 export async function getHomePageDataWithCache(): Promise<HomePageData | null> {
+  console.log('DIRECTUS_URL', process.env.DIRECTUS_URL);
   if (!process.env.DIRECTUS_URL) {
     return EMPTY_HOME_PAGE;
   }
