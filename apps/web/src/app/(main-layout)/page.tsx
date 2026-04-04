@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import BankAccounts from '@/components/back-accounts/back-accounts';
 import Contact from '@/components/contact/contact';
 import Corporate from '@/components/corporate/corporate';
