@@ -3,8 +3,6 @@ import type { HeaderData } from '@/components/header/header.types';
 import { getImageUrl } from '@/lib/directus';
 
 export function GetHeaderDataMapper(data: GetHeaderDataQuery): HeaderData {
-  console.log('data', data);
-
   return {
     contacts: [
       {

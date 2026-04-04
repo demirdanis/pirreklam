@@ -2562,6 +2562,7 @@ export type Create_Product_Variations_Input = {
   purchase_count_prices?: InputMaybe<Array<InputMaybe<Create_Purchases_Counts_Input>>>;
   secondary_option?: InputMaybe<Create_Product_Options_Input>;
   stock_code?: InputMaybe<Scalars['String']['input']>;
+  video_url?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Create_Products_Input = {
@@ -2620,6 +2621,7 @@ export type Create_Sub_Category_Variations_Input = {
   name?: InputMaybe<Scalars['String']['input']>;
   order?: InputMaybe<Scalars['Int']['input']>;
   products?: InputMaybe<Array<InputMaybe<Create_Products_Input>>>;
+  slug?: InputMaybe<Scalars['String']['input']>;
   sub_categories_id?: InputMaybe<Create_Sub_Categories_Input>;
 };
 
@@ -3824,6 +3826,7 @@ export type Product_Variations = {
   purchase_count_prices_func?: Maybe<Count_Functions>;
   secondary_option?: Maybe<Product_Options>;
   stock_code?: Maybe<Scalars['String']['output']>;
+  video_url?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -3911,6 +3914,7 @@ export type Product_Variations_Aggregated_Count = {
   purchase_count_prices?: Maybe<Scalars['Int']['output']>;
   secondary_option?: Maybe<Scalars['Int']['output']>;
   stock_code?: Maybe<Scalars['Int']['output']>;
+  video_url?: Maybe<Scalars['Int']['output']>;
 };
 
 export type Product_Variations_Aggregated_Fields = {
@@ -3937,6 +3941,7 @@ export type Product_Variations_Filter = {
   purchase_count_prices_func?: InputMaybe<Count_Function_Filter_Operators>;
   secondary_option?: InputMaybe<Product_Options_Filter>;
   stock_code?: InputMaybe<String_Filter_Operators>;
+  video_url?: InputMaybe<String_Filter_Operators>;
 };
 
 export type Product_Variations_Mutated = {
@@ -3962,6 +3967,7 @@ export type Product_Variations_Quantifier_Filter = {
   purchase_count_prices_func?: InputMaybe<Count_Function_Filter_Operators>;
   secondary_option?: InputMaybe<Product_Options_Filter>;
   stock_code?: InputMaybe<String_Filter_Operators>;
+  video_url?: InputMaybe<String_Filter_Operators>;
 };
 
 export type Products = {
@@ -4522,6 +4528,7 @@ export type Sub_Category_Variations = {
   order?: Maybe<Scalars['Int']['output']>;
   products?: Maybe<Array<Maybe<Products>>>;
   products_func?: Maybe<Count_Functions>;
+  slug?: Maybe<Scalars['String']['output']>;
   sub_categories_id?: Maybe<Sub_Categories>;
 };
 
@@ -4565,6 +4572,7 @@ export type Sub_Category_Variations_Aggregated_Count = {
   name?: Maybe<Scalars['Int']['output']>;
   order?: Maybe<Scalars['Int']['output']>;
   products?: Maybe<Scalars['Int']['output']>;
+  slug?: Maybe<Scalars['Int']['output']>;
   sub_categories_id?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -4583,6 +4591,7 @@ export type Sub_Category_Variations_Filter = {
   order?: InputMaybe<Number_Filter_Operators>;
   products?: InputMaybe<Products_Quantifier_Filter>;
   products_func?: InputMaybe<Count_Function_Filter_Operators>;
+  slug?: InputMaybe<String_Filter_Operators>;
   sub_categories_id?: InputMaybe<Sub_Categories_Filter>;
 };
 
@@ -4603,6 +4612,7 @@ export type Sub_Category_Variations_Quantifier_Filter = {
   order?: InputMaybe<Number_Filter_Operators>;
   products?: InputMaybe<Products_Quantifier_Filter>;
   products_func?: InputMaybe<Count_Function_Filter_Operators>;
+  slug?: InputMaybe<String_Filter_Operators>;
   sub_categories_id?: InputMaybe<Sub_Categories_Filter>;
 };
 
@@ -4779,6 +4789,7 @@ export type Update_Product_Variations_Input = {
   purchase_count_prices?: InputMaybe<Array<InputMaybe<Update_Purchases_Counts_Input>>>;
   secondary_option?: InputMaybe<Update_Product_Options_Input>;
   stock_code?: InputMaybe<Scalars['String']['input']>;
+  video_url?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Update_Products_Input = {
@@ -4837,6 +4848,7 @@ export type Update_Sub_Category_Variations_Input = {
   name?: InputMaybe<Scalars['String']['input']>;
   order?: InputMaybe<Scalars['Int']['input']>;
   products?: InputMaybe<Array<InputMaybe<Update_Products_Input>>>;
+  slug?: InputMaybe<Scalars['String']['input']>;
   sub_categories_id?: InputMaybe<Update_Sub_Categories_Input>;
 };
 
@@ -5034,6 +5046,7 @@ export type Version_Product_Variations = {
   purchase_count_prices?: Maybe<Scalars['JSON']['output']>;
   secondary_option?: Maybe<Scalars['JSON']['output']>;
   stock_code?: Maybe<Scalars['String']['output']>;
+  video_url?: Maybe<Scalars['String']['output']>;
 };
 
 export type Version_Products = {
@@ -5099,6 +5112,7 @@ export type Version_Sub_Category_Variations = {
   name?: Maybe<Scalars['String']['output']>;
   order?: Maybe<Scalars['Int']['output']>;
   products?: Maybe<Scalars['JSON']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
   sub_categories_id?: Maybe<Scalars['JSON']['output']>;
 };
 
@@ -5139,10 +5153,18 @@ export type GetHomePageDataQuery = { __typename?: 'Query', page__home?: { __type
 
 export type GetProductListQueryVariables = Exact<{
   subcategorySlug: Scalars['String']['input'];
+  variation?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type GetProductListQuery = { __typename?: 'Query', sub_categories: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, variations?: Array<{ __typename?: 'sub_category_variations', name?: string | null, order?: number | null, products?: Array<{ __typename?: 'products', name?: string | null, slug?: string | null, variatins?: Array<{ __typename?: 'product_variations', main_option?: { __typename?: 'product_options', name?: string | null, category?: { __typename?: 'product_option_categories', name?: string | null } | null } | null, images?: Array<{ __typename?: 'product_variation_images', big_image?: string | null } | null> | null } | null> | null } | null> | null } | null> | null }> };
+export type GetProductListQuery = { __typename?: 'Query', sub_categories: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, variations?: Array<{ __typename?: 'sub_category_variations', name?: string | null, slug?: string | null, order?: number | null, products?: Array<{ __typename?: 'products', name?: string | null, slug?: string | null, variatins?: Array<{ __typename?: 'product_variations', main_option?: { __typename?: 'product_options', id: string, name?: string | null, category?: { __typename?: 'product_option_categories', name?: string | null } | null } | null, secondary_option?: { __typename?: 'product_options', id: string, name?: string | null, category?: { __typename?: 'product_option_categories', name?: string | null } | null } | null, color?: { __typename?: 'product_colors', id: string, name?: string | null, color?: string | null } | null, images?: Array<{ __typename?: 'product_variation_images', big_image?: string | null } | null> | null } | null> | null } | null> | null } | null> | null }> };
+
+export type GetProductDataQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetProductDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'products', id: string, name?: string | null, slug?: string | null, sub_category_variation?: { __typename?: 'sub_category_variations', name?: string | null, slug?: string | null } | null, variatins?: Array<{ __typename?: 'product_variations', piece_price?: number | null, stock_code?: string | null, video_url?: string | null, main_option?: { __typename?: 'product_options', id: string, name?: string | null, code?: string | null, category?: { __typename?: 'product_option_categories', id: string, name?: string | null } | null } | null, secondary_option?: { __typename?: 'product_options', id: string, name?: string | null, code?: string | null, category?: { __typename?: 'product_option_categories', id: string, name?: string | null } | null } | null, color?: { __typename?: 'product_colors', name?: string | null, color?: string | null } | null, purchase_count_prices?: Array<{ __typename?: 'purchases_counts', id: string, count?: number | null, price?: number | null } | null> | null, images?: Array<{ __typename?: 'product_variation_images', big_image?: string | null, small_image?: string | null } | null> | null } | null> | null }> };
 
 
 export const GetBankAccountsDocument = gql`
@@ -5287,29 +5309,92 @@ export const GetHomePageDataDocument = gql`
 }
     `;
 export const GetProductListDocument = gql`
-    query GetProductList($subcategorySlug: String!) {
+    query GetProductList($subcategorySlug: String!, $variation: String) {
   sub_categories(filter: {slug: {_eq: $subcategorySlug}}, limit: 1) {
     id
     name
     slug
-    variations {
+    variations(filter: {slug: {_eq: $variation}}) {
       name
+      slug
       order
       products {
         name
         slug
-        variatins(limit: 1) {
-          main_option(filter: {category: {name: {_eq: "Baskı Seçenekleri"}}}) {
+        variatins {
+          main_option {
+            id
             name
             category {
               name
             }
+          }
+          secondary_option {
+            id
+            name
+            category {
+              name
+            }
+          }
+          color {
+            id
+            name
+            color
           }
           images(limit: 1) {
             big_image
           }
         }
       }
+    }
+  }
+}
+    `;
+export const GetProductDataDocument = gql`
+    query GetProductData($slug: String) {
+  products(filter: {slug: {_eq: $slug}}, limit: 1) {
+    id
+    name
+    slug
+    sub_category_variation {
+      name
+      slug
+    }
+    variatins {
+      main_option {
+        id
+        name
+        code
+        category {
+          id
+          name
+        }
+      }
+      secondary_option {
+        id
+        name
+        code
+        category {
+          id
+          name
+        }
+      }
+      color {
+        name
+        color
+      }
+      piece_price
+      stock_code
+      purchase_count_prices {
+        id
+        count
+        price
+      }
+      images {
+        big_image
+        small_image
+      }
+      video_url
     }
   }
 }
@@ -5345,6 +5430,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetProductList(variables: GetProductListQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProductListQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductListQuery>({ document: GetProductListDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProductList', 'query', variables);
+    },
+    GetProductData(variables?: GetProductDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProductDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductDataQuery>({ document: GetProductDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProductData', 'query', variables);
     }
   };
 }

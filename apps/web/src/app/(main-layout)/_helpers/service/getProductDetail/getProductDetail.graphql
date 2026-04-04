@@ -1,0 +1,50 @@
+query GetProductData($slug: String) {
+  products(filter: { slug: { _eq: $slug } }, limit: 1) {
+    id
+    name
+    slug
+    sub_category_variation {
+      name
+      slug
+    }
+    variatins {
+      main_option {
+        id
+        name
+        code
+        category {
+          id
+          name
+        }
+      }
+
+      secondary_option {
+        id
+        name
+        code
+        category {
+          id
+          name
+        }
+      }
+
+      color {
+        name
+        color
+      }
+      piece_price
+      stock_code
+      purchase_count_prices {
+        id
+        count
+        price
+      }
+
+      images {
+        big_image
+        small_image
+      }
+      video_url
+    }
+  }
+}

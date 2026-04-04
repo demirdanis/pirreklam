@@ -10,17 +10,18 @@ import { getProductCategoryMapper } from './getProductCategory.mapper';
 import { unstable_cache } from 'next/cache';
 
 export async function getProductCategoryData(
-  subcategory: string
+  subcategory: string,
+  variation?: string
 ): Promise<ProductCategoryListData | null> {
   if (!process.env.DIRECTUS_URL) {
     return null;
   }
   if (process.env.DISABLE_CACHE) {
-    return fetchProductCategory(subcategory);
+    return fetchProductCategory(subcategory, variation);
   }
   return unstable_cache(
-    async () => fetchProductCategory(subcategory),
-    ['product-category', subcategory],
+    async () => fetchProductCategory(subcategory, variation),
+    ['product-category', subcategory, variation ?? 'default'],
     {
       revalidate: 60 * 60 * 24,
     }
@@ -28,14 +29,22 @@ export async function getProductCategoryData(
 }
 
 const fetchProductCategory = async (
-  subcategory: string
+  subcategory: string,
+  variation?: string
 ): Promise<ProductCategoryListData | null> => {
+  const vars: GetProductListQueryVariables = {
+    subcategorySlug: subcategory,
+  };
+
+  if (variation) {
+    vars.variation = variation;
+  }
+
+  console.log('variation', variation);
   const data = await directusGraphqlQuery<
     GetProductListQuery,
     GetProductListQueryVariables
-  >(GetProductListDocument, {
-    subcategorySlug: subcategory,
-  });
+  >(GetProductListDocument, vars);
 
   return getProductCategoryMapper(data, subcategory);
 };

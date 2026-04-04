@@ -1,7 +1,3 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// TYPES
-// ─────────────────────────────────────────────────────────────────────────────
-
 export interface OptionItem {
   id: string;
   label: string;
@@ -67,10 +63,6 @@ export interface ProductDetailData {
   relatedProducts: RelatedProduct[];
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// HELPERS
-// ─────────────────────────────────────────────────────────────────────────────
-
 function v(
   mainId: string,
   colorId: string,
@@ -95,41 +87,12 @@ function v(
   };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// SHARED IMAGES (in production each variant gets its own photos)
-// ─────────────────────────────────────────────────────────────────────────────
-
 const LUX1 =
   'https://pirreklam.com.tr/wp-content/uploads/2026/02/Dikisli-Damla-Lux-Suni-Deri-Ruhsat-Kabi-k-3.webp';
 const LUX2 =
   'https://pirreklam.com.tr/wp-content/uploads/2026/03/Dikisli-Lux-Desenli-Termo-Deri-Evlilik-Cuzdani-Kilifi-taba-a.webp';
 const LUX3 =
   'https://pirreklam.com.tr/wp-content/uploads/2026/02/Mat-Biala-Ruhsat-Kabi-kirmizi-beyaz-k2-1024x1024.webp';
-
-const BIA1 =
-  'https://pirreklam.com.tr/wp-content/uploads/2026/02/Mat-Biala-Ruhsat-Kabi-kirmizi-beyaz-k2-1024x1024.webp';
-const BIA2 =
-  'https://pirreklam.com.tr/wp-content/uploads/2026/03/Mat-Biala-Tekli-Kredi-Kartlik-siyah-gumus-k.webp';
-const BIA3 =
-  'https://pirreklam.com.tr/wp-content/uploads/2026/02/Dikisli-Damla-Lux-Suni-Deri-Ruhsat-Kabi-k-3.webp';
-
-// ─────────────────────────────────────────────────────────────────────────────
-// PRODUCT 1 – Dikişli Lüx Suni Deri Ruhsat Kabı (has sub-options)
-// ─────────────────────────────────────────────────────────────────────────────
-//
-// Compatibility matrix (main × sub × color):
-//   gofre    + tual    : bakir, siyah, lacivert, kahverengi   (4 variants)
-//   gofre    + deri    : siyah, bordo, lacivert, taba          (4 variants)
-//   gofre    + klasik  : siyah, mavi, kahverengi               (3 variants)
-//   gofre_damla + tual : bakir, siyah, bordo                   (3 variants)
-//   gofre_damla + deri : lacivert, kahverengi, taba            (3 variants)
-//   gofre_damla + klasik: *** NOT AVAILABLE ***                (intentional gap)
-//
-// Therefore:
-//   "mavi"       is ONLY compatible with gofre+klasik
-//   "klasik" sub is NOT compatible with gofre_damla (dimmed when gofre_damla selected)
-//   "gofre_damla" is NOT compatible when (sub=klasik OR color=mavi) is selected
-// ─────────────────────────────────────────────────────────────────────────────
 
 const DIKISLI_LUX_SUNI: ProductDetailData = {
   slug: 'dikisli-lux-suni-deri-ruhsat-kabi-2',
@@ -468,210 +431,8 @@ const DIKISLI_LUX_SUNI: ProductDetailData = {
   ],
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
-// PRODUCT 2 – Çıt Çıt Kapaklı Mat Biala Ruhsat Kabı (NO sub-options)
-// ─────────────────────────────────────────────────────────────────────────────
-//
-// Compatibility matrix (main × color):
-//   1_renk : beyaz, siyah, kirmizi, mavi, sari, yesil, turuncu  (all 7)
-//   2_renk : beyaz, siyah, kirmizi, mavi, sari                   (5 – no yesil/turuncu)
-//   3_renk : beyaz, siyah, kirmizi                               (3 only)
-//
-// Therefore:
-//   "yesil" & "turuncu"  are ONLY compatible with 1_renk
-//   "mavi"  & "sari"     are NOT compatible with 3_renk
-// ─────────────────────────────────────────────────────────────────────────────
-
-const CIT_CIT_KAPAKLI: ProductDetailData = {
-  slug: 'cit-cit-kapakli-mat-biala-ruhsat-kabi',
-  title: 'Çıt Çıt Kapaklı Mat Biala Ruhsat Kabı',
-  categorySlug: 'plastik-urunler',
-  categoryTitle: 'Plastik Ürünler',
-  subcategorySlug: 'ruhsat-kabi',
-  subcategoryTitle: 'Ruhsat Kabı',
-  breadcrumb: [
-    { label: 'Anasayfa', href: '/' },
-    { label: 'Plastik Ürünler', href: '/plastik-urunler' },
-    { label: 'Ruhsat Kabı', href: '/plastik-urunler/ruhsat-kabi' },
-    {
-      label: 'Çıt Çıt Kapaklı Mat Biala Ruhsat Kabı',
-      href: '/plastik-urunler/ruhsat-kabi/cit-cit-kapakli-mat-biala-ruhsat-kabi',
-    },
-  ],
-
-  mainOptionGroup: {
-    title: 'BASKI SEÇENEKLERİ',
-    options: [
-      {
-        id: '1_renk',
-        label: '1 Renk Boya',
-        description:
-          'Tek renk boya baskı ile logonuz veya yazınız ürün yüzeyine uygulanır. Ekonomik fiyat avantajı ile tüm renk seçeneklerinde geçerlidir.',
-      },
-      {
-        id: '2_renk',
-        label: '2 Renk Boya',
-        description:
-          'İki farklı renk kullanılarak daha detaylı ve etkili bir baskı elde edilir. Beyaz, siyah, kırmızı, mavi ve sarı renk seçeneklerinde uygulanmaktadır.',
-      },
-      {
-        id: '3_renk',
-        label: '3 Renk Boya',
-        description:
-          'Üç renk boya baskı ile en çarpıcı görüntü sağlanır. Yalnızca beyaz, siyah ve kırmızı renk seçeneklerinde uygulanmaktadır.',
-      },
-    ],
-  },
-
-  // No subOptionGroup
-
-  colors: [
-    { id: 'beyaz', label: 'Beyaz', hex: '#e8e8e8' },
-    { id: 'siyah', label: 'Siyah', hex: '#1c1c1c' },
-    { id: 'kirmizi', label: 'Kırmızı', hex: '#730912' },
-    { id: 'mavi', label: 'Mavi', hex: '#1e4d8c' },
-    { id: 'sari', label: 'Sarı', hex: '#f5c518' },
-    { id: 'yesil', label: 'Yeşil', hex: '#2d6a4f' },
-    { id: 'turuncu', label: 'Turuncu', hex: '#e8720c' },
-  ],
-
-  variants: [
-    // ── 1_renk : all 7 ──
-    v('1_renk', 'beyaz', 'R-C-MB+S1-BY', [BIA1, BIA2, BIA3], 8, [
-      { qty: 200, perUnitExVat: 6.5 },
-      { qty: 500, perUnitExVat: 5.5 },
-      { qty: 1000, perUnitExVat: 4.5 },
-    ]),
-    v('1_renk', 'siyah', 'R-C-MB+S1-SY', [BIA1, BIA2], 8, [
-      { qty: 200, perUnitExVat: 6.5 },
-      { qty: 500, perUnitExVat: 5.5 },
-      { qty: 1000, perUnitExVat: 4.5 },
-    ]),
-    v('1_renk', 'kirmizi', 'R-C-MB+S1-KR', [BIA1, BIA2], 8, [
-      { qty: 200, perUnitExVat: 6.5 },
-      { qty: 500, perUnitExVat: 5.5 },
-      { qty: 1000, perUnitExVat: 4.5 },
-    ]),
-    v('1_renk', 'mavi', 'R-C-MB+S1-MV', [BIA1], 8, [
-      { qty: 200, perUnitExVat: 6.5 },
-      { qty: 500, perUnitExVat: 5.5 },
-      { qty: 1000, perUnitExVat: 4.5 },
-    ]),
-    v('1_renk', 'sari', 'R-C-MB+S1-SR', [BIA1], 8, [
-      { qty: 200, perUnitExVat: 6.5 },
-      { qty: 500, perUnitExVat: 5.5 },
-      { qty: 1000, perUnitExVat: 4.5 },
-    ]),
-    v('1_renk', 'yesil', 'R-C-MB+S1-YS', [BIA1], 8, [
-      { qty: 200, perUnitExVat: 6.5 },
-      { qty: 500, perUnitExVat: 5.5 },
-      { qty: 1000, perUnitExVat: 4.5 },
-    ]),
-    v('1_renk', 'turuncu', 'R-C-MB+S1-TU', [BIA1], 8, [
-      { qty: 200, perUnitExVat: 6.5 },
-      { qty: 500, perUnitExVat: 5.5 },
-      { qty: 1000, perUnitExVat: 4.5 },
-    ]),
-
-    // ── 2_renk : 5 colors ──
-    v('2_renk', 'beyaz', 'R-C-MB+S2-BY', [BIA2, BIA1], 10, [
-      { qty: 200, perUnitExVat: 8.5 },
-      { qty: 500, perUnitExVat: 7.5 },
-      { qty: 1000, perUnitExVat: 6.5 },
-    ]),
-    v('2_renk', 'siyah', 'R-C-MB+S2-SY', [BIA2, BIA1], 10, [
-      { qty: 200, perUnitExVat: 8.5 },
-      { qty: 500, perUnitExVat: 7.5 },
-      { qty: 1000, perUnitExVat: 6.5 },
-    ]),
-    v('2_renk', 'kirmizi', 'R-C-MB+S2-KR', [BIA2, BIA1], 10, [
-      { qty: 200, perUnitExVat: 8.5 },
-      { qty: 500, perUnitExVat: 7.5 },
-      { qty: 1000, perUnitExVat: 6.5 },
-    ]),
-    v('2_renk', 'mavi', 'R-C-MB+S2-MV', [BIA2], 10, [
-      { qty: 200, perUnitExVat: 8.5 },
-      { qty: 500, perUnitExVat: 7.5 },
-      { qty: 1000, perUnitExVat: 6.5 },
-    ]),
-    v('2_renk', 'sari', 'R-C-MB+S2-SR', [BIA2], 10, [
-      { qty: 200, perUnitExVat: 8.5 },
-      { qty: 500, perUnitExVat: 7.5 },
-      { qty: 1000, perUnitExVat: 6.5 },
-    ]),
-
-    // ── 3_renk : 3 colors ──
-    v('3_renk', 'beyaz', 'R-C-MB+S3-BY', [BIA1, BIA2, BIA3], 12, [
-      { qty: 200, perUnitExVat: 10.5 },
-      { qty: 500, perUnitExVat: 9 },
-      { qty: 1000, perUnitExVat: 8 },
-    ]),
-    v('3_renk', 'siyah', 'R-C-MB+S3-SY', [BIA1, BIA2], 12, [
-      { qty: 200, perUnitExVat: 10.5 },
-      { qty: 500, perUnitExVat: 9 },
-      { qty: 1000, perUnitExVat: 8 },
-    ]),
-    v('3_renk', 'kirmizi', 'R-C-MB+S3-KR', [BIA1, BIA2], 12, [
-      { qty: 200, perUnitExVat: 10.5 },
-      { qty: 500, perUnitExVat: 9 },
-      { qty: 1000, perUnitExVat: 8 },
-    ]),
-  ],
-
-  relatedProducts: [
-    {
-      id: 'standart-mat-biala',
-      title: 'Standart Mat Biala Ruhsat Kabı',
-      imageUrl: BIA1,
-      href: '/plastik-urunler/ruhsat-kabi/standart-mat-biala-ruhsat-kabi',
-    },
-    {
-      id: 'ekonomik-ince-mat-biala',
-      title: 'Ekonomik İnce Mat Biala Ruhsat Kabı',
-      imageUrl: BIA2,
-      href: '/plastik-urunler/ruhsat-kabi/ekonomik-ince-mat-biala-ruhsat-kabi',
-    },
-    {
-      id: 'lux-kalin-deri-biala',
-      title: 'Lüx Kalın Deri Desen Biala Ruhsat Kabı',
-      imageUrl: BIA1,
-      href: '/plastik-urunler/ruhsat-kabi/lux-kalin-deri-desen-biala-ruhsat-kabi',
-    },
-    {
-      id: 'ofset-baski',
-      title: 'Ofset Baskı Folyo Pvc Ruhsat Kabı',
-      imageUrl: BIA3,
-      href: '/plastik-urunler/ruhsat-kabi/ofset-baski-folyo-pvc-ruhsat-kabi',
-    },
-    {
-      id: 'dikisli-lux-suni',
-      title: 'Dikişli Lüx Suni Deri Ruhsat Kabı',
-      imageUrl: BIA3,
-      href: '/plastik-urunler/ruhsat-kabi/dikisli-lux-suni-deri-ruhsat-kabi-2',
-    },
-  ],
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
-// LOOKUP MAP
-// ─────────────────────────────────────────────────────────────────────────────
-
-const DETAIL_MAP: Record<
-  string,
-  Record<string, Record<string, ProductDetailData>>
-> = {
-  'plastik-urunler': {
-    'ruhsat-kabi': {
-      'dikisli-lux-suni-deri-ruhsat-kabi-2': DIKISLI_LUX_SUNI,
-      'cit-cit-kapakli-mat-biala-ruhsat-kabi': CIT_CIT_KAPAKLI,
-    },
-  },
-};
-
 export async function getProductDetailData(
-  category: string,
-  subcategory: string,
-  product: string
+  slug: string
 ): Promise<ProductDetailData | null> {
-  return DETAIL_MAP[category]?.[subcategory]?.[product] ?? null;
+  return DIKISLI_LUX_SUNI;
 }

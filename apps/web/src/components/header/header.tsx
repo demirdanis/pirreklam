@@ -129,13 +129,13 @@ export default function Header({ data, categories = [] }: HeaderProps) {
           </div>
 
           {/* Center — Phone + Logo + WhatsApp */}
-          <div className="flex flex-1 items-center justify-center gap-x-24">
+          <div className="flex flex-1 items-center justify-center gap-x-12">
             <a
               href="tel:4441030"
               className="flex flex-col items-center gap-1 group w-fit"
             >
               <span className="flex items-center justify-center gap-1.5 text-[12px] tracking-[0.2em] text-white/85 font-semibold">
-                <Phone className="h-12 w-12 text-[#e32231]" />
+                <Phone className="h-8 w-8 text-[#e32231]" />
                 Türkiye&apos;nin her yerinden
               </span>
               <span className="text-4xl font-bold text-white tracking-tight transition-colors">

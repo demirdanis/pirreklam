@@ -3,8 +3,6 @@ import type { GetFooterDataQuery } from '@/generated/graphql';
 import { getImageUrl } from '@/lib/directus';
 
 export function GetFooterDataMapper(data: GetFooterDataQuery): FooterData {
-  console.log('data', data);
-
   return {
     contact: {
       address: data.footer?.address ?? '',

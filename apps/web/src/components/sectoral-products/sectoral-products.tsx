@@ -107,7 +107,7 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
               {/* Sector heading */}
               <div className="mb-6 flex items-end justify-between bg-white/70 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/80 shadow-sm">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-[#730912] mb-1 font-bold">
+                  <p className="text-[10px]  tracking-[0.18em] text-[#730912] mb-1 font-bold">
                     Önerilen Ürünler
                   </p>
                   <h3 className="text-xl font-bold text-[#091530]">

@@ -13,7 +13,6 @@ export interface HomePageData {
 export function GetHomePageDataMapper(
   data: GetHomePageDataQuery
 ): HomePageData {
-  console.log('data', data);
   const banners: HeroCarouselData = {
     slides: (data.page__home?.banners ?? []).map((banner) => ({
       id: banner?.id ?? '',

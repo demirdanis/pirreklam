@@ -53,7 +53,6 @@ export default async function MainLayout({
     getCategoryBarDataWithCache(),
   ]);
 
-  console.log('headerData', headerData);
   return (
     <html className={fontVariables}>
       <head></head>

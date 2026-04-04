@@ -4,6 +4,7 @@ import {
   ChevronDown,
   ChevronRight,
   MessageCircle,
+  Play,
   X,
   ZoomIn,
 } from 'lucide-react';
@@ -12,12 +13,13 @@ import type {
   OptionItem,
   ProductDetailData,
   VariantData,
-} from '@/app/(main-layout)/_helpers/service/getProductDetail/getProductDetail.mock';
+} from '@/app/(main-layout)/_helpers/service/getProductDetail/getProductDetail.types';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { createPortal } from 'react-dom';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // FORMAT HELPERS
@@ -30,19 +32,67 @@ function fmt(n: number) {
   });
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// IMAGE GALLERY
-// ─────────────────────────────────────────────────────────────────────────────
+function getYouTubeEmbedUrl(url: string): string | null {
+  try {
+    const u = new URL(url);
+    let videoId: string | null = null;
+    if (u.hostname.includes('youtu.be')) {
+      videoId = u.pathname.slice(1);
+    } else if (u.hostname.includes('youtube.com')) {
+      videoId = u.searchParams.get('v');
+    }
+    if (!videoId) return null;
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+  } catch {
+    return null;
+  }
+}
+
+function VideoModal({ url, onClose }: { url: string; onClose: () => void }) {
+  const embedUrl = getYouTubeEmbedUrl(url);
+  if (!embedUrl) return null;
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-9999 flex items-center justify-center bg-black/80 backdrop-blur-sm p-0 md:p-[10vh]"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full h-full md:w-[80vw] md:h-auto md:max-h-[80vh] md:aspect-video rounded-none md:rounded-2xl overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <iframe
+          src={embedUrl}
+          className="w-full h-full absolute inset-0"
+          style={{ aspectRatio: 'unset' }}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title="Ürün videosu"
+        />
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/90 transition-colors"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
+    </div>,
+    document.body
+  );
+}
 
 function ImageGallery({
   images,
   activeIndex,
   onSelect,
+  videoUrl,
 }: {
   images: string[];
   activeIndex: number;
   onSelect: (i: number) => void;
+  videoUrl?: string;
 }) {
+  const [videoOpen, setVideoOpen] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomOrigin, setZoomOrigin] = useState('50% 50%');
   const containerRef = useRef<HTMLDivElement>(null);
@@ -81,6 +131,25 @@ function ImageGallery({
         <div className="absolute top-3 right-3 hidden md:flex h-7 w-7 items-center justify-center rounded-full bg-black/30 text-white/70 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
           <ZoomIn className="h-3.5 w-3.5" />
         </div>
+
+        {/* Video button */}
+        {videoUrl && (
+          <button
+            onClick={() => setVideoOpen(true)}
+            className="absolute top-2 left-2 flex items-center gap-2 rounded-full bg-[#730912] px-3 py-2 text-white shadow-lg shadow-[#730912]/40 transition-all hover:bg-[#8f0e17] hover:scale-105 active:scale-95"
+            style={{
+              animation: 'videoPulse 2s ease-in-out infinite',
+            }}
+          >
+            <span className="relative flex h-5 w-5 shrink-0 items-center justify-center">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-white/30 animate-ping" />
+              <Play className="relative h-5 w-5 fill-white text-white" />
+            </span>
+            <span className="text-[11px] font-bold tracking-wide">
+              Videoyu İzle
+            </span>
+          </button>
+        )}
       </div>
 
       {/* Thumbnails */}
@@ -94,7 +163,7 @@ function ImageGallery({
                 'shrink-0 h-16 w-16 rounded-lg overflow-hidden border-2 transition-all bg-white',
                 activeIndex === i
                   ? 'border-[#730912] shadow-md shadow-[#730912]/20'
-                  : 'border-white/10 opacity-60 hover:opacity-100'
+                  : 'border-[#091530]/10 opacity-60 hover:opacity-100'
               )}
             >
               <Image
@@ -108,6 +177,9 @@ function ImageGallery({
             </button>
           ))}
         </div>
+      )}
+      {videoOpen && videoUrl && (
+        <VideoModal url={videoUrl} onClose={() => setVideoOpen(false)} />
       )}
     </div>
   );
@@ -136,13 +208,13 @@ function OptionButton({
         selected
           ? 'border-[#730912] bg-[#730912] text-white shadow-md shadow-[#730912]/30'
           : compatible
-            ? 'border-white/15 bg-white/5 text-white/75 hover:border-white/30 hover:text-white'
-            : 'border-dashed border-white/10 bg-transparent text-white/25 hover:border-white/20 hover:text-white/40'
+            ? 'border-[#091530]/15 bg-[#091530]/5 text-[#091530]/75 hover:border-[#091530]/30 hover:text-[#091530]'
+            : 'border-dashed border-[#091530]/10 bg-transparent text-[#091530]/25 hover:border-[#091530]/20 hover:text-[#091530]/40'
       )}
     >
       {option.label}
       {!compatible && !selected && (
-        <span className="ml-1 text-[9px] font-normal text-white/20">
+        <span className="ml-1 text-[9px] font-normal text-[#091530]/20">
           uyumsuz
         </span>
       )}
@@ -172,9 +244,9 @@ function ColorSwatch({
       className={cn(
         'relative h-9 w-9 rounded-full transition-all flex items-center justify-center',
         selected
-          ? 'ring-2 ring-[#730912] ring-offset-2 ring-offset-[#091530] scale-110'
+          ? 'ring-2 ring-[#730912] ring-offset-2 ring-offset-[#f5f6f7] scale-110'
           : compatible
-            ? 'ring-1 ring-white/10 hover:ring-white/30 hover:scale-105'
+            ? 'ring-1 ring-[#091530]/10 hover:ring-[#091530]/30 hover:scale-105'
             : 'opacity-35 hover:opacity-55'
       )}
       style={{ backgroundColor: color.hex }}
@@ -213,23 +285,23 @@ function Accordion({
 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-t border-white/8">
+    <div className="border-t border-[#091530]/8">
       <button
         onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between py-4 text-left"
       >
-        <span className="text-xs font-bold uppercase tracking-[0.12em] text-white/70">
+        <span className="text-xs font-bold  tracking-[0.12em] text-[#091530]/70">
           {title}
         </span>
         <ChevronDown
           className={cn(
-            'h-4 w-4 text-white/40 transition-transform',
+            'h-4 w-4 text-[#091530]/40 transition-transform',
             open && 'rotate-180'
           )}
         />
       </button>
       {open && (
-        <div className="pb-4 text-sm text-white/50 leading-relaxed">
+        <div className="pb-4 text-sm text-[#091530]/50 leading-relaxed">
           {children}
         </div>
       )}
@@ -249,7 +321,7 @@ function RelatedCard({
   return (
     <Link
       href={product.href}
-      className="group shrink-0 w-36 sm:w-44 flex flex-col overflow-hidden rounded-xl border border-white/8 bg-surface-dark transition-all hover:border-[#730912]/50 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#730912]/10"
+      className="group shrink-0 w-36 sm:w-44 flex flex-col overflow-hidden rounded-xl border border-[#091530]/8 bg-white transition-all hover:border-[#730912]/50 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#730912]/10"
     >
       <div className="relative aspect-square overflow-hidden rounded-t-lg bg-white">
         <Image
@@ -262,10 +334,10 @@ function RelatedCard({
         <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#730912] transition-all duration-300 group-hover:w-full" />
       </div>
       <div className="flex items-center justify-between gap-1 px-3 py-2.5 bg-foreground">
-        <p className="text-[11px] font-semibold text-white/70 group-hover:text-white transition-colors line-clamp-2 leading-snug">
+        <p className="text-[11px] font-semibold text-[#091530]/70 group-hover:text-[#091530] transition-colors line-clamp-2 leading-snug">
           {product.title}
         </p>
-        <ChevronRight className="h-3 w-3 shrink-0 text-white/30 group-hover:text-[#730912] transition-colors" />
+        <ChevronRight className="h-3 w-3 shrink-0 text-[#091530]/30 group-hover:text-[#730912] transition-colors" />
       </div>
     </Link>
   );
@@ -285,7 +357,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
     firstVariant?.subOptionId ?? null
   );
   const [selColor, setSelColor] = useState(firstVariant?.colorId ?? '');
-  const [selQty, setSelQty] = useState<200 | 500 | 1000>(200);
+  const [selQty, setSelQty] = useState<number>(200);
   const [activeImg, setActiveImg] = useState(0);
 
   // ── Find exact variant ──
@@ -444,6 +516,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
   const images: string[] = rawImages.filter(
     (s): s is string => typeof s === 'string'
   );
+  const videoUrl = currentVariant?.videoUrl ?? data.variants[0]?.videoUrl;
 
   // ── Selected labels ──
   const selMainLabel =
@@ -474,19 +547,19 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
   const waUrl = `https://wa.me/905442338003?text=${waMsg}`;
 
   return (
-    <div className="bg-[#091530] min-h-screen">
+    <div className="bg-[#f5f6f7] min-h-screen">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
-        <nav className="mb-6 flex flex-wrap items-center gap-1 text-xs text-white/35">
+        <nav className="mb-6 flex flex-wrap items-center gap-1 text-xs text-[#091530]/35">
           {data.breadcrumb.map((crumb, i) => (
             <span key={crumb.href} className="flex items-center gap-1">
-              {i > 0 && <ChevronRight className="h-3 w-3 text-white/15" />}
+              {i > 0 && <ChevronRight className="h-3 w-3 text-[#091530]/15" />}
               {i === data.breadcrumb.length - 1 ? (
-                <span className="text-white/60">{crumb.label}</span>
+                <span className="text-[#091530]/60">{crumb.label}</span>
               ) : (
                 <Link
                   href={crumb.href}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-[#091530] transition-colors"
                 >
                   {crumb.label}
                 </Link>
@@ -503,6 +576,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
               images={images}
               activeIndex={activeImg}
               onSelect={setActiveImg}
+              videoUrl={videoUrl}
             />
           </div>
 
@@ -510,15 +584,15 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
           <div className="flex flex-col gap-6">
             {/* Title + code */}
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#730912] mb-1">
+              <p className="text-xs font-bold  tracking-[0.15em] text-[#730912] mb-1">
                 {data.subcategoryTitle}
               </p>
-              <h1 className="text-2xl sm:text-3xl font-bold text-white font-alt leading-tight">
+              <h1 className="text-2xl sm:text-3xl font-bold text-[#091530] font-alt leading-tight">
                 {data.title}
               </h1>
               {currentVariant && (
-                <div className="mt-2 inline-flex items-center gap-2 rounded-md bg-white/5 border border-white/8 px-3 py-1.5">
-                  <span className="text-[10px] text-white/40 uppercase tracking-wider">
+                <div className="mt-2 inline-flex items-center gap-2 rounded-md bg-[#091530]/5 border border-[#091530]/8 px-3 py-1.5">
+                  <span className="text-[10px] text-[#091530]/40  tracking-wider">
                     Stok Kodu
                   </span>
                   <span className="text-xs font-bold text-[#730912] font-mono">
@@ -531,13 +605,13 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
             {/* ── Main options ── */}
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/50">
+                <p className="text-[11px] font-bold  tracking-[0.12em] text-[#091530]/50">
                   {data.mainOptionGroup.title}
                 </p>
                 {selMainLabel && (
                   <>
-                    <span className="text-white/15">·</span>
-                    <span className="text-[11px] font-semibold text-white/80 uppercase tracking-wide">
+                    <span className="text-[#091530]/15">·</span>
+                    <span className="text-[11px] font-semibold text-[#091530]/80  tracking-wide">
                       {selMainLabel}
                     </span>
                   </>
@@ -560,13 +634,13 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
             {data.subOptionGroup && (
               <div>
                 <div className="flex items-center gap-2 mb-3">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/50">
+                  <p className="text-[11px] font-bold  tracking-[0.12em] text-[#091530]/50">
                     {data.subOptionGroup.title}
                   </p>
                   {selSubLabel && (
                     <>
-                      <span className="text-white/15">·</span>
-                      <span className="text-[11px] font-semibold text-white/80 uppercase tracking-wide">
+                      <span className="text-[#091530]/15">·</span>
+                      <span className="text-[11px] font-semibold text-[#091530]/80  tracking-wide">
                         {selSubLabel}
                       </span>
                     </>
@@ -589,13 +663,13 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
             {/* ── Colors ── */}
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/50">
+                <p className="text-[11px] font-bold  tracking-[0.12em] text-[#091530]/50">
                   RENK SEÇENEKLERİ
                 </p>
                 {selColorLabel && (
                   <>
-                    <span className="text-white/15">·</span>
-                    <span className="text-[11px] font-semibold text-white/80 uppercase tracking-wide">
+                    <span className="text-[#091530]/15">·</span>
+                    <span className="text-[11px] font-semibold text-[#091530]/80  tracking-wide">
                       {selColorLabel}
                     </span>
                   </>
@@ -619,7 +693,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
 
             {/* ── Quantity tiers ── */}
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/50 mb-3">
+              <p className="text-[11px] font-bold  tracking-[0.12em] text-[#091530]/50 mb-3">
                 TOPLAM ADET SEÇİNİZ
               </p>
               <div className="grid grid-cols-3 gap-2">
@@ -631,13 +705,15 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
                       'flex flex-col items-center rounded-xl border px-2 py-3.5 transition-all',
                       selQty === tier.qty
                         ? 'border-[#730912] bg-[#730912]/10 shadow-md shadow-[#730912]/20'
-                        : 'border-white/10 bg-white/3 hover:border-white/25'
+                        : 'border-[#091530]/20 bg-white hover:border-[#091530]/40'
                     )}
                   >
                     <span
                       className={cn(
                         'text-[11px] font-semibold',
-                        selQty === tier.qty ? 'text-[#730912]' : 'text-white/45'
+                        selQty === tier.qty
+                          ? 'text-[#730912]'
+                          : 'text-[#091530]/45'
                       )}
                     >
                       {tier.qty.toLocaleString('tr-TR')} Adet
@@ -645,12 +721,14 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
                     <span
                       className={cn(
                         'text-base font-bold mt-0.5',
-                        selQty === tier.qty ? 'text-white' : 'text-white/60'
+                        selQty === tier.qty
+                          ? 'text-[#091530]'
+                          : 'text-[#091530]/60'
                       )}
                     >
                       {fmt(tier.perUnitExVat)} ₺
                     </span>
-                    <span className="text-[9px] text-white/30 mt-0.5">
+                    <span className="text-[9px] text-[#091530]/30 mt-0.5">
                       / Adet
                     </span>
                   </button>
@@ -660,31 +738,31 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
 
             {/* ── Pricing summary ── */}
             {currentVariant && (
-              <div className="rounded-xl border border-white/8 bg-white/3 p-4 space-y-2">
+              <div className="rounded-xl border border-[#091530]/8 bg-white p-4 space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-white/50">
+                  <span className="text-[#091530]/50">
                     Birim Fiyat ({selQty.toLocaleString('tr-TR')} Adet)
                   </span>
-                  <span className="font-semibold text-white">
+                  <span className="font-semibold text-[#091530]">
                     {fmt(currentTier?.perUnitExVat ?? 0)}{' '}
-                    <span className="text-xs text-white/40">₺ / Adet</span>
+                    <span className="text-xs text-[#091530]/40">₺ / Adet</span>
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-white/50">Toplam (KDV Hariç)</span>
-                  <span className="font-semibold text-white">
+                  <span className="text-[#091530]/50">Toplam (KDV Hariç)</span>
+                  <span className="font-semibold text-[#091530]">
                     {fmt(totalExVat)} ₺
                   </span>
                 </div>
-                <div className="flex items-center justify-between border-t border-white/8 pt-2 mt-2">
-                  <span className="text-sm font-medium text-white/70">
+                <div className="flex items-center justify-between border-t border-[#091530]/8 pt-2 mt-2">
+                  <span className="text-sm font-medium text-[#091530]/70">
                     Toplam (KDV Dahil %20)
                   </span>
                   <span className="text-lg font-bold text-[#730912]">
                     {fmt(totalIncVat)} ₺
                   </span>
                 </div>
-                <p className="text-[10px] text-white/25 mt-1">
+                <p className="text-[10px] text-[#091530]/25 mt-1">
                   * Fiyatlar KDV hariç gösterilmektedir. Gösterilen fiyatlar
                   yaklaşık fiyatlardır.
                 </p>
@@ -702,11 +780,11 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
               WhatsApp ile Sipariş Ver
             </a>
 
-            <p className="text-center text-[11px] text-white/30 -mt-3">
+            <p className="text-center text-[11px] text-[#091530]/30 -mt-3">
               Sipariş detayı ve farklı talepler için{' '}
               <a
                 href="tel:4441030"
-                className="text-white/50 underline hover:text-white"
+                className="text-[#091530]/50 underline hover:text-[#091530]"
               >
                 444 10 30
               </a>{' '}
@@ -756,12 +834,12 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
 
         {/* ── Related products ── */}
         {data.relatedProducts.length > 0 && (
-          <div className="mt-16 border-t border-white/8 pt-12">
+          <div className="mt-16 border-t border-[#091530]/8 pt-12">
             <div className="mb-6">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#730912] mb-1">
+              <p className="text-xs font-bold  tracking-[0.15em] text-[#730912] mb-1">
                 Benzer Ürünler
               </p>
-              <h2 className="text-xl font-bold text-white font-alt">
+              <h2 className="text-xl font-bold text-[#091530] font-alt">
                 Benzer Ürünleri Keşfedin
               </h2>
             </div>
