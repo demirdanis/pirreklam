@@ -106,26 +106,47 @@ export default function Header({ data, categories = [] }: HeaderProps) {
 
       {/* Main Nav */}
       <nav className="bg-header-menu border-b border-[#000000] shadow-header-menu relative overflow-hidden">
-        {/* Stars background */}
+        {/* Background — desktop */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-30 z-0 pointer-events-none"
-          style={{ backgroundImage: "url('/assets/stars-back.png')" }}
+          className="hidden lg:block absolute inset-0 bg-cover bg-center opacity-30 z-0 pointer-events-none"
+          style={{ backgroundImage: "url('/assets/header_back_web.webp')" }}
+        />
+        {/* Background — mobile */}
+        <div
+          className="lg:hidden absolute inset-0 bg-cover bg-center opacity-30 z-0 pointer-events-none"
+          style={{ backgroundImage: "url('/assets/header_back_mobile.webp')" }}
         />
         {/* Desktop layout */}
         <div className="hidden lg:flex mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 items-center justify-between gap-4 py-3 relative z-10">
           <div className="grid grid-cols-1 gap-2 w-44">
-            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-left font-semibold">
+            <Link
+              href="/plastik-urunler/ruhsat-kabi/"
+              style={{ animationDelay: '0s' }}
+              className="animate-text-glow rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-left font-semibold"
+            >
               Ruhsat Kabı
-            </button>
-            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-left font-semibold">
+            </Link>
+            <Link
+              href="/plastik-urunler/plakalik/"
+              style={{ animationDelay: '0.75s' }}
+              className="animate-text-glow rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-left font-semibold"
+            >
               Plakalık
-            </button>
-            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-left font-semibold">
+            </Link>
+            <Link
+              href="/plastik-urunler/pasaport-kilifi/"
+              style={{ animationDelay: '1.5s' }}
+              className="animate-text-glow rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-left font-semibold"
+            >
               Pasaport Kılıfı
-            </button>
-            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-left font-semibold">
+            </Link>
+            <Link
+              href="/plastik-urunler/vesikalik-kabi/"
+              style={{ animationDelay: '2.25s' }}
+              className="animate-text-glow rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-left font-semibold"
+            >
               Vesikalık Kabı
-            </button>
+            </Link>
           </div>
 
           {/* Center — Phone + Logo + WhatsApp */}
@@ -171,18 +192,34 @@ export default function Header({ data, categories = [] }: HeaderProps) {
           </div>
 
           <div className="grid grid-cols-1 gap-2 w-44">
-            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-right font-semibold">
+            <Link
+              href="/plastik-urunler/kredi-kartlik/"
+              style={{ animationDelay: '0.375s' }}
+              className="animate-text-glow rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-right font-semibold"
+            >
               Kredi Kartlık
-            </button>
-            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-right font-semibold">
+            </Link>
+            <Link
+              href="/plastik-urunler/doviz-kabi/"
+              style={{ animationDelay: '1.125s' }}
+              className="animate-text-glow rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-right font-semibold"
+            >
               Döviz Kabı
-            </button>
-            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-right font-semibold">
+            </Link>
+            <Link
+              href="/plastik-urunler/evlilik-cuzdani-kilifi/"
+              style={{ animationDelay: '1.875s' }}
+              className="animate-text-glow rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-right font-semibold"
+            >
               Evlilik Cüzdanı Kılıfı
-            </button>
-            <button className="rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-right font-semibold">
+            </Link>
+            <Link
+              href="/plastik-urunler/veteriner-asi-karnesi-kabi/"
+              style={{ animationDelay: '2.625s' }}
+              className="animate-text-glow rounded px-3 py-1.5 text-xs text-white hover:bg-white/10 transition-colors text-right font-semibold"
+            >
               Veteriner Aşı Karnesi Kabı
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -202,33 +239,65 @@ export default function Header({ data, categories = [] }: HeaderProps) {
               </div>
             </Link>
 
-            <button className="absolute top-[10%] left-[22%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-left transition-all">
+            <Link
+              href="/plastik-urunler/ruhsat-kabi/"
+              style={{ animationDelay: '0s' }}
+              className="animate-text-glow absolute top-[10%] left-[22%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-left transition-all"
+            >
               Ruhsat Kabı
-            </button>
-            <button className="absolute top-[38%] left-[24%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-left transition-all">
+            </Link>
+            <Link
+              href="/plastik-urunler/plakalik/"
+              style={{ animationDelay: '0.75s' }}
+              className="animate-text-glow absolute top-[38%] left-[24%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-left transition-all"
+            >
               Plakalık
-            </button>
+            </Link>
 
-            <button className="absolute top-[44%] left-[70%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-left transition-all">
+            <Link
+              href="/plastik-urunler/pasaport-kilifi/"
+              style={{ animationDelay: '1.5s' }}
+              className="animate-text-glow absolute top-[44%] left-[70%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-left transition-all"
+            >
               Pasaport Kılıfı
-            </button>
-            <button className="absolute top-[81%] left-[2%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-left transition-all">
+            </Link>
+            <Link
+              href="/plastik-urunler/vesikalik-kabi/"
+              style={{ animationDelay: '2.25s' }}
+              className="animate-text-glow absolute top-[81%] left-[2%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-left transition-all"
+            >
               Vesikalık Kabı
-            </button>
+            </Link>
 
-            <button className="absolute  top-[59%] left-[8%] text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-right transition-all">
+            <Link
+              href="/plastik-urunler/kredi-kartlik/"
+              style={{ animationDelay: '0.375s' }}
+              className="animate-text-glow absolute  top-[59%] left-[8%] text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-right transition-all"
+            >
               Kredi Kartlık
-            </button>
-            <button className="absolute top-[45%] left-[45%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-right transition-all">
+            </Link>
+            <Link
+              href="/plastik-urunler/doviz-kabi/"
+              style={{ animationDelay: '1.125s' }}
+              className="animate-text-glow absolute top-[45%] left-[45%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-right transition-all"
+            >
               Döviz Kabı
-            </button>
+            </Link>
 
-            <button className="absolute top-[12%] left-[60%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-right transition-all">
+            <Link
+              href="/plastik-urunler/evlilik-cuzdani-kilifi/"
+              style={{ animationDelay: '1.875s' }}
+              className="animate-text-glow absolute top-[12%] left-[60%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-right transition-all"
+            >
               Evlilik Cüzdanı Kılıfı
-            </button>
-            <button className="absolute top-[73%] left-[43%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-right transition-all">
+            </Link>
+            <Link
+              href="/plastik-urunler/veteriner-asi-karnesi-kabi/"
+              style={{ animationDelay: '2.625s' }}
+              className="animate-text-glow absolute top-[73%] left-[43%]  text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight text-right transition-all"
+            >
               Veteriner Aşı Karnesi Kabı
-            </button>
+            </Link>
           </div>
         </div>
       </nav>
