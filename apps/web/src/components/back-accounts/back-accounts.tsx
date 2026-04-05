@@ -21,7 +21,7 @@ function CopyButton({ text }: { text: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="ml-2 inline-flex items-center gap-1 rounded-md border border-[#e6e6e6] px-2 py-1 text-xs text-[#585d5d] transition-colors hover:border-[#730912] hover:text-[#730912]"
+      className="ml-2 inline-flex items-center gap-1 rounded-md border border-[#e6e6e6] px-2 py-1 text-xs text-[#585d5d] transition-colors hover:border-[#cc0636] hover:text-[#cc0636]"
       aria-label="Kopyala"
     >
       {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
@@ -34,12 +34,12 @@ function BankCard({ account }: { account: BankAccount }) {
   return (
     <div className="rounded-2xl border border-[#f0f0f0] bg-white overflow-hidden">
       {/* Colored top bar */}
-      <div className="h-1.5 w-full" style={{ backgroundColor: '#730912' }} />
-      <div className="p-6">
-        <div className="flex items-center gap-3 mb-5">
+      <div className="h-1.5 w-full" style={{ backgroundColor: '#cc0636' }} />
+      <div className="p-2 lg:p-4">
+        <div className="flex items-center gap-3 mb-2">
           <div
             className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
-            style={{ backgroundColor: '#730912' }}
+            style={{ backgroundColor: '#cc0636' }}
           >
             <CreditCard className="h-5 w-5" style={{ color: '#fff' }} />
           </div>
@@ -51,7 +51,7 @@ function BankCard({ account }: { account: BankAccount }) {
           </div>
           <span
             className="ml-auto shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-wider text-white"
-            style={{ backgroundColor: '#730912' }}
+            style={{ backgroundColor: '#cc0636' }}
           >
             {account.currency}
           </span>
@@ -62,7 +62,7 @@ function BankCard({ account }: { account: BankAccount }) {
         </p>
 
         <div className="space-y-3">
-          <div className="rounded-lg bg-[#f8f8f8] px-4 py-3">
+          <div className="rounded-lg bg-[#f8f8f8] p-2  lg:p4">
             <p className="mb-1 text-[10px] font-semibold  tracking-wider text-text-mute">
               IBAN
             </p>
@@ -74,7 +74,7 @@ function BankCard({ account }: { account: BankAccount }) {
             </div>
           </div>
 
-          <div className="rounded-lg bg-[#f8f8f8] px-4 py-3">
+          <div className="rounded-lg bg-[#f8f8f8] p-2 lg:p-4">
             <p className="mb-1 text-[10px] font-semibold  tracking-wider text-text-mute">
               Hesap No
             </p>
@@ -100,7 +100,7 @@ export default function BankAccounts({ data }: BankAccountsProps) {
           <h2 className="text-3xl font-bold text-[#16223f] sm:text-4xl">
             Banka Hesaplarımız
           </h2>
-          <div className="mx-auto lg:mx-0 mt-4 h-1 w-16 rounded-full bg-[#730912]" />
+          <div className="mx-auto lg:mx-0 mt-4 h-1 w-16 rounded-full bg-[#cc0636]" />
           <p className="mt-6 text-[#585d5d] max-w-xl text-sm">
             Aşağıdaki banka hesaplarımıza havale veya EFT yapabilirsiniz. IBAN
             numarasını kopyalamak için &ldquo;Kopyala&rdquo; butonuna tıklayın.

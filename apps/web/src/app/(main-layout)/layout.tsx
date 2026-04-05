@@ -2,6 +2,7 @@ import CategoryBar from '@/components/category-bar/category-bar';
 import Footer from '@/components/footer/footer';
 import Header from '@/components/header/header';
 import type { Metadata } from 'next';
+import ScrollToTop from '@/components/scroll-to-top';
 import { fontVariables } from '@/lib/fonts';
 import { getCategoryBarDataWithCache } from './_helpers/service/getCategoryBar/getCategoryBar.service';
 import { getFooterDataWithCache } from './_helpers/service/getFooter/getFooter.service';
@@ -57,6 +58,7 @@ export default async function MainLayout({
     <html className={fontVariables}>
       <head></head>
       <body className="font-sans">
+        <ScrollToTop />
         <div className="relative flex min-h-screen flex-col">
           <Header data={headerData} categories={categoryBarData.categories} />
           <CategoryBar data={categoryBarData} />

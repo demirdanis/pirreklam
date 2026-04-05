@@ -9,7 +9,7 @@ interface FooterProps {
 
 export default function Footer({ data }: FooterProps) {
   return (
-    <footer className="bg-[#030e26] border-t border-[#2a2d2d]">
+    <footer className="bg-[#25497f] border-t border-[#2a2d2d]">
       {/* Main Footer Content */}
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
@@ -36,7 +36,7 @@ export default function Footer({ data }: FooterProps) {
                 href={data.contact.phoneHref}
                 className="flex items-center gap-2.5 text-sm text-white/85 hover:text-white transition-colors group"
               >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e32231]/10 text-[#e32231] group-hover:bg-[#730912]/20 transition-colors shrink-0">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e32231]/10 text-[#e32231] group-hover:bg-[#cc0636]/20 transition-colors shrink-0">
                   <Phone className="h-3.5 w-3.5" />
                 </span>
                 {data.contact.phone}
@@ -45,7 +45,7 @@ export default function Footer({ data }: FooterProps) {
                 href={data.contact.whatsappHref}
                 className="flex items-center gap-2.5 text-sm text-white/85 hover:text-white transition-colors group"
               >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e32231]/10 text-[#e32231] group-hover:bg-[#730912]/20 transition-colors shrink-0">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e32231]/10 text-[#e32231] group-hover:bg-[#cc0636]/20 transition-colors shrink-0">
                   <MessageCircle className="h-3.5 w-3.5" />
                 </span>
                 {data.contact.whatsapp}
@@ -54,13 +54,13 @@ export default function Footer({ data }: FooterProps) {
                 href={`mailto:${data.contact.email}`}
                 className="flex items-center gap-2.5 text-sm text-white/85 hover:text-white transition-colors group"
               >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e32231]/10 text-[#e32231] group-hover:bg-[#730912]/20 transition-colors shrink-0">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e32231]/10 text-[#e32231] group-hover:bg-[#cc0636]/20 transition-colors shrink-0">
                   <Mail className="h-3.5 w-3.5" />
                 </span>
                 {data.contact.email}
               </a>
               <div className="flex items-center gap-2.5 text-sm text-white/85 hover:text-white transition-colors group">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#730912]/10 text-[#e32231] shrink-0 mt-0.5">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#cc0636]/10 text-[#e32231] shrink-0 mt-0.5">
                   <MapPin className="h-3.5 w-3.5" />
                 </span>
                 {data.contact.address}
@@ -110,7 +110,7 @@ export default function Footer({ data }: FooterProps) {
                 href={data.googleReviewHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-md border border-[#2a2d2d] px-3 py-1.5 text-xs text-white/50 transition-colors hover:border-[#730912]/50 hover:text-white"
+                className="flex items-center gap-1.5 rounded-md border border-[#2a2d2d] px-3 py-1.5 text-xs text-white/50 transition-colors hover:border-[#cc0636]/50 hover:text-white"
               >
                 <Star className="h-3 w-3 text-yellow-400" />
                 <span>Yorum Yap</span>
@@ -123,7 +123,7 @@ export default function Footer({ data }: FooterProps) {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-8 w-8 items-center justify-center rounded-full border border-[#2a2d2d] text-white/40 transition-colors hover:border-[#730912]/50 hover:text-white hover:bg-[#730912]/10"
+                    className="flex h-8 w-8 items-center justify-center rounded-full border border-[#2a2d2d] text-white/40 transition-colors hover:border-[#cc0636]/50 hover:text-white hover:bg-[#cc0636]/10"
                   >
                     <img
                       src={social.logoUrl}

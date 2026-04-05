@@ -106,11 +106,11 @@ function ImageGallery({
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 h-full">
       {/* Main image */}
       <div
         ref={containerRef}
-        className="relative aspect-square overflow-hidden rounded-2xl bg-white cursor-zoom-in group"
+        className="relative flex-1 overflow-hidden rounded-2xl bg-white cursor-zoom-in group"
         onMouseEnter={() => setIsZoomed(true)}
         onMouseLeave={() => setIsZoomed(false)}
         onMouseMove={handleMouseMove}
@@ -136,7 +136,7 @@ function ImageGallery({
         {videoUrl && (
           <button
             onClick={() => setVideoOpen(true)}
-            className="absolute top-2 left-2 flex items-center gap-2 rounded-full bg-[#730912] px-3 py-2 text-white shadow-lg shadow-[#730912]/40 transition-all hover:bg-[#8f0e17] hover:scale-105 active:scale-95"
+            className="absolute top-2 left-2 flex items-center gap-2 rounded-full bg-[#cc0636] px-3 py-2 text-white shadow-lg shadow-[#cc0636]/40 transition-all hover:bg-[#8f0e17] hover:scale-105 active:scale-95"
             style={{
               animation: 'videoPulse 2s ease-in-out infinite',
             }}
@@ -154,7 +154,7 @@ function ImageGallery({
 
       {/* Thumbnails */}
       {images.length > 1 && (
-        <div className="flex gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden pb-1">
+        <div className="flex gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden pb-1 shrink-0">
           {images.map((src, i) => (
             <button
               key={i}
@@ -162,7 +162,7 @@ function ImageGallery({
               className={cn(
                 'shrink-0 h-16 w-16 rounded-lg overflow-hidden border-2 transition-all bg-white',
                 activeIndex === i
-                  ? 'border-[#730912] shadow-md shadow-[#730912]/20'
+                  ? 'border-[#cc0636] shadow-md shadow-[#cc0636]/20'
                   : 'border-[#091530]/10 opacity-60 hover:opacity-100'
               )}
             >
@@ -206,7 +206,7 @@ function OptionButton({
       className={cn(
         'rounded-lg border px-3 py-2 text-xs font-semibold transition-all text-left',
         selected
-          ? 'border-[#730912] bg-[#730912] text-white shadow-md shadow-[#730912]/30'
+          ? 'border-[#cc0636] bg-[#cc0636] text-white shadow-md shadow-[#cc0636]/30'
           : compatible
             ? 'border-[#091530]/15 bg-[#091530]/5 text-[#091530]/75 hover:border-[#091530]/30 hover:text-[#091530]'
             : 'border-dashed border-[#091530]/10 bg-transparent text-[#091530]/25 hover:border-[#091530]/20 hover:text-[#091530]/40'
@@ -244,7 +244,7 @@ function ColorSwatch({
       className={cn(
         'relative h-9 w-9 rounded-full transition-all flex items-center justify-center',
         selected
-          ? 'ring-2 ring-[#730912] ring-offset-2 ring-offset-[#f5f6f7] scale-110'
+          ? 'ring-2 ring-[#cc0636] ring-offset-2 ring-offset-[#f5f6f7] scale-110'
           : compatible
             ? 'ring-1 ring-[#091530]/10 hover:ring-[#091530]/30 hover:scale-105'
             : 'opacity-35 hover:opacity-55'
@@ -321,7 +321,7 @@ function RelatedCard({
   return (
     <Link
       href={product.href}
-      className="group shrink-0 w-36 sm:w-44 flex flex-col overflow-hidden rounded-xl border border-[#091530]/8 bg-white transition-all hover:border-[#730912]/50 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#730912]/10"
+      className="group shrink-0 w-36 sm:w-44 flex flex-col overflow-hidden rounded-xl border border-[#091530]/8 bg-white transition-all hover:border-[#cc0636]/50 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#cc0636]/10"
     >
       <div className="relative aspect-square overflow-hidden rounded-t-lg bg-white">
         <Image
@@ -331,13 +331,13 @@ function RelatedCard({
           className="object-cover p-2 transition-transform duration-500 group-hover:scale-108"
           unoptimized
         />
-        <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#730912] transition-all duration-300 group-hover:w-full" />
+        <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#cc0636] transition-all duration-300 group-hover:w-full" />
       </div>
       <div className="flex items-center justify-between gap-1 px-3 py-2.5 bg-foreground">
         <p className="text-[11px] font-semibold text-[#091530]/70 group-hover:text-[#091530] transition-colors line-clamp-2 leading-snug">
           {product.title}
         </p>
-        <ChevronRight className="h-3 w-3 shrink-0 text-[#091530]/30 group-hover:text-[#730912] transition-colors" />
+        <ChevronRight className="h-3 w-3 shrink-0 text-[#091530]/30 group-hover:text-[#cc0636] transition-colors" />
       </div>
     </Link>
   );
@@ -548,9 +548,9 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
 
   return (
     <div className="bg-[#f5f6f7] min-h-screen">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mx-auto max-w-7xl px-4   py-4">
         {/* Breadcrumb */}
-        <nav className="mb-6 flex flex-wrap items-center gap-1 text-xs text-[#091530]/35">
+        <nav className="mb-4 flex flex-wrap items-center gap-1 text-xs text-[#091530]/35">
           {data.breadcrumb.map((crumb, i) => (
             <span key={crumb.href} className="flex items-center gap-1">
               {i > 0 && <ChevronRight className="h-3 w-3 text-[#091530]/15" />}
@@ -569,9 +569,9 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
         </nav>
 
         {/* ── Two-column layout ── */}
-        <div className="lg:grid lg:grid-cols-2 lg:gap-12 xl:gap-16">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-4 xl:gap-8">
           {/* LEFT: Image gallery (sticky on desktop) */}
-          <div className="mb-8 lg:mb-0 lg:sticky lg:top-28 lg:self-start">
+          <div className="mb-8 lg:mb-0 lg:sticky lg:top-22 lg:self-start lg:h-[calc(100vh-250px)]">
             <ImageGallery
               images={images}
               activeIndex={activeImg}
@@ -581,12 +581,9 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
           </div>
 
           {/* RIGHT: Product info */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
             {/* Title + code */}
             <div>
-              <p className="text-xs font-bold  tracking-[0.15em] text-[#730912] mb-1">
-                {data.subcategoryTitle}
-              </p>
               <h1 className="text-2xl sm:text-3xl font-bold text-[#091530] font-alt leading-tight">
                 {data.title}
               </h1>
@@ -595,7 +592,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
                   <span className="text-[10px] text-[#091530]/40  tracking-wider">
                     Stok Kodu
                   </span>
-                  <span className="text-xs font-bold text-[#730912] font-mono">
+                  <span className="text-xs font-bold text-[#cc0636] font-mono">
                     {currentVariant.productCode}
                   </span>
                 </div>
@@ -603,8 +600,8 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
             </div>
 
             {/* ── Main options ── */}
-            <div>
-              <div className="flex items-center gap-2 mb-3">
+            <div className="rounded-xl border border-[#091530]/8 bg-white p-2 space-y-2">
+              <div className="flex items-center gap-1">
                 <p className="text-[11px] font-bold  tracking-[0.12em] text-[#091530]/50">
                   {data.mainOptionGroup.title}
                 </p>
@@ -632,8 +629,8 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
 
             {/* ── Sub options (conditional) ── */}
             {data.subOptionGroup && (
-              <div>
-                <div className="flex items-center gap-2 mb-3">
+              <div className="rounded-xl border border-[#091530]/8 bg-white p-2 space-y-2">
+                <div className="flex items-center gap-1">
                   <p className="text-[11px] font-bold  tracking-[0.12em] text-[#091530]/50">
                     {data.subOptionGroup.title}
                   </p>
@@ -661,8 +658,8 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
             )}
 
             {/* ── Colors ── */}
-            <div>
-              <div className="flex items-center gap-2 mb-3">
+            <div className="rounded-xl border border-[#091530]/8 bg-white p-2 space-y-2">
+              <div className="flex items-center gap-1">
                 <p className="text-[11px] font-bold  tracking-[0.12em] text-[#091530]/50">
                   RENK SEÇENEKLERİ
                 </p>
@@ -688,12 +685,9 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
               </div>
             </div>
 
-            {/* Divider */}
-            <div className="h-px bg-white/8" />
-
             {/* ── Quantity tiers ── */}
             <div>
-              <p className="text-[11px] font-bold  tracking-[0.12em] text-[#091530]/50 mb-3">
+              <p className="text-[11px] font-bold  tracking-[0.12em] text-[#091530]/50 mt-1">
                 TOPLAM ADET SEÇİNİZ
               </p>
               <div className="grid grid-cols-3 gap-2">
@@ -702,34 +696,31 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
                     key={tier.qty}
                     onClick={() => setSelQty(tier.qty)}
                     className={cn(
-                      'flex flex-col items-center rounded-xl border px-2 py-3.5 transition-all',
+                      'flex flex-col items-center rounded-lg border px-2 py-1.5 transition-all',
                       selQty === tier.qty
-                        ? 'border-[#730912] bg-[#730912]/10 shadow-md shadow-[#730912]/20'
+                        ? 'border-[#cc0636] bg-[#cc0636]/10 shadow-md shadow-[#cc0636]/20'
                         : 'border-[#091530]/20 bg-white hover:border-[#091530]/40'
                     )}
                   >
                     <span
                       className={cn(
-                        'text-[11px] font-semibold',
+                        'text-sm font-bold',
                         selQty === tier.qty
-                          ? 'text-[#730912]'
-                          : 'text-[#091530]/45'
+                          ? 'text-[#cc0636]'
+                          : 'text-[#091530]/70'
                       )}
                     >
                       {tier.qty.toLocaleString('tr-TR')} Adet
                     </span>
                     <span
                       className={cn(
-                        'text-base font-bold mt-0.5',
+                        'text-[10px] font-medium mt-0.5',
                         selQty === tier.qty
                           ? 'text-[#091530]'
-                          : 'text-[#091530]/60'
+                          : 'text-[#091530]/45'
                       )}
                     >
                       {fmt(tier.perUnitExVat)} ₺
-                    </span>
-                    <span className="text-[9px] text-[#091530]/30 mt-0.5">
-                      / Adet
                     </span>
                   </button>
                 ))}
@@ -738,49 +729,51 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
 
             {/* ── Pricing summary ── */}
             {currentVariant && (
-              <div className="rounded-xl border border-[#091530]/8 bg-white p-4 space-y-2">
-                <div className="flex items-center justify-between text-sm">
+              <div className="rounded-xl border border-[#091530]/8 bg-white p-4 space-y-1.5">
+                <div className="text-sm">
                   <span className="text-[#091530]/50">
-                    Birim Fiyat ({selQty.toLocaleString('tr-TR')} Adet)
-                  </span>
+                    Birim Fiyat (KDV Hariç):
+                  </span>{' '}
                   <span className="font-semibold text-[#091530]">
-                    {fmt(currentTier?.perUnitExVat ?? 0)}{' '}
-                    <span className="text-xs text-[#091530]/40">₺ / Adet</span>
+                    {fmt(currentTier?.perUnitExVat ?? 0)} ₺
                   </span>
                 </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-[#091530]/50">Toplam (KDV Hariç)</span>
+                <div className="text-sm">
+                  <span className="text-[#091530]/50">
+                    {selQty.toLocaleString('tr-TR')} Adet Fiyatı (KDV Hariç):
+                  </span>{' '}
                   <span className="font-semibold text-[#091530]">
                     {fmt(totalExVat)} ₺
                   </span>
                 </div>
-                <div className="flex items-center justify-between border-t border-[#091530]/8 pt-2 mt-2">
-                  <span className="text-sm font-medium text-[#091530]/70">
-                    Toplam (KDV Dahil %20)
-                  </span>
-                  <span className="text-lg font-bold text-[#730912]">
+                <div className="text-sm border-t border-[#091530]/8 pt-1.5 mt-1">
+                  <span className="font-medium text-[#091530]/70">
+                    Toplam (KDV Dahil %20):
+                  </span>{' '}
+                  <span className="text-base font-bold text-[#cc0636]">
                     {fmt(totalIncVat)} ₺
                   </span>
                 </div>
-                <p className="text-[10px] text-[#091530]/25 mt-1">
-                  * Fiyatlar KDV hariç gösterilmektedir. Gösterilen fiyatlar
-                  yaklaşık fiyatlardır.
-                </p>
               </div>
             )}
 
-            {/* ── WhatsApp order button ── */}
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2.5 rounded-xl bg-[#25d366] px-6 py-4 text-sm font-bold text-white shadow-lg shadow-[#25d366]/20 transition-all hover:bg-[#22c25c] hover:shadow-[#25d366]/30 active:scale-98"
-            >
-              <MessageCircle className="h-5 w-5" />
-              WhatsApp ile Sipariş Ver
-            </a>
+            {/* ── Order buttons ── */}
+            <div className="flex gap-3">
+              <button className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-[#cc0636] px-4 py-4 text-sm font-bold text-white shadow-lg shadow-[#cc0636]/20 transition-all hover:bg-[#a8042c] active:scale-98">
+                Anında Sipariş Ver
+              </button>
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2.5 rounded-xl bg-[#25d366] px-4 py-4 text-sm font-bold text-white shadow-lg shadow-[#25d366]/20 transition-all hover:bg-[#22c25c] hover:shadow-[#25d366]/30 active:scale-98"
+              >
+                <MessageCircle className="h-5 w-5" />
+                WhatsApp ile Sipariş Ver
+              </a>
+            </div>
 
-            <p className="text-center text-[11px] text-[#091530]/30 -mt-3">
+            <p className="text-center text-[11px] text-[#091530]/30 mt-1">
               Sipariş detayı ve farklı talepler için{' '}
               <a
                 href="tel:4441030"
@@ -823,7 +816,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
                   'Toplu alımlarda özel fiyat için teklif isteyiniz',
                 ].map((line) => (
                   <li key={line} className="flex gap-2">
-                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#730912]/50" />
+                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#cc0636]/50" />
                     {line}
                   </li>
                 ))}
@@ -836,7 +829,7 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
         {data.relatedProducts.length > 0 && (
           <div className="mt-16 border-t border-[#091530]/8 pt-12">
             <div className="mb-6">
-              <p className="text-xs font-bold  tracking-[0.15em] text-[#730912] mb-1">
+              <p className="text-xs font-bold  tracking-[0.15em] text-[#cc0636] mb-1">
                 Benzer Ürünler
               </p>
               <h2 className="text-xl font-bold text-[#091530] font-alt">

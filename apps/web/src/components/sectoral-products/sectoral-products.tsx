@@ -88,7 +88,7 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
           <h2 className="text-2xl sm:text-3xl font-bold text-[#091530] font-alt">
             {data.title}
           </h2>
-          <div className="mx-auto lg:mx-0 mt-4 h-1 w-16 rounded-full bg-[#730912]" />
+          <div className="mx-auto lg:mx-0 mt-4 h-1 w-16 rounded-full bg-[#cc0636]" />
         </div>
 
         {/* Desktop Layout */}
@@ -103,7 +103,7 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
                   onClick={() => setActiveId(group.id)}
                   className={`group relative text-left py-5 px-6 transition-all duration-200 border-b border-[#f0f0f0] last:border-b-0 ${
                     isActive
-                      ? 'bg-[#730912] text-white'
+                      ? 'bg-[#cc0636] text-white'
                       : 'bg-white hover:bg-[#fafafa]'
                   }`}
                 >
@@ -166,7 +166,7 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
               {/* Sector heading */}
               <div className="mb-6 flex items-end justify-between bg-white/70 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/80 ">
                 <div>
-                  <p className="text-[10px]  tracking-[0.18em] text-[#730912] mb-1 font-bold">
+                  <p className="text-[10px]  tracking-[0.18em] text-[#cc0636] mb-1 font-bold">
                     Önerilen Ürünler
                   </p>
                   <h3 className="text-xl font-bold text-[#091530]">
@@ -187,7 +187,7 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
                     key={product.href}
                     href={product.href}
                     style={{ animationDelay: `${i * 30}ms` }}
-                    className="group flex items-center gap-2.5 rounded-lg border border-[#e2e5e8] bg-white/90 px-3.5 py-3 text-sm text-[#444]  transition-all hover:bg-[#730912] hover:border-[#730912] hover:text-white hover:shadow-md animate-fade-in"
+                    className="group flex items-center gap-2.5 rounded-lg border border-[#e2e5e8] bg-white/90 px-3.5 py-3 text-sm text-[#444]  transition-all hover:bg-[#cc0636] hover:border-[#cc0636] hover:text-white hover:shadow-md animate-fade-in"
                   >
                     <span className="leading-tight">{product.label}</span>
                   </Link>
@@ -234,12 +234,12 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
                     key={group.id}
                     onClick={() => setActiveId(group.id)}
                     className={`relative shrink-0 px-4 py-3 text-sm whitespace-nowrap transition-all font-medium ${
-                      isActive ? 'text-[#730912]' : 'text-[#888]'
+                      isActive ? 'text-[#cc0636]' : 'text-[#888]'
                     }`}
                   >
                     {group.sectors[0]}
                     {isActive && (
-                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#730912]" />
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#cc0636]" />
                     )}
                   </button>
                 );
@@ -253,7 +253,7 @@ export default function SectoralProducts({ data }: SectoralProductsProps) {
               <Link
                 key={product.href}
                 href={product.href}
-                className="group flex items-center gap-2 rounded-lg border border-[#e2e5e8] bg-white px-3 py-3 text-sm text-[#444]  transition-all hover:bg-[#730912] hover:border-[#730912] hover:text-white"
+                className="group flex items-center gap-2 rounded-lg border border-[#e2e5e8] bg-white px-3 py-3 text-sm text-[#444]  transition-all hover:bg-[#cc0636] hover:border-[#cc0636] hover:text-white"
               >
                 <span className="leading-tight">{product.label}</span>
               </Link>

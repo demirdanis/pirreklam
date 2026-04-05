@@ -30,7 +30,7 @@ export default function HeroCarousel({ data }: HeroCarouselProps) {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-[#030e26]"
+      className="relative w-full overflow-hidden bg-[#25497f]"
       style={{ height: 'clamp(240px, 50vw, 420px)' }}
     >
       {slides.map((slide, i) => (
@@ -55,7 +55,7 @@ export default function HeroCarousel({ data }: HeroCarouselProps) {
 
           {/* Content */}
           <div className="absolute inset-0 flex items-center">
-            <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12">
+            <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="max-w-xl">
                 <span className="inline-block rounded-full border border-[#e32231]/40 bg-[#e32231]/10 px-3 py-1 text-[10px] font-bold  tracking-widest text-[#f74e56] mb-4">
                   {slide.badge ?? "Pir Reklam'da"}
@@ -68,7 +68,7 @@ export default function HeroCarousel({ data }: HeroCarouselProps) {
                 </p>
                 <Link
                   href={slide.ctaHref}
-                  className="mt-7 inline-flex items-center gap-2 rounded-lg bg-[#730912] px-3 py-1 sm:px-7 sm:py-3 text-xs sm:text-sm font-semibold text-white hover:bg-[#f74e56] transition-colors"
+                  className="mt-7 inline-flex items-center gap-2 rounded-lg bg-[#cc0636] px-3 py-1 sm:px-7 sm:py-3 text-xs sm:text-sm font-semibold text-white hover:bg-[#f74e56] transition-colors"
                 >
                   {slide.ctaLabel}
                   <ChevronRight className="h-4 w-4" />
@@ -83,14 +83,14 @@ export default function HeroCarousel({ data }: HeroCarouselProps) {
       <button
         onClick={prev}
         aria-label="Önceki slayt"
-        className="absolute left-4 top-1/2 z-20 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm hover:bg-[#730912]/80 transition-colors"
+        className="absolute left-4 top-1/2 z-20 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm hover:bg-[#cc0636]/80 transition-colors"
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
       <button
         onClick={next}
         aria-label="Sonraki slayt"
-        className="absolute right-4 top-1/2 z-20 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm hover:bg-[#730912]/80 transition-colors"
+        className="absolute right-4 top-1/2 z-20 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm hover:bg-[#cc0636]/80 transition-colors"
       >
         <ChevronRight className="h-5 w-5" />
       </button>
@@ -104,7 +104,7 @@ export default function HeroCarousel({ data }: HeroCarouselProps) {
             aria-label={`Slayt ${i + 1}`}
             className={`rounded-full transition-all duration-300 ${
               i === current
-                ? 'w-7 h-2 bg-[#730912]'
+                ? 'w-7 h-2 bg-[#cc0636]'
                 : 'w-2 h-2 bg-white/40 hover:bg-white/70'
             }`}
           />
@@ -115,7 +115,7 @@ export default function HeroCarousel({ data }: HeroCarouselProps) {
       <div className="absolute bottom-0 left-0 right-0 z-20 h-0.5 bg-white/10">
         <div
           key={current}
-          className="h-full bg-[#730912] origin-left"
+          className="h-full bg-[#cc0636] origin-left"
           style={{ animation: 'growWidth 5.5s linear forwards' }}
         />
       </div>

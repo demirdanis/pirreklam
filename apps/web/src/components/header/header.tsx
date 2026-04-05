@@ -28,10 +28,22 @@ export default function Header({ data, categories = [] }: HeaderProps) {
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full">
+    <header className="z-6000 w-full">
       {/* Mobile-only category trigger strip */}
-      <div className="lg:hidden bg-[#030e26] border-b border-[#000000]">
-        <div className="flex items-center justify-between px-4 py-2">
+      <div className="lg:hidden bg-[#25497f] border-b border-[#000000]">
+        <Link href="/" className="absolute left-[4px] top-[4px] z-9999999 flex">
+          <div className="flex rounded-full bg-white p-3 gradient-shadow-white-636b7f items-center justify-center">
+            <Image
+              src="https://pirreklam.com.tr/wp-content/uploads/2026/01/cropped-Adsiz-tasarim.png"
+              alt="Pir Reklam"
+              width={48}
+              height={48}
+              className="h-14 w-auto object-contain"
+              priority
+            />
+          </div>
+        </Link>
+        <div className="flex items-center justify-between px-4 py-1">
           <div />
           <div className="flex items-center gap-1">
             <button
@@ -68,8 +80,8 @@ export default function Header({ data, categories = [] }: HeaderProps) {
       </div>
 
       {/* Top Bar — desktop only */}
-      <div className="hidden lg:block bg-[#030e26] border-b border-[#000000]">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
+      <div className="hidden lg:block bg-[#25497f] border-b border-[#000000]">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-1 sm:px-6 lg:px-8">
           {/* Nav Links */}
           <div className="flex items-center">
             {data.navItems.map((item) => (
@@ -82,7 +94,7 @@ export default function Header({ data, categories = [] }: HeaderProps) {
                   : {})}
               >
                 {item.label}
-                <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-[#730912] transition-all duration-200 group-hover:w-3/4" />
+                <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-[#cc0636] transition-all duration-200 group-hover:w-3/4" />
               </Link>
             ))}
           </div>
@@ -105,7 +117,7 @@ export default function Header({ data, categories = [] }: HeaderProps) {
       </div>
 
       {/* Main Nav */}
-      <nav className="bg-header-menu border-b border-[#000000] shadow-header-menu relative overflow-hidden">
+      <nav className="absolute bg-header-menu border-b border-[#000000] shadow-header-menu relative overflow-hidden lg:overflow-visible">
         {/* Background — desktop */}
         <div
           className="hidden lg:block absolute inset-0 bg-cover bg-center z-0 pointer-events-none"
@@ -117,8 +129,8 @@ export default function Header({ data, categories = [] }: HeaderProps) {
           style={{ backgroundImage: "url('/assets/header_back_mobile.webp')" }}
         />
         {/* Desktop layout */}
-        <div className="hidden lg:flex mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 items-center justify-between gap-4 py-3 relative z-10">
-          <div className="grid grid-cols-1 gap-2 w-44">
+        <div className="hidden lg:flex mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 items-center justify-between gap-4 py-0 relative z-10">
+          <div className="grid grid-cols-1  w-44 ml-[-8px]">
             <Link
               href="/plastik-urunler/ruhsat-kabi/"
               style={{ animationDelay: '0s' }}
@@ -156,21 +168,21 @@ export default function Header({ data, categories = [] }: HeaderProps) {
               className="flex flex-col items-center gap-1 group w-fit"
             >
               <span className="flex items-center justify-center gap-1.5 text-[12px] tracking-[0.2em] text-white/85 font-semibold">
-                <Phone className="h-8 w-8 text-[#e32231]" />
+                <Phone className="h-6 w-6 text-[#e32231]" />
                 Türkiye&apos;nin her yerinden
               </span>
-              <span className="text-4xl font-bold text-white tracking-tight transition-colors">
+              <span className="text-3xl font-bold text-white tracking-tight transition-colors">
                 444 10 30
               </span>
             </a>
-            <Link href="/" className="flex justify-center shrink-0">
-              <div className="flex rounded-full bg-white p-8 gradient-shadow-white-636b7f items-center justify-center animate-brightness">
+            <Link href="/" className="flex justify-center shrink-0 -my-5">
+              <div className="flex rounded-full bg-white p-2 gradient-shadow-white-636b7f h-[140px] w-[140px] items-center justify-center animate-brightness">
                 <Image
                   src="https://pirreklam.com.tr/wp-content/uploads/2026/01/cropped-Adsiz-tasarim.png"
                   alt="Pir Reklam"
-                  width={108}
-                  height={108}
-                  className="h-24 w-auto object-contain -mt-3"
+                  width={96}
+                  height={96}
+                  className="h-20 w-auto object-contain"
                   priority
                 />
               </div>
@@ -183,15 +195,15 @@ export default function Header({ data, categories = [] }: HeaderProps) {
             >
               <span className="flex items-center justify-center gap-1.5 text-[12px] text-white/85 font-semibold">
                 WhatsApp Sipariş
-                <MessageCircle className="h-8 w-8 text-[#25d366]" />
+                <MessageCircle className="h-6 w-6 text-[#25d366]" />
               </span>
-              <span className="text-4xl font-bold text-white tracking-tight group-hover:text-[#25d366] transition-colors">
+              <span className="text-3xl font-bold text-white tracking-tight group-hover:text-[#25d366] transition-colors">
                 0544 233 80 03
               </span>
             </a>
           </div>
 
-          <div className="grid grid-cols-1 gap-2 w-44">
+          <div className="grid grid-cols-1 w-44 mr-[-8px]">
             <Link
               href="/plastik-urunler/kredi-kartlik/"
               style={{ animationDelay: '0.375s' }}
@@ -224,21 +236,8 @@ export default function Header({ data, categories = [] }: HeaderProps) {
         </div>
 
         {/* Mobile layout: logo centered, 8 buttons scattered around */}
-        <div className="lg:hidden h-24 w-full overflow-hidden">
+        <div className=" t-0 lg:hidden h-20 w-full overflow-hidden z-11">
           <div className="relative h-full ml-[clamp(3%,10%,20%)] mx-auto">
-            <Link href="/" className="fixed left-4 top-4 z-9999999 flex">
-              <div className="flex rounded-full bg-white p-3 gradient-shadow-white-636b7f items-center justify-center">
-                <Image
-                  src="https://pirreklam.com.tr/wp-content/uploads/2026/01/cropped-Adsiz-tasarim.png"
-                  alt="Pir Reklam"
-                  width={48}
-                  height={48}
-                  className="h-12 w-auto object-contain"
-                  priority
-                />
-              </div>
-            </Link>
-
             <Link
               href="/plastik-urunler/ruhsat-kabi/"
               style={{ animationDelay: '0s' }}
@@ -303,15 +302,15 @@ export default function Header({ data, categories = [] }: HeaderProps) {
       </nav>
 
       {/* Mobile Phone Bar */}
-      <div className="lg:hidden bg-[#730912] border-b border-[#000000]">
-        <div className="flex items-center justify-around px-4 py-2 gap-2">
+      <div className="lg:hidden bg-[#cc0636] border-b border-[#000000]">
+        <div className="flex items-center justify-around px-4 py-1 gap-2">
           <a href="tel:4441030" className="flex items-center gap-1.5 group">
             <Phone className="h-6 w-6 text-[#e32231] shrink-0" />
             <div className="flex flex-col">
               <span className="text-[11px] text-white/50 leading-none">
                 Türkiye&apos;nin her yerinden
               </span>
-              <span className="text-[16px] font-bold text-white group-hover:text-[#730912] transition-colors leading-tight">
+              <span className="text-[16px] font-bold text-white group-hover:text-[#cc0636] transition-colors leading-tight">
                 444 10 30
               </span>
             </div>
@@ -338,8 +337,8 @@ export default function Header({ data, categories = [] }: HeaderProps) {
 
       {/* Mobile Search Input — below Phone Bar */}
       {mobileSearchOpen && (
-        <div className="lg:hidden border-t border-[#2a2d2d] bg-[#030e26] px-4 py-2.5">
-          <div className="flex items-center gap-2 rounded-md border border-[#2a2d2d] bg-[#030e26] px-3 py-1.5 focus-within:border-[#730912] transition-colors">
+        <div className="lg:hidden border-t border-[#2a2d2d] bg-[#25497f] px-4 py-2.5">
+          <div className="flex items-center gap-2 rounded-md border border-[#2a2d2d] bg-[#25497f] px-3 py-1.5 focus-within:border-[#cc0636] transition-colors">
             <Search className="h-3.5 w-3.5 text-white/40 shrink-0" />
             <input
               type="search"
@@ -370,22 +369,21 @@ export default function Header({ data, categories = [] }: HeaderProps) {
                   <ChevronDown
                     className={`h-4 w-4 text-white/40 transition-transform duration-200 ${
                       mobileCatExpandedId === cat.id
-                        ? 'rotate-180 text-[#730912]'
+                        ? 'rotate-180 text-[#cc0636]'
                         : ''
                     }`}
                   />
                 )}
               </button>
               {mobileCatExpandedId === cat.id && cat.subItems.length > 0 && (
-                <div className="bg-[#030e26] pb-1">
+                <div className="bg-[#25497f] pb-1">
                   {cat.subItems.map((sub) => (
                     <Link
                       key={sub.href}
                       href={sub.href}
                       onClick={() => setMobileCatOpen(false)}
-                      className="flex items-center gap-2.5 px-6 py-2.5 text-sm text-white/85 hover:text-white hover:bg-white/5 transition-colors"
+                      className="flex items-center gap-2.5 px-6 py-2.5 text-sm text-white/85 hover:text-white hover:bg-white/5 transition-colors border-b border-white/10"
                     >
-                      <span className="h-1 w-1 rounded-full bg-[#730912]/50 shrink-0" />
                       {sub.label}
                     </Link>
                   ))}

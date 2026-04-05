@@ -20,10 +20,10 @@ export default function Corporate({ data }: CorporateProps) {
           <h2 className="text-3xl font-bold text-[#16223f] sm:text-4xl">
             {data.title}
           </h2>
-          <div className="mx-auto lg:mx-0 mt-4 h-1 w-16 rounded-full bg-[#730912]" />
+          <div className="mx-auto lg:mx-0 mt-4 h-1 w-16 rounded-full bg-[#cc0636]" />
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+        <div className="grid gap-6 lg:gap-12 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Left — text */}
           <div
             className="flex flex-col gap-6 text-text-secondary-dark leading-relaxed text-base prose max-w-none [&>p]:mb-0"
@@ -39,7 +39,7 @@ export default function Corporate({ data }: CorporateProps) {
                   key={feature.title}
                   className="group rounded-2xl border border-surface-secondary-light-b bg-white p-2 md:p-4  transition-shadow hover:shadow-md"
                 >
-                  <div className="mb-2 flex items-start gap-4">
+                  <div className="flex items-start gap-4">
                     <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#e32231]/10 group-hover:bg-[#e32231] transition-colors">
                       <Icon className="h-5 w-5 text-[#e32231] group-hover:text-white transition-colors" />
                     </div>
@@ -59,7 +59,7 @@ export default function Corporate({ data }: CorporateProps) {
         </div>
 
         {/* Stats */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
+        <div className="mt-4 lg:mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
           {data.stats.map((stat: CorporateStat) => (
             <div
               key={stat.label}

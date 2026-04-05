@@ -19,7 +19,7 @@ function PopularProductCard({
   return (
     <Link
       href={href}
-      className="group relative flex flex-col overflow-hidden rounded-xl bg-white border border-[#e2e5e8]  transition-all duration-300 hover:border-[#730912] hover:shadow-md hover:-translate-y-0.5"
+      className="group relative flex flex-col overflow-hidden rounded-xl bg-white border border-[#e2e5e8]  transition-all duration-300 hover:border-[#cc0636] hover:shadow-md hover:-translate-y-0.5"
     >
       {/* Image */}
       <div className="relative p-0 pb-0">
@@ -32,15 +32,15 @@ function PopularProductCard({
             unoptimized
           />
           {/* Red accent line on hover */}
-          <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#730912] transition-all duration-300 group-hover:w-full" />
+          <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#cc0636] transition-all duration-300 group-hover:w-full" />
         </div>
       </div>
       {/* Title */}
-      <div className="flex items-center justify-between px-2 md:px-4 py-1 md:py-3.5 bg-[#730912]">
+      <div className="flex items-center justify-between px-2 md:px-4 py-1 md:py-3.5 bg-[#cc0636]">
         <p className="text-[12px] md:text-[14px] font-semibold text-white/85 tracking-wide leading-snug  transition-colors">
           {title}
         </p>
-        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full  text-[#bbb] transition-all group-hover:bg-[#730912] group-hover:text-white">
+        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full  text-[#bbb] transition-all group-hover:bg-[#cc0636] group-hover:text-white">
           <ArrowRight className="h-3.5 w-3.5" />
         </span>
       </div>
@@ -61,7 +61,7 @@ export default function PopularProducts({ data }: PopularProductsProps) {
           <h2 className="text-2xl sm:text-3xl font-bold text-[#091530] font-alt">
             {data.title}
           </h2>
-          <div className="mx-auto lg:mx-0 mt-4 h-1 w-16 rounded-full bg-[#730912]" />
+          <div className="mx-auto lg:mx-0 mt-4 h-1 w-16 rounded-full bg-[#cc0636]" />
           <p className="mt-4 text-sm text-[#888]">{data.subtitle}</p>
         </div>
 

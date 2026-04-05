@@ -13,9 +13,9 @@ function CategoryDropdown({ category }: { category: Category }) {
         <Link
           key={sub.href}
           href={sub.href}
-          className={`flex items-center px-4 py-2.5 text-sm text-[#585d5d] hover:bg-surface-secondary-light-a hover:text-[#730912] transition-colors ${i === 0 ? '' : 'border-t border-[#f5f5f5]'}`}
+          className={`flex items-center px-4 py-2.5 text-sm text-[#585d5d] hover:bg-surface-secondary-light-a hover:text-[#cc0636] transition-colors ${i === 0 ? '' : 'border-t border-[#f5f5f5]'}`}
         >
-          <span className="h-1 w-1 rounded-full bg-[#730912]/40 mr-2.5 shrink-0" />
+          <span className="h-1 w-1 rounded-full bg-[#cc0636]/40 mr-2.5 shrink-0" />
           {sub.label}
         </Link>
       ))}
@@ -56,18 +56,11 @@ export default function CategoryBar({ data }: CategoryBarProps) {
   };
 
   return (
-    <div className="hidden lg:block sticky top-[258px] z-5551 bg-[#730912] border-b border-[#000000]">
+    <div className="hidden lg:block sticky lg:top-[0px] z-5551 bg-[#cc0636] border-b border-[#000000]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative flex items-center" ref={containerRef}>
-          <div className="flex items-center gap-2 pr-5 mr-1 border-r border-white/10 py-3.5 shrink-0">
-            <Grid2x2 className="h-3.5 w-3.5 text-white/85" />
-            <span className="text-[10px] font-bold  tracking-[0.15em] text-white/85">
-              Kategoriler
-            </span>
-          </div>
-
           <div
-            className="relative flex-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="relative flex-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ml-[-8px]"
             ref={navRef}
           >
             <div className="flex">
@@ -83,7 +76,7 @@ export default function CategoryBar({ data }: CategoryBarProps) {
                 >
                   <button
                     type="button"
-                    className={`flex items-center gap-1.5 px-5 py-3.5 text-sm font-medium transition-colors whitespace-nowrap ${
+                    className={`flex items-center gap-1.5 px-3 py-3.5 text-sm font-medium transition-colors whitespace-nowrap ${
                       activeId === cat.id
                         ? 'text-white bg-white/5'
                         : 'text-white/85 hover:text-white'
@@ -93,7 +86,7 @@ export default function CategoryBar({ data }: CategoryBarProps) {
                     {cat.subItems.length > 0 && (
                       <ChevronDown
                         className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                          activeId === cat.id ? 'rotate-180 text-[#730912]' : ''
+                          activeId === cat.id ? 'rotate-180 text-[#cc0636]' : ''
                         }`}
                       />
                     )}
@@ -133,15 +126,15 @@ export default function CategoryBar({ data }: CategoryBarProps) {
       </div>
       {/* Search bar */}
       {searchOpen && (
-        <div className="border-t border-[#2a2d2d] px-4 py-3 sm:px-6 lg:px-8">
+        <div className="border-t border-[#2a2d2d] px-4 py-3 sm:px-6 lg:px-8 bg-white">
           <div className="mx-auto max-w-7xl">
-            <div className="flex items-center gap-2 rounded-md border border-[#2a2d2d] bg-[#030e26] px-4 py-2 focus-within:border-[#730912] transition-colors">
-              <Search className="h-4 w-4 text-white/40 shrink-0" />
+            <div className="flex items-center gap-2 rounded-md border border-[#2a2d2d] bg-white px-4 py-2 focus-within:border-[#cc0636] transition-colors">
+              <Search className="h-4 w-4 text-black/40 shrink-0" />
               <input
                 type="search"
                 placeholder="Ürün ara..."
                 autoFocus
-                className="w-full bg-transparent text-sm text-white placeholder-white/30 outline-none"
+                className="w-full bg-transparent text-sm text-black/80 placeholder-black/30 outline-none"
               />
             </div>
           </div>

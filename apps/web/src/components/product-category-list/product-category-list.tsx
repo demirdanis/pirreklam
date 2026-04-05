@@ -78,8 +78,8 @@ function SearchableSelect({
           disabled
             ? 'cursor-not-allowed opacity-40 border-[#e2e5e8]'
             : open
-              ? 'border-[#730912] ring-2 ring-[#730912]/15'
-              : 'border-[#e2e5e8] hover:border-[#730912]/50',
+              ? 'border-[#cc0636] ring-2 ring-[#cc0636]/15'
+              : 'border-[#e2e5e8] hover:border-[#cc0636]/50',
           value ? 'text-[#091530]' : 'text-[#091530]/40'
         )}
       >
@@ -107,7 +107,7 @@ function SearchableSelect({
                 onChange(null);
                 setOpen(false);
               }}
-              className="flex h-4 w-4 items-center justify-center rounded-full hover:bg-[#730912]/10 text-[#730912] transition-colors"
+              className="flex h-4 w-4 items-center justify-center rounded-full hover:bg-[#cc0636]/10 text-[#cc0636] transition-colors"
             >
               <X className="h-2.5 w-2.5" />
             </span>
@@ -151,7 +151,7 @@ function SearchableSelect({
                   className={cn(
                     'flex w-full items-center gap-2 px-3 py-2.5 text-left text-xs transition-colors hover:bg-[#f5f6f7]',
                     value === opt.id
-                      ? 'bg-[#730912]/5 font-semibold text-[#730912]'
+                      ? 'bg-[#cc0636]/5 font-semibold text-[#cc0636]'
                       : 'text-[#091530]'
                   )}
                 >
@@ -297,7 +297,7 @@ function FilterBar({
               colorId: null,
             })
           }
-          className="flex items-center gap-1 rounded-lg border border-[#730912]/30 px-3 py-2 text-xs font-semibold text-[#730912] hover:bg-[#730912]/5 transition-colors shrink-0"
+          className="flex items-center gap-1 rounded-lg border border-[#cc0636]/30 px-3 py-2 text-xs font-semibold text-[#cc0636] hover:bg-[#cc0636]/5 transition-colors shrink-0"
         >
           <X className="h-3 w-3" />
           Temizle
@@ -319,7 +319,7 @@ function ProductCard({
   return (
     <Link
       href={`/${product.slug}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl bg-white border border-[#e2e5e8]  transition-all duration-300 hover:border-[#730912] hover:shadow-md hover:-translate-y-0.5"
+      className="group relative flex flex-col overflow-hidden rounded-xl bg-white border border-[#e2e5e8]  transition-all duration-300 hover:border-[#cc0636] hover:shadow-md hover:-translate-y-0.5"
     >
       <div className="relative">
         <div className="relative aspect-square overflow-hidden rounded-t-xl bg-white">
@@ -330,10 +330,10 @@ function ProductCard({
             className="object-cover p-2 transition-transform duration-500 group-hover:scale-105"
             unoptimized
           />
-          <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#730912] transition-all duration-300 group-hover:w-full" />
+          <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#cc0636] transition-all duration-300 group-hover:w-full" />
         </div>
       </div>
-      <div className="flex bg-[#730912] flex-col gap-2 px-3 py-3 flex-1">
+      <div className="flex bg-[#cc0636] flex-col gap-2 px-3 py-3 flex-1">
         <p className="text-xs font-semibold text-[#ffffffd3] tracking-wide leading-snug transition-colors line-clamp-2">
           {product.title}
         </p>
@@ -374,15 +374,15 @@ function SubCategorySection({
   if (products.length === 0) return null;
 
   return (
-    <section className="mb-12">
+    <section className="mb-8 lg:mb-12">
       {!pathname.endsWith(subcategoryVariation.slug) ? (
-        <div className="mb-5 flex items-center gap-3">
-          <div className="h-5 w-1 rounded-full bg-[#730912]" />
+        <div className="mb-2 lg:mb-4 flex items-center gap-3">
+          <div className="h-5 w-1 rounded-full bg-[#cc0636]" />
           <a
             href={`${pathname}/${subcategoryVariation.slug}`}
-            className="text-xs font-bold tracking-[0.15em] text-[#730912]"
+            className="text-xs font-bold tracking-[0.15em] text-[#cc0636]"
           >
-            <h2 className="text-lg sm:text-xl font-bold text-[#091530] font-alt">
+            <h2 className="text-md sm:text-xl font-bold text-[#091530] font-alt">
               {subcategoryVariation.title}
             </h2>
           </a>
@@ -451,7 +451,7 @@ export default function ProductCategoryList({
   return (
     <section className="bg-[#f5f6f7] min-h-screen">
       {!pathname.endsWith(subcategories?.[0]?.slug ?? '') ? (
-        <div className="sticky top-47.75 lg:top-76.75 z-40 bg-[#030e26] backdrop-blur-md border-b border-black">
+        <div className="sticky top-[0px] lg:top-[48px] z-40 bg-[#25497f] backdrop-blur-md border-b border-black">
           <div className="sticky left-0 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex gap-2 overflow-x-auto py-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {subcategories.map((sc) => (
@@ -468,16 +468,16 @@ export default function ProductCategoryList({
         </div>
       ) : null}
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2">
         {!pathname.endsWith(subcategories?.[0]?.slug ?? '') ? (
-          <div className="mb-6">
-            <p className="text-xs font-bold  tracking-[0.15em] text-[#730912] mb-1">
+          <div className="mb-2 lg:mb-4">
+            <p className="text-xs font-bold  tracking-[0.15em] text-[#cc0636] mb-1">
               {categoryTitle}
             </p>
             <h1 className="text-2xl sm:text-3xl font-bold text-[#091530] font-alt">
               {subcategoryTitle}
             </h1>
-            <div className="mt-3 h-1 w-16 rounded-full bg-[#730912]" />
+            <div className="mt-3 h-1 w-16 rounded-full bg-[#cc0636]" />
             <p className="mt-3 text-sm text-[#888]">
               {subcategories.length} alt kategori &middot;{' '}
               {filteredCount !== totalProducts ? `${filteredCount} / ` : ''}
@@ -485,11 +485,11 @@ export default function ProductCategoryList({
             </p>
           </div>
         ) : (
-          <div className="mb-6">
+          <div className="mb-2 lg:mb-4">
             <h1 className="text-2xl sm:text-3xl font-bold text-[#091530] font-alt">
               {subcategories?.[0]?.title}
             </h1>
-            <div className="mt-3 h-1 w-16 rounded-full bg-[#730912]" />
+            <div className="mt-3 h-1 w-16 rounded-full bg-[#cc0636]" />
             <p className="mt-3 text-sm text-[#888]">
               {filteredCount !== totalProducts ? `${filteredCount} / ` : ''}
               {totalProducts} ürün
@@ -507,7 +507,7 @@ export default function ProductCategoryList({
           <div
             key={subcategoryVariation.id}
             id={subcategoryVariation.id}
-            className="scroll-mt-65 lg:scroll-mt-95"
+            className="scroll-mt-[220px] lg:scroll-mt-[260px]"
           >
             <SubCategorySection
               subcategoryVariation={subcategoryVariation}
@@ -530,7 +530,7 @@ export default function ProductCategoryList({
                   colorId: null,
                 })
               }
-              className="mt-4 text-xs font-semibold text-[#730912] underline hover:no-underline"
+              className="mt-4 text-xs font-semibold text-[#cc0636] underline hover:no-underline"
             >
               Filtreleri temizle
             </button>
