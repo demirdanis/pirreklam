@@ -39,6 +39,8 @@ export type Mutation = {
   create_cargo_company_items: Array<Cargo_Company>;
   create_home_banners_item?: Maybe<Home_Banners>;
   create_home_banners_items: Array<Home_Banners>;
+  create_invoice_info_item?: Maybe<Invoice_Info>;
+  create_invoice_info_items: Array<Invoice_Info>;
   create_main_categories_item?: Maybe<Main_Categories>;
   create_main_categories_items: Array<Main_Categories>;
   create_orders_item?: Maybe<Orders>;
@@ -77,6 +79,8 @@ export type Mutation = {
   delete_cargo_company_items?: Maybe<Delete_Many>;
   delete_home_banners_item?: Maybe<Delete_One>;
   delete_home_banners_items?: Maybe<Delete_Many>;
+  delete_invoice_info_item?: Maybe<Delete_One>;
+  delete_invoice_info_items?: Maybe<Delete_Many>;
   delete_main_categories_item?: Maybe<Delete_One>;
   delete_main_categories_items?: Maybe<Delete_Many>;
   delete_orders_item?: Maybe<Delete_One>;
@@ -124,6 +128,9 @@ export type Mutation = {
   update_home_banners_batch: Array<Home_Banners>;
   update_home_banners_item?: Maybe<Home_Banners>;
   update_home_banners_items: Array<Home_Banners>;
+  update_invoice_info_batch: Array<Invoice_Info>;
+  update_invoice_info_item?: Maybe<Invoice_Info>;
+  update_invoice_info_items: Array<Invoice_Info>;
   update_main_categories_batch: Array<Main_Categories>;
   update_main_categories_item?: Maybe<Main_Categories>;
   update_main_categories_items: Array<Main_Categories>;
@@ -248,6 +255,22 @@ export type MutationCreate_Home_Banners_ItemArgs = {
 export type MutationCreate_Home_Banners_ItemsArgs = {
   data?: InputMaybe<Array<Create_Home_Banners_Input>>;
   filter?: InputMaybe<Home_Banners_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type MutationCreate_Invoice_Info_ItemArgs = {
+  data: Create_Invoice_Info_Input;
+};
+
+
+export type MutationCreate_Invoice_Info_ItemsArgs = {
+  data?: InputMaybe<Array<Create_Invoice_Info_Input>>;
+  filter?: InputMaybe<Invoice_Info_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -526,6 +549,16 @@ export type MutationDelete_Home_Banners_ItemArgs = {
 
 
 export type MutationDelete_Home_Banners_ItemsArgs = {
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
+};
+
+
+export type MutationDelete_Invoice_Info_ItemArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationDelete_Invoice_Info_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
@@ -826,6 +859,35 @@ export type MutationUpdate_Home_Banners_ItemArgs = {
 export type MutationUpdate_Home_Banners_ItemsArgs = {
   data: Update_Home_Banners_Input;
   filter?: InputMaybe<Home_Banners_Filter>;
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type MutationUpdate_Invoice_Info_BatchArgs = {
+  data?: InputMaybe<Array<Update_Invoice_Info_Input>>;
+  filter?: InputMaybe<Invoice_Info_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type MutationUpdate_Invoice_Info_ItemArgs = {
+  data: Update_Invoice_Info_Input;
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdate_Invoice_Info_ItemsArgs = {
+  data: Update_Invoice_Info_Input;
+  filter?: InputMaybe<Invoice_Info_Filter>;
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -1305,6 +1367,10 @@ export type Query = {
   home_banners_aggregated: Array<Home_Banners_Aggregated>;
   home_banners_by_id?: Maybe<Home_Banners>;
   home_banners_by_version?: Maybe<Version_Home_Banners>;
+  invoice_info: Array<Invoice_Info>;
+  invoice_info_aggregated: Array<Invoice_Info_Aggregated>;
+  invoice_info_by_id?: Maybe<Invoice_Info>;
+  invoice_info_by_version?: Maybe<Version_Invoice_Info>;
   main_categories: Array<Main_Categories>;
   main_categories_aggregated: Array<Main_Categories_Aggregated>;
   main_categories_by_id?: Maybe<Main_Categories>;
@@ -1578,6 +1644,39 @@ export type QueryHome_Banners_By_IdArgs = {
 
 
 export type QueryHome_Banners_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryInvoice_InfoArgs = {
+  filter?: InputMaybe<Invoice_Info_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryInvoice_Info_AggregatedArgs = {
+  filter?: InputMaybe<Invoice_Info_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryInvoice_Info_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryInvoice_Info_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
@@ -2134,6 +2233,7 @@ export type Subscription = {
   footer_mutated?: Maybe<Footer_Mutated>;
   header_mutated?: Maybe<Header_Mutated>;
   home_banners_mutated?: Maybe<Home_Banners_Mutated>;
+  invoice_info_mutated?: Maybe<Invoice_Info_Mutated>;
   main_categories_mutated?: Maybe<Main_Categories_Mutated>;
   orders_mutated?: Maybe<Orders_Mutated>;
   page__bank_account_mutated?: Maybe<Page__Bank_Account_Mutated>;
@@ -2244,6 +2344,11 @@ export type SubscriptionHeader_MutatedArgs = {
 
 
 export type SubscriptionHome_Banners_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionInvoice_Info_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
@@ -2813,6 +2918,20 @@ export type Create_Home_Banners_Input = {
   web_image?: InputMaybe<Scalars['ID']['input']>;
 };
 
+export type Create_Invoice_Info_Input = {
+  address?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  district?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  full_name?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  is_default?: InputMaybe<Scalars['Boolean']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  tax_office?: InputMaybe<Scalars['String']['input']>;
+  tckn?: InputMaybe<Scalars['String']['input']>;
+  user?: InputMaybe<Create_Directus_Users_Input>;
+};
+
 export type Create_Main_Categories_Input = {
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -2828,7 +2947,9 @@ export type Create_Orders_Input = {
   color_label?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['Date']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
+  invoice_info?: InputMaybe<Create_Invoice_Info_Input>;
   main_option?: InputMaybe<Scalars['String']['input']>;
+  partial_payment_value?: InputMaybe<Scalars['Float']['input']>;
   piece_price?: InputMaybe<Scalars['Float']['input']>;
   product?: InputMaybe<Create_Product_Variations_Input>;
   product_count?: InputMaybe<Scalars['Int']['input']>;
@@ -3743,6 +3864,88 @@ export type Id_Filter_Operators = {
   _starts_with?: InputMaybe<Scalars['ID']['input']>;
 };
 
+export type Invoice_Info = {
+  __typename?: 'invoice_info';
+  address?: Maybe<Scalars['String']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  district?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  full_name?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  is_default?: Maybe<Scalars['Boolean']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  tax_office?: Maybe<Scalars['String']['output']>;
+  tckn?: Maybe<Scalars['String']['output']>;
+  user?: Maybe<Directus_Users>;
+};
+
+
+export type Invoice_InfoUserArgs = {
+  filter?: InputMaybe<Directus_Users_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Invoice_Info_Aggregated = {
+  __typename?: 'invoice_info_aggregated';
+  avg?: Maybe<Invoice_Info_Aggregated_Fields>;
+  avgDistinct?: Maybe<Invoice_Info_Aggregated_Fields>;
+  count?: Maybe<Invoice_Info_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Invoice_Info_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Invoice_Info_Aggregated_Fields>;
+  min?: Maybe<Invoice_Info_Aggregated_Fields>;
+  sum?: Maybe<Invoice_Info_Aggregated_Fields>;
+  sumDistinct?: Maybe<Invoice_Info_Aggregated_Fields>;
+};
+
+export type Invoice_Info_Aggregated_Count = {
+  __typename?: 'invoice_info_aggregated_count';
+  address?: Maybe<Scalars['Int']['output']>;
+  city?: Maybe<Scalars['Int']['output']>;
+  district?: Maybe<Scalars['Int']['output']>;
+  email?: Maybe<Scalars['Int']['output']>;
+  full_name?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  is_default?: Maybe<Scalars['Int']['output']>;
+  phone?: Maybe<Scalars['Int']['output']>;
+  tax_office?: Maybe<Scalars['Int']['output']>;
+  tckn?: Maybe<Scalars['Int']['output']>;
+  user?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Invoice_Info_Aggregated_Fields = {
+  __typename?: 'invoice_info_aggregated_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Invoice_Info_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Invoice_Info_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Invoice_Info_Filter>>>;
+  address?: InputMaybe<String_Filter_Operators>;
+  city?: InputMaybe<String_Filter_Operators>;
+  district?: InputMaybe<String_Filter_Operators>;
+  email?: InputMaybe<String_Filter_Operators>;
+  full_name?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  is_default?: InputMaybe<Boolean_Filter_Operators>;
+  phone?: InputMaybe<String_Filter_Operators>;
+  tax_office?: InputMaybe<String_Filter_Operators>;
+  tckn?: InputMaybe<String_Filter_Operators>;
+  user?: InputMaybe<Directus_Users_Filter>;
+};
+
+export type Invoice_Info_Mutated = {
+  __typename?: 'invoice_info_mutated';
+  data?: Maybe<Invoice_Info>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
 export type Main_Categories = {
   __typename?: 'main_categories';
   id: Scalars['ID']['output'];
@@ -3834,7 +4037,9 @@ export type Orders = {
   created_at?: Maybe<Scalars['Date']['output']>;
   created_at_func?: Maybe<Datetime_Functions>;
   id: Scalars['ID']['output'];
+  invoice_info?: Maybe<Invoice_Info>;
   main_option?: Maybe<Scalars['String']['output']>;
+  partial_payment_value?: Maybe<Scalars['Float']['output']>;
   piece_price?: Maybe<Scalars['Float']['output']>;
   product?: Maybe<Product_Variations>;
   product_count?: Maybe<Scalars['Int']['output']>;
@@ -3849,6 +4054,16 @@ export type Orders = {
 
 export type OrdersCargo_CompanyArgs = {
   filter?: InputMaybe<Cargo_Company_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type OrdersInvoice_InfoArgs = {
+  filter?: InputMaybe<Invoice_Info_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -3898,7 +4113,9 @@ export type Orders_Aggregated_Count = {
   color_label?: Maybe<Scalars['Int']['output']>;
   created_at?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  invoice_info?: Maybe<Scalars['Int']['output']>;
   main_option?: Maybe<Scalars['Int']['output']>;
+  partial_payment_value?: Maybe<Scalars['Int']['output']>;
   piece_price?: Maybe<Scalars['Int']['output']>;
   product?: Maybe<Scalars['Int']['output']>;
   product_count?: Maybe<Scalars['Int']['output']>;
@@ -3914,6 +4131,8 @@ export type Orders_Aggregated_Fields = {
   __typename?: 'orders_aggregated_fields';
   cargo_company?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
+  invoice_info?: Maybe<Scalars['Float']['output']>;
+  partial_payment_value?: Maybe<Scalars['Float']['output']>;
   piece_price?: Maybe<Scalars['Float']['output']>;
   product?: Maybe<Scalars['Float']['output']>;
   product_count?: Maybe<Scalars['Float']['output']>;
@@ -3931,7 +4150,9 @@ export type Orders_Filter = {
   created_at?: InputMaybe<Date_Filter_Operators>;
   created_at_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   id?: InputMaybe<Number_Filter_Operators>;
+  invoice_info?: InputMaybe<Invoice_Info_Filter>;
   main_option?: InputMaybe<String_Filter_Operators>;
+  partial_payment_value?: InputMaybe<Number_Filter_Operators>;
   piece_price?: InputMaybe<Number_Filter_Operators>;
   product?: InputMaybe<Product_Variations_Filter>;
   product_count?: InputMaybe<Number_Filter_Operators>;
@@ -5253,6 +5474,20 @@ export type Update_Home_Banners_Input = {
   web_image?: InputMaybe<Scalars['ID']['input']>;
 };
 
+export type Update_Invoice_Info_Input = {
+  address?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  district?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  full_name?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  is_default?: InputMaybe<Scalars['Boolean']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  tax_office?: InputMaybe<Scalars['String']['input']>;
+  tckn?: InputMaybe<Scalars['String']['input']>;
+  user?: InputMaybe<Update_Directus_Users_Input>;
+};
+
 export type Update_Main_Categories_Input = {
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -5268,7 +5503,9 @@ export type Update_Orders_Input = {
   color_label?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['Date']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
+  invoice_info?: InputMaybe<Update_Invoice_Info_Input>;
   main_option?: InputMaybe<Scalars['String']['input']>;
+  partial_payment_value?: InputMaybe<Scalars['Float']['input']>;
   piece_price?: InputMaybe<Scalars['Float']['input']>;
   product?: InputMaybe<Update_Product_Variations_Input>;
   product_count?: InputMaybe<Scalars['Int']['input']>;
@@ -5523,6 +5760,21 @@ export type Version_Home_Banners = {
   web_image?: Maybe<Scalars['ID']['output']>;
 };
 
+export type Version_Invoice_Info = {
+  __typename?: 'version_invoice_info';
+  address?: Maybe<Scalars['String']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  district?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  full_name?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  is_default?: Maybe<Scalars['Boolean']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  tax_office?: Maybe<Scalars['String']['output']>;
+  tckn?: Maybe<Scalars['String']['output']>;
+  user?: Maybe<Scalars['JSON']['output']>;
+};
+
 export type Version_Main_Categories = {
   __typename?: 'version_main_categories';
   id?: Maybe<Scalars['ID']['output']>;
@@ -5540,7 +5792,9 @@ export type Version_Orders = {
   color_label?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['Date']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
+  invoice_info?: Maybe<Scalars['JSON']['output']>;
   main_option?: Maybe<Scalars['String']['output']>;
+  partial_payment_value?: Maybe<Scalars['Float']['output']>;
   piece_price?: Maybe<Scalars['Float']['output']>;
   product?: Maybe<Scalars['JSON']['output']>;
   product_count?: Maybe<Scalars['Int']['output']>;
@@ -5769,7 +6023,7 @@ export type GetOrdersQueryVariables = Exact<{
 }>;
 
 
-export type GetOrdersQuery = { __typename?: 'Query', orders: Array<{ __typename?: 'orders', id: string, stock_number?: string | null, product_count?: number | null, color_hex?: string | null, color_label?: string | null, main_option?: string | null, secondary_option?: string | null, total_price?: number | null, piece_price?: number | null, total_price_with_tax?: number | null, status?: string | null, cargo_tracking_number?: string | null, product?: { __typename?: 'product_variations', images?: Array<{ __typename?: 'product_variation_images', small_image?: string | null } | null> | null } | null, cargo_company?: { __typename?: 'cargo_company', name?: string | null, cargo_tracking_url?: string | null } | null }>, orders_aggregated: Array<{ __typename?: 'orders_aggregated', count?: { __typename?: 'orders_aggregated_count', id?: number | null } | null }> };
+export type GetOrdersQuery = { __typename?: 'Query', orders: Array<{ __typename?: 'orders', id: string, stock_number?: string | null, product_count?: number | null, color_hex?: string | null, color_label?: string | null, main_option?: string | null, secondary_option?: string | null, total_price?: number | null, piece_price?: number | null, total_price_with_tax?: number | null, partial_payment_value?: number | null, status?: string | null, created_at?: any | null, cargo_tracking_number?: string | null, product?: { __typename?: 'product_variations', images?: Array<{ __typename?: 'product_variation_images', small_image?: string | null } | null> | null } | null, cargo_company?: { __typename?: 'cargo_company', name?: string | null, cargo_tracking_url?: string | null } | null, invoice_info?: { __typename?: 'invoice_info', full_name?: string | null, tckn?: string | null } | null }>, orders_aggregated: Array<{ __typename?: 'orders_aggregated', count?: { __typename?: 'orders_aggregated_count', id?: number | null } | null }> };
 
 
 export const GetBankAccountsDocument = gql`
@@ -6027,7 +6281,9 @@ export const GetOrdersDocument = gql`
     total_price
     piece_price
     total_price_with_tax
+    partial_payment_value
     status
+    created_at
     product {
       images(limit: 1) {
         small_image
@@ -6038,6 +6294,10 @@ export const GetOrdersDocument = gql`
       cargo_tracking_url
     }
     cargo_tracking_number
+    invoice_info {
+      full_name
+      tckn
+    }
   }
   orders_aggregated {
     count {

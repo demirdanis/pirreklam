@@ -138,6 +138,14 @@ export async function POST(req: NextRequest) {
   const ordersUrl = `${baseUrl}/siparislerim`;
   const newStatus = statusLabel(order.status);
   const statusClr = statusColor(order.status);
+  const isShipped = order.status?.toLowerCase().includes('shipped') ?? false;
+  const cargoTrackingUrl =
+    order.cargo_company?.cargo_tracking_url && order.cargo_tracking_number
+      ? order.cargo_company.cargo_tracking_url.replace(
+          '${cargo_tracking_number}',
+          order.cargo_tracking_number
+        )
+      : null;
   const productName =
     order.product?.products_id?.name ?? order.stock_number ?? '—';
   const orderDate = order.created_at
@@ -174,7 +182,7 @@ export async function POST(req: NextRequest) {
                 <strong>${productName}</strong> ürününüze ait siparişinizin durumu güncellendi.
               </p>
               <!-- Status pill -->
-              <table cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+              <table cellpadding="0" cellspacing="0" style="margin-bottom:${isShipped ? '16px' : '28px'};">
                 <tr>
                   <td style="background:#f8f8f8;border:2px solid ${statusClr};border-radius:8px;padding:16px 28px;text-align:center;">
                     <p style="margin:0 0 4px;font-size:11px;color:#999999;text-transform:uppercase;letter-spacing:0.08em;">Yeni Durum</p>
@@ -182,6 +190,21 @@ export async function POST(req: NextRequest) {
                   </td>
                 </tr>
               </table>
+              ${
+                isShipped
+                  ? `<!-- Shipped banner -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+                <tr>
+                  <td style="background:#eff6ff;border:2px solid #3b82f6;border-radius:8px;padding:16px 24px;text-align:center;">
+                    <p style="margin:0 0 4px;font-size:20px;">🚚</p>
+                    <p style="margin:0 0 4px;font-size:15px;font-weight:bold;color:#1d4ed8;">Kargonuz Yola Çıktı!</p>
+                    <p style="margin:0;font-size:13px;color:#3b82f6;">Siparişiniz kargoya verildi, en kısa sürede ulaşacak.</p>
+                    ${order.cargo_company?.name ? `<p style="margin:6px 0 0;font-size:12px;color:#6b7280;">Kargo firması: <strong>${order.cargo_company.name}</strong>${order.cargo_tracking_number ? ` &ndash; Takip no: <strong>${order.cargo_tracking_number}</strong>` : ''}</p>` : ''}
+                  </td>
+                </tr>
+              </table>`
+                  : ''
+              }
             </td>
           </tr>
 
@@ -213,6 +236,21 @@ export async function POST(req: NextRequest) {
                       Siparişimi Görüntüle
                     </a>
                   </td>
+                  ${
+                    cargoTrackingUrl
+                      ? `<td style="padding-left:12px;">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="background:#1d4ed8;border-radius:6px;padding:14px 32px;">
+                          <a href="${cargoTrackingUrl}" style="color:#ffffff;text-decoration:none;font-size:15px;font-weight:bold;display:block;">
+                            🚚 Kargoyu Takip Et
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>`
+                      : ''
+                  }
                 </tr>
               </table>
             </td>

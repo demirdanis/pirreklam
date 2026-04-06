@@ -10,7 +10,9 @@ query GetOrders($limit: Int, $offset: Int) {
     total_price
     piece_price
     total_price_with_tax
+    partial_payment_value
     status
+    created_at
     product {
       images(limit: 1) {
         small_image
@@ -20,8 +22,11 @@ query GetOrders($limit: Int, $offset: Int) {
       name
       cargo_tracking_url
     }
-
     cargo_tracking_number
+    invoice_info {
+      full_name
+      tckn
+    }
   }
 
   orders_aggregated {

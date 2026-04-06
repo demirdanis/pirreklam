@@ -2,6 +2,7 @@
 
 import {
   ChevronDown,
+  FileText,
   LogIn,
   Menu,
   MessageCircle,
@@ -9,6 +10,7 @@ import {
   Search,
   ShoppingBag,
   User,
+  UserCog,
   X,
 } from 'lucide-react';
 
@@ -242,7 +244,7 @@ export default function Header({
                   />
                 </button>
                 {userMenuOpen && (
-                  <div className="absolute right-0 top-full mt-1 w-44 rounded-lg border border-white/10 bg-[#0d1e3a] shadow-xl z-50 overflow-hidden">
+                  <div className="absolute right-0 top-full mt-1 w-52 rounded-lg border border-white/10 bg-[#25497f] shadow-xl z-50 overflow-hidden">
                     <Link
                       href="/siparislerim"
                       onClick={() => setUserMenuOpen(false)}
@@ -250,6 +252,22 @@ export default function Header({
                     >
                       <ShoppingBag className="h-4 w-4" />
                       Siparişlerim
+                    </Link>
+                    <Link
+                      href="/profilim"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-white/80 hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      <UserCog className="h-4 w-4" />
+                      Profilim
+                    </Link>
+                    <Link
+                      href="/fatura-bilgilerim"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-white/80 hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      <FileText className="h-4 w-4" />
+                      Fatura Bilgilerim
                     </Link>
                     <div className="border-t border-white/10" />
                     <button
@@ -280,7 +298,7 @@ export default function Header({
                   <span>Giriş Yap</span>
                 </button>
                 {loginPanelOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-80 rounded-xl border border-white/10 bg-[#0d1e3a] shadow-xl z-50 p-4">
+                  <div className="absolute right-0 top-full mt-2 w-80 rounded-xl border border-white/10 bg-[#25497f] shadow-xl z-50 p-4">
                     {loginStatus === 'success' ? (
                       <div className="text-center py-2">
                         <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-500/10 mb-3">
@@ -641,7 +659,7 @@ export default function Header({
 
       {/* Mobile User Menu */}
       {userMenuOpen && isLoggedIn && (
-        <div className="lg:hidden bg-[#0d1e3a] border-b border-[#000000]">
+        <div className="lg:hidden bg-[#25497f] border-b border-[#000000]">
           <Link
             href="/siparislerim"
             onClick={() => setUserMenuOpen(false)}
@@ -649,6 +667,22 @@ export default function Header({
           >
             <ShoppingBag className="h-4 w-4" />
             Siparişlerim
+          </Link>
+          <Link
+            href="/profilim"
+            onClick={() => setUserMenuOpen(false)}
+            className="flex items-center gap-2.5 px-4 py-3.5 text-sm font-medium text-white/80 hover:text-white hover:bg-white/5 transition-colors border-b border-[#1a2d4a]"
+          >
+            <UserCog className="h-4 w-4" />
+            Profilim
+          </Link>
+          <Link
+            href="/fatura-bilgilerim"
+            onClick={() => setUserMenuOpen(false)}
+            className="flex items-center gap-2.5 px-4 py-3.5 text-sm font-medium text-white/80 hover:text-white hover:bg-white/5 transition-colors border-b border-[#1a2d4a]"
+          >
+            <FileText className="h-4 w-4" />
+            Fatura Bilgilerim
           </Link>
           <button
             type="button"
@@ -663,7 +697,7 @@ export default function Header({
 
       {/* Mobile Categories Accordion Drawer */}
       {mobileCatOpen && (
-        <div className="lg:hidden bg-[#0d1e3a] border-b border-[#000000] max-h-[70vh] overflow-y-auto">
+        <div className="lg:hidden bg-[#25497f] border-b border-[#000000] max-h-[70vh] overflow-y-auto">
           {categories.map((cat) => (
             <div key={cat.id} className="border-b border-[#1a2d4a]">
               <button

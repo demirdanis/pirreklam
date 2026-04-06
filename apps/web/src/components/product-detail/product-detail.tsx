@@ -14,7 +14,7 @@ import type {
   ProductDetailData,
   VariantData,
 } from '@/app/(main-layout)/_helpers/service/getProductDetail/getProductDetail.types';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -396,6 +396,31 @@ export default function ProductDetail({
   const [orderCreated, setOrderCreated] = useState(false);
   const [orderError, setOrderError] = useState('');
 
+  // ── Invoice state (logged-in: selector; guest: form) ──
+  type InvoiceInfo = {
+    id: string;
+    full_name: string;
+    tckn: string;
+    is_default: boolean;
+  };
+  const [invoices, setInvoices] = useState<InvoiceInfo[]>([]);
+  const [invoicesLoading, setInvoicesLoading] = useState(false);
+  const [selectedInvoiceId, setSelectedInvoiceId] = useState<string | null>(
+    null
+  );
+  const [guestInvoice, setGuestInvoice] = useState({
+    full_name: '',
+    email: '',
+    tckn: '',
+    address: '',
+    city: '',
+    district: '',
+    phone: '',
+    tax_office: '',
+  });
+  const [guestOrderCreating, setGuestOrderCreating] = useState(false);
+  const [guestOrderError, setGuestOrderError] = useState('');
+
   // ── Find exact variant ──
   const findVariant = useCallback(
     (main: string, sub: string | null, color: string): VariantData | null => {
@@ -542,6 +567,39 @@ export default function ProductDetail({
     [data.variants, selMain, selSub, findVariant]
   );
 
+  // ── Reset qty when variant changes and current qty is no longer available ──
+  useEffect(() => {
+    if (!currentVariant) return;
+    const available = currentVariant.tiers.some((t) => t.qty === selQty);
+    if (!available) {
+      setSelQty(currentVariant.tiers[0]?.qty ?? selQty);
+    }
+  }, [currentVariant]);
+
+  // ── Load invoice infos when logged-in user opens the popup ──
+  useEffect(() => {
+    if (!isLoggedIn || !orderPopupOpen) return;
+    setInvoicesLoading(true);
+    fetch('/api/invoice-infos')
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then(
+        (
+          list: {
+            id: string;
+            full_name: string;
+            tckn: string;
+            is_default: boolean;
+          }[]
+        ) => {
+          setInvoices(list);
+          const def = list.find((i) => i.is_default) ?? list[0];
+          if (def) setSelectedInvoiceId(def.id);
+        }
+      )
+      .catch(() => {})
+      .finally(() => setInvoicesLoading(false));
+  }, [isLoggedIn, orderPopupOpen]);
+
   // ── Pricing ──
   const currentTier = currentVariant?.tiers.find((t) => t.qty === selQty);
   const totalExVat = currentTier ? currentTier.perUnitExVat * selQty : 0;
@@ -589,6 +647,7 @@ export default function ProductDetail({
     setOrderError('');
     setOrderLoginStatus('idle');
     setOrderLoginEmail('');
+    setGuestOrderError('');
   }, []);
 
   const handleCloseOrder = useCallback(() => {
@@ -618,6 +677,7 @@ export default function ProductDetail({
           piece_price: tier.perUnitExVat,
           total_price: totalEx,
           total_price_with_tax: totalInc,
+          ...(selectedInvoiceId ? { invoice_info_id: selectedInvoiceId } : {}),
         }),
       });
       if (!res.ok) {
@@ -676,6 +736,58 @@ export default function ProductDetail({
       );
     }
   }, [orderLoginEmail, selMain, selSub, selColor, selQty]);
+
+  const handleCreateGuestOrder = useCallback(async () => {
+    const tier = currentVariant?.tiers.find((t) => t.qty === selQty);
+    if (!tier || !currentVariant) return;
+    const totalEx = tier.perUnitExVat * selQty;
+    const totalInc = totalEx * 1.2;
+    setGuestOrderCreating(true);
+    setGuestOrderError('');
+    try {
+      const res = await fetch('/api/create-guest-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          order: {
+            stock_number: currentVariant.productCode,
+            variant_id: currentVariant.id,
+            product_count: selQty,
+            color_hex:
+              data.colors.find((c) => c.id === selColor)?.hex ?? undefined,
+            color_label: selColorLabel || undefined,
+            main_option: selMainLabel || undefined,
+            secondary_option: hasSub && selSubLabel ? selSubLabel : undefined,
+            piece_price: tier.perUnitExVat,
+            total_price: totalEx,
+            total_price_with_tax: totalInc,
+          },
+          invoice: guestInvoice,
+        }),
+      });
+      if (!res.ok) {
+        const err = (await res.json().catch(() => ({}))) as { error?: string };
+        throw new Error(err.error ?? 'Sipariş oluşturulamadı.');
+      }
+      setOrderCreated(true);
+    } catch (e) {
+      setGuestOrderError(
+        e instanceof Error ? e.message : 'Bir hata oluştu. Tekrar deneyin.'
+      );
+    } finally {
+      setGuestOrderCreating(false);
+    }
+  }, [
+    currentVariant,
+    selQty,
+    selColor,
+    selColorLabel,
+    selMainLabel,
+    selSubLabel,
+    hasSub,
+    data.colors,
+    guestInvoice,
+  ]);
 
   return (
     <div className="bg-[#f5f6f7] min-h-screen">
@@ -1152,8 +1264,53 @@ export default function ProductDetail({
                   {/* ── Action area ── */}
                   <div className="px-5 pb-5">
                     {isLoggedIn ? (
-                      /* Logged-in: confirm button */
-                      <div className="space-y-2">
+                      /* Logged-in: invoice selector + confirm button */
+                      <div className="space-y-3">
+                        {/* Invoice selector */}
+                        <div>
+                          <p className="text-xs font-semibold text-[#091530]/60 mb-2">
+                            Fatura Bilgisi
+                          </p>
+                          {invoicesLoading ? (
+                            <p className="text-xs text-[#091530]/40">
+                              Yükleniyor…
+                            </p>
+                          ) : invoices.length === 0 ? (
+                            <p className="text-xs text-[#091530]/40">
+                              Kayıtlı fatura bilginiz yok.{' '}
+                              <Link
+                                href="/fatura-bilgilerim"
+                                target="_blank"
+                                className="text-[#cc0636] underline"
+                              >
+                                Ekle
+                              </Link>
+                            </p>
+                          ) : (
+                            <div className="flex flex-col gap-1.5">
+                              {invoices.map((inv) => (
+                                <button
+                                  key={inv.id}
+                                  type="button"
+                                  onClick={() => setSelectedInvoiceId(inv.id)}
+                                  className={cn(
+                                    'text-left rounded-xl border px-3 py-2 text-xs transition-colors',
+                                    selectedInvoiceId === inv.id
+                                      ? 'border-[#cc0636] bg-[#cc0636]/5'
+                                      : 'border-[#091530]/15 hover:border-[#091530]/30'
+                                  )}
+                                >
+                                  <span className="font-semibold text-[#091530]">
+                                    {inv.full_name}
+                                  </span>
+                                  <span className="ml-2 text-[#091530]/40">
+                                    TC: {inv.tckn}
+                                  </span>
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                         {orderError && (
                           <p className="text-xs text-red-600 bg-red-50 rounded-lg px-3 py-2">
                             {orderError}
@@ -1212,52 +1369,148 @@ export default function ProductDetail({
                           </button>
                         </div>
 
-                        {orderLoginStatus === 'sent' ? (
-                          <div className="rounded-xl bg-green-50 border border-green-200 px-4 py-4 text-center space-y-1">
-                            <p className="text-sm font-semibold text-green-800">
-                              E-postanızı kontrol edin
-                            </p>
-                            <p className="text-xs text-green-700">
-                              Gönderilen bağlantıya tıklayınca siparişiniz
-                              otomatik başlatılacak.
-                            </p>
-                          </div>
+                        {orderLoginTab === 'register' ? (
+                          /* Register tab — magic link */
+                          orderLoginStatus === 'sent' ? (
+                            <div className="rounded-xl bg-green-50 border border-green-200 px-4 py-4 text-center space-y-1">
+                              <p className="text-sm font-semibold text-green-800">
+                                E-postanızı kontrol edin
+                              </p>
+                              <p className="text-xs text-green-700">
+                                Gönderilen bağlantıya tıklayınca siparişiniz
+                                otomatik başlatılacak.
+                              </p>
+                            </div>
+                          ) : (
+                            <div className="space-y-2">
+                              <p className="text-xs text-[#091530]/50">
+                                Üye olun, siparişlerinizi kolayca takip edin.
+                              </p>
+                              <input
+                                type="email"
+                                value={orderLoginEmail}
+                                onChange={(e) =>
+                                  setOrderLoginEmail(e.target.value)
+                                }
+                                onKeyDown={(e) =>
+                                  e.key === 'Enter' && handleOrderLogin()
+                                }
+                                placeholder="E-posta adresiniz"
+                                className="w-full rounded-xl border border-[#091530]/15 px-4 py-3 text-sm text-[#091530] placeholder:text-[#091530]/30 focus:outline-none focus:border-[#cc0636] transition-colors"
+                              />
+                              {orderLoginError && (
+                                <p className="text-xs text-red-600">
+                                  {orderLoginError}
+                                </p>
+                              )}
+                              <button
+                                onClick={handleOrderLogin}
+                                disabled={
+                                  orderLoginStatus === 'sending' ||
+                                  !orderLoginEmail
+                                }
+                                className="w-full rounded-xl bg-[#cc0636] py-3.5 text-sm font-bold text-white hover:bg-[#a8042c] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                              >
+                                {orderLoginStatus === 'sending'
+                                  ? 'Gönderiliyor…'
+                                  : 'Bağlantı Gönder'}
+                              </button>
+                            </div>
+                          )
                         ) : (
+                          /* Guest tab — invoice form */
                           <div className="space-y-2">
                             <p className="text-xs text-[#091530]/50">
-                              {orderLoginTab === 'register'
-                                ? 'Üye olun, siparişlerinizi kolayca takip edin.'
-                                : 'Siparişinizi takip etmek için e-posta adresinizi girin.'}
+                              Fatura bilgilerinizi girerek üye olmadan sipariş
+                              verebilirsiniz.
                             </p>
-                            <input
-                              type="email"
-                              value={orderLoginEmail}
-                              onChange={(e) =>
-                                setOrderLoginEmail(e.target.value)
-                              }
-                              onKeyDown={(e) =>
-                                e.key === 'Enter' && handleOrderLogin()
-                              }
-                              placeholder="E-posta adresiniz"
-                              className="w-full rounded-xl border border-[#091530]/15 px-4 py-3 text-sm text-[#091530] placeholder:text-[#091530]/30 focus:outline-none focus:border-[#cc0636] transition-colors"
-                            />
-                            {orderLoginError && (
-                              <p className="text-xs text-red-600">
-                                {orderLoginError}
+                            {(
+                              [
+                                {
+                                  key: 'full_name',
+                                  placeholder: 'Ad Soyad *',
+                                  type: 'text',
+                                },
+                                {
+                                  key: 'email',
+                                  placeholder: 'E-posta *',
+                                  type: 'email',
+                                },
+                                {
+                                  key: 'tckn',
+                                  placeholder: 'TC Kimlik No * (11 hane)',
+                                  type: 'text',
+                                  maxLength: 11,
+                                },
+                                {
+                                  key: 'address',
+                                  placeholder: 'Adres *',
+                                  type: 'text',
+                                },
+                                {
+                                  key: 'city',
+                                  placeholder: 'İl *',
+                                  type: 'text',
+                                },
+                                {
+                                  key: 'district',
+                                  placeholder: 'İlçe',
+                                  type: 'text',
+                                },
+                                {
+                                  key: 'phone',
+                                  placeholder: 'Telefon',
+                                  type: 'tel',
+                                },
+                                {
+                                  key: 'tax_office',
+                                  placeholder: 'Vergi Dairesi',
+                                  type: 'text',
+                                },
+                              ] as {
+                                key: keyof typeof guestInvoice;
+                                placeholder: string;
+                                type: string;
+                                maxLength?: number;
+                              }[]
+                            ).map(({ key, placeholder, type, maxLength }) => (
+                              <input
+                                key={key}
+                                type={type}
+                                maxLength={maxLength}
+                                value={guestInvoice[key]}
+                                onChange={(e) =>
+                                  setGuestInvoice((prev) => ({
+                                    ...prev,
+                                    [key]: e.target.value,
+                                  }))
+                                }
+                                placeholder={placeholder}
+                                className="w-full rounded-xl border border-[#091530]/15 px-4 py-2.5 text-sm text-[#091530] placeholder:text-[#091530]/30 focus:outline-none focus:border-[#cc0636] transition-colors"
+                              />
+                            ))}
+                            {guestOrderError && (
+                              <p className="text-xs text-red-600 bg-red-50 rounded-lg px-3 py-2">
+                                {guestOrderError}
                               </p>
                             )}
-                            <button
-                              onClick={handleOrderLogin}
-                              disabled={
-                                orderLoginStatus === 'sending' ||
-                                !orderLoginEmail
-                              }
-                              className="w-full rounded-xl bg-[#cc0636] py-3.5 text-sm font-bold text-white hover:bg-[#a8042c] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
-                            >
-                              {orderLoginStatus === 'sending'
-                                ? 'Gönderiliyor…'
-                                : 'Bağlantı Gönder'}
-                            </button>
+                            <div className="flex gap-3 pt-1">
+                              <button
+                                onClick={handleCloseOrder}
+                                className="flex-1 rounded-xl border border-[#091530]/15 py-3.5 text-sm font-semibold text-[#091530]/60 hover:border-[#091530]/30 transition-colors"
+                              >
+                                Vazgeç
+                              </button>
+                              <button
+                                onClick={handleCreateGuestOrder}
+                                disabled={guestOrderCreating}
+                                className="flex-1 rounded-xl bg-[#cc0636] py-3.5 text-sm font-bold text-white hover:bg-[#a8042c] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                              >
+                                {guestOrderCreating
+                                  ? 'Oluşturuluyor…'
+                                  : 'Siparişi Oluştur'}
+                              </button>
+                            </div>
                           </div>
                         )}
                       </div>

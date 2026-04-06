@@ -14,6 +14,11 @@ export interface CargoCompany {
   cargo_tracking_url: string | null;
 }
 
+export interface OrderInvoiceInfo {
+  full_name: string | null;
+  tckn: string | null;
+}
+
 export interface Order {
   id: string;
   stock_number: string | null;
@@ -25,11 +30,13 @@ export interface Order {
   total_price: number | null;
   piece_price: number | null;
   total_price_with_tax: number | null;
+  partial_payment_value: number | null;
   status: string | null;
   created_at: string | null;
   product: OrderProduct | null;
   cargo_tracking_number: string | null;
   cargo_company: CargoCompany | null;
+  invoice_info: OrderInvoiceInfo | null;
 }
 
 export interface GetOrdersResult {

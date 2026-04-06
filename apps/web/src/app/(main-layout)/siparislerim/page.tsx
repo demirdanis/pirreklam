@@ -146,83 +146,100 @@ function OrderCard({ order }: { order: Order }) {
     : null;
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-      <div className="flex gap-4 p-4 sm:p-5">
-        {/* Ürün Görseli */}
-        <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-gray-100 border border-gray-100">
-          {imageUrl ? (
-            <Image
-              src={imageUrl}
-              alt={order.stock_number ?? 'Ürün'}
-              width={96}
-              height={96}
-              className="w-full h-full object-cover"
-              unoptimized
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <Package className="w-8 h-8 text-gray-300" />
-            </div>
-          )}
-        </div>
-
-        {/* Sipariş Bilgileri */}
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-start justify-between gap-2">
-            <div>
-              <p className="text-xs text-gray-400 mb-0.5">Stok No</p>
-              <p className="text-sm font-bold text-[#16223f] truncate">
-                {order.stock_number ?? '—'}
-              </p>
-            </div>
-            <span
-              className={`shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${status.bg} ${status.color}`}
-            >
-              {status.label}
-            </span>
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
+      <div className="p-4 sm:p-5 space-y-3">
+        {/* Üst satır: görsel + özet bilgiler */}
+        <div className="flex gap-4">
+          {/* Ürün Görseli */}
+          <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-gray-100 border border-gray-100">
+            {imageUrl ? (
+              <Image
+                src={imageUrl}
+                alt={order.stock_number ?? 'Ürün'}
+                width={96}
+                height={96}
+                className="w-full h-full object-cover"
+                unoptimized
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <Package className="w-8 h-8 text-gray-300" />
+              </div>
+            )}
           </div>
 
-          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
-            {order.created_at && (
-              <div className="shrink-0">
-                <p className="text-[10px] text-gray-400 uppercase tracking-wide">
-                  Tarih
-                </p>
-                <p className="text-xs font-medium text-gray-700">
-                  {formatDate(order.created_at)}
-                </p>
-              </div>
-            )}
-            {order.product_count != null && (
-              <div className="shrink-0">
-                <p className="text-[10px] text-gray-400 uppercase tracking-wide">
-                  Adet
-                </p>
-                <p className="text-xs font-medium text-gray-700">
-                  {order.product_count}
+          {/* Stok no + statü */}
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-wrap items-start justify-between gap-2">
+              <div>
+                <p className="text-xs text-gray-400 mb-0.5">Stok No</p>
+                <p className="text-sm font-bold text-[#16223f] truncate">
+                  {order.stock_number ?? '—'}
                 </p>
               </div>
-            )}
-            {(order.color_hex || order.color_label) && (
-              <div className="shrink-0">
-                <p className="text-[10px] text-gray-400 uppercase tracking-wide">
-                  Renk
-                </p>
-                <div className="flex items-center gap-1.5 mt-0.5">
-                  {order.color_hex && (
-                    <span
-                      className="inline-block w-3.5 h-3.5 rounded-full border border-black/10 shrink-0"
-                      style={{ backgroundColor: order.color_hex }}
-                    />
+              <div className="flex flex-col items-end gap-1">
+                <span
+                  className={`shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${status.bg} ${status.color}`}
+                >
+                  {status.label}
+                </span>
+                {order.partial_payment_value != null &&
+                  order.status?.toLowerCase().includes('partial_payment') && (
+                    <p className="text-xs font-semibold text-yellow-700">
+                      {formatPrice(order.partial_payment_value)}
+                    </p>
                   )}
+              </div>
+            </div>
+
+            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+              {order.created_at && (
+                <div className="shrink-0">
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+                    Tarih
+                  </p>
                   <p className="text-xs font-medium text-gray-700">
-                    {order.color_label ?? order.color_hex}
+                    {formatDate(order.created_at)}
                   </p>
                 </div>
-              </div>
-            )}
+              )}
+              {order.product_count != null && (
+                <div className="shrink-0">
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+                    Adet
+                  </p>
+                  <p className="text-xs font-medium text-gray-700">
+                    {order.product_count}
+                  </p>
+                </div>
+              )}
+              {(order.color_hex || order.color_label) && (
+                <div className="shrink-0">
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+                    Renk
+                  </p>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    {order.color_hex && (
+                      <span
+                        className="inline-block w-3.5 h-3.5 rounded-full border border-black/10 shrink-0"
+                        style={{ backgroundColor: order.color_hex }}
+                      />
+                    )}
+                    <p className="text-xs font-medium text-gray-700">
+                      {order.color_label ?? order.color_hex}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Seçenek satırları — tam genişlik, resmin altından başlar */}
+        {(order.main_option || order.secondary_option) && (
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
             {order.main_option && (
-              <div className="basis-full">
+              <div>
                 <p className="text-[10px] text-gray-400 uppercase tracking-wide">
                   Seçenek
                 </p>
@@ -232,7 +249,7 @@ function OrderCard({ order }: { order: Order }) {
               </div>
             )}
             {order.secondary_option && (
-              <div className="basis-full">
+              <div>
                 <p className="text-[10px] text-gray-400 uppercase tracking-wide">
                   Alt Seçenek
                 </p>
@@ -242,7 +259,33 @@ function OrderCard({ order }: { order: Order }) {
               </div>
             )}
           </div>
-        </div>
+        )}
+
+        {/* Fatura bilgisi */}
+        {order.invoice_info?.full_name && (
+          <div className="flex flex-wrap gap-x-6 gap-y-2 pt-1 border-t border-gray-50">
+            <div>
+              <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+                Fatura Adı
+              </p>
+              <p className="text-xs font-medium text-gray-700">
+                {order.invoice_info.full_name}
+              </p>
+            </div>
+            {order.invoice_info.tckn && (
+              <div>
+                <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+                  TC Kimlik
+                </p>
+                <p className="text-xs font-medium text-gray-700 font-mono">
+                  {order.invoice_info.tckn.slice(0, 3) +
+                    '*'.repeat(order.invoice_info.tckn.length - 6) +
+                    order.invoice_info.tckn.slice(-3)}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Kargo takip şeridi */}
@@ -274,6 +317,9 @@ function OrderCard({ order }: { order: Order }) {
           </a>
         </div>
       )}
+
+      {/* Spacer to push price to bottom */}
+      <div className="flex-1" />
 
       {/* Alt fiyat şeridi */}
       <div className="border-t border-gray-50 bg-gray-50/60 px-4 sm:px-5 py-3 flex flex-wrap items-center justify-between gap-3">
@@ -398,7 +444,7 @@ export default async function SiparislerimPage({ searchParams }: PageProps) {
 
   return (
     <div className="min-h-screen bg-[#f8f9fb]">
-      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Başlık */}
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-1">
@@ -434,7 +480,12 @@ export default async function SiparislerimPage({ searchParams }: PageProps) {
             </Link>
           </div>
         ) : (
-          <div className="flex flex-col gap-4">
+          <div
+            className="grid gap-4"
+            style={{
+              gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+            }}
+          >
             {pageData.orders.map((order) => (
               <OrderCard key={order.id} order={order} />
             ))}

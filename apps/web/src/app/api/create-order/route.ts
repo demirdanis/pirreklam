@@ -16,6 +16,7 @@ const schema = z.object({
   piece_price: z.number().positive(),
   total_price: z.number().positive(),
   total_price_with_tax: z.number().positive(),
+  invoice_info_id: z.string().optional(),
 });
 
 const CREATE_ORDER_MUTATION = `
@@ -63,7 +64,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { variant_id, ...orderFields } = parsed.data;
+    const { variant_id, invoice_info_id, ...orderFields } = parsed.data;
 
     // Use admin token for the mutation, but embed the verified user ID so the
     // order is always tied to the authenticated user.
@@ -73,8 +74,10 @@ export async function POST(req: NextRequest) {
         data: {
           ...orderFields,
           status: 'created',
+          created_at: new Date().toISOString(),
           user: { id: me.id },
           product: { id: variant_id },
+          ...(invoice_info_id ? { invoice_info: { id: invoice_info_id } } : {}),
         },
       }
     );
