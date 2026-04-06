@@ -9,12 +9,17 @@ const schema = z.object({
   redirectUrl: z.string().optional(),
 });
 
-const DIRECTUS_URL = process.env.DIRECTUS_URL!.replace(/\/$/, '');
-const ADMIN_TOKEN = process.env.DIRECTUS_STATIC_TOKEN!;
-const CUSTOMER_ROLE_ID = process.env.DIRECTUS_CUSTOMER_ROLE_ID!;
-const BASE_URL = process.env.BASE_URL!;
+function getEnv() {
+  return {
+    DIRECTUS_URL: (process.env.DIRECTUS_URL ?? '').replace(/\/$/, ''),
+    ADMIN_TOKEN: process.env.DIRECTUS_STATIC_TOKEN ?? '',
+    CUSTOMER_ROLE_ID: process.env.DIRECTUS_CUSTOMER_ROLE_ID ?? '',
+    BASE_URL: process.env.BASE_URL ?? '',
+  };
+}
 
 async function directusFetch(path: string, options: RequestInit = {}) {
+  const { DIRECTUS_URL, ADMIN_TOKEN } = getEnv();
   const res = await fetch(`${DIRECTUS_URL}${path}`, {
     ...options,
     headers: {
@@ -43,7 +48,7 @@ async function findOrCreateUser(email: string): Promise<string> {
   }
 
   // Rol ID'si yoksa name'e göre ara
-  let roleId = CUSTOMER_ROLE_ID;
+  let roleId = getEnv().CUSTOMER_ROLE_ID;
   if (!roleId) {
     const rolesRes = await directusFetch(
       `/roles?filter[name][_eq]=customer&fields=id`
@@ -85,7 +90,7 @@ async function sendMagicLinkEmail(
   token: string,
   redirectUrl?: string
 ) {
-  const callbackUrl = new URL(`${BASE_URL}/auth/callback`);
+  const callbackUrl = new URL(`${getEnv().BASE_URL}/auth/callback`);
   callbackUrl.searchParams.set('token', token);
   if (redirectUrl) callbackUrl.searchParams.set('redirectUrl', redirectUrl);
   const magicLink = callbackUrl.toString();
