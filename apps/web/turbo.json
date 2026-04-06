@@ -14,7 +14,16 @@
         "ASSETS_URL",
         "BASE_URL",
         "GEMINI_API_KEY",
-        "TRANSLATE_ENDPOINT_TOKEN"
+        "TRANSLATE_ENDPOINT_TOKEN",
+        "DIRECTUS_CUSTOMER_ROLE_ID",
+        "SMTP_HOST",
+        "SMTP_PORT",
+        "SMTP_USER",
+        "SMTP_PASS",
+        "SMTP_FROM",
+        "WEBHOOK_SECRET",
+        "ADMIN_EMAIL",
+        "CMS_ADMIN_URL"
       ]
     }
   }
