@@ -102,6 +102,7 @@ export function getProductDetailMapper(
 
     return {
       key,
+      id: variat?.id ?? '',
       mainOptionId,
       subOptionId,
       colorId,

@@ -3,6 +3,7 @@ import Footer from '@/components/footer/footer';
 import Header from '@/components/header/header';
 import type { Metadata } from 'next';
 import ScrollToTop from '@/components/scroll-to-top';
+import { cookies } from 'next/headers';
 import { fontVariables } from '@/lib/fonts';
 import { getCategoryBarDataWithCache } from './_helpers/service/getCategoryBar/getCategoryBar.service';
 import { getFooterDataWithCache } from './_helpers/service/getFooter/getFooter.service';
@@ -48,6 +49,9 @@ export default async function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = await cookies();
+  const isLoggedIn = !!cookieStore.get('auth_token')?.value;
+
   const [headerData, footerData, categoryBarData] = await Promise.all([
     getHeaderDataWithCache(),
     getFooterDataWithCache(),
@@ -60,7 +64,11 @@ export default async function MainLayout({
       <body className="font-sans">
         <ScrollToTop />
         <div className="relative flex min-h-screen flex-col">
-          <Header data={headerData} categories={categoryBarData.categories} />
+          <Header
+            data={headerData}
+            categories={categoryBarData.categories}
+            isLoggedIn={isLoggedIn}
+          />
           <CategoryBar data={categoryBarData} />
           <main className="flex-1">{children}</main>
           <Footer data={footerData} />

@@ -35,10 +35,14 @@ export type Mutation = {
   create_about_us_specs_items: Array<About_Us_Specs>;
   create_bank_accounts_item?: Maybe<Bank_Accounts>;
   create_bank_accounts_items: Array<Bank_Accounts>;
+  create_cargo_company_item?: Maybe<Cargo_Company>;
+  create_cargo_company_items: Array<Cargo_Company>;
   create_home_banners_item?: Maybe<Home_Banners>;
   create_home_banners_items: Array<Home_Banners>;
   create_main_categories_item?: Maybe<Main_Categories>;
   create_main_categories_items: Array<Main_Categories>;
+  create_orders_item?: Maybe<Orders>;
+  create_orders_items: Array<Orders>;
   create_product_colors_item?: Maybe<Product_Colors>;
   create_product_colors_items: Array<Product_Colors>;
   create_product_option_categories_item?: Maybe<Product_Option_Categories>;
@@ -69,10 +73,14 @@ export type Mutation = {
   delete_about_us_specs_items?: Maybe<Delete_Many>;
   delete_bank_accounts_item?: Maybe<Delete_One>;
   delete_bank_accounts_items?: Maybe<Delete_Many>;
+  delete_cargo_company_item?: Maybe<Delete_One>;
+  delete_cargo_company_items?: Maybe<Delete_Many>;
   delete_home_banners_item?: Maybe<Delete_One>;
   delete_home_banners_items?: Maybe<Delete_Many>;
   delete_main_categories_item?: Maybe<Delete_One>;
   delete_main_categories_items?: Maybe<Delete_Many>;
+  delete_orders_item?: Maybe<Delete_One>;
+  delete_orders_items?: Maybe<Delete_Many>;
   delete_product_colors_item?: Maybe<Delete_One>;
   delete_product_colors_items?: Maybe<Delete_Many>;
   delete_product_option_categories_item?: Maybe<Delete_One>;
@@ -107,6 +115,9 @@ export type Mutation = {
   update_bank_accounts_batch: Array<Bank_Accounts>;
   update_bank_accounts_item?: Maybe<Bank_Accounts>;
   update_bank_accounts_items: Array<Bank_Accounts>;
+  update_cargo_company_batch: Array<Cargo_Company>;
+  update_cargo_company_item?: Maybe<Cargo_Company>;
+  update_cargo_company_items: Array<Cargo_Company>;
   update_contact?: Maybe<Contact>;
   update_footer?: Maybe<Footer>;
   update_header?: Maybe<Header>;
@@ -116,6 +127,9 @@ export type Mutation = {
   update_main_categories_batch: Array<Main_Categories>;
   update_main_categories_item?: Maybe<Main_Categories>;
   update_main_categories_items: Array<Main_Categories>;
+  update_orders_batch: Array<Orders>;
+  update_orders_item?: Maybe<Orders>;
+  update_orders_items: Array<Orders>;
   update_page__bank_account?: Maybe<Page__Bank_Account>;
   update_page__distance_selling_agreement?: Maybe<Page__Distance_Selling_Agreement>;
   update_page__home?: Maybe<Page__Home>;
@@ -210,6 +224,22 @@ export type MutationCreate_Bank_Accounts_ItemsArgs = {
 };
 
 
+export type MutationCreate_Cargo_Company_ItemArgs = {
+  data: Create_Cargo_Company_Input;
+};
+
+
+export type MutationCreate_Cargo_Company_ItemsArgs = {
+  data?: InputMaybe<Array<Create_Cargo_Company_Input>>;
+  filter?: InputMaybe<Cargo_Company_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
 export type MutationCreate_Home_Banners_ItemArgs = {
   data: Create_Home_Banners_Input;
 };
@@ -234,6 +264,22 @@ export type MutationCreate_Main_Categories_ItemArgs = {
 export type MutationCreate_Main_Categories_ItemsArgs = {
   data?: InputMaybe<Array<Create_Main_Categories_Input>>;
   filter?: InputMaybe<Main_Categories_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type MutationCreate_Orders_ItemArgs = {
+  data: Create_Orders_Input;
+};
+
+
+export type MutationCreate_Orders_ItemsArgs = {
+  data?: InputMaybe<Array<Create_Orders_Input>>;
+  filter?: InputMaybe<Orders_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -464,6 +510,16 @@ export type MutationDelete_Bank_Accounts_ItemsArgs = {
 };
 
 
+export type MutationDelete_Cargo_Company_ItemArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationDelete_Cargo_Company_ItemsArgs = {
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
+};
+
+
 export type MutationDelete_Home_Banners_ItemArgs = {
   id: Scalars['ID']['input'];
 };
@@ -480,6 +536,16 @@ export type MutationDelete_Main_Categories_ItemArgs = {
 
 
 export type MutationDelete_Main_Categories_ItemsArgs = {
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
+};
+
+
+export type MutationDelete_Orders_ItemArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationDelete_Orders_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
@@ -696,6 +762,35 @@ export type MutationUpdate_Bank_Accounts_ItemsArgs = {
 };
 
 
+export type MutationUpdate_Cargo_Company_BatchArgs = {
+  data?: InputMaybe<Array<Update_Cargo_Company_Input>>;
+  filter?: InputMaybe<Cargo_Company_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type MutationUpdate_Cargo_Company_ItemArgs = {
+  data: Update_Cargo_Company_Input;
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdate_Cargo_Company_ItemsArgs = {
+  data: Update_Cargo_Company_Input;
+  filter?: InputMaybe<Cargo_Company_Filter>;
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
 export type MutationUpdate_ContactArgs = {
   data: Update_Contact_Input;
 };
@@ -760,6 +855,35 @@ export type MutationUpdate_Main_Categories_ItemArgs = {
 export type MutationUpdate_Main_Categories_ItemsArgs = {
   data: Update_Main_Categories_Input;
   filter?: InputMaybe<Main_Categories_Filter>;
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type MutationUpdate_Orders_BatchArgs = {
+  data?: InputMaybe<Array<Update_Orders_Input>>;
+  filter?: InputMaybe<Orders_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type MutationUpdate_Orders_ItemArgs = {
+  data: Update_Orders_Input;
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdate_Orders_ItemsArgs = {
+  data: Update_Orders_Input;
+  filter?: InputMaybe<Orders_Filter>;
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -1167,6 +1291,10 @@ export type Query = {
   bank_accounts_aggregated: Array<Bank_Accounts_Aggregated>;
   bank_accounts_by_id?: Maybe<Bank_Accounts>;
   bank_accounts_by_version?: Maybe<Version_Bank_Accounts>;
+  cargo_company: Array<Cargo_Company>;
+  cargo_company_aggregated: Array<Cargo_Company_Aggregated>;
+  cargo_company_by_id?: Maybe<Cargo_Company>;
+  cargo_company_by_version?: Maybe<Version_Cargo_Company>;
   contact?: Maybe<Contact>;
   contact_by_version?: Maybe<Version_Contact>;
   footer?: Maybe<Footer>;
@@ -1181,6 +1309,10 @@ export type Query = {
   main_categories_aggregated: Array<Main_Categories_Aggregated>;
   main_categories_by_id?: Maybe<Main_Categories>;
   main_categories_by_version?: Maybe<Version_Main_Categories>;
+  orders: Array<Orders>;
+  orders_aggregated: Array<Orders_Aggregated>;
+  orders_by_id?: Maybe<Orders>;
+  orders_by_version?: Maybe<Version_Orders>;
   page__bank_account?: Maybe<Page__Bank_Account>;
   page__bank_account_by_version?: Maybe<Version_Page__Bank_Account>;
   page__distance_selling_agreement?: Maybe<Page__Distance_Selling_Agreement>;
@@ -1355,6 +1487,39 @@ export type QueryBank_Accounts_By_VersionArgs = {
 };
 
 
+export type QueryCargo_CompanyArgs = {
+  filter?: InputMaybe<Cargo_Company_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryCargo_Company_AggregatedArgs = {
+  filter?: InputMaybe<Cargo_Company_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryCargo_Company_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryCargo_Company_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
 export type QueryContactArgs = {
   version?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1446,6 +1611,39 @@ export type QueryMain_Categories_By_IdArgs = {
 
 
 export type QueryMain_Categories_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryOrdersArgs = {
+  filter?: InputMaybe<Orders_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryOrders_AggregatedArgs = {
+  filter?: InputMaybe<Orders_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryOrders_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryOrders_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
@@ -1922,6 +2120,7 @@ export type Subscription = {
   about_us_mutated?: Maybe<About_Us_Mutated>;
   about_us_specs_mutated?: Maybe<About_Us_Specs_Mutated>;
   bank_accounts_mutated?: Maybe<Bank_Accounts_Mutated>;
+  cargo_company_mutated?: Maybe<Cargo_Company_Mutated>;
   contact_mutated?: Maybe<Contact_Mutated>;
   directus_activity_mutated?: Maybe<Directus_Activity_Mutated>;
   directus_comments_mutated?: Maybe<Directus_Comments_Mutated>;
@@ -1936,6 +2135,7 @@ export type Subscription = {
   header_mutated?: Maybe<Header_Mutated>;
   home_banners_mutated?: Maybe<Home_Banners_Mutated>;
   main_categories_mutated?: Maybe<Main_Categories_Mutated>;
+  orders_mutated?: Maybe<Orders_Mutated>;
   page__bank_account_mutated?: Maybe<Page__Bank_Account_Mutated>;
   page__distance_selling_agreement_mutated?: Maybe<Page__Distance_Selling_Agreement_Mutated>;
   page__home_mutated?: Maybe<Page__Home_Mutated>;
@@ -1974,6 +2174,11 @@ export type SubscriptionAbout_Us_Specs_MutatedArgs = {
 
 
 export type SubscriptionBank_Accounts_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionCargo_Company_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
@@ -2044,6 +2249,11 @@ export type SubscriptionHome_Banners_MutatedArgs = {
 
 
 export type SubscriptionMain_Categories_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionOrders_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
@@ -2416,6 +2626,61 @@ export type Bank_Accounts_Mutated = {
   key: Scalars['ID']['output'];
 };
 
+export type Boolean_Filter_Operators = {
+  _eq?: InputMaybe<Scalars['Boolean']['input']>;
+  _neq?: InputMaybe<Scalars['Boolean']['input']>;
+  _nnull?: InputMaybe<Scalars['Boolean']['input']>;
+  _null?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type Cargo_Company = {
+  __typename?: 'cargo_company';
+  cargo_tracking_url?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type Cargo_Company_Aggregated = {
+  __typename?: 'cargo_company_aggregated';
+  avg?: Maybe<Cargo_Company_Aggregated_Fields>;
+  avgDistinct?: Maybe<Cargo_Company_Aggregated_Fields>;
+  count?: Maybe<Cargo_Company_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Cargo_Company_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Cargo_Company_Aggregated_Fields>;
+  min?: Maybe<Cargo_Company_Aggregated_Fields>;
+  sum?: Maybe<Cargo_Company_Aggregated_Fields>;
+  sumDistinct?: Maybe<Cargo_Company_Aggregated_Fields>;
+};
+
+export type Cargo_Company_Aggregated_Count = {
+  __typename?: 'cargo_company_aggregated_count';
+  cargo_tracking_url?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Cargo_Company_Aggregated_Fields = {
+  __typename?: 'cargo_company_aggregated_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Cargo_Company_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Cargo_Company_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Cargo_Company_Filter>>>;
+  cargo_tracking_url?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  name?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Cargo_Company_Mutated = {
+  __typename?: 'cargo_company_mutated';
+  data?: Maybe<Cargo_Company>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
 export type Contact = {
   __typename?: 'contact';
   address?: Maybe<Scalars['String']['output']>;
@@ -2483,6 +2748,43 @@ export type Create_Bank_Accounts_Input = {
   order?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type Create_Cargo_Company_Input = {
+  cargo_tracking_url?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Create_Directus_Users_Input = {
+  appearance?: InputMaybe<Scalars['String']['input']>;
+  auth_data?: InputMaybe<Scalars['JSON']['input']>;
+  avatar?: InputMaybe<Scalars['ID']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  email_notifications?: InputMaybe<Scalars['Boolean']['input']>;
+  external_identifier?: InputMaybe<Scalars['String']['input']>;
+  first_name?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  language?: InputMaybe<Scalars['String']['input']>;
+  last_access?: InputMaybe<Scalars['Date']['input']>;
+  last_name?: InputMaybe<Scalars['String']['input']>;
+  last_page?: InputMaybe<Scalars['String']['input']>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['Hash']['input']>;
+  policies?: InputMaybe<Scalars['String']['input']>;
+  provider?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['ID']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Scalars['JSON']['input']>;
+  text_direction?: InputMaybe<Scalars['String']['input']>;
+  tfa_secret?: InputMaybe<Scalars['Hash']['input']>;
+  theme_dark?: InputMaybe<Scalars['String']['input']>;
+  theme_dark_overrides?: InputMaybe<Scalars['JSON']['input']>;
+  theme_light?: InputMaybe<Scalars['String']['input']>;
+  theme_light_overrides?: InputMaybe<Scalars['JSON']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  token?: InputMaybe<Scalars['Hash']['input']>;
+};
+
 export type Create_Footer_Input = {
   address?: InputMaybe<Scalars['String']['input']>;
   copyright?: InputMaybe<Scalars['String']['input']>;
@@ -2517,6 +2819,25 @@ export type Create_Main_Categories_Input = {
   order?: InputMaybe<Scalars['Int']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   sub_categories?: InputMaybe<Array<InputMaybe<Create_Sub_Categories_Input>>>;
+};
+
+export type Create_Orders_Input = {
+  cargo_company?: InputMaybe<Create_Cargo_Company_Input>;
+  cargo_tracking_number?: InputMaybe<Scalars['String']['input']>;
+  color_hex?: InputMaybe<Scalars['String']['input']>;
+  color_label?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  main_option?: InputMaybe<Scalars['String']['input']>;
+  piece_price?: InputMaybe<Scalars['Float']['input']>;
+  product?: InputMaybe<Create_Product_Variations_Input>;
+  product_count?: InputMaybe<Scalars['Int']['input']>;
+  secondary_option?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  stock_number?: InputMaybe<Scalars['String']['input']>;
+  total_price?: InputMaybe<Scalars['Float']['input']>;
+  total_price_with_tax?: InputMaybe<Scalars['Float']['input']>;
+  user?: InputMaybe<Create_Directus_Users_Input>;
 };
 
 export type Create_Page__Home_Input = {
@@ -2623,6 +2944,32 @@ export type Create_Sub_Category_Variations_Input = {
   products?: InputMaybe<Array<InputMaybe<Create_Products_Input>>>;
   slug?: InputMaybe<Scalars['String']['input']>;
   sub_categories_id?: InputMaybe<Create_Sub_Categories_Input>;
+};
+
+export type Date_Filter_Operators = {
+  _between?: InputMaybe<Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>>;
+  _eq?: InputMaybe<Scalars['String']['input']>;
+  _gt?: InputMaybe<Scalars['String']['input']>;
+  _gte?: InputMaybe<Scalars['String']['input']>;
+  _in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  _lt?: InputMaybe<Scalars['String']['input']>;
+  _lte?: InputMaybe<Scalars['String']['input']>;
+  _nbetween?: InputMaybe<Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>>;
+  _neq?: InputMaybe<Scalars['String']['input']>;
+  _nin?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  _nnull?: InputMaybe<Scalars['Boolean']['input']>;
+  _null?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type Datetime_Function_Filter_Operators = {
+  day?: InputMaybe<Number_Filter_Operators>;
+  hour?: InputMaybe<Number_Filter_Operators>;
+  minute?: InputMaybe<Number_Filter_Operators>;
+  month?: InputMaybe<Number_Filter_Operators>;
+  second?: InputMaybe<Number_Filter_Operators>;
+  week?: InputMaybe<Number_Filter_Operators>;
+  weekday?: InputMaybe<Number_Filter_Operators>;
+  year?: InputMaybe<Number_Filter_Operators>;
 };
 
 export type Datetime_Functions = {
@@ -3069,25 +3416,39 @@ export type Directus_Translations_Mutated = {
 export type Directus_Users = {
   __typename?: 'directus_users';
   appearance?: Maybe<Scalars['String']['output']>;
+  auth_data?: Maybe<Scalars['JSON']['output']>;
+  auth_data_func?: Maybe<Count_Functions>;
   avatar?: Maybe<Scalars['ID']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  email_notifications?: Maybe<Scalars['Boolean']['output']>;
+  external_identifier?: Maybe<Scalars['String']['output']>;
   first_name?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
+  id?: Maybe<Scalars['ID']['output']>;
   language?: Maybe<Scalars['String']['output']>;
+  last_access?: Maybe<Scalars['Date']['output']>;
+  last_access_func?: Maybe<Datetime_Functions>;
   last_name?: Maybe<Scalars['String']['output']>;
   last_page?: Maybe<Scalars['String']['output']>;
   location?: Maybe<Scalars['String']['output']>;
   password?: Maybe<Scalars['Hash']['output']>;
+  policies?: Maybe<Scalars['String']['output']>;
+  policies_func?: Maybe<Count_Functions>;
   provider?: Maybe<Scalars['String']['output']>;
   role?: Maybe<Directus_Roles>;
   status?: Maybe<Scalars['String']['output']>;
   tags?: Maybe<Scalars['JSON']['output']>;
   tags_func?: Maybe<Count_Functions>;
+  text_direction?: Maybe<Scalars['String']['output']>;
   tfa_secret?: Maybe<Scalars['Hash']['output']>;
   theme_dark?: Maybe<Scalars['String']['output']>;
+  theme_dark_overrides?: Maybe<Scalars['JSON']['output']>;
+  theme_dark_overrides_func?: Maybe<Count_Functions>;
   theme_light?: Maybe<Scalars['String']['output']>;
+  theme_light_overrides?: Maybe<Scalars['JSON']['output']>;
+  theme_light_overrides_func?: Maybe<Count_Functions>;
   title?: Maybe<Scalars['String']['output']>;
+  token?: Maybe<Scalars['Hash']['output']>;
 };
 
 
@@ -3104,25 +3465,39 @@ export type Directus_Users_Filter = {
   _and?: InputMaybe<Array<InputMaybe<Directus_Users_Filter>>>;
   _or?: InputMaybe<Array<InputMaybe<Directus_Users_Filter>>>;
   appearance?: InputMaybe<String_Filter_Operators>;
+  auth_data?: InputMaybe<String_Filter_Operators>;
+  auth_data_func?: InputMaybe<Count_Function_Filter_Operators>;
   avatar?: InputMaybe<Id_Filter_Operators>;
   description?: InputMaybe<String_Filter_Operators>;
   email?: InputMaybe<String_Filter_Operators>;
+  email_notifications?: InputMaybe<Boolean_Filter_Operators>;
+  external_identifier?: InputMaybe<String_Filter_Operators>;
   first_name?: InputMaybe<String_Filter_Operators>;
   id?: InputMaybe<Id_Filter_Operators>;
   language?: InputMaybe<String_Filter_Operators>;
+  last_access?: InputMaybe<Date_Filter_Operators>;
+  last_access_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   last_name?: InputMaybe<String_Filter_Operators>;
   last_page?: InputMaybe<String_Filter_Operators>;
   location?: InputMaybe<String_Filter_Operators>;
   password?: InputMaybe<Hash_Filter_Operators>;
+  policies?: InputMaybe<String_Filter_Operators>;
+  policies_func?: InputMaybe<Count_Function_Filter_Operators>;
   provider?: InputMaybe<String_Filter_Operators>;
   role?: InputMaybe<Directus_Roles_Filter>;
   status?: InputMaybe<String_Filter_Operators>;
   tags?: InputMaybe<String_Filter_Operators>;
   tags_func?: InputMaybe<Count_Function_Filter_Operators>;
+  text_direction?: InputMaybe<String_Filter_Operators>;
   tfa_secret?: InputMaybe<Hash_Filter_Operators>;
   theme_dark?: InputMaybe<String_Filter_Operators>;
+  theme_dark_overrides?: InputMaybe<String_Filter_Operators>;
+  theme_dark_overrides_func?: InputMaybe<Count_Function_Filter_Operators>;
   theme_light?: InputMaybe<String_Filter_Operators>;
+  theme_light_overrides?: InputMaybe<String_Filter_Operators>;
+  theme_light_overrides_func?: InputMaybe<Count_Function_Filter_Operators>;
   title?: InputMaybe<String_Filter_Operators>;
+  token?: InputMaybe<Hash_Filter_Operators>;
 };
 
 export type Directus_Users_Mutated = {
@@ -3138,25 +3513,39 @@ export type Directus_Users_Quantifier_Filter = {
   _or?: InputMaybe<Array<InputMaybe<Directus_Users_Filter>>>;
   _some?: InputMaybe<Directus_Users_Filter>;
   appearance?: InputMaybe<String_Filter_Operators>;
+  auth_data?: InputMaybe<String_Filter_Operators>;
+  auth_data_func?: InputMaybe<Count_Function_Filter_Operators>;
   avatar?: InputMaybe<Id_Filter_Operators>;
   description?: InputMaybe<String_Filter_Operators>;
   email?: InputMaybe<String_Filter_Operators>;
+  email_notifications?: InputMaybe<Boolean_Filter_Operators>;
+  external_identifier?: InputMaybe<String_Filter_Operators>;
   first_name?: InputMaybe<String_Filter_Operators>;
   id?: InputMaybe<Id_Filter_Operators>;
   language?: InputMaybe<String_Filter_Operators>;
+  last_access?: InputMaybe<Date_Filter_Operators>;
+  last_access_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   last_name?: InputMaybe<String_Filter_Operators>;
   last_page?: InputMaybe<String_Filter_Operators>;
   location?: InputMaybe<String_Filter_Operators>;
   password?: InputMaybe<Hash_Filter_Operators>;
+  policies?: InputMaybe<String_Filter_Operators>;
+  policies_func?: InputMaybe<Count_Function_Filter_Operators>;
   provider?: InputMaybe<String_Filter_Operators>;
   role?: InputMaybe<Directus_Roles_Filter>;
   status?: InputMaybe<String_Filter_Operators>;
   tags?: InputMaybe<String_Filter_Operators>;
   tags_func?: InputMaybe<Count_Function_Filter_Operators>;
+  text_direction?: InputMaybe<String_Filter_Operators>;
   tfa_secret?: InputMaybe<Hash_Filter_Operators>;
   theme_dark?: InputMaybe<String_Filter_Operators>;
+  theme_dark_overrides?: InputMaybe<String_Filter_Operators>;
+  theme_dark_overrides_func?: InputMaybe<Count_Function_Filter_Operators>;
   theme_light?: InputMaybe<String_Filter_Operators>;
+  theme_light_overrides?: InputMaybe<String_Filter_Operators>;
+  theme_light_overrides_func?: InputMaybe<Count_Function_Filter_Operators>;
   title?: InputMaybe<String_Filter_Operators>;
+  token?: InputMaybe<Hash_Filter_Operators>;
 };
 
 export type Footer = {
@@ -3434,6 +3823,131 @@ export type Number_Filter_Operators = {
   _nin?: InputMaybe<Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>>;
   _nnull?: InputMaybe<Scalars['Boolean']['input']>;
   _null?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type Orders = {
+  __typename?: 'orders';
+  cargo_company?: Maybe<Cargo_Company>;
+  cargo_tracking_number?: Maybe<Scalars['String']['output']>;
+  color_hex?: Maybe<Scalars['String']['output']>;
+  color_label?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['Date']['output']>;
+  created_at_func?: Maybe<Datetime_Functions>;
+  id: Scalars['ID']['output'];
+  main_option?: Maybe<Scalars['String']['output']>;
+  piece_price?: Maybe<Scalars['Float']['output']>;
+  product?: Maybe<Product_Variations>;
+  product_count?: Maybe<Scalars['Int']['output']>;
+  secondary_option?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  stock_number?: Maybe<Scalars['String']['output']>;
+  total_price?: Maybe<Scalars['Float']['output']>;
+  total_price_with_tax?: Maybe<Scalars['Float']['output']>;
+  user?: Maybe<Directus_Users>;
+};
+
+
+export type OrdersCargo_CompanyArgs = {
+  filter?: InputMaybe<Cargo_Company_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type OrdersProductArgs = {
+  filter?: InputMaybe<Product_Variations_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type OrdersUserArgs = {
+  filter?: InputMaybe<Directus_Users_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Orders_Aggregated = {
+  __typename?: 'orders_aggregated';
+  avg?: Maybe<Orders_Aggregated_Fields>;
+  avgDistinct?: Maybe<Orders_Aggregated_Fields>;
+  count?: Maybe<Orders_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Orders_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Orders_Aggregated_Fields>;
+  min?: Maybe<Orders_Aggregated_Fields>;
+  sum?: Maybe<Orders_Aggregated_Fields>;
+  sumDistinct?: Maybe<Orders_Aggregated_Fields>;
+};
+
+export type Orders_Aggregated_Count = {
+  __typename?: 'orders_aggregated_count';
+  cargo_company?: Maybe<Scalars['Int']['output']>;
+  cargo_tracking_number?: Maybe<Scalars['Int']['output']>;
+  color_hex?: Maybe<Scalars['Int']['output']>;
+  color_label?: Maybe<Scalars['Int']['output']>;
+  created_at?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  main_option?: Maybe<Scalars['Int']['output']>;
+  piece_price?: Maybe<Scalars['Int']['output']>;
+  product?: Maybe<Scalars['Int']['output']>;
+  product_count?: Maybe<Scalars['Int']['output']>;
+  secondary_option?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  stock_number?: Maybe<Scalars['Int']['output']>;
+  total_price?: Maybe<Scalars['Int']['output']>;
+  total_price_with_tax?: Maybe<Scalars['Int']['output']>;
+  user?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Orders_Aggregated_Fields = {
+  __typename?: 'orders_aggregated_fields';
+  cargo_company?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+  piece_price?: Maybe<Scalars['Float']['output']>;
+  product?: Maybe<Scalars['Float']['output']>;
+  product_count?: Maybe<Scalars['Float']['output']>;
+  total_price?: Maybe<Scalars['Float']['output']>;
+  total_price_with_tax?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Orders_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Orders_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Orders_Filter>>>;
+  cargo_company?: InputMaybe<Cargo_Company_Filter>;
+  cargo_tracking_number?: InputMaybe<String_Filter_Operators>;
+  color_hex?: InputMaybe<String_Filter_Operators>;
+  color_label?: InputMaybe<String_Filter_Operators>;
+  created_at?: InputMaybe<Date_Filter_Operators>;
+  created_at_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  main_option?: InputMaybe<String_Filter_Operators>;
+  piece_price?: InputMaybe<Number_Filter_Operators>;
+  product?: InputMaybe<Product_Variations_Filter>;
+  product_count?: InputMaybe<Number_Filter_Operators>;
+  secondary_option?: InputMaybe<String_Filter_Operators>;
+  status?: InputMaybe<String_Filter_Operators>;
+  stock_number?: InputMaybe<String_Filter_Operators>;
+  total_price?: InputMaybe<Number_Filter_Operators>;
+  total_price_with_tax?: InputMaybe<Number_Filter_Operators>;
+  user?: InputMaybe<Directus_Users_Filter>;
+};
+
+export type Orders_Mutated = {
+  __typename?: 'orders_mutated';
+  data?: Maybe<Orders>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
 };
 
 export type Page__Bank_Account = {
@@ -4652,6 +5166,12 @@ export type Update_Bank_Accounts_Input = {
   order?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type Update_Cargo_Company_Input = {
+  cargo_tracking_url?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Update_Contact_Input = {
   address?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
@@ -4664,6 +5184,37 @@ export type Update_Contact_Input = {
   work_hours_mid_week?: InputMaybe<Scalars['String']['input']>;
   work_hours_saturday?: InputMaybe<Scalars['String']['input']>;
   work_hours_sunday?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Update_Directus_Users_Input = {
+  appearance?: InputMaybe<Scalars['String']['input']>;
+  auth_data?: InputMaybe<Scalars['JSON']['input']>;
+  avatar?: InputMaybe<Scalars['ID']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  email_notifications?: InputMaybe<Scalars['Boolean']['input']>;
+  external_identifier?: InputMaybe<Scalars['String']['input']>;
+  first_name?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  language?: InputMaybe<Scalars['String']['input']>;
+  last_access?: InputMaybe<Scalars['Date']['input']>;
+  last_name?: InputMaybe<Scalars['String']['input']>;
+  last_page?: InputMaybe<Scalars['String']['input']>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['Hash']['input']>;
+  policies?: InputMaybe<Scalars['String']['input']>;
+  provider?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['ID']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Scalars['JSON']['input']>;
+  text_direction?: InputMaybe<Scalars['String']['input']>;
+  tfa_secret?: InputMaybe<Scalars['Hash']['input']>;
+  theme_dark?: InputMaybe<Scalars['String']['input']>;
+  theme_dark_overrides?: InputMaybe<Scalars['JSON']['input']>;
+  theme_light?: InputMaybe<Scalars['String']['input']>;
+  theme_light_overrides?: InputMaybe<Scalars['JSON']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  token?: InputMaybe<Scalars['Hash']['input']>;
 };
 
 export type Update_Footer_Input = {
@@ -4708,6 +5259,25 @@ export type Update_Main_Categories_Input = {
   order?: InputMaybe<Scalars['Int']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   sub_categories?: InputMaybe<Array<InputMaybe<Update_Sub_Categories_Input>>>;
+};
+
+export type Update_Orders_Input = {
+  cargo_company?: InputMaybe<Update_Cargo_Company_Input>;
+  cargo_tracking_number?: InputMaybe<Scalars['String']['input']>;
+  color_hex?: InputMaybe<Scalars['String']['input']>;
+  color_label?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  main_option?: InputMaybe<Scalars['String']['input']>;
+  piece_price?: InputMaybe<Scalars['Float']['input']>;
+  product?: InputMaybe<Update_Product_Variations_Input>;
+  product_count?: InputMaybe<Scalars['Int']['input']>;
+  secondary_option?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  stock_number?: InputMaybe<Scalars['String']['input']>;
+  total_price?: InputMaybe<Scalars['Float']['input']>;
+  total_price_with_tax?: InputMaybe<Scalars['Float']['input']>;
+  user?: InputMaybe<Update_Directus_Users_Input>;
 };
 
 export type Update_Page__Bank_Account_Input = {
@@ -4892,6 +5462,13 @@ export type Version_Bank_Accounts = {
   order?: Maybe<Scalars['Int']['output']>;
 };
 
+export type Version_Cargo_Company = {
+  __typename?: 'version_cargo_company';
+  cargo_tracking_url?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
 export type Version_Contact = {
   __typename?: 'version_contact';
   address?: Maybe<Scalars['String']['output']>;
@@ -4953,6 +5530,26 @@ export type Version_Main_Categories = {
   order?: Maybe<Scalars['Int']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
   sub_categories?: Maybe<Scalars['JSON']['output']>;
+};
+
+export type Version_Orders = {
+  __typename?: 'version_orders';
+  cargo_company?: Maybe<Scalars['JSON']['output']>;
+  cargo_tracking_number?: Maybe<Scalars['String']['output']>;
+  color_hex?: Maybe<Scalars['String']['output']>;
+  color_label?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['Date']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  main_option?: Maybe<Scalars['String']['output']>;
+  piece_price?: Maybe<Scalars['Float']['output']>;
+  product?: Maybe<Scalars['JSON']['output']>;
+  product_count?: Maybe<Scalars['Int']['output']>;
+  secondary_option?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  stock_number?: Maybe<Scalars['String']['output']>;
+  total_price?: Maybe<Scalars['Float']['output']>;
+  total_price_with_tax?: Maybe<Scalars['Float']['output']>;
+  user?: Maybe<Scalars['JSON']['output']>;
 };
 
 export type Version_Page__Bank_Account = {
@@ -5164,7 +5761,15 @@ export type GetProductDataQueryVariables = Exact<{
 }>;
 
 
-export type GetProductDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'products', id: string, name?: string | null, slug?: string | null, sub_category_variation?: { __typename?: 'sub_category_variations', name?: string | null, slug?: string | null } | null, variatins?: Array<{ __typename?: 'product_variations', piece_price?: number | null, stock_code?: string | null, video_url?: string | null, main_option?: { __typename?: 'product_options', id: string, name?: string | null, code?: string | null, category?: { __typename?: 'product_option_categories', id: string, name?: string | null } | null } | null, secondary_option?: { __typename?: 'product_options', id: string, name?: string | null, code?: string | null, category?: { __typename?: 'product_option_categories', id: string, name?: string | null } | null } | null, color?: { __typename?: 'product_colors', name?: string | null, color?: string | null } | null, purchase_count_prices?: Array<{ __typename?: 'purchases_counts', id: string, count?: number | null, price?: number | null } | null> | null, images?: Array<{ __typename?: 'product_variation_images', big_image?: string | null, small_image?: string | null } | null> | null } | null> | null }> };
+export type GetProductDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'products', id: string, name?: string | null, slug?: string | null, sub_category_variation?: { __typename?: 'sub_category_variations', name?: string | null, slug?: string | null } | null, variatins?: Array<{ __typename?: 'product_variations', id: string, piece_price?: number | null, stock_code?: string | null, video_url?: string | null, main_option?: { __typename?: 'product_options', id: string, name?: string | null, code?: string | null, category?: { __typename?: 'product_option_categories', id: string, name?: string | null } | null } | null, secondary_option?: { __typename?: 'product_options', id: string, name?: string | null, code?: string | null, category?: { __typename?: 'product_option_categories', id: string, name?: string | null } | null } | null, color?: { __typename?: 'product_colors', name?: string | null, color?: string | null } | null, purchase_count_prices?: Array<{ __typename?: 'purchases_counts', id: string, count?: number | null, price?: number | null } | null> | null, images?: Array<{ __typename?: 'product_variation_images', big_image?: string | null, small_image?: string | null } | null> | null } | null> | null }> };
+
+export type GetOrdersQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetOrdersQuery = { __typename?: 'Query', orders: Array<{ __typename?: 'orders', id: string, stock_number?: string | null, product_count?: number | null, color_hex?: string | null, color_label?: string | null, main_option?: string | null, secondary_option?: string | null, total_price?: number | null, piece_price?: number | null, total_price_with_tax?: number | null, status?: string | null, cargo_tracking_number?: string | null, product?: { __typename?: 'product_variations', images?: Array<{ __typename?: 'product_variation_images', small_image?: string | null } | null> | null } | null, cargo_company?: { __typename?: 'cargo_company', name?: string | null, cargo_tracking_url?: string | null } | null }>, orders_aggregated: Array<{ __typename?: 'orders_aggregated', count?: { __typename?: 'orders_aggregated_count', id?: number | null } | null }> };
 
 
 export const GetBankAccountsDocument = gql`
@@ -5370,6 +5975,7 @@ export const GetProductDataDocument = gql`
       slug
     }
     variatins {
+      id
       main_option {
         id
         name
@@ -5408,6 +6014,38 @@ export const GetProductDataDocument = gql`
   }
 }
     `;
+export const GetOrdersDocument = gql`
+    query GetOrders($limit: Int, $offset: Int) {
+  orders(limit: $limit, offset: $offset, sort: ["-created_at"]) {
+    id
+    stock_number
+    product_count
+    color_hex
+    color_label
+    main_option
+    secondary_option
+    total_price
+    piece_price
+    total_price_with_tax
+    status
+    product {
+      images(limit: 1) {
+        small_image
+      }
+    }
+    cargo_company {
+      name
+      cargo_tracking_url
+    }
+    cargo_tracking_number
+  }
+  orders_aggregated {
+    count {
+      id
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -5442,6 +6080,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetProductData(variables?: GetProductDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProductDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductDataQuery>({ document: GetProductDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProductData', 'query', variables);
+    },
+    GetOrders(variables?: GetOrdersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetOrdersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetOrdersQuery>({ document: GetOrdersDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetOrders', 'query', variables);
     }
   };
 }

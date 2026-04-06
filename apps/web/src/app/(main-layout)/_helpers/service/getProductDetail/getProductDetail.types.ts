@@ -29,6 +29,8 @@ export interface VariantData {
    *  - without sub     : "{mainId}__{colorId}"
    */
   key: string;
+  /** Directus product_variations row ID */
+  id: string;
   mainOptionId: string;
   subOptionId?: string;
   colorId: string;

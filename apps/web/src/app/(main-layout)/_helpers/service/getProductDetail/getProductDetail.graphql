@@ -8,6 +8,7 @@ query GetProductData($slug: String) {
       slug
     }
     variatins {
+      id
       main_option {
         id
         name

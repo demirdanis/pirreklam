@@ -2,10 +2,13 @@
 
 import {
   ChevronDown,
+  LogIn,
   Menu,
   MessageCircle,
   Phone,
   Search,
+  ShoppingBag,
+  User,
   X,
 } from 'lucide-react';
 
@@ -13,19 +16,84 @@ import type { Category } from '../category-bar/category-bar.types';
 import type { HeaderData } from './header.types';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 interface HeaderProps {
   data: HeaderData;
   categories?: Category[];
+  isLoggedIn?: boolean;
 }
 
-export default function Header({ data, categories = [] }: HeaderProps) {
+export default function Header({
+  data,
+  categories = [],
+  isLoggedIn = false,
+}: HeaderProps) {
+  const router = useRouter();
+
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [mobileCatOpen, setMobileCatOpen] = useState(false);
   const [mobileCatExpandedId, setMobileCatExpandedId] = useState<string | null>(
     null
   );
+
+  // Login panel state
+  const [loginPanelOpen, setLoginPanelOpen] = useState(false);
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginStatus, setLoginStatus] = useState<
+    'idle' | 'loading' | 'success' | 'error'
+  >('idle');
+  const [loginError, setLoginError] = useState('');
+
+  // User menu state
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  function openLoginPanel() {
+    setLoginPanelOpen(true);
+    setMobileSearchOpen(false);
+    setMobileCatOpen(false);
+    setLoginEmail('');
+    setLoginStatus('idle');
+    setLoginError('');
+  }
+
+  function closeLoginPanel() {
+    setLoginPanelOpen(false);
+    setLoginEmail('');
+    setLoginStatus('idle');
+    setLoginError('');
+  }
+
+  async function submitLogin(e: React.FormEvent) {
+    e.preventDefault();
+    if (!loginEmail) return;
+    setLoginStatus('loading');
+    setLoginError('');
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: loginEmail }),
+      });
+      const resData = await res.json();
+      if (!res.ok) {
+        setLoginError(resData.error ?? 'Bir hata oluştu.');
+        setLoginStatus('error');
+        return;
+      }
+      setLoginStatus('success');
+    } catch {
+      setLoginError('Sunucuya bağlanılamadı.');
+      setLoginStatus('error');
+    }
+  }
+
+  async function handleLogout() {
+    await fetch('/api/logout', { method: 'POST' });
+    setUserMenuOpen(false);
+    router.refresh();
+  }
 
   return (
     <header className="z-6000 w-full">
@@ -48,7 +116,15 @@ export default function Header({ data, categories = [] }: HeaderProps) {
           <div className="flex items-center gap-1">
             <button
               type="button"
-              onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
+              onClick={() => {
+                if (mobileSearchOpen) {
+                  setMobileSearchOpen(false);
+                } else {
+                  setMobileSearchOpen(true);
+                  closeLoginPanel();
+                  setMobileCatOpen(false);
+                }
+              }}
               aria-label="Ara"
               className="flex h-7 w-7 items-center justify-center text-white/85 hover:text-white transition-colors"
             >
@@ -58,6 +134,42 @@ export default function Header({ data, categories = [] }: HeaderProps) {
                 <Search className="h-4 w-4" />
               )}
             </button>
+
+            {/* Login / User — mobile */}
+            {isLoggedIn ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setUserMenuOpen(!userMenuOpen);
+                  setMobileCatOpen(false);
+                  setMobileSearchOpen(false);
+                }}
+                aria-label="Hesabım"
+                className="flex h-7 w-7 items-center justify-center text-white/85 hover:text-white transition-colors"
+              >
+                <User className="h-4 w-4" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  if (loginPanelOpen) {
+                    closeLoginPanel();
+                  } else {
+                    openLoginPanel();
+                  }
+                }}
+                aria-label="Giriş Yap"
+                className="flex h-7 w-7 items-center justify-center text-white/85 hover:text-white transition-colors"
+              >
+                {loginPanelOpen ? (
+                  <X className="h-4 w-4" />
+                ) : (
+                  <LogIn className="h-4 w-4" />
+                )}
+              </button>
+            )}
+
             <button
               type="button"
               onClick={() => {
@@ -99,7 +211,7 @@ export default function Header({ data, categories = [] }: HeaderProps) {
             ))}
           </div>
 
-          {/* Right: Social icons */}
+          {/* Right: Social icons + Login/User */}
           <div className="flex items-center gap-2">
             {data.socialLinks.map((social) => (
               <a
@@ -112,6 +224,128 @@ export default function Header({ data, categories = [] }: HeaderProps) {
                 <img src={social.logoUrl} className="h-4 w-4" />
               </a>
             ))}
+
+            <div className="w-px h-4 bg-white/20 mx-1" />
+
+            {/* Login / User — desktop */}
+            {isLoggedIn ? (
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="flex items-center gap-1.5 rounded px-2 py-1 text-xs font-medium text-white/85 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  <User className="h-4 w-4" />
+                  <span>Hesabım</span>
+                  <ChevronDown
+                    className={`h-3 w-3 transition-transform duration-200 ${userMenuOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {userMenuOpen && (
+                  <div className="absolute right-0 top-full mt-1 w-44 rounded-lg border border-white/10 bg-[#0d1e3a] shadow-xl z-50 overflow-hidden">
+                    <Link
+                      href="/siparislerim"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-white/80 hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      <ShoppingBag className="h-4 w-4" />
+                      Siparişlerim
+                    </Link>
+                    <div className="border-t border-white/10" />
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="flex w-full items-center gap-2 px-4 py-2.5 text-sm text-red-400 hover:text-red-300 hover:bg-white/5 transition-colors"
+                    >
+                      <LogIn className="h-4 w-4 rotate-180" />
+                      Çıkış Yap
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (loginPanelOpen) {
+                      closeLoginPanel();
+                    } else {
+                      openLoginPanel();
+                    }
+                  }}
+                  className="flex items-center gap-1.5 rounded px-2 py-1 text-xs font-medium text-white/85 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  <LogIn className="h-4 w-4" />
+                  <span>Giriş Yap</span>
+                </button>
+                {loginPanelOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-80 rounded-xl border border-white/10 bg-[#0d1e3a] shadow-xl z-50 p-4">
+                    {loginStatus === 'success' ? (
+                      <div className="text-center py-2">
+                        <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-500/10 mb-3">
+                          <svg
+                            className="h-5 w-5 text-green-400"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                        </div>
+                        <p className="text-sm font-medium text-white mb-1">
+                          E-postanızı kontrol edin!
+                        </p>
+                        <p className="text-xs text-white/50">
+                          Giriş linki{' '}
+                          <strong className="text-white/70">
+                            {loginEmail}
+                          </strong>{' '}
+                          adresine gönderildi.
+                        </p>
+                      </div>
+                    ) : (
+                      <form onSubmit={submitLogin} className="space-y-3">
+                        <p className="text-xs text-white/60">
+                          E-posta adresinizi girin, giriş linki gönderelim.
+                        </p>
+                        <input
+                          type="email"
+                          autoFocus
+                          value={loginEmail}
+                          onChange={(e) => {
+                            setLoginEmail(e.target.value);
+                            if (loginStatus === 'error') {
+                              setLoginStatus('idle');
+                              setLoginError('');
+                            }
+                          }}
+                          placeholder="ornek@email.com"
+                          className="w-full rounded-lg border border-white/15 bg-white/8 px-3 py-2 text-sm text-white placeholder-white/35 outline-none focus:border-[#cc0636]/60 transition-colors"
+                        />
+                        {loginError && (
+                          <p className="text-xs text-red-400">{loginError}</p>
+                        )}
+                        <button
+                          type="submit"
+                          disabled={loginStatus === 'loading' || !loginEmail}
+                          className="w-full rounded-lg bg-[#cc0636] hover:bg-[#a8052c] disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium py-2 transition-colors"
+                        >
+                          {loginStatus === 'loading'
+                            ? 'Gönderiliyor…'
+                            : 'Giriş Linki Gönder'}
+                        </button>
+                      </form>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -347,6 +581,83 @@ export default function Header({ data, categories = [] }: HeaderProps) {
               className="w-full bg-transparent text-sm text-white placeholder-white/30 outline-none"
             />
           </div>
+        </div>
+      )}
+
+      {/* Mobile Login Panel */}
+      {loginPanelOpen && !isLoggedIn && (
+        <div className="lg:hidden border-t border-[#2a2d2d] bg-[#25497f] px-4 py-3">
+          {loginStatus === 'success' ? (
+            <div className="flex items-center gap-2 text-sm text-green-400 justify-center py-1">
+              <svg
+                className="h-4 w-4 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <span>Giriş linki e-postanıza gönderildi!</span>
+            </div>
+          ) : (
+            <form onSubmit={submitLogin} className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 rounded-md border border-[#2a2d2d] focus-within:border-[#cc0636] bg-[#1a3260] px-3 py-1.5 transition-colors">
+                <input
+                  type="email"
+                  value={loginEmail}
+                  onChange={(e) => {
+                    setLoginEmail(e.target.value);
+                    if (loginStatus === 'error') {
+                      setLoginStatus('idle');
+                      setLoginError('');
+                    }
+                  }}
+                  placeholder="E-posta adresiniz..."
+                  autoFocus
+                  className="w-full bg-transparent text-sm text-white placeholder-white/30 outline-none"
+                />
+              </div>
+              {loginError && (
+                <p className="text-xs text-red-400">{loginError}</p>
+              )}
+              <button
+                type="submit"
+                disabled={loginStatus === 'loading' || !loginEmail}
+                className="rounded-md bg-[#cc0636] hover:bg-[#a8052c] disabled:opacity-50 text-white text-sm font-medium py-1.5 transition-colors"
+              >
+                {loginStatus === 'loading'
+                  ? 'Gönderiliyor…'
+                  : 'Giriş Linki Gönder'}
+              </button>
+            </form>
+          )}
+        </div>
+      )}
+
+      {/* Mobile User Menu */}
+      {userMenuOpen && isLoggedIn && (
+        <div className="lg:hidden bg-[#0d1e3a] border-b border-[#000000]">
+          <Link
+            href="/siparislerim"
+            onClick={() => setUserMenuOpen(false)}
+            className="flex items-center gap-2.5 px-4 py-3.5 text-sm font-medium text-white/80 hover:text-white hover:bg-white/5 transition-colors border-b border-[#1a2d4a]"
+          >
+            <ShoppingBag className="h-4 w-4" />
+            Siparişlerim
+          </Link>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex w-full items-center gap-2.5 px-4 py-3.5 text-sm font-medium text-red-400 hover:text-red-300 hover:bg-white/5 transition-colors"
+          >
+            <LogIn className="h-4 w-4 rotate-180" />
+            Çıkış Yap
+          </button>
         </div>
       )}
 

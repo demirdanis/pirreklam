@@ -347,18 +347,54 @@ function RelatedCard({
 // MAIN COMPONENT
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function ProductDetail({ data }: { data: ProductDetailData }) {
+export default function ProductDetail({
+  data,
+  isLoggedIn = false,
+  initialMain,
+  initialSub,
+  initialColor,
+  initialQty,
+  autoOpenOrder = false,
+}: {
+  data: ProductDetailData;
+  isLoggedIn?: boolean;
+  initialMain?: string;
+  initialSub?: string;
+  initialColor?: string;
+  initialQty?: number;
+  autoOpenOrder?: boolean;
+}) {
   const hasSub = Boolean(data.subOptionGroup);
   const firstVariant = data.variants[0];
 
   // ── Selection state ──
-  const [selMain, setSelMain] = useState(firstVariant?.mainOptionId ?? '');
-  const [selSub, setSelSub] = useState<string | null>(
-    firstVariant?.subOptionId ?? null
+  const [selMain, setSelMain] = useState(
+    initialMain ?? firstVariant?.mainOptionId ?? ''
   );
-  const [selColor, setSelColor] = useState(firstVariant?.colorId ?? '');
-  const [selQty, setSelQty] = useState<number>(200);
+  const [selSub, setSelSub] = useState<string | null>(
+    initialSub ?? firstVariant?.subOptionId ?? null
+  );
+  const [selColor, setSelColor] = useState(
+    initialColor ?? firstVariant?.colorId ?? ''
+  );
+  const [selQty, setSelQty] = useState<number>(
+    initialQty ?? firstVariant?.tiers[0]?.qty ?? 200
+  );
   const [activeImg, setActiveImg] = useState(0);
+
+  // ── Order popup state ──
+  const [orderPopupOpen, setOrderPopupOpen] = useState(autoOpenOrder);
+  const [orderLoginTab, setOrderLoginTab] = useState<'register' | 'guest'>(
+    'register'
+  );
+  const [orderLoginEmail, setOrderLoginEmail] = useState('');
+  const [orderLoginStatus, setOrderLoginStatus] = useState<
+    'idle' | 'sending' | 'sent' | 'error'
+  >('idle');
+  const [orderLoginError, setOrderLoginError] = useState('');
+  const [orderCreating, setOrderCreating] = useState(false);
+  const [orderCreated, setOrderCreated] = useState(false);
+  const [orderError, setOrderError] = useState('');
 
   // ── Find exact variant ──
   const findVariant = useCallback(
@@ -545,6 +581,101 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
       `📌 Tahmini Toplam: ${fmt(totalExVat)} ₺ (KDV Hariç)`
   );
   const waUrl = `https://wa.me/905442338003?text=${waMsg}`;
+
+  // ── Order handlers ──
+  const handleOpenOrder = useCallback(() => {
+    setOrderPopupOpen(true);
+    setOrderCreated(false);
+    setOrderError('');
+    setOrderLoginStatus('idle');
+    setOrderLoginEmail('');
+  }, []);
+
+  const handleCloseOrder = useCallback(() => {
+    setOrderPopupOpen(false);
+  }, []);
+
+  const handleCreateOrder = useCallback(async () => {
+    const tier = currentVariant?.tiers.find((t) => t.qty === selQty);
+    if (!tier || !currentVariant) return;
+    const totalEx = tier.perUnitExVat * selQty;
+    const totalInc = totalEx * 1.2;
+    setOrderCreating(true);
+    setOrderError('');
+    try {
+      const res = await fetch('/api/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          stock_number: currentVariant.productCode,
+          variant_id: currentVariant.id,
+          product_count: selQty,
+          color_hex:
+            data.colors.find((c) => c.id === selColor)?.hex ?? undefined,
+          color_label: selColorLabel || undefined,
+          main_option: selMainLabel || undefined,
+          secondary_option: hasSub && selSubLabel ? selSubLabel : undefined,
+          piece_price: tier.perUnitExVat,
+          total_price: totalEx,
+          total_price_with_tax: totalInc,
+        }),
+      });
+      if (!res.ok) {
+        const err = (await res.json().catch(() => ({}))) as { error?: string };
+        throw new Error(err.error ?? 'Sipariş oluşturulamadı.');
+      }
+      setOrderCreated(true);
+    } catch (e) {
+      setOrderError(
+        e instanceof Error ? e.message : 'Bir hata oluştu. Tekrar deneyin.'
+      );
+    } finally {
+      setOrderCreating(false);
+    }
+  }, [
+    currentVariant,
+    selQty,
+    selColor,
+    selColorLabel,
+    selMainLabel,
+    selSubLabel,
+    hasSub,
+    data.colors,
+  ]);
+
+  const handleOrderLogin = useCallback(async () => {
+    if (!orderLoginEmail) return;
+    setOrderLoginStatus('sending');
+    setOrderLoginError('');
+    try {
+      const currentPath =
+        typeof window !== 'undefined' ? window.location.pathname : '';
+      const params = new URLSearchParams({
+        main: selMain,
+        color: selColor,
+        qty: String(selQty),
+        onOrder: 'true',
+      });
+      if (selSub) params.set('sub', selSub);
+      const redirectUrl = `${currentPath}?${params.toString()}`;
+
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: orderLoginEmail, redirectUrl }),
+      });
+      if (!res.ok) {
+        const err = (await res.json().catch(() => ({}))) as { error?: string };
+        throw new Error(err.error ?? 'Bağlantı gönderilemedi.');
+      }
+      setOrderLoginStatus('sent');
+    } catch (e) {
+      setOrderLoginStatus('error');
+      setOrderLoginError(
+        e instanceof Error ? e.message : 'Bir hata oluştu. Tekrar deneyin.'
+      );
+    }
+  }, [orderLoginEmail, selMain, selSub, selColor, selQty]);
 
   return (
     <div className="bg-[#f5f6f7] min-h-screen">
@@ -759,7 +890,10 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
 
             {/* ── Order buttons ── */}
             <div className="flex gap-3">
-              <button className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-[#cc0636] px-4 py-4 text-sm font-bold text-white shadow-lg shadow-[#cc0636]/20 transition-all hover:bg-[#a8042c] active:scale-98">
+              <button
+                onClick={handleOpenOrder}
+                className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-[#cc0636] px-4 py-4 text-sm font-bold text-white shadow-lg shadow-[#cc0636]/20 transition-all hover:bg-[#a8042c] active:scale-98"
+              >
                 Anında Sipariş Ver
               </button>
               <a
@@ -844,6 +978,297 @@ export default function ProductDetail({ data }: { data: ProductDetailData }) {
           </div>
         )}
       </div>
+
+      {/* ── Order confirmation popup ── */}
+      {orderPopupOpen &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-9999 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4"
+            onClick={handleCloseOrder}
+          >
+            <div
+              className="relative w-full sm:max-w-lg bg-white sm:rounded-2xl rounded-t-2xl overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-[#091530]/8">
+                <h2 className="text-base font-bold text-[#091530]">
+                  {orderCreated ? '✓ Siparişiniz Alındı' : 'Siparişi Onayla'}
+                </h2>
+                <button
+                  onClick={handleCloseOrder}
+                  className="flex h-7 w-7 items-center justify-center rounded-full bg-[#091530]/8 text-[#091530]/50 hover:bg-[#091530]/15 transition-colors"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+
+              {orderCreated ? (
+                /* ── Success view ── */
+                <div className="px-5 py-8 flex flex-col items-center gap-4 text-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                    <svg
+                      className="h-8 w-8 text-green-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-[#091530]">
+                      Siparişiniz başarıyla oluşturuldu.
+                    </p>
+                    <p className="text-xs text-[#091530]/50 mt-1">
+                      Siparişlerim sayfasından takip edebilirsiniz.
+                    </p>
+                  </div>
+                  <div className="flex gap-3 w-full mt-2">
+                    <Link
+                      href="/siparislerim"
+                      className="flex-1 rounded-xl border border-[#091530]/15 py-3 text-center text-sm font-semibold text-[#091530]/70 hover:border-[#091530]/30 transition-colors"
+                      onClick={handleCloseOrder}
+                    >
+                      Siparişlerime Git
+                    </Link>
+                    <button
+                      onClick={handleCloseOrder}
+                      className="flex-1 rounded-xl bg-[#cc0636] py-3 text-sm font-bold text-white hover:bg-[#a8042c] transition-colors"
+                    >
+                      Tamam
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="overflow-y-auto max-h-[80vh]">
+                  {/* ── Order summary ── */}
+                  <div className="px-5 pt-4 pb-3 space-y-3">
+                    {/* Product title + code */}
+                    <div className="flex items-start gap-3">
+                      {images[0] && (
+                        <div className="relative h-14 w-14 shrink-0 rounded-lg overflow-hidden border border-[#091530]/8 bg-white">
+                          <Image
+                            src={images[0]}
+                            alt={data.title}
+                            fill
+                            className="object-contain p-1"
+                            unoptimized
+                          />
+                        </div>
+                      )}
+                      <div className="min-w-0">
+                        <p className="text-sm font-bold text-[#091530] leading-tight line-clamp-2">
+                          {data.title}
+                        </p>
+                        {currentVariant && (
+                          <p className="text-[11px] text-[#cc0636] font-mono font-semibold mt-0.5">
+                            {currentVariant.productCode}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Selection details */}
+                    <div className="rounded-xl bg-[#091530]/4 p-3 space-y-1.5 text-xs">
+                      <div className="flex justify-between">
+                        <span className="text-[#091530]/50">
+                          {data.mainOptionGroup.title}
+                        </span>
+                        <span className="font-semibold text-[#091530]">
+                          {selMainLabel}
+                        </span>
+                      </div>
+                      {hasSub && selSubLabel && (
+                        <div className="flex justify-between">
+                          <span className="text-[#091530]/50">
+                            {data.subOptionGroup!.title}
+                          </span>
+                          <span className="font-semibold text-[#091530]">
+                            {selSubLabel}
+                          </span>
+                        </div>
+                      )}
+                      <div className="flex items-center justify-between">
+                        <span className="text-[#091530]/50">Renk</span>
+                        <span className="flex items-center gap-1.5 font-semibold text-[#091530]">
+                          {data.colors.find((c) => c.id === selColor)?.hex && (
+                            <span
+                              className="h-3 w-3 rounded-full border border-black/10 shrink-0"
+                              style={{
+                                backgroundColor: data.colors.find(
+                                  (c) => c.id === selColor
+                                )!.hex,
+                              }}
+                            />
+                          )}
+                          {selColorLabel}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-[#091530]/50">Adet</span>
+                        <span className="font-semibold text-[#091530]">
+                          {selQty.toLocaleString('tr-TR')}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Pricing */}
+                    {currentTier && (
+                      <div className="rounded-xl border border-[#091530]/8 p-3 space-y-1.5 text-xs">
+                        <div className="flex justify-between">
+                          <span className="text-[#091530]/50">
+                            Birim Fiyat (KDV Hariç)
+                          </span>
+                          <span className="font-semibold text-[#091530]">
+                            {fmt(currentTier.perUnitExVat)} ₺
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-[#091530]/50">
+                            Toplam (KDV Hariç)
+                          </span>
+                          <span className="font-semibold text-[#091530]">
+                            {fmt(totalExVat)} ₺
+                          </span>
+                        </div>
+                        <div className="flex justify-between border-t border-[#091530]/8 pt-1.5 mt-1">
+                          <span className="font-medium text-[#091530]/70">
+                            Toplam (KDV Dahil %20)
+                          </span>
+                          <span className="font-bold text-[#cc0636] text-sm">
+                            {fmt(totalIncVat)} ₺
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* ── Action area ── */}
+                  <div className="px-5 pb-5">
+                    {isLoggedIn ? (
+                      /* Logged-in: confirm button */
+                      <div className="space-y-2">
+                        {orderError && (
+                          <p className="text-xs text-red-600 bg-red-50 rounded-lg px-3 py-2">
+                            {orderError}
+                          </p>
+                        )}
+                        <div className="flex gap-3">
+                          <button
+                            onClick={handleCloseOrder}
+                            className="flex-1 rounded-xl border border-[#091530]/15 py-3.5 text-sm font-semibold text-[#091530]/60 hover:border-[#091530]/30 transition-colors"
+                          >
+                            Vazgeç
+                          </button>
+                          <button
+                            onClick={handleCreateOrder}
+                            disabled={orderCreating}
+                            className="flex-1 rounded-xl bg-[#cc0636] py-3.5 text-sm font-bold text-white hover:bg-[#a8042c] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                          >
+                            {orderCreating
+                              ? 'Oluşturuluyor…'
+                              : 'Siparişi Oluştur'}
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      /* Not logged in: tabs */
+                      <div className="space-y-3">
+                        {/* Tab buttons */}
+                        <div className="flex rounded-xl overflow-hidden border border-[#091530]/12">
+                          <button
+                            onClick={() => {
+                              setOrderLoginTab('register');
+                              setOrderLoginStatus('idle');
+                            }}
+                            className={cn(
+                              'flex-1 py-2.5 text-xs font-semibold transition-colors',
+                              orderLoginTab === 'register'
+                                ? 'bg-[#091530] text-white'
+                                : 'bg-white text-[#091530]/50 hover:text-[#091530]'
+                            )}
+                          >
+                            Üye Ol
+                          </button>
+                          <button
+                            onClick={() => {
+                              setOrderLoginTab('guest');
+                              setOrderLoginStatus('idle');
+                            }}
+                            className={cn(
+                              'flex-1 py-2.5 text-xs font-semibold transition-colors border-l border-[#091530]/12',
+                              orderLoginTab === 'guest'
+                                ? 'bg-[#091530] text-white'
+                                : 'bg-white text-[#091530]/50 hover:text-[#091530]'
+                            )}
+                          >
+                            Üye Olmadan Devam Et
+                          </button>
+                        </div>
+
+                        {orderLoginStatus === 'sent' ? (
+                          <div className="rounded-xl bg-green-50 border border-green-200 px-4 py-4 text-center space-y-1">
+                            <p className="text-sm font-semibold text-green-800">
+                              E-postanızı kontrol edin
+                            </p>
+                            <p className="text-xs text-green-700">
+                              Gönderilen bağlantıya tıklayınca siparişiniz
+                              otomatik başlatılacak.
+                            </p>
+                          </div>
+                        ) : (
+                          <div className="space-y-2">
+                            <p className="text-xs text-[#091530]/50">
+                              {orderLoginTab === 'register'
+                                ? 'Üye olun, siparişlerinizi kolayca takip edin.'
+                                : 'Siparişinizi takip etmek için e-posta adresinizi girin.'}
+                            </p>
+                            <input
+                              type="email"
+                              value={orderLoginEmail}
+                              onChange={(e) =>
+                                setOrderLoginEmail(e.target.value)
+                              }
+                              onKeyDown={(e) =>
+                                e.key === 'Enter' && handleOrderLogin()
+                              }
+                              placeholder="E-posta adresiniz"
+                              className="w-full rounded-xl border border-[#091530]/15 px-4 py-3 text-sm text-[#091530] placeholder:text-[#091530]/30 focus:outline-none focus:border-[#cc0636] transition-colors"
+                            />
+                            {orderLoginError && (
+                              <p className="text-xs text-red-600">
+                                {orderLoginError}
+                              </p>
+                            )}
+                            <button
+                              onClick={handleOrderLogin}
+                              disabled={
+                                orderLoginStatus === 'sending' ||
+                                !orderLoginEmail
+                              }
+                              className="w-full rounded-xl bg-[#cc0636] py-3.5 text-sm font-bold text-white hover:bg-[#a8042c] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                            >
+                              {orderLoginStatus === 'sending'
+                                ? 'Gönderiliyor…'
+                                : 'Bağlantı Gönder'}
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>,
+          document.body
+        )}
     </div>
   );
 }

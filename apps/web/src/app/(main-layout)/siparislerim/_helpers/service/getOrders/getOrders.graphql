@@ -1,0 +1,32 @@
+query GetOrders($limit: Int, $offset: Int) {
+  orders(limit: $limit, offset: $offset, sort: ["-created_at"]) {
+    id
+    stock_number
+    product_count
+    color_hex
+    color_label
+    main_option
+    secondary_option
+    total_price
+    piece_price
+    total_price_with_tax
+    status
+    product {
+      images(limit: 1) {
+        small_image
+      }
+    }
+    cargo_company {
+      name
+      cargo_tracking_url
+    }
+
+    cargo_tracking_number
+  }
+
+  orders_aggregated {
+    count {
+      id
+    }
+  }
+}
