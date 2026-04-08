@@ -29,10 +29,7 @@ export default function HeroCarousel({ data }: HeroCarouselProps) {
   }, [next]);
 
   return (
-    <section
-      className="relative w-full overflow-hidden bg-[#25497f]"
-      style={{ height: 'clamp(240px, 50vw, 420px)' }}
-    >
+    <section className="relative w-full overflow-hidden bg-[#25497f] h-60 lg:h-[clamp(240px,50vw,420px)]">
       {slides.map((slide, i) => (
         <div
           key={slide.id}
@@ -57,7 +54,7 @@ export default function HeroCarousel({ data }: HeroCarouselProps) {
           <div className="absolute inset-0 flex items-center">
             <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="max-w-xl">
-                <span className="inline-block rounded-full border border-[#e32231]/40 bg-[#e32231]/10 px-3 py-1 text-[10px] font-bold  tracking-widest text-[#f74e56] mb-4">
+                <span className="inline-block rounded-full border border-white bg-white/10 px-3 py-1 text-[10px] font-bold  tracking-widest text-white mb-4">
                   {slide.badge ?? "Pir Reklam'da"}
                 </span>
                 <h2 className="text-1xl sm:text-3xl lg:text-5xl font-bold text-white leading-tight font-alt">
@@ -78,22 +75,6 @@ export default function HeroCarousel({ data }: HeroCarouselProps) {
           </div>
         </div>
       ))}
-
-      {/* Prev/Next buttons */}
-      <button
-        onClick={prev}
-        aria-label="Önceki slayt"
-        className="absolute left-4 top-1/2 z-20 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm hover:bg-[#cc0636]/80 transition-colors"
-      >
-        <ChevronLeft className="h-5 w-5" />
-      </button>
-      <button
-        onClick={next}
-        aria-label="Sonraki slayt"
-        className="absolute right-4 top-1/2 z-20 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm hover:bg-[#cc0636]/80 transition-colors"
-      >
-        <ChevronRight className="h-5 w-5" />
-      </button>
 
       {/* Dot indicators */}
       <div className="absolute bottom-5 left-1/2 z-20 -translate-x-1/2 flex items-center gap-2">

@@ -7,17 +7,28 @@ import { useRef, useState } from 'react';
 import Link from 'next/link';
 
 function CategoryDropdown({ category }: { category: Category }) {
+  const COLS = Math.ceil(category.subItems.length / 10);
+  const chunks = Array.from({ length: COLS }, (_, i) =>
+    category.subItems.slice(i * 10, i * 10 + 10)
+  );
   return (
-    <div className="w-56 rounded-b-lg bg-white shadow-xl border border-surface-secondary-light-b overflow-hidden">
-      {category.subItems.map((sub, i) => (
-        <Link
-          key={sub.href}
-          href={sub.href}
-          className={`flex items-center px-4 py-2.5 text-sm text-[#585d5d] hover:bg-surface-secondary-light-a hover:text-[#cc0636] transition-colors ${i === 0 ? '' : 'border-t border-[#f5f5f5]'}`}
+    <div className="rounded-b-lg bg-white shadow-xl border border-surface-secondary-light-b overflow-hidden flex flex-row">
+      {chunks.map((chunk, colIdx) => (
+        <div
+          key={colIdx}
+          className="flex flex-col"
+          style={{ borderLeft: colIdx > 0 ? '1px solid #f0f0f0' : 'none' }}
         >
-          <span className="h-1 w-1 rounded-full bg-[#cc0636]/40 mr-2.5 shrink-0" />
-          {sub.label}
-        </Link>
+          {chunk.map((sub) => (
+            <Link
+              key={sub.href}
+              href={sub.href}
+              className="flex items-center h-8 px-4 text-sm text-[#585d5d] hover:bg-surface-secondary-light-a hover:text-[#cc0636] transition-colors border-b border-[#f5f5f5] whitespace-nowrap"
+            >
+              {sub.label}
+            </Link>
+          ))}
+        </div>
       ))}
     </div>
   );
@@ -56,9 +67,9 @@ export default function CategoryBar({ data }: CategoryBarProps) {
   };
 
   return (
-    <div className="hidden lg:block sticky lg:top-[0px] z-5551 bg-[#cc0636] border-b border-[#000000]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative flex items-center" ref={containerRef}>
+    <div className="hidden lg:block sticky lg:top-[0px] z-5551 h-8 bg-[#cc0636] border-b border-[#000000]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full">
+        <div className="relative flex items-center h-full" ref={containerRef}>
           <div
             className="relative flex-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ml-[-8px]"
             ref={navRef}
@@ -76,7 +87,7 @@ export default function CategoryBar({ data }: CategoryBarProps) {
                 >
                   <button
                     type="button"
-                    className={`flex items-center gap-1.5 px-3 py-3.5 text-sm font-medium transition-colors whitespace-nowrap ${
+                    className={`flex items-center gap-1.5 px-3 py-1 text-sm font-medium transition-colors whitespace-nowrap ${
                       activeId === cat.id
                         ? 'text-white bg-white/5'
                         : 'text-white/85 hover:text-white'

@@ -209,15 +209,10 @@ function OptionButton({
           ? 'border-[#cc0636] bg-[#cc0636] text-white shadow-md shadow-[#cc0636]/30'
           : compatible
             ? 'border-[#091530]/15 bg-[#091530]/5 text-[#091530]/75 hover:border-[#091530]/30 hover:text-[#091530]'
-            : 'border-dashed border-[#091530]/10 bg-transparent text-[#091530]/25 hover:border-[#091530]/20 hover:text-[#091530]/40'
+            : 'border-dashed border-[#091530]/15 bg-transparent text-[#091530]/40 hover:border-[#091530]/25 hover:text-[#091530]/55'
       )}
     >
       {option.label}
-      {!compatible && !selected && (
-        <span className="ml-1 text-[9px] font-normal text-[#091530]/20">
-          uyumsuz
-        </span>
-      )}
     </button>
   );
 }
@@ -242,19 +237,19 @@ function ColorSwatch({
       onClick={onClick}
       title={color.label}
       className={cn(
-        'relative h-9 w-9 rounded-full transition-all flex items-center justify-center',
+        'relative h-5 w-5 rounded-full transition-all flex items-center justify-center',
         selected
           ? 'ring-2 ring-[#cc0636] ring-offset-2 ring-offset-[#f5f6f7] scale-110'
           : compatible
             ? 'ring-1 ring-[#091530]/10 hover:ring-[#091530]/30 hover:scale-105'
-            : 'opacity-35 hover:opacity-55'
+            : 'opacity-55 hover:opacity-70'
       )}
       style={{ backgroundColor: color.hex }}
     >
       {/* Incompatible X overlay */}
       {!compatible && (
-        <span className="absolute inset-0 flex items-center justify-center rounded-full bg-black/50">
-          <X className="h-3.5 w-3.5 text-white/70" />
+        <span className="absolute inset-0 flex items-center justify-center rounded-full bg-black/40">
+          <X className="h-2.5 w-2.5 text-white/80" />
         </span>
       )}
       {/* Selected check */}
@@ -790,10 +785,10 @@ export default function ProductDetail({
   ]);
 
   return (
-    <div className="bg-[#f5f6f7] min-h-screen">
+    <div className="bg-[#f5f6f7] ">
       <div className="mx-auto max-w-7xl px-4   py-4">
         {/* Breadcrumb */}
-        <nav className="mb-4 flex flex-wrap items-center gap-1 text-xs text-[#091530]/35">
+        <nav className="hidden lg:flex mb-4 flex flex-wrap items-center gap-1 text-xs text-[#091530]/35">
           {data.breadcrumb.map((crumb, i) => (
             <span key={crumb.href} className="flex items-center gap-1">
               {i > 0 && <ChevronRight className="h-3 w-3 text-[#091530]/15" />}
@@ -814,7 +809,7 @@ export default function ProductDetail({
         {/* ── Two-column layout ── */}
         <div className="lg:grid lg:grid-cols-2 lg:gap-4 xl:gap-8">
           {/* LEFT: Image gallery (sticky on desktop) */}
-          <div className="mb-8 lg:mb-0 lg:sticky lg:top-22 lg:self-start lg:h-[calc(100vh-250px)]">
+          <div className="mb-8 lg:mb-0 lg:sticky lg:top-22 lg:self-start min-h-[400px] h-[400px] lg:h-[calc(100vh-250px)] lg:min-h-[400px]">
             <ImageGallery
               images={images}
               activeIndex={activeImg}
@@ -933,13 +928,13 @@ export default function ProductDetail({
               <p className="text-[11px] font-bold  tracking-[0.12em] text-[#091530]/50 mt-1">
                 TOPLAM ADET SEÇİNİZ
               </p>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-4 gap-2">
                 {currentVariant?.tiers.map((tier) => (
                   <button
                     key={tier.qty}
                     onClick={() => setSelQty(tier.qty)}
                     className={cn(
-                      'flex flex-col items-center rounded-lg border px-2 py-1.5 transition-all',
+                      'flex flex-col items-center rounded-lg border px-1 py-1 transition-all',
                       selQty === tier.qty
                         ? 'border-[#cc0636] bg-[#cc0636]/10 shadow-md shadow-[#cc0636]/20'
                         : 'border-[#091530]/20 bg-white hover:border-[#091530]/40'
@@ -957,7 +952,7 @@ export default function ProductDetail({
                     </span>
                     <span
                       className={cn(
-                        'text-[10px] font-medium mt-0.5',
+                        'text-[10px] font-medium',
                         selQty === tier.qty
                           ? 'text-[#091530]'
                           : 'text-[#091530]/45'
@@ -1001,10 +996,10 @@ export default function ProductDetail({
             )}
 
             {/* ── Order buttons ── */}
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-2">
               <button
                 onClick={handleOpenOrder}
-                className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-[#cc0636] px-4 py-4 text-sm font-bold text-white shadow-lg shadow-[#cc0636]/20 transition-all hover:bg-[#a8042c] active:scale-98"
+                className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-[#cc0636] px-4 py-1.75 md:py-2.5 h-8.5 md:h-10 text-sm font-bold text-white shadow-lg shadow-[#cc0636]/20 transition-all hover:bg-[#a8042c] active:scale-98"
               >
                 Anında Sipariş Ver
               </button>
@@ -1012,7 +1007,7 @@ export default function ProductDetail({
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2.5 rounded-xl bg-[#25d366] px-4 py-4 text-sm font-bold text-white shadow-lg shadow-[#25d366]/20 transition-all hover:bg-[#22c25c] hover:shadow-[#25d366]/30 active:scale-98"
+                className="flex-1 flex items-center justify-center gap-2.5 rounded-xl bg-[#25d366]  px-4 py-1.75 md:py-2.5 h-8.5 md:h-10 text-sm font-bold text-white shadow-lg shadow-[#25d366]/20 transition-all hover:bg-[#22c25c] hover:shadow-[#25d366]/30 active:scale-98"
               >
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp ile Sipariş Ver

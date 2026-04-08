@@ -83,7 +83,7 @@ export default function Contact({ data }: ContactProps) {
               </div>
             </a>
 
-            <div className="flex items-start gap-4 rounded-2xl border border-surface-secondary-light-b bg-whitep-2 lg:p-4 ">
+            <div className="flex items-start gap-4 rounded-2xl border border-surface-secondary-light-b bg-white p-2 lg:p-4 ">
               <div className="shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e32231]/10">
                 <MapPin className="h-5 w-5 text-[#e32231]" />
               </div>

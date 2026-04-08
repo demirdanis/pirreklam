@@ -37,7 +37,7 @@ function PopularProductCard({
       </div>
       {/* Title */}
       <div className="flex items-center justify-between px-2 md:px-4 py-1 md:py-3.5 bg-[#cc0636]">
-        <p className="text-[12px] md:text-[14px] font-semibold text-white/85 tracking-wide leading-snug  transition-colors">
+        <p className="text-[12px] md:text-[14px] font-semibold text-white tracking-wide leading-snug  transition-colors">
           {title}
         </p>
         <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full  text-[#bbb] transition-all group-hover:bg-[#cc0636] group-hover:text-white">
@@ -57,7 +57,7 @@ export default function PopularProducts({ data }: PopularProductsProps) {
     <section className="bg-[#f5f6f7] py-4 md:py-8 lg:py-14">
       <div className=" mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8 text-center lg:text-left">
+        <div className="mb-4 md:mb-8 text-center lg:text-left">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#091530] font-alt">
             {data.title}
           </h2>

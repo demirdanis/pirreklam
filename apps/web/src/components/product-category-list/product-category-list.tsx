@@ -390,7 +390,7 @@ function SubCategorySection({
           <span className="text-xs text-[#bbb]">{products.length} ürün</span>
         </div>
       ) : null}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
@@ -451,14 +451,14 @@ export default function ProductCategoryList({
   return (
     <section className="bg-[#f5f6f7] min-h-screen">
       {!pathname.endsWith(subcategories?.[0]?.slug ?? '') ? (
-        <div className="sticky top-[0px] lg:top-[48px] z-40 bg-[#25497f] backdrop-blur-md border-b border-black">
+        <div className="sticky top-[0px] lg:top-[32px] z-40 bg-[#25497f] backdrop-blur-md border-b border-black">
           <div className="sticky left-0 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex gap-2 overflow-x-auto py-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="flex gap-2 overflow-x-auto py-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {subcategories.map((sc) => (
                 <a
                   key={sc.id}
                   href={`#${sc.id}`}
-                  className="shrink-0 rounded-lg border border-bg-white/10 px-3 py-1.5 text-xs font-medium text-white/60 transition-colors hover:border-white/90 hover:text-white/90 whitespace-nowrap"
+                  className="shrink-0 rounded-lg border border-bg-white/10 px-3 py-1 text-xs font-medium text-white/70 transition-colors hover:border-white/90 hover:text-white/90 whitespace-nowrap"
                 >
                   {sc.title}
                 </a>
