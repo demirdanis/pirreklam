@@ -35,6 +35,10 @@ export default function Header({
   const router = useRouter();
 
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const [mobileSearchVal, setMobileSearchVal] = useState('');
+  const mobileSearchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
   const [mobileCatOpen, setMobileCatOpen] = useState(false);
   const [mobileCatExpandedId, setMobileCatExpandedId] = useState<string | null>(
     null
@@ -68,6 +72,29 @@ export default function Header({
     setLoginEmail('');
     setLoginStatus('idle');
     setLoginError('');
+  }
+
+  function handleMobileSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const val = e.target.value;
+    setMobileSearchVal(val);
+    if (mobileSearchDebounceRef.current)
+      clearTimeout(mobileSearchDebounceRef.current);
+    if (!val.trim()) return;
+    mobileSearchDebounceRef.current = setTimeout(() => {
+      router.push(`/urunler/${encodeURIComponent(val.trim())}`);
+      setMobileSearchOpen(false);
+      setMobileSearchVal('');
+    }, 1000);
+  }
+
+  function handleMobileSearchKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'Enter' && mobileSearchVal.trim()) {
+      if (mobileSearchDebounceRef.current)
+        clearTimeout(mobileSearchDebounceRef.current);
+      router.push(`/urunler/${encodeURIComponent(mobileSearchVal.trim())}`);
+      setMobileSearchOpen(false);
+      setMobileSearchVal('');
+    }
   }
 
   async function submitLogin(e: React.FormEvent) {
@@ -117,7 +144,7 @@ export default function Header({
     <header className="z-6000 w-full relative">
       <Link
         href="/"
-        className="lg:hidden flex justify-center shrink-0 top-[20px] left-[calc(50%-125px)] z-50 absolute"
+        className="lg:hidden flex justify-center shrink-0 top-[12px] w-[96px] left-[calc(50%-48px)] z-50 absolute"
       >
         <div className="flex flex-col items-center gap-0.5">
           <div className="flex rounded-full bg-white p-1.5 gradient-shadow-white-636b7f h-[96px] w-[96px] items-center justify-center animate-brightness">
@@ -130,9 +157,27 @@ export default function Header({
               priority
             />
           </div>
-          <span className="text-[14px] mt-[-12px] rounded-xl font-semibold text-[#cc0636] tracking-[0.1em] px-2 bg-white whitespace-nowrap drop-shadow-sm animate-brightness">
+          <span className="text-[14px] px-2 py-1 mt-[-6px] rounded font-semibold text-white tracking-[0.12em] whitespace-nowrap drop-shadow-sm animate-brightness">
             1961&apos;den Beri Sektörün Pir&apos;i
           </span>
+        </div>
+      </Link>
+
+      <Link
+        href="/"
+        className="hidden lg:flex justify-center shrink-0 top-[8px]  w-[170px] left-[calc(50%-85px)] z-50 absolute"
+      >
+        <div className="flex flex-col items-center gap-0.5">
+          <div className="flex rounded-full bg-white p-1.5 gradient-shadow-white-636b7f h-[170px] w-[170px] items-center justify-center animate-brightness">
+            <Image
+              src="https://pirreklam.com.tr/wp-content/uploads/2026/01/cropped-Adsiz-tasarim.png"
+              alt="Pir Reklam"
+              width={90}
+              height={90}
+              className="h-[113px] w-auto object-contain mt-[-16px]"
+              priority
+            />
+          </div>
         </div>
       </Link>
 
@@ -449,26 +494,8 @@ export default function Header({
                 444 10 30
               </span>
             </a>
-            <Link
-              href="/"
-              className="flex justify-center shrink-0 -my-5 relative mb-[10px]"
-            >
-              <div className="flex flex-col items-center gap-1">
-                <div className="flex rounded-full bg-white p-2 gradient-shadow-white-636b7f h-[144px] w-[144px] items-center justify-center animate-brightness">
-                  <Image
-                    src="https://pirreklam.com.tr/wp-content/uploads/2026/01/cropped-Adsiz-tasarim.png"
-                    alt="Pir Reklam"
-                    width={102}
-                    height={102}
-                    className="h-25 -mt-3 rounded-xl w-auto object-contain"
-                    priority
-                  />
-                </div>
-                <span className="text-[14px] absolute bottom-[-6px] px-2 py-1 rounded bg-white font-semibold text-[#cc0636] tracking-[0.12em] whitespace-nowrap drop-shadow-sm animate-brightness">
-                  1961&apos;den Beri Sektörün Pir&apos;i
-                </span>
-              </div>
-            </Link>
+            <div className=" h-[144px] w-[144px]  "></div>
+
             <a
               href="https://wa.me/905442338003"
               target="_blank"
@@ -531,21 +558,21 @@ export default function Header({
             <Link
               href="/plastik-urunler/plakalik/"
               style={{ animationDelay: '0.75s' }}
-              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[16px] left-[42%]"
+              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[16px] left-[32%]"
             >
               Plakalık
             </Link>
             <Link
               href="/plastik-urunler/pasaport-kilifi/"
               style={{ animationDelay: '1.5s' }}
-              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[34px] left-[7%]"
+              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[34px] left-[4%]"
             >
               Pasaport Kılıfı
             </Link>
             <Link
               href="/plastik-urunler/vesikalik-kabi/"
               style={{ animationDelay: '2.25s' }}
-              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[50px] left-[28%]"
+              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[50px] left-[22%]"
             >
               Vesikalık Kabı
             </Link>
@@ -566,7 +593,7 @@ export default function Header({
             <Link
               href="/plastik-urunler/doviz-kabi/"
               style={{ animationDelay: '1.125s' }}
-              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[16px] left-[40%]"
+              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[16px] left-[54%]"
             >
               Döviz Kabı
             </Link>
@@ -574,14 +601,14 @@ export default function Header({
             <Link
               href="/plastik-urunler/veteriner-asi-karnesi-kabi/"
               style={{ animationDelay: '2.625s' }}
-              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[50px] left-[27%]"
+              className="animate-text-glow absolute text-[11px] text-right font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[50px] left-[27%]"
             >
               Veteriner Aşı Karnesi Kabı
             </Link>
             <Link
               href="/plastik-urunler/evlilik-cuzdani-kilifi/"
               style={{ animationDelay: '1.875s' }}
-              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[34px] right-[7%]"
+              className="animate-text-glow absolute text-[11px] text-right font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[34px] right-[7%]"
             >
               Evlilik Cüzdanı Kılıfı
             </Link>
@@ -631,15 +658,29 @@ export default function Header({
 
       {/* Mobile Search Input — below Phone Bar */}
       {mobileSearchOpen && (
-        <div className="lg:hidden border-t border-[#2a2d2d] bg-[#25497f] px-4 py-2.5">
-          <div className="flex items-center gap-2 rounded-md border border-[#2a2d2d] bg-[#25497f] px-3 py-1.5 focus-within:border-[#cc0636] transition-colors">
-            <Search className="h-3.5 w-3.5 text-white/40 shrink-0" />
-            <input
-              type="search"
-              placeholder="Ürün ara..."
-              autoFocus
-              className="w-full bg-transparent text-sm text-white placeholder-white/30 outline-none"
-            />
+        <div
+          className="fixed top-0 h-[100vh]  z-999999 w-full lg:hidden b bg-black/80 "
+          onClick={() => {
+            setMobileSearchOpen(false);
+            setMobileSearchVal('');
+          }}
+        >
+          <div
+            className="fixed top-4  z-999999 w-full lg:hidden px-4 "
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-2 rounded-md border border-[#414545]  bg-white py-2.5 px-3 py-1.5 focus-within:border-[#25497f] transition-colors">
+              <Search className="h-3.5 w-3.5 text-[#414545] shrink-0" />
+              <input
+                type="search"
+                placeholder="Ürün ara..."
+                autoFocus
+                value={mobileSearchVal}
+                onChange={handleMobileSearchChange}
+                onKeyDown={handleMobileSearchKeyDown}
+                className="w-full bg-transparent text-sm text-[#1f2222] placeholder-[#414545]/80 outline-none"
+              />
+            </div>
           </div>
         </div>
       )}

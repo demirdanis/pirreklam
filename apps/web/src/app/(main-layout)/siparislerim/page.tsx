@@ -195,7 +195,7 @@ function OrderCard({ order }: { order: Order }) {
             <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
               {order.created_at && (
                 <div className="shrink-0">
-                  <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+                  <p className="text-[10px] text-gray-400  tracking-wide">
                     Tarih
                   </p>
                   <p className="text-xs font-medium text-gray-700">
@@ -205,7 +205,7 @@ function OrderCard({ order }: { order: Order }) {
               )}
               {order.product_count != null && (
                 <div className="shrink-0">
-                  <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+                  <p className="text-[10px] text-gray-400  tracking-wide">
                     Adet
                   </p>
                   <p className="text-xs font-medium text-gray-700">
@@ -215,7 +215,7 @@ function OrderCard({ order }: { order: Order }) {
               )}
               {(order.color_hex || order.color_label) && (
                 <div className="shrink-0">
-                  <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+                  <p className="text-[10px] text-gray-400  tracking-wide">
                     Renk
                   </p>
                   <div className="flex items-center gap-1.5 mt-0.5">
@@ -240,7 +240,7 @@ function OrderCard({ order }: { order: Order }) {
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             {order.main_option && (
               <div>
-                <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+                <p className="text-[10px] text-gray-400  tracking-wide">
                   Seçenek
                 </p>
                 <p className="text-xs font-medium text-gray-700">
@@ -250,7 +250,7 @@ function OrderCard({ order }: { order: Order }) {
             )}
             {order.secondary_option && (
               <div>
-                <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+                <p className="text-[10px] text-gray-400  tracking-wide">
                   Alt Seçenek
                 </p>
                 <p className="text-xs font-medium text-gray-700">
@@ -265,7 +265,7 @@ function OrderCard({ order }: { order: Order }) {
         {order.invoice_info?.full_name && (
           <div className="flex flex-wrap gap-x-6 gap-y-2 pt-1 border-t border-gray-50">
             <div>
-              <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+              <p className="text-[10px] text-gray-400  tracking-wide">
                 Fatura Adı
               </p>
               <p className="text-xs font-medium text-gray-700">
@@ -274,7 +274,7 @@ function OrderCard({ order }: { order: Order }) {
             </div>
             {order.invoice_info.tckn && (
               <div>
-                <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+                <p className="text-[10px] text-gray-400  tracking-wide">
                   TC Kimlik
                 </p>
                 <p className="text-xs font-medium text-gray-700 font-mono">
@@ -326,7 +326,7 @@ function OrderCard({ order }: { order: Order }) {
         <div className="flex items-center gap-4">
           {order.piece_price != null && (
             <div>
-              <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+              <p className="text-[10px] text-gray-400  tracking-wide">
                 Birim Fiyat
               </p>
               <p className="text-sm font-semibold text-gray-700">
@@ -336,7 +336,7 @@ function OrderCard({ order }: { order: Order }) {
           )}
           {order.total_price != null && (
             <div>
-              <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+              <p className="text-[10px] text-gray-400  tracking-wide">
                 Ara Toplam
               </p>
               <p className="text-sm font-semibold text-gray-700">
@@ -347,7 +347,7 @@ function OrderCard({ order }: { order: Order }) {
         </div>
         {order.total_price_with_tax != null && (
           <div className="text-right">
-            <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+            <p className="text-[10px] text-gray-400  tracking-wide">
               Toplam (KDV dahil)
             </p>
             <p className="text-base font-bold text-[#cc0636]">

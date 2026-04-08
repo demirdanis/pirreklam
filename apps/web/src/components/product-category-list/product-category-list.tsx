@@ -319,7 +319,7 @@ function ProductCard({
   return (
     <Link
       href={`/${product.slug}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl bg-white border border-[#e2e5e8]  transition-all duration-300 hover:border-[#cc0636] hover:shadow-md hover:-translate-y-0.5"
+      className="group relative h-full flex flex-col overflow-hidden rounded-xl bg-white border border-[#e2e5e8]  transition-all duration-300 hover:border-[#cc0636] hover:shadow-md hover:-translate-y-0.5"
     >
       <div className="relative">
         <div className="relative aspect-square overflow-hidden rounded-t-xl bg-white">
@@ -371,7 +371,45 @@ function SubCategorySection({
     ? subcategoryVariation.products.filter((p) => filteredProductIds.has(p.id))
     : subcategoryVariation.products;
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    function checkScroll() {
+      if (!el) return;
+      setCanScrollLeft(el.scrollLeft > 1);
+      setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+    }
+
+    checkScroll();
+    el.addEventListener('scroll', checkScroll, { passive: true });
+    const ro = new ResizeObserver(checkScroll);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener('scroll', checkScroll);
+      ro.disconnect();
+    };
+  }, [products]);
+
+  function scrollBy(dir: 'left' | 'right') {
+    const el = scrollRef.current;
+    if (!el) return;
+    const itemWidth = el.firstElementChild
+      ? (el.firstElementChild as HTMLElement).offsetWidth + 16
+      : 240;
+    el.scrollBy({
+      left: dir === 'right' ? itemWidth : -itemWidth,
+      behavior: 'smooth',
+    });
+  }
+
   if (products.length === 0) return null;
+
+  const showArrows = canScrollLeft || canScrollRight;
 
   return (
     <section className="mb-8 lg:mb-12">
@@ -390,10 +428,52 @@ function SubCategorySection({
           <span className="text-xs text-[#bbb]">{products.length} ürün</span>
         </div>
       ) : null}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+
+      {/* Mobile: normal grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 lg:hidden">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
+      </div>
+
+      {/* Desktop: horizontal carousel */}
+      <div className="relative hidden lg:block">
+        {showArrows && canScrollLeft && (
+          <button
+            type="button"
+            onClick={() => scrollBy('left')}
+            aria-label="Sola kaydır"
+            className="absolute -left-4 top-1/2 z-10 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white border border-[#e2e5e8] shadow-md text-[#091530] hover:border-[#cc0636] hover:text-[#cc0636] transition-all"
+          >
+            <ChevronDown className="h-4 w-4 rotate-90" />
+          </button>
+        )}
+
+        <div
+          ref={scrollRef}
+          className="flex gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
+        >
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="flex-shrink-0"
+              style={{ width: 'calc((100% - 4 * 1rem) / 4.5)' }}
+            >
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
+
+        {showArrows && canScrollRight && (
+          <button
+            type="button"
+            onClick={() => scrollBy('right')}
+            aria-label="Sağa kaydır"
+            className="absolute -right-4 top-1/2 z-10 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white border border-[#e2e5e8] shadow-md text-[#091530] hover:border-[#cc0636] hover:text-[#cc0636] transition-all"
+          >
+            <ChevronDown className="h-4 w-4 -rotate-90" />
+          </button>
+        )}
       </div>
     </section>
   );
@@ -409,6 +489,9 @@ export default function ProductCategoryList({
   subcategories,
 }: ProductCategoryListData) {
   const pathname = usePathname();
+  const [selectedSubcategoryId, setSelectedSubcategoryId] = useState<
+    string | null
+  >(null);
 
   const [filters, setFilters] = useState<ActiveFilters>({
     mainOptionId: null,
@@ -458,7 +541,20 @@ export default function ProductCategoryList({
                 <a
                   key={sc.id}
                   href={`#${sc.id}`}
-                  className="shrink-0 rounded-lg border border-bg-white/10 px-3 py-1 text-xs font-medium text-white/70 transition-colors hover:border-white/90 hover:text-white/90 whitespace-nowrap"
+                  onClick={(e) => {
+                    setSelectedSubcategoryId(sc.id);
+                    (e.currentTarget as HTMLAnchorElement).scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'nearest',
+                      inline: 'center',
+                    });
+                  }}
+                  className={cn(
+                    'shrink-0 rounded-lg border px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap',
+                    selectedSubcategoryId === sc.id
+                      ? 'border-white/80 bg-white/80 text-[#25497f]'
+                      : 'border-bg-white/10 text-white/70 hover:border-white hover:bg-white/80 hover:text-[#25497f]'
+                  )}
                 >
                   {sc.title}
                 </a>
@@ -507,7 +603,7 @@ export default function ProductCategoryList({
           <div
             key={subcategoryVariation.id}
             id={subcategoryVariation.id}
-            className="scroll-mt-[220px] lg:scroll-mt-[260px]"
+            className="scroll-mt-[44px] lg:scroll-mt-[80px]"
           >
             <SubCategorySection
               subcategoryVariation={subcategoryVariation}

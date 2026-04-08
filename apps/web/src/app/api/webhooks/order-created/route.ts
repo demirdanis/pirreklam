@@ -147,7 +147,7 @@ export async function POST(req: NextRequest) {
               <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
                 <tr>
                   <td style="background:#fef9c3;border:2px solid #ca8a04;border-radius:8px;padding:16px 24px;text-align:center;">
-                    <p style="margin:0 0 4px;font-size:11px;color:#92400e;text-transform:uppercase;letter-spacing:0.08em;">Yeni Sipariş</p>
+                    <p style="margin:0 0 4px;font-size:11px;color:#92400e;text-transform:;letter-spacing:0.08em;">Yeni Sipariş</p>
                     <p style="margin:0;font-size:18px;font-weight:bold;color:#92400e;">Sipariş #${order.id} – ${productName}</p>
                   </td>
                 </tr>
@@ -158,7 +158,7 @@ export async function POST(req: NextRequest) {
           <!-- Customer & order details -->
           <tr>
             <td style="padding:0 40px 16px;">
-              <p style="margin:0 0 12px;font-size:12px;font-weight:bold;color:#091530;letter-spacing:0.1em;text-transform:uppercase;">Sipariş Detayları</p>
+              <p style="margin:0 0 12px;font-size:12px;font-weight:bold;color:#091530;letter-spacing:0.1em;text-transform:;">Sipariş Detayları</p>
               <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb;border-radius:6px;overflow:hidden;font-size:13px;">
                 <tr><td style="padding:10px 16px;background:#f9fafb;color:#6b7280;width:40%;">Sipariş No</td><td style="padding:10px 16px;font-weight:700;color:#111827;">#${order.id}</td></tr>
                 <tr><td style="padding:10px 16px;background:#f9fafb;color:#6b7280;border-top:1px solid #e5e7eb;">Tarih</td><td style="padding:10px 16px;color:#374151;border-top:1px solid #e5e7eb;">${orderDate}</td></tr>

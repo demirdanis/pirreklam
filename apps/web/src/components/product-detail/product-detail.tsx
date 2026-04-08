@@ -239,7 +239,7 @@ function ColorSwatch({
       className={cn(
         'relative h-5 w-5 rounded-full transition-all flex items-center justify-center',
         selected
-          ? 'ring-2 ring-[#cc0636] ring-offset-2 ring-offset-[#f5f6f7] scale-110'
+          ? 'ring-1 ring-[#cc0636] ring-offset-2  scale-110'
           : compatible
             ? 'ring-1 ring-[#091530]/10 hover:ring-[#091530]/30 hover:scale-105'
             : 'opacity-55 hover:opacity-70'
@@ -341,6 +341,8 @@ function RelatedCard({
 // ─────────────────────────────────────────────────────────────────────────────
 // MAIN COMPONENT
 // ─────────────────────────────────────────────────────────────────────────────
+
+const VAT_RATE = Number(process.env.NEXT_PUBLIC_VAT_RATE ?? 20);
 
 export default function ProductDetail({
   data,
@@ -597,8 +599,8 @@ export default function ProductDetail({
 
   // ── Pricing ──
   const currentTier = currentVariant?.tiers.find((t) => t.qty === selQty);
-  const totalExVat = currentTier ? currentTier.perUnitExVat * selQty : 0;
-  const totalIncVat = totalExVat * 1.2;
+  const totalExVat = currentTier ? currentTier.perUnitExVat : 0;
+  const totalIncVat = totalExVat * (1 + VAT_RATE / 100);
 
   // ── Current images ──
   const rawImages = currentVariant?.images ?? data.variants[0]?.images ?? [];
@@ -652,8 +654,8 @@ export default function ProductDetail({
   const handleCreateOrder = useCallback(async () => {
     const tier = currentVariant?.tiers.find((t) => t.qty === selQty);
     if (!tier || !currentVariant) return;
-    const totalEx = tier.perUnitExVat * selQty;
-    const totalInc = totalEx * 1.2;
+    const totalEx = tier.perUnitExVat;
+    const totalInc = totalEx * (1 + VAT_RATE / 100);
     setOrderCreating(true);
     setOrderError('');
     try {
@@ -669,7 +671,7 @@ export default function ProductDetail({
           color_label: selColorLabel || undefined,
           main_option: selMainLabel || undefined,
           secondary_option: hasSub && selSubLabel ? selSubLabel : undefined,
-          piece_price: tier.perUnitExVat,
+          piece_price: currentVariant.singleUnitPriceExVat,
           total_price: totalEx,
           total_price_with_tax: totalInc,
           ...(selectedInvoiceId ? { invoice_info_id: selectedInvoiceId } : {}),
@@ -735,8 +737,8 @@ export default function ProductDetail({
   const handleCreateGuestOrder = useCallback(async () => {
     const tier = currentVariant?.tiers.find((t) => t.qty === selQty);
     if (!tier || !currentVariant) return;
-    const totalEx = tier.perUnitExVat * selQty;
-    const totalInc = totalEx * 1.2;
+    const totalEx = tier.perUnitExVat;
+    const totalInc = totalEx * (1 + VAT_RATE / 100);
     setGuestOrderCreating(true);
     setGuestOrderError('');
     try {
@@ -753,7 +755,7 @@ export default function ProductDetail({
             color_label: selColorLabel || undefined,
             main_option: selMainLabel || undefined,
             secondary_option: hasSub && selSubLabel ? selSubLabel : undefined,
-            piece_price: tier.perUnitExVat,
+            piece_price: currentVariant.singleUnitPriceExVat,
             total_price: totalEx,
             total_price_with_tax: totalInc,
           },
@@ -899,7 +901,7 @@ export default function ProductDetail({
             <div className="rounded-xl border border-[#091530]/8 bg-white p-2 space-y-2">
               <div className="flex items-center gap-1">
                 <p className="text-[11px] font-bold  tracking-[0.12em] text-[#091530]/50">
-                  RENK SEÇENEKLERİ
+                  Renk Seçenekleri
                 </p>
                 {selColorLabel && (
                   <>
@@ -910,7 +912,7 @@ export default function ProductDetail({
                   </>
                 )}
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2 mb-3 pt-[2px] pl-1">
                 {data.colors.map((color) => (
                   <ColorSwatch
                     key={color.id}
@@ -924,9 +926,9 @@ export default function ProductDetail({
             </div>
 
             {/* ── Quantity tiers ── */}
-            <div>
+            <div className="rounded-xl border border-[#091530]/8 bg-white p-2 space-y-2">
               <p className="text-[11px] font-bold  tracking-[0.12em] text-[#091530]/50 mt-1">
-                TOPLAM ADET SEÇİNİZ
+                Toplam Adet Seçiniz
               </p>
               <div className="grid grid-cols-4 gap-2">
                 {currentVariant?.tiers.map((tier) => (
@@ -936,7 +938,7 @@ export default function ProductDetail({
                     className={cn(
                       'flex flex-col items-center rounded-lg border px-1 py-1 transition-all',
                       selQty === tier.qty
-                        ? 'border-[#cc0636] bg-[#cc0636]/10 shadow-md shadow-[#cc0636]/20'
+                        ? 'border-[#cc0636] bg-[#cc0636]/10 '
                         : 'border-[#091530]/20 bg-white hover:border-[#091530]/40'
                     )}
                   >
@@ -958,7 +960,7 @@ export default function ProductDetail({
                           : 'text-[#091530]/45'
                       )}
                     >
-                      {fmt(tier.perUnitExVat)} ₺
+                      {fmt(tier.perUnitExVat * (1 + VAT_RATE / 100))} ₺
                     </span>
                   </button>
                 ))}
@@ -973,7 +975,7 @@ export default function ProductDetail({
                     Birim Fiyat (KDV Hariç):
                   </span>{' '}
                   <span className="font-semibold text-[#091530]">
-                    {fmt(currentTier?.perUnitExVat ?? 0)} ₺
+                    {fmt(currentVariant.singleUnitPriceExVat)} ₺
                   </span>
                 </div>
                 <div className="text-sm">
@@ -986,7 +988,7 @@ export default function ProductDetail({
                 </div>
                 <div className="text-sm border-t border-[#091530]/8 pt-1.5 mt-1">
                   <span className="font-medium text-[#091530]/70">
-                    Toplam (KDV Dahil %20):
+                    Toplam (KDV Dahil %{VAT_RATE}):
                   </span>{' '}
                   <span className="text-base font-bold text-[#cc0636]">
                     {fmt(totalIncVat)} ₺
@@ -1233,7 +1235,7 @@ export default function ProductDetail({
                             Birim Fiyat (KDV Hariç)
                           </span>
                           <span className="font-semibold text-[#091530]">
-                            {fmt(currentTier.perUnitExVat)} ₺
+                            {fmt(currentVariant?.singleUnitPriceExVat ?? 0)} ₺
                           </span>
                         </div>
                         <div className="flex justify-between">
@@ -1246,7 +1248,7 @@ export default function ProductDetail({
                         </div>
                         <div className="flex justify-between border-t border-[#091530]/8 pt-1.5 mt-1">
                           <span className="font-medium text-[#091530]/70">
-                            Toplam (KDV Dahil %20)
+                            Toplam (KDV Dahil %{VAT_RATE})
                           </span>
                           <span className="font-bold text-[#cc0636] text-sm">
                             {fmt(totalIncVat)} ₺

@@ -185,7 +185,7 @@ export async function POST(req: NextRequest) {
               <table cellpadding="0" cellspacing="0" style="margin-bottom:${isShipped ? '16px' : '28px'};">
                 <tr>
                   <td style="background:#f8f8f8;border:2px solid ${statusClr};border-radius:8px;padding:16px 28px;text-align:center;">
-                    <p style="margin:0 0 4px;font-size:11px;color:#999999;text-transform:uppercase;letter-spacing:0.08em;">Yeni Durum</p>
+                    <p style="margin:0 0 4px;font-size:11px;color:#999999;text-transform:;letter-spacing:0.08em;">Yeni Durum</p>
                     <p style="margin:0;font-size:20px;font-weight:bold;color:${statusClr};">${newStatus}</p>
                   </td>
                 </tr>
@@ -211,7 +211,7 @@ export async function POST(req: NextRequest) {
           <!-- Order details -->
           <tr>
             <td style="padding:0 40px 16px;">
-              <p style="margin:0 0 12px;font-size:12px;font-weight:bold;color:#091530;letter-spacing:0.1em;text-transform:uppercase;">Sipariş Bilgileri</p>
+              <p style="margin:0 0 12px;font-size:12px;font-weight:bold;color:#091530;letter-spacing:0.1em;text-transform:;">Sipariş Bilgileri</p>
               <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb;border-radius:6px;overflow:hidden;font-size:13px;">
                 ${order.stock_number ? `<tr><td style="padding:10px 16px;background:#f9fafb;color:#6b7280;width:45%;">Stok Kodu</td><td style="padding:10px 16px;font-weight:600;color:#111827;">${order.stock_number}</td></tr>` : ''}
                 <tr><td style="padding:10px 16px;background:#f9fafb;color:#6b7280;border-top:1px solid #e5e7eb;">Ürün</td><td style="padding:10px 16px;font-weight:600;color:#111827;border-top:1px solid #e5e7eb;">${productName}</td></tr>

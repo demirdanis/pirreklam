@@ -6017,6 +6017,20 @@ export type GetProductDataQueryVariables = Exact<{
 
 export type GetProductDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'products', id: string, name?: string | null, slug?: string | null, sub_category_variation?: { __typename?: 'sub_category_variations', name?: string | null, slug?: string | null } | null, variatins?: Array<{ __typename?: 'product_variations', id: string, piece_price?: number | null, stock_code?: string | null, video_url?: string | null, main_option?: { __typename?: 'product_options', id: string, name?: string | null, code?: string | null, category?: { __typename?: 'product_option_categories', id: string, name?: string | null } | null } | null, secondary_option?: { __typename?: 'product_options', id: string, name?: string | null, code?: string | null, category?: { __typename?: 'product_option_categories', id: string, name?: string | null } | null } | null, color?: { __typename?: 'product_colors', name?: string | null, color?: string | null } | null, purchase_count_prices?: Array<{ __typename?: 'purchases_counts', id: string, count?: number | null, price?: number | null } | null> | null, images?: Array<{ __typename?: 'product_variation_images', big_image?: string | null, small_image?: string | null } | null> | null } | null> | null }> };
 
+export type SearchProductsByNameQueryVariables = Exact<{
+  keyword: Scalars['String']['input'];
+}>;
+
+
+export type SearchProductsByNameQuery = { __typename?: 'Query', products: Array<{ __typename?: 'products', id: string, name?: string | null, slug?: string | null, variatins?: Array<{ __typename?: 'product_variations', images?: Array<{ __typename?: 'product_variation_images', big_image?: string | null } | null> | null } | null> | null }> };
+
+export type SearchProductsByStockCodeQueryVariables = Exact<{
+  stockCode: Scalars['String']['input'];
+}>;
+
+
+export type SearchProductsByStockCodeQuery = { __typename?: 'Query', products: Array<{ __typename?: 'products', id: string, name?: string | null, slug?: string | null, variatins?: Array<{ __typename?: 'product_variations', images?: Array<{ __typename?: 'product_variation_images', big_image?: string | null } | null> | null } | null> | null }> };
+
 export type GetOrdersQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -6268,6 +6282,34 @@ export const GetProductDataDocument = gql`
   }
 }
     `;
+export const SearchProductsByNameDocument = gql`
+    query SearchProductsByName($keyword: String!) {
+  products(filter: {name: {_icontains: $keyword}}, limit: 20) {
+    id
+    name
+    slug
+    variatins(limit: 1) {
+      images(limit: 1) {
+        big_image
+      }
+    }
+  }
+}
+    `;
+export const SearchProductsByStockCodeDocument = gql`
+    query SearchProductsByStockCode($stockCode: String!) {
+  products(filter: {variatins: {stock_code: {_icontains: $stockCode}}}, limit: 20) {
+    id
+    name
+    slug
+    variatins(limit: 1) {
+      images(limit: 1) {
+        big_image
+      }
+    }
+  }
+}
+    `;
 export const GetOrdersDocument = gql`
     query GetOrders($limit: Int, $offset: Int) {
   orders(limit: $limit, offset: $offset, sort: ["-created_at"]) {
@@ -6340,6 +6382,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetProductData(variables?: GetProductDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProductDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductDataQuery>({ document: GetProductDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProductData', 'query', variables);
+    },
+    SearchProductsByName(variables: SearchProductsByNameQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<SearchProductsByNameQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SearchProductsByNameQuery>({ document: SearchProductsByNameDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'SearchProductsByName', 'query', variables);
+    },
+    SearchProductsByStockCode(variables: SearchProductsByStockCodeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<SearchProductsByStockCodeQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SearchProductsByStockCodeQuery>({ document: SearchProductsByStockCodeDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'SearchProductsByStockCode', 'query', variables);
     },
     GetOrders(variables?: GetOrdersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetOrdersQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetOrdersQuery>({ document: GetOrdersDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetOrders', 'query', variables);

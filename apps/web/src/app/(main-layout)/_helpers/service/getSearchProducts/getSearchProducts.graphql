@@ -1,0 +1,28 @@
+query SearchProductsByName($keyword: String!) {
+  products(filter: { name: { _icontains: $keyword } }, limit: 20) {
+    id
+    name
+    slug
+    variatins(limit: 1) {
+      images(limit: 1) {
+        big_image
+      }
+    }
+  }
+}
+
+query SearchProductsByStockCode($stockCode: String!) {
+  products(
+    filter: { variatins: { stock_code: { _icontains: $stockCode } } }
+    limit: 20
+  ) {
+    id
+    name
+    slug
+    variatins(limit: 1) {
+      images(limit: 1) {
+        big_image
+      }
+    }
+  }
+}
