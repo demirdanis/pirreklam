@@ -98,6 +98,30 @@ collections:
       versioning: false
     schema:
       name: bank_accounts
+  - collection: cargo_company
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: cargo_company
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: cargo_company
   - collection: contact
     meta:
       accountability: all
@@ -194,6 +218,30 @@ collections:
       versioning: false
     schema:
       name: home_banners
+  - collection: invoice_info
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: invoice_info
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: invoice_info
   - collection: main_categories
     meta:
       accountability: all
@@ -218,6 +266,32 @@ collections:
       versioning: false
     schema:
       name: main_categories
+  - collection: orders
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: orders
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields:
+        - created_at
+        - updated_at
+      note: null
+      preview_url: '{{product.images.small_image}}'
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: orders
   - collection: page__bank_account
     meta:
       accountability: all
@@ -524,7 +598,7 @@ collections:
       preview_url: null
       singleton: false
       sort: null
-      sort_field: null
+      sort_field: order
       translations: null
       unarchive_value: null
       versioning: false
@@ -602,6 +676,30 @@ collections:
       versioning: false
     schema:
       name: social_medias
+  - collection: sss
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: sss
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: sort
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: sss
   - collection: sub_categories
     meta:
       accountability: all
@@ -674,6 +772,30 @@ collections:
       versioning: false
     schema:
       name: sub_category_variations
+  - collection: users
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: users
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: users
 fields:
   - collection: about_us
     field: id
@@ -1637,6 +1759,126 @@ fields:
       max_length: null
       numeric_precision: 32
       numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: cargo_company
+    field: id
+    type: integer
+    meta:
+      collection: cargo_company
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: cargo_company
+      data_type: integer
+      default_value: nextval('cargo_company_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: cargo_company
+    field: name
+    type: string
+    meta:
+      collection: cargo_company
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: name
+      table: cargo_company
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: cargo_company
+    field: cargo_tracking_url
+    type: string
+    meta:
+      collection: cargo_company
+      conditions: null
+      display: null
+      display_options: null
+      field: cargo_tracking_url
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: cargo_tracking_url
+      table: cargo_company
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
       is_nullable: true
       is_unique: false
       is_indexed: false
@@ -3168,6 +3410,449 @@ fields:
       has_auto_increment: false
       foreign_key_table: page__home
       foreign_key_column: id
+  - collection: invoice_info
+    field: id
+    type: integer
+    meta:
+      collection: invoice_info
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: invoice_info
+      data_type: integer
+      default_value: nextval('invoice_info_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: invoice_info
+    field: address
+    type: text
+    meta:
+      collection: invoice_info
+      conditions: null
+      display: null
+      display_options: null
+      field: address
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: address
+      table: invoice_info
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: invoice_info
+    field: tax_office
+    type: string
+    meta:
+      collection: invoice_info
+      conditions: null
+      display: null
+      display_options: null
+      field: tax_office
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: tax_office
+      table: invoice_info
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: invoice_info
+    field: phone
+    type: string
+    meta:
+      collection: invoice_info
+      conditions: null
+      display: null
+      display_options: null
+      field: phone
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: phone
+      table: invoice_info
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: invoice_info
+    field: district
+    type: string
+    meta:
+      collection: invoice_info
+      conditions: null
+      display: null
+      display_options: null
+      field: district
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 8
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: district
+      table: invoice_info
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: invoice_info
+    field: is_default
+    type: boolean
+    meta:
+      collection: invoice_info
+      conditions: null
+      display: null
+      display_options: null
+      field: is_default
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 9
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: is_default
+      table: invoice_info
+      data_type: boolean
+      default_value: false
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: invoice_info
+    field: city
+    type: string
+    meta:
+      collection: invoice_info
+      conditions: null
+      display: null
+      display_options: null
+      field: city
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: city
+      table: invoice_info
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: invoice_info
+    field: full_name
+    type: string
+    meta:
+      collection: invoice_info
+      conditions: null
+      display: null
+      display_options: null
+      field: full_name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: full_name
+      table: invoice_info
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: invoice_info
+    field: tckn
+    type: string
+    meta:
+      collection: invoice_info
+      conditions: null
+      display: null
+      display_options: null
+      field: tckn
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: tckn
+      table: invoice_info
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: invoice_info
+    field: email
+    type: string
+    meta:
+      collection: invoice_info
+      conditions: null
+      display: null
+      display_options: null
+      field: email
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 10
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: email
+      table: invoice_info
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: invoice_info
+    field: user
+    type: uuid
+    meta:
+      collection: invoice_info
+      conditions: null
+      display: null
+      display_options: null
+      field: user
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{email}}'
+      readonly: false
+      required: false
+      searchable: true
+      sort: 11
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: user
+      table: invoice_info
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_users
+      foreign_key_column: id
   - collection: main_categories
     field: id
     type: integer
@@ -3295,8 +3980,9 @@ fields:
     meta:
       collection: main_categories
       conditions: null
-      display: null
-      display_options: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
       field: sub_categories
       group: null
       hidden: false
@@ -3307,8 +3993,11 @@ fields:
           - id
           - name
           - slug
+          - order
         layout: table
+        limit: 100
         sort: order
+        template: '{{name}}'
       readonly: false
       required: true
       searchable: true
@@ -3361,6 +4050,761 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: orders
+    field: id
+    type: integer
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: orders
+      data_type: integer
+      default_value: nextval('orders_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: stock_number
+    type: string
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: stock_number
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: stock_number
+      table: orders
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: product_count
+    type: integer
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: product_count
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        max: 10000000
+        min: 1
+        step: 0
+      readonly: false
+      required: true
+      searchable: false
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: product_count
+      table: orders
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: user
+    type: uuid
+    meta:
+      collection: orders
+      conditions: null
+      display: user
+      display_options: null
+      field: user
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{email}}'
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: user
+      table: orders
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_users
+      foreign_key_column: id
+  - collection: orders
+    field: main_option
+    type: string
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: main_option
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: main_option
+      table: orders
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: secondary_option
+    type: string
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: secondary_option
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 10
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: secondary_option
+      table: orders
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: total_price
+    type: float
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: total_price
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        step: 0
+      readonly: false
+      required: true
+      searchable: true
+      sort: 11
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: total_price
+      table: orders
+      data_type: real
+      default_value: null
+      max_length: null
+      numeric_precision: 24
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: piece_price
+    type: float
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: piece_price
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        step: 0
+      readonly: false
+      required: true
+      searchable: true
+      sort: 12
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: piece_price
+      table: orders
+      data_type: real
+      default_value: null
+      max_length: null
+      numeric_precision: 24
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: product
+    type: integer
+    meta:
+      collection: orders
+      conditions: null
+      display: related-values
+      display_options: null
+      field: product
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{main_option.name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: 4
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: product
+      table: orders
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: product_variations
+      foreign_key_column: id
+  - collection: orders
+    field: status
+    type: string
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: status
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        choices:
+          - text: Oluşturuldu
+            value: created
+          - text: Satıcı Onayladı
+            value: seller_confirmed
+          - text: Kısmi Ödeme Alındı
+            value: partial_payment_received
+          - text: Kısmi Ödeme Alındı - Ürün Hazırlanıyor
+            value: partial_payment_received_product-is-being_prepared
+          - text: Tam Ödeme Alındı
+            value: full_payment_received
+          - text: Tam Ödeme Alındı - Ürün Hazırlanıyor
+            value: full_payment_received_product_is_being_prepared
+          - text: Kısmi Ödeme Alındı - Ürün Kargolandı
+            value: partial_payment_received_product_shipped
+          - text: Tam Ödeme Alındı - Ürün Kargolandı
+            value: full_payment_received_product_shipped
+          - text: Tamamlandı
+            value: completed
+      readonly: false
+      required: true
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: status
+      table: orders
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: created_at
+    type: dateTime
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: created_at
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options:
+        includeSeconds: true
+      readonly: false
+      required: true
+      searchable: true
+      sort: 14
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: created_at
+      table: orders
+      data_type: timestamp without time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: cargo_tracking_number
+    type: string
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: cargo_tracking_number
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 15
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: cargo_tracking_number
+      table: orders
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: cargo_company
+    type: integer
+    meta:
+      collection: orders
+      conditions: null
+      display: related-values
+      display_options: null
+      field: cargo_company
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: false
+      searchable: true
+      sort: 16
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: cargo_company
+      table: orders
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: cargo_company
+      foreign_key_column: id
+  - collection: orders
+    field: color_label
+    type: string
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: color_label
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 8
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: color_label
+      table: orders
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: color_hex
+    type: string
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: color_hex
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 9
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: color_hex
+      table: orders
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: total_price_with_tax
+    type: float
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: total_price_with_tax
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        step: 0
+      readonly: false
+      required: true
+      searchable: true
+      sort: 13
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: total_price_with_tax
+      table: orders
+      data_type: real
+      default_value: null
+      max_length: null
+      numeric_precision: 24
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: partial_payment_value
+    type: float
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: partial_payment_value
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        step: 0
+      readonly: false
+      required: false
+      searchable: true
+      sort: 17
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: partial_payment_value
+      table: orders
+      data_type: real
+      default_value: null
+      max_length: null
+      numeric_precision: 24
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orders
+    field: invoice_info
+    type: integer
+    meta:
+      collection: orders
+      conditions: null
+      display: null
+      display_options: null
+      field: invoice_info
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{full_name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: 18
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: invoice_info
+      table: orders
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: invoice_info
+      foreign_key_column: id
   - collection: page__bank_account
     field: id
     type: integer
@@ -4936,7 +6380,8 @@ fields:
       collection: product_variations
       conditions: null
       display: related-values
-      display_options: null
+      display_options:
+        template: ({{color}}) {{name}}
       field: color
       group: null
       hidden: false
@@ -4977,8 +6422,9 @@ fields:
     meta:
       collection: product_variations
       conditions: null
-      display: null
-      display_options: null
+      display: formatted-value
+      display_options:
+        suffix: ' TL'
       field: piece_price
       group: null
       hidden: false
@@ -4988,7 +6434,7 @@ fields:
       readonly: false
       required: true
       searchable: true
-      sort: 7
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -5019,7 +6465,7 @@ fields:
       conditions: null
       display: related-values
       display_options:
-        template: '{{count}}'
+        template: ({{count}}) {{price}}TL
       field: purchase_count_prices
       group: null
       hidden: false
@@ -5034,7 +6480,7 @@ fields:
       readonly: false
       required: true
       searchable: true
-      sort: 8
+      sort: 6
       special:
         - o2m
       translations: null
@@ -5058,7 +6504,7 @@ fields:
       readonly: false
       required: true
       searchable: true
-      sort: 10
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -5087,8 +6533,9 @@ fields:
     meta:
       collection: product_variations
       conditions: null
-      display: null
-      display_options: null
+      display: related-values
+      display_options:
+        template: '{{big_image.$thumbnail}}'
       field: images
       group: null
       hidden: false
@@ -5102,7 +6549,7 @@ fields:
       readonly: false
       required: true
       searchable: true
-      sort: 11
+      sort: 8
       special:
         - o2m
       translations: null
@@ -5126,7 +6573,7 @@ fields:
       readonly: false
       required: false
       searchable: true
-      sort: 12
+      sort: 10
       special: null
       translations: null
       validation: null
@@ -5149,6 +6596,86 @@ fields:
       has_auto_increment: false
       foreign_key_table: products
       foreign_key_column: id
+  - collection: product_variations
+    field: video_url
+    type: string
+    meta:
+      collection: product_variations
+      conditions: null
+      display: raw
+      display_options: null
+      field: video_url
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: false
+      sort: 9
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: video_url
+      table: product_variations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: product_variations
+    field: details
+    type: text
+    meta:
+      collection: product_variations
+      conditions: null
+      display: null
+      display_options: null
+      field: details
+      group: null
+      hidden: false
+      interface: input-rich-text-html
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 11
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: details
+      table: product_variations
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: products
     field: id
     type: integer
@@ -5206,7 +6733,7 @@ fields:
       readonly: false
       required: true
       searchable: true
-      sort: 2
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -5247,7 +6774,7 @@ fields:
       readonly: false
       required: true
       searchable: true
-      sort: 3
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -5289,15 +6816,140 @@ fields:
           - stock_code
         layout: table
       readonly: false
-      required: true
+      required: false
       searchable: true
-      sort: 4
+      sort: 5
       special:
         - o2m
       translations: null
       validation: null
       validation_message: null
       width: full
+  - collection: products
+    field: sub_category_variation
+    type: integer
+    meta:
+      collection: products
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: sub_category_variation
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: 2
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sub_category_variation
+      table: products
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: sub_category_variations
+      foreign_key_column: id
+  - collection: products
+    field: sub_category_variations_id
+    type: integer
+    meta:
+      collection: products
+      conditions: null
+      display: null
+      display_options: null
+      field: sub_category_variations_id
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sub_category_variations_id
+      table: products
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: sub_category_variations
+      foreign_key_column: id
+  - collection: products
+    field: order
+    type: integer
+    meta:
+      collection: products
+      conditions: null
+      display: null
+      display_options: null
+      field: order
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        max: 999999999
+        min: 1
+      readonly: false
+      required: true
+      searchable: true
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: order
+      table: products
+      data_type: integer
+      default_value: 1
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: purchases_counts
     field: id
     type: integer
@@ -5782,6 +7434,169 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: sss
+    field: id
+    type: integer
+    meta:
+      collection: sss
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: sss
+      data_type: integer
+      default_value: nextval('sss_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: sss
+    field: question
+    type: text
+    meta:
+      collection: sss
+      conditions: null
+      display: null
+      display_options: null
+      field: question
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: question
+      table: sss
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: sss
+    field: answer
+    type: text
+    meta:
+      collection: sss
+      conditions: null
+      display: null
+      display_options: null
+      field: answer
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: answer
+      table: sss
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: sss
+    field: sort
+    type: integer
+    meta:
+      collection: sss
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        max: 100
+        min: 1
+        step: 0
+      readonly: false
+      required: true
+      searchable: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sort
+      table: sss
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: sub_categories
     field: id
     type: integer
@@ -5839,7 +7654,7 @@ fields:
       readonly: false
       required: true
       searchable: true
-      sort: 2
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -5880,7 +7695,7 @@ fields:
       readonly: false
       required: true
       searchable: true
-      sort: 3
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -5920,7 +7735,7 @@ fields:
       readonly: false
       required: false
       searchable: true
-      sort: 4
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -5962,7 +7777,7 @@ fields:
       readonly: false
       required: true
       searchable: true
-      sort: 5
+      sort: 6
       special: null
       translations: null
       validation: null
@@ -6007,7 +7822,7 @@ fields:
       readonly: false
       required: false
       searchable: true
-      sort: 6
+      sort: 7
       special:
         - m2m
       translations: null
@@ -6031,7 +7846,7 @@ fields:
       readonly: false
       required: false
       searchable: true
-      sort: 7
+      sort: 8
       special: null
       translations: null
       validation: null
@@ -6071,7 +7886,7 @@ fields:
       readonly: false
       required: false
       searchable: true
-      sort: 8
+      sort: 9
       special: null
       translations: null
       validation: null
@@ -6111,7 +7926,7 @@ fields:
       readonly: false
       required: false
       searchable: true
-      sort: 9
+      sort: 10
       special: null
       translations: null
       validation: null
@@ -6151,7 +7966,7 @@ fields:
       readonly: false
       required: false
       searchable: true
-      sort: 10
+      sort: 11
       special:
         - file
       translations: null
@@ -6175,6 +7990,36 @@ fields:
       has_auto_increment: false
       foreign_key_table: directus_files
       foreign_key_column: id
+  - collection: sub_categories
+    field: variations
+    type: alias
+    meta:
+      collection: sub_categories
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: variations
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        fields:
+          - id
+          - name
+          - order
+        layout: table
+      readonly: false
+      required: true
+      searchable: true
+      sort: 2
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
   - collection: sub_categories_sectors
     field: id
     type: integer
@@ -6417,6 +8262,157 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: sub_category_variations
+    field: sub_categories_id
+    type: integer
+    meta:
+      collection: sub_category_variations
+      conditions: null
+      display: null
+      display_options: null
+      field: sub_categories_id
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sub_categories_id
+      table: sub_category_variations
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: sub_categories
+      foreign_key_column: id
+  - collection: sub_category_variations
+    field: products
+    type: alias
+    meta:
+      collection: sub_category_variations
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: products
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        fields:
+          - id
+          - name
+          - slug
+        layout: table
+      readonly: false
+      required: false
+      searchable: true
+      sort: 5
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: sub_category_variations
+    field: slug
+    type: string
+    meta:
+      collection: sub_category_variations
+      conditions: null
+      display: null
+      display_options: null
+      field: slug
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        slug: true
+      readonly: false
+      required: true
+      searchable: true
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: slug
+      table: sub_category_variations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: users
+    field: id
+    type: integer
+    meta:
+      collection: users
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: users
+      data_type: integer
+      default_value: nextval('users_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
 systemFields:
   - collection: directus_activity
     field: timestamp
@@ -6555,6 +8551,111 @@ relations:
       foreign_key_table: page__home
       foreign_key_column: id
       constraint_name: home_banners_page__home_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: invoice_info
+    field: user
+    related_collection: directus_users
+    meta:
+      junction_field: null
+      many_collection: invoice_info
+      many_field: user
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: invoice_info
+      column: user
+      foreign_key_table: directus_users
+      foreign_key_column: id
+      constraint_name: invoice_info_user_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: orders
+    field: user
+    related_collection: directus_users
+    meta:
+      junction_field: null
+      many_collection: orders
+      many_field: user
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: orders
+      column: user
+      foreign_key_table: directus_users
+      foreign_key_column: id
+      constraint_name: orders_user_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: orders
+    field: product
+    related_collection: product_variations
+    meta:
+      junction_field: null
+      many_collection: orders
+      many_field: product
+      one_allowed_collections: null
+      one_collection: product_variations
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: orders
+      column: product
+      foreign_key_table: product_variations
+      foreign_key_column: id
+      constraint_name: orders_product_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: orders
+    field: cargo_company
+    related_collection: cargo_company
+    meta:
+      junction_field: null
+      many_collection: orders
+      many_field: cargo_company
+      one_allowed_collections: null
+      one_collection: cargo_company
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: orders
+      column: cargo_company
+      foreign_key_table: cargo_company
+      foreign_key_column: id
+      constraint_name: orders_cargo_company_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: orders
+    field: invoice_info
+    related_collection: invoice_info
+    meta:
+      junction_field: null
+      many_collection: orders
+      many_field: invoice_info
+      one_allowed_collections: null
+      one_collection: invoice_info
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: orders
+      column: invoice_info
+      foreign_key_table: invoice_info
+      foreign_key_column: id
+      constraint_name: orders_invoice_info_foreign
       on_update: NO ACTION
       on_delete: SET NULL
   - collection: product_options
@@ -6723,6 +8824,48 @@ relations:
       foreign_key_table: products
       foreign_key_column: id
       constraint_name: product_variations_products_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: products
+    field: sub_category_variation
+    related_collection: sub_category_variations
+    meta:
+      junction_field: null
+      many_collection: products
+      many_field: sub_category_variation
+      one_allowed_collections: null
+      one_collection: sub_category_variations
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: products
+      column: sub_category_variation
+      foreign_key_table: sub_category_variations
+      foreign_key_column: id
+      constraint_name: products_sub_category_variation_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: products
+    field: sub_category_variations_id
+    related_collection: sub_category_variations
+    meta:
+      junction_field: null
+      many_collection: products
+      many_field: sub_category_variations_id
+      one_allowed_collections: null
+      one_collection: sub_category_variations
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: products
+      sort_field: order
+    schema:
+      table: products
+      column: sub_category_variations_id
+      foreign_key_table: sub_category_variations
+      foreign_key_column: id
+      constraint_name: products_sub_category_variations_id_foreign
       on_update: NO ACTION
       on_delete: SET NULL
   - collection: purchases_counts
@@ -6933,5 +9076,26 @@ relations:
       foreign_key_table: sub_categories
       foreign_key_column: id
       constraint_name: sub_categories_sectors_sub_categories_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: sub_category_variations
+    field: sub_categories_id
+    related_collection: sub_categories
+    meta:
+      junction_field: null
+      many_collection: sub_category_variations
+      many_field: sub_categories_id
+      one_allowed_collections: null
+      one_collection: sub_categories
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: variations
+      sort_field: order
+    schema:
+      table: sub_category_variations
+      column: sub_categories_id
+      foreign_key_table: sub_categories
+      foreign_key_column: id
+      constraint_name: sub_category_variations_sub_categories_id_foreign
       on_update: NO ACTION
       on_delete: SET NULL

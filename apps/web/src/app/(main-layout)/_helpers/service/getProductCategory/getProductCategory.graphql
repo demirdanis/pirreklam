@@ -34,7 +34,9 @@ query GetProductList($subcategorySlug: String!, $variation: String) {
           }
 
           images(limit: 1) {
-            big_image
+            big_image {
+              filename_disk
+            }
           }
         }
       }

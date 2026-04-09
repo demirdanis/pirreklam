@@ -15,7 +15,9 @@ query GetOrders($limit: Int, $offset: Int) {
     created_at
     product {
       images(limit: 1) {
-        small_image
+        small_image {
+          filename_disk
+        }
       }
     }
     cargo_company {

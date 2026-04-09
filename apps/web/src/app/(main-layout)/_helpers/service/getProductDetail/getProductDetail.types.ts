@@ -40,6 +40,8 @@ export interface VariantData {
   /** Single-piece price, VAT excluded */
   singleUnitPriceExVat: number;
   tiers: TierPrice[];
+  /** HTML content for print option description */
+  details?: string | null;
 }
 
 export interface RelatedProduct {

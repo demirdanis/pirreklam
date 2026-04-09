@@ -1,0 +1,7 @@
+query GetSss {
+  sss {
+    id
+    question
+    answer
+  }
+}

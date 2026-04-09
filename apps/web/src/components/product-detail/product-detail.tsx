@@ -1049,6 +1049,15 @@ export default function ProductDetail({
               </Accordion>
             )}
 
+            {currentVariant?.details && (
+              <Accordion title="BASKI SEÇENEKLERİ AÇIKLAMASI">
+                <div
+                  className="prose prose-sm max-w-none text-[#091530]/50 [&_ul]:list-disc [&_ul]:pl-4 [&_ol]:list-decimal [&_ol]:pl-4 [&_li]:my-0.5 [&_strong]:text-[#091530]/70 [&_a]:text-[#cc0636] [&_a]:underline"
+                  dangerouslySetInnerHTML={{ __html: currentVariant.details }}
+                />
+              </Accordion>
+            )}
+
             <Accordion title="GENEL SİPARİŞ DETAYLARI">
               <ul className="space-y-1.5 list-none">
                 {[

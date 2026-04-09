@@ -5,7 +5,9 @@ query SearchProductsByName($keyword: String!) {
     slug
     variatins(limit: 1) {
       images(limit: 1) {
-        big_image
+        big_image {
+          filename_disk
+        }
       }
     }
   }
@@ -21,7 +23,9 @@ query SearchProductsByStockCode($stockCode: String!) {
     slug
     variatins(limit: 1) {
       images(limit: 1) {
-        big_image
+        big_image {
+          filename_disk
+        }
       }
     }
   }

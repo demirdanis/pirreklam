@@ -20,7 +20,9 @@ query GetFooterData {
   }
 
   social_medias {
-    icon
+    icon {
+      filename_disk
+    }
     url
     order
   }

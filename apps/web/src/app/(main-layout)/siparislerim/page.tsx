@@ -141,8 +141,8 @@ function formatPrice(price: number | null) {
 
 function OrderCard({ order }: { order: Order }) {
   const status = getStatus(order.status);
-  const imageUrl = order.product?.images?.[0]?.small_image
-    ? `${process.env.ASSETS_URL}/${order.product.images[0].small_image}`
+  const imageUrl = order.product?.images?.[0]?.small_image?.filename_disk
+    ? `${process.env.ASSETS_URL}/${order.product.images[0].small_image.filename_disk}`
     : null;
 
   return (

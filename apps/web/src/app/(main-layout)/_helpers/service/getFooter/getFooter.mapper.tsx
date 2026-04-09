@@ -37,6 +37,7 @@ export function GetFooterDataMapper(data: GetFooterDataQuery): FooterData {
           { label: 'Kurumsal', href: '/kurumsal' },
           { label: 'İletişim', href: '/iletisim' },
           { label: 'Banka Hesapları', href: '/banka-hesaplari' },
+          { label: 'SSS', href: '/sss' },
         ],
       },
       {

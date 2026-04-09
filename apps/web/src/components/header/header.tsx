@@ -3,6 +3,7 @@
 import {
   ChevronDown,
   FileText,
+  LayoutList,
   LogIn,
   Menu,
   MessageCircle,
@@ -19,6 +20,7 @@ import type { Category } from '../category-bar/category-bar.types';
 import type { HeaderData } from './header.types';
 import Image from 'next/image';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 
 interface HeaderProps {
@@ -43,9 +45,19 @@ export default function Header({
   const [mobileCatExpandedId, setMobileCatExpandedId] = useState<string | null>(
     null
   );
+  const [mobilePagesOpen, setMobilePagesOpen] = useState(false);
 
   // Refs for category buttons
   const catButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  // Lock body scroll when any mobile drawer is open
+  useEffect(() => {
+    const open = mobileCatOpen || mobilePagesOpen;
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileCatOpen, mobilePagesOpen]);
 
   // Login panel state
   const [loginPanelOpen, setLoginPanelOpen] = useState(false);
@@ -62,6 +74,7 @@ export default function Header({
     setLoginPanelOpen(true);
     setMobileSearchOpen(false);
     setMobileCatOpen(false);
+    setMobilePagesOpen(false);
     setLoginEmail('');
     setLoginStatus('idle');
     setLoginError('');
@@ -184,7 +197,20 @@ export default function Header({
       {/* Mobile-only category trigger strip */}
       <div className="lg:hidden bg-[#25497f] border-b border-[#000000]">
         <div className="flex h-8 items-center justify-between px-4">
-          <div />
+          {/* Pages drawer button — left */}
+          <button
+            type="button"
+            onClick={() => {
+              setMobilePagesOpen(true);
+              setMobileCatOpen(false);
+              setMobileSearchOpen(false);
+              closeLoginPanel();
+            }}
+            aria-label="Sayfalar"
+            className="flex h-7 w-7 items-center justify-center text-white/85 hover:text-white transition-colors"
+          >
+            <LayoutList className="h-4 w-4" />
+          </button>
           <div className="flex items-center gap-1">
             <button
               type="button"
@@ -195,6 +221,7 @@ export default function Header({
                   setMobileSearchOpen(true);
                   closeLoginPanel();
                   setMobileCatOpen(false);
+                  setMobilePagesOpen(false);
                 }
               }}
               aria-label="Ara"
@@ -247,6 +274,7 @@ export default function Header({
               onClick={() => {
                 setMobileCatOpen(!mobileCatOpen);
                 setMobileCatExpandedId(null);
+                setMobilePagesOpen(false);
               }}
               className="flex items-center gap-2 text-white/85 hover:text-white transition-colors"
             >
@@ -778,9 +806,38 @@ export default function Header({
         </div>
       )}
 
-      {/* Mobile Categories Accordion Drawer */}
-      {mobileCatOpen && (
-        <div className="lg:hidden bg-[#25497f] border-b border-[#000000] max-h-[70vh] overflow-y-auto">
+      {/* ── Mobile Categories Drawer (right side) ── */}
+      <div
+        className={cn(
+          'fixed inset-0 z-[7000] bg-black/60 transition-opacity duration-300 lg:hidden',
+          mobileCatOpen
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
+        )}
+        onClick={() => setMobileCatOpen(false)}
+      />
+      <div
+        className={cn(
+          'fixed inset-y-0 right-0 z-[7001] flex flex-col bg-[#25497f] transition-transform duration-300 ease-in-out lg:hidden',
+          'w-[85%]',
+          mobileCatOpen ? 'translate-x-0' : 'translate-x-full'
+        )}
+      >
+        {/* Drawer header */}
+        <div className="flex h-12 shrink-0 items-center justify-between border-b border-white/10 px-4">
+          <span className="text-sm font-bold tracking-wide text-white">
+            Kategoriler
+          </span>
+          <button
+            type="button"
+            onClick={() => setMobileCatOpen(false)}
+            className="flex h-8 w-8 items-center justify-center text-white/70 hover:text-white transition-colors"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+        {/* Scrollable list */}
+        <div className="flex-1 overflow-y-auto">
           {categories.map((cat) => (
             <div key={cat.id} className="border-b border-[#1a2d4a]">
               <button
@@ -793,31 +850,32 @@ export default function Header({
                     mobileCatExpandedId === cat.id ? null : cat.id
                   )
                 }
-                className={`flex w-full items-center justify-between px-4 py-3.5 text-sm font-medium transition-all duration-300 ${
+                className={cn(
+                  'flex w-full items-center justify-between px-4 py-3.5 text-sm font-medium transition-all duration-200',
                   mobileCatExpandedId === cat.id
-                    ? 'text-white bg-white/10'
-                    : 'text-white/80 hover:text-white hover:bg-white/5'
-                }`}
+                    ? 'bg-white/10 text-white'
+                    : 'text-white/80 hover:bg-white/5 hover:text-white'
+                )}
               >
                 <span>{cat.label}</span>
                 {cat.subItems.length > 0 && (
                   <ChevronDown
-                    className={`h-4 w-4 text-white/40 transition-transform duration-200 ${
-                      mobileCatExpandedId === cat.id
-                        ? 'rotate-180 text-[#cc0636]'
-                        : ''
-                    }`}
+                    className={cn(
+                      'h-4 w-4 text-white/40 transition-transform duration-200',
+                      mobileCatExpandedId === cat.id &&
+                        'rotate-180 text-[#cc0636]'
+                    )}
                   />
                 )}
               </button>
               {mobileCatExpandedId === cat.id && cat.subItems.length > 0 && (
-                <div className="bg-[#25497f] pb-1">
+                <div className="bg-[#1e3e6e] pb-1">
                   {cat.subItems.map((sub) => (
                     <Link
                       key={sub.href}
                       href={sub.href}
                       onClick={() => setMobileCatOpen(false)}
-                      className="flex items-center gap-2.5 px-6 py-2.5 text-sm text-white/85 hover:text-white hover:bg-white/5 transition-colors border-b border-white/10"
+                      className="flex items-center gap-2.5 border-b border-white/10 px-6 py-2.5 text-sm text-white/85 hover:bg-white/5 hover:text-white transition-colors"
                     >
                       {sub.label}
                     </Link>
@@ -827,7 +885,74 @@ export default function Header({
             </div>
           ))}
         </div>
-      )}
+      </div>
+
+      {/* ── Mobile Pages Drawer (left side) ── */}
+      <div
+        className={cn(
+          'fixed inset-0 z-[7000] bg-black/60 transition-opacity duration-300 lg:hidden',
+          mobilePagesOpen
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
+        )}
+        onClick={() => setMobilePagesOpen(false)}
+      />
+      <div
+        className={cn(
+          'fixed inset-y-0 left-0 z-[7001] flex w-[90%] flex-col bg-[#25497f] transition-transform duration-300 ease-in-out lg:hidden',
+          mobilePagesOpen ? 'translate-x-0' : '-translate-x-full'
+        )}
+      >
+        {/* Drawer header */}
+        <div className="flex h-12 shrink-0 items-center justify-between border-b border-white/10 px-4">
+          <span className="text-sm font-bold tracking-wide text-white">
+            Menü
+          </span>
+          <button
+            type="button"
+            onClick={() => setMobilePagesOpen(false)}
+            className="flex h-8 w-8 items-center justify-center text-white/70 hover:text-white transition-colors"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+        {/* Nav links */}
+        <nav className="flex-1 overflow-y-auto py-2">
+          {data.navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setMobilePagesOpen(false)}
+              className="flex items-center border-b border-white/8 px-5 py-4 text-sm font-medium text-white/80 hover:bg-white/5 hover:text-white transition-colors"
+              {...(item.isExternal
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        {/* Social links at bottom */}
+        {data.socialLinks.length > 0 && (
+          <div className="shrink-0 border-t border-white/10 px-5 py-4 flex items-center gap-3">
+            {data.socialLinks.map((social) => (
+              <a
+                key={social.href}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 text-white/60 hover:border-white/50 hover:text-white transition-colors"
+              >
+                <img
+                  src={social.logoUrl}
+                  alt=""
+                  className="h-4 w-4 object-contain"
+                />
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
     </header>
   );
 }

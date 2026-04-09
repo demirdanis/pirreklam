@@ -65,7 +65,7 @@ export function getProductCategoryMapper(
             slug: p?.slug ?? '',
             title: p?.name ?? '',
             imageUrl: getImageUrl(
-              firstVariation?.images?.[0]?.big_image ?? '',
+              firstVariation?.images?.[0]?.big_image,
               NO_CARD_IMAGE_URL
             ),
             imageAlt: p?.name ?? '',

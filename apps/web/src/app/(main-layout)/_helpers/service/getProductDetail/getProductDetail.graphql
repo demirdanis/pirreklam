@@ -35,6 +35,8 @@ query GetProductData($slug: String) {
       }
       piece_price
       stock_code
+
+      details
       purchase_count_prices {
         id
         count
@@ -42,8 +44,12 @@ query GetProductData($slug: String) {
       }
 
       images {
-        big_image
-        small_image
+        big_image {
+          filename_disk
+        }
+        small_image {
+          filename_disk
+        }
       }
       video_url
     }

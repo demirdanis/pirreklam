@@ -8,7 +8,7 @@ export interface ProductCategoryPageProps {
 
 export async function ProductCategoryPage({ slug }: ProductCategoryPageProps) {
   const data = await getProductCategoryData(slug);
-
+  console.log('data', data);
   if (!data) {
     notFound();
   }

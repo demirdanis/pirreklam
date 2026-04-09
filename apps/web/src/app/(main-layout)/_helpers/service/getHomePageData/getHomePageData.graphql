@@ -7,8 +7,12 @@ query GetHomePageData {
       description
       button_text
       button_url
-      web_image
-      mobile_image
+      web_image {
+        filename_disk
+      }
+      mobile_image {
+        filename_disk
+      }
       order
     }
     sectoral_sub_categories {
@@ -31,7 +35,9 @@ query GetHomePageData {
       name
       slug
       order
-      card_image
+      card_image {
+        filename_disk
+      }
       main_categories_id {
         slug
       }
@@ -42,6 +48,8 @@ query GetHomePageData {
     id
     name
     description
-    web_image
+    web_image {
+      filename_disk
+    }
   }
 }

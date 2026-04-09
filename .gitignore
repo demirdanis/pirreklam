@@ -17,7 +17,8 @@ node_modules
 .env.web
 __ENV.js
 
-
+oldData
+medias/*
 
 # Testing
 coverage

@@ -2,7 +2,7 @@
 // Bu dosya geriye dönük uyumluluk için korunuyor.
 
 export interface OrderImage {
-  small_image: string | null;
+  small_image: { filename_disk: string | null } | null;
 }
 
 export interface OrderProduct {

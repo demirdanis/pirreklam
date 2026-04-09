@@ -111,6 +111,7 @@ export function getProductDetailMapper(
       videoUrl: variat?.video_url ?? undefined,
       singleUnitPriceExVat: variat?.piece_price ?? 0,
       tiers,
+      details: variat?.details ?? null,
     };
   });
 

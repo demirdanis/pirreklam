@@ -35,6 +35,10 @@ export function GetHeaderDataMapper(data: GetHeaderDataQuery): HeaderData {
         label: 'Banka Hesapları',
         href: '/banka-hesaplari',
       },
+      {
+        label: 'S.S.S.',
+        href: '/sss',
+      },
     ],
     socialLinks: data.social_medias.map((m) => {
       return {
