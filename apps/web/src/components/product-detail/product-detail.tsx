@@ -811,7 +811,7 @@ export default function ProductDetail({
         {/* ── Two-column layout ── */}
         <div className="lg:grid lg:grid-cols-2 lg:gap-4 xl:gap-8">
           {/* LEFT: Image gallery (sticky on desktop) */}
-          <div className="mb-8 lg:mb-0 lg:sticky lg:top-22 lg:self-start min-h-[400px] h-[400px] lg:h-[calc(100vh-250px)] lg:min-h-[400px]">
+          <div className="mb-8 lg:mb-0 lg:sticky lg:top-22 lg:self-start min-h-[300px] h-[300px] lg:h-[calc(100vh-250px)] lg:min-h-[400px]">
             <ImageGallery
               images={images}
               activeIndex={activeImg}
@@ -950,7 +950,7 @@ export default function ProductDetail({
                           : 'text-[#091530]/70'
                       )}
                     >
-                      {tier.qty.toLocaleString('tr-TR')} Adet
+                      {tier.qty.toLocaleString('tr-TR')}
                     </span>
                     <span
                       className={cn(
@@ -1061,11 +1061,12 @@ export default function ProductDetail({
             <Accordion title="GENEL SİPARİŞ DETAYLARI">
               <ul className="space-y-1.5 list-none">
                 {[
-                  'Minimum sipariş adedi: 200 adet',
-                  'Üretim süresi: Sipariş onayından itibaren 7-10 iş günü',
-                  'Baskı için vektörel (.ai, .eps, .pdf) dosya gereklidir',
-                  'Özel ambalaj ve kargo seçenekleri için lütfen iletişime geçiniz',
-                  'Toplu alımlarda özel fiyat için teklif isteyiniz',
+                  'Sepet dışındaki sipariş aşamasında; grafik çalışmasından önce, minimum %30 ön ödeme alınır.',
+                  'Siparişinizin hazır olduğunu belgeleyen video gönderilir, kalan bakiye tahsil sonrası sevk edilir.',
+                  'Siparişin hazırlanması süreci; grafik onayından sonra, serigrafi boya baskılı ürünlerde 7 gün, gofre kabartmalı ürünlerde 15 gündür.',
+                  'Ürün, desen ve renk tonlarında  ± %10 farklılıklar olabilir.',
+                  'Kargo ücreti müşteriye aittir.',
+                  'Fiyatlarımıza %20 KDV dahil değildir.',
                 ].map((line) => (
                   <li key={line} className="flex gap-2">
                     <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#cc0636]/50" />

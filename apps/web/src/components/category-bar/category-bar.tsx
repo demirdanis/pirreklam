@@ -127,7 +127,7 @@ export default function CategoryBar({ data }: CategoryBarProps) {
                 </div>
               ))}
             </div>
-            <span className="text-[14px] px-2 py-1 rounded font-semibold text-white tracking-[0.12em] whitespace-nowrap drop-shadow-sm animate-brightness">
+            <span className="text-[12px] px-2 py-1 rounded font-semibold text-white tracking-[0.12em] whitespace-nowrap drop-shadow-sm ">
               1961&apos;den Beri Sektörün Pir&apos;i
             </span>
             <div className="flex flex-1 justify-start pl-12">

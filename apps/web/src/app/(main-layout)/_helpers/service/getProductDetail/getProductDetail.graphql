@@ -1,4 +1,13 @@
 query GetProductData($slug: String) {
+  product_colors(limit: -1) {
+    id
+    name
+    color
+  }
+  product_options(limit: -1) {
+    id
+    name
+  }
   products(filter: { slug: { _eq: $slug } }, limit: 1) {
     id
     name

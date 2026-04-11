@@ -170,7 +170,7 @@ export default function Header({
               priority
             />
           </div>
-          <span className="text-[14px] px-2 py-1 mt-[-6px] rounded font-semibold text-white tracking-[0.12em] whitespace-nowrap drop-shadow-sm animate-brightness">
+          <span className="text-[10px] px-2 py-1 mt-[-2px] rounded font-semibold text-white tracking-[0.12em] whitespace-nowrap drop-shadow-sm">
             1961&apos;den Beri Sektörün Pir&apos;i
           </span>
         </div>
@@ -477,7 +477,7 @@ export default function Header({
         />
         {/* Desktop layout */}
         <div className="hidden lg:flex mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 items-center justify-between gap-4 py-0 relative z-10">
-          <div className="grid grid-cols-1  w-44 ml-[-8px]">
+          <div className="grid grid-cols-1  w-44 ml-[-8px] min-w-[146px] flex-0">
             <Link
               href="/plastik-urunler/ruhsat-kabi/"
               style={{ animationDelay: '0s' }}
@@ -579,30 +579,23 @@ export default function Header({
             <Link
               href="/plastik-urunler/ruhsat-kabi/"
               style={{ animationDelay: '0s' }}
-              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[1px] left-[18%]"
+              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[6px] left-[18%]"
             >
               Ruhsat Kabı
             </Link>
             <Link
               href="/plastik-urunler/plakalik/"
               style={{ animationDelay: '0.75s' }}
-              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[16px] left-[32%]"
+              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[30px] right-[52%]"
             >
               Plakalık
             </Link>
             <Link
               href="/plastik-urunler/pasaport-kilifi/"
               style={{ animationDelay: '1.5s' }}
-              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[34px] left-[4%]"
+              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[54px] left-[18%]"
             >
               Pasaport Kılıfı
-            </Link>
-            <Link
-              href="/plastik-urunler/vesikalik-kabi/"
-              style={{ animationDelay: '2.25s' }}
-              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[50px] left-[22%]"
-            >
-              Vesikalık Kabı
             </Link>
           </div>
 
@@ -612,31 +605,24 @@ export default function Header({
 
           <div className="relative w-[calc(50vw)] h-22">
             <Link
-              href="/plastik-urunler/kredi-kartlik/"
-              style={{ animationDelay: '0.375s' }}
-              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[1px] right-[18%]"
-            >
-              Kredi Kartlık
-            </Link>
-            <Link
               href="/plastik-urunler/doviz-kabi/"
               style={{ animationDelay: '1.125s' }}
-              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[16px] left-[54%]"
+              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[6px] right-[24%]"
             >
               Döviz Kabı
             </Link>
 
             <Link
-              href="/plastik-urunler/veteriner-asi-karnesi-kabi/"
-              style={{ animationDelay: '2.625s' }}
-              className="animate-text-glow absolute text-[11px] text-right font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[50px] left-[27%]"
+              href="/plastik-urunler/vesikalik-kabi/"
+              style={{ animationDelay: '2.25s' }}
+              className="animate-text-glow absolute text-[11px] font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[30px] left-[45%]"
             >
-              Veteriner Aşı Karnesi Kabı
+              Vesikalık Kabı
             </Link>
             <Link
               href="/plastik-urunler/evlilik-cuzdani-kilifi/"
               style={{ animationDelay: '1.875s' }}
-              className="animate-text-glow absolute text-[11px] text-right font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[34px] right-[7%]"
+              className="animate-text-glow absolute text-[11px] text-right font-semibold text-white hover:drop-shadow-lg leading-tight transition-all top-[54px] right-[7%]"
             >
               Evlilik Cüzdanı Kılıfı
             </Link>

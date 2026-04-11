@@ -1,31 +1,45 @@
 import { GraphQLClient, RequestOptions } from 'graphql-request';
+
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+export type MakeEmpty<
+  T extends { [key: string]: unknown },
+  K extends keyof T,
+> = { [_ in K]?: never };
+export type Incremental<T> =
+  | T
+  | {
+      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
+    };
 type GraphQLClientRequestHeaders = RequestOptions['requestHeaders'];
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  Date: { input: any; output: any; }
-  GraphQLBigInt: { input: any; output: any; }
-  GraphQLStringOrFloat: { input: any; output: any; }
-  Hash: { input: any; output: any; }
-  JSON: { input: any; output: any; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  Date: { input: any; output: any };
+  GraphQLBigInt: { input: any; output: any };
+  GraphQLStringOrFloat: { input: any; output: any };
+  Hash: { input: any; output: any };
+  JSON: { input: any; output: any };
 };
 
 export enum EventEnum {
   Create = 'create',
   Delete = 'delete',
-  Update = 'update'
+  Update = 'update',
 }
 
 export type Mutation = {
@@ -190,11 +204,9 @@ export type Mutation = {
   update_sub_category_variations_items: Array<Sub_Category_Variations>;
 };
 
-
 export type MutationCreate_About_Us_Features_ItemArgs = {
   data: Create_About_Us_Features_Input;
 };
-
 
 export type MutationCreate_About_Us_Features_ItemsArgs = {
   data?: InputMaybe<Array<Create_About_Us_Features_Input>>;
@@ -206,11 +218,9 @@ export type MutationCreate_About_Us_Features_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_About_Us_Specs_ItemArgs = {
   data: Create_About_Us_Specs_Input;
 };
-
 
 export type MutationCreate_About_Us_Specs_ItemsArgs = {
   data?: InputMaybe<Array<Create_About_Us_Specs_Input>>;
@@ -222,11 +232,9 @@ export type MutationCreate_About_Us_Specs_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Bank_Accounts_ItemArgs = {
   data: Create_Bank_Accounts_Input;
 };
-
 
 export type MutationCreate_Bank_Accounts_ItemsArgs = {
   data?: InputMaybe<Array<Create_Bank_Accounts_Input>>;
@@ -238,11 +246,9 @@ export type MutationCreate_Bank_Accounts_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Cargo_Company_ItemArgs = {
   data: Create_Cargo_Company_Input;
 };
-
 
 export type MutationCreate_Cargo_Company_ItemsArgs = {
   data?: InputMaybe<Array<Create_Cargo_Company_Input>>;
@@ -254,11 +260,9 @@ export type MutationCreate_Cargo_Company_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Home_Banners_ItemArgs = {
   data: Create_Home_Banners_Input;
 };
-
 
 export type MutationCreate_Home_Banners_ItemsArgs = {
   data?: InputMaybe<Array<Create_Home_Banners_Input>>;
@@ -270,11 +274,9 @@ export type MutationCreate_Home_Banners_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Invoice_Info_ItemArgs = {
   data: Create_Invoice_Info_Input;
 };
-
 
 export type MutationCreate_Invoice_Info_ItemsArgs = {
   data?: InputMaybe<Array<Create_Invoice_Info_Input>>;
@@ -286,11 +288,9 @@ export type MutationCreate_Invoice_Info_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Main_Categories_ItemArgs = {
   data: Create_Main_Categories_Input;
 };
-
 
 export type MutationCreate_Main_Categories_ItemsArgs = {
   data?: InputMaybe<Array<Create_Main_Categories_Input>>;
@@ -302,11 +302,9 @@ export type MutationCreate_Main_Categories_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Orders_ItemArgs = {
   data: Create_Orders_Input;
 };
-
 
 export type MutationCreate_Orders_ItemsArgs = {
   data?: InputMaybe<Array<Create_Orders_Input>>;
@@ -318,11 +316,9 @@ export type MutationCreate_Orders_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Product_Colors_ItemArgs = {
   data: Create_Product_Colors_Input;
 };
-
 
 export type MutationCreate_Product_Colors_ItemsArgs = {
   data?: InputMaybe<Array<Create_Product_Colors_Input>>;
@@ -334,11 +330,9 @@ export type MutationCreate_Product_Colors_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Product_Option_Categories_ItemArgs = {
   data: Create_Product_Option_Categories_Input;
 };
-
 
 export type MutationCreate_Product_Option_Categories_ItemsArgs = {
   data?: InputMaybe<Array<Create_Product_Option_Categories_Input>>;
@@ -350,11 +344,9 @@ export type MutationCreate_Product_Option_Categories_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Product_Options_ItemArgs = {
   data: Create_Product_Options_Input;
 };
-
 
 export type MutationCreate_Product_Options_ItemsArgs = {
   data?: InputMaybe<Array<Create_Product_Options_Input>>;
@@ -366,11 +358,9 @@ export type MutationCreate_Product_Options_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Product_Variation_Images_ItemArgs = {
   data: Create_Product_Variation_Images_Input;
 };
-
 
 export type MutationCreate_Product_Variation_Images_ItemsArgs = {
   data?: InputMaybe<Array<Create_Product_Variation_Images_Input>>;
@@ -382,11 +372,9 @@ export type MutationCreate_Product_Variation_Images_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Product_Variations_ItemArgs = {
   data: Create_Product_Variations_Input;
 };
-
 
 export type MutationCreate_Product_Variations_ItemsArgs = {
   data?: InputMaybe<Array<Create_Product_Variations_Input>>;
@@ -398,11 +386,9 @@ export type MutationCreate_Product_Variations_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Products_ItemArgs = {
   data: Create_Products_Input;
 };
-
 
 export type MutationCreate_Products_ItemsArgs = {
   data?: InputMaybe<Array<Create_Products_Input>>;
@@ -414,11 +400,9 @@ export type MutationCreate_Products_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Purchases_Counts_ItemArgs = {
   data: Create_Purchases_Counts_Input;
 };
-
 
 export type MutationCreate_Purchases_Counts_ItemsArgs = {
   data?: InputMaybe<Array<Create_Purchases_Counts_Input>>;
@@ -430,11 +414,9 @@ export type MutationCreate_Purchases_Counts_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Sectors_ItemArgs = {
   data: Create_Sectors_Input;
 };
-
 
 export type MutationCreate_Sectors_ItemsArgs = {
   data?: InputMaybe<Array<Create_Sectors_Input>>;
@@ -446,11 +428,9 @@ export type MutationCreate_Sectors_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Social_Medias_ItemArgs = {
   data: Create_Social_Medias_Input;
 };
-
 
 export type MutationCreate_Social_Medias_ItemsArgs = {
   data?: InputMaybe<Array<Create_Social_Medias_Input>>;
@@ -462,11 +442,9 @@ export type MutationCreate_Social_Medias_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Sss_ItemArgs = {
   data: Create_Sss_Input;
 };
-
 
 export type MutationCreate_Sss_ItemsArgs = {
   data?: InputMaybe<Array<Create_Sss_Input>>;
@@ -478,11 +456,9 @@ export type MutationCreate_Sss_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Sub_Categories_ItemArgs = {
   data: Create_Sub_Categories_Input;
 };
-
 
 export type MutationCreate_Sub_Categories_ItemsArgs = {
   data?: InputMaybe<Array<Create_Sub_Categories_Input>>;
@@ -494,11 +470,9 @@ export type MutationCreate_Sub_Categories_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Sub_Categories_Sectors_ItemArgs = {
   data: Create_Sub_Categories_Sectors_Input;
 };
-
 
 export type MutationCreate_Sub_Categories_Sectors_ItemsArgs = {
   data?: InputMaybe<Array<Create_Sub_Categories_Sectors_Input>>;
@@ -510,11 +484,9 @@ export type MutationCreate_Sub_Categories_Sectors_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationCreate_Sub_Category_Variations_ItemArgs = {
   data: Create_Sub_Category_Variations_Input;
 };
-
 
 export type MutationCreate_Sub_Category_Variations_ItemsArgs = {
   data?: InputMaybe<Array<Create_Sub_Category_Variations_Input>>;
@@ -526,221 +498,177 @@ export type MutationCreate_Sub_Category_Variations_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationDelete_About_Us_Features_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_About_Us_Features_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_About_Us_Specs_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_About_Us_Specs_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Bank_Accounts_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Bank_Accounts_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Cargo_Company_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Cargo_Company_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Home_Banners_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Home_Banners_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Invoice_Info_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Invoice_Info_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Main_Categories_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Main_Categories_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Orders_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Orders_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Product_Colors_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Product_Colors_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Product_Option_Categories_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Product_Option_Categories_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Product_Options_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Product_Options_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Product_Variation_Images_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Product_Variation_Images_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Product_Variations_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Product_Variations_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Products_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Products_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Purchases_Counts_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Purchases_Counts_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Sectors_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Sectors_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Social_Medias_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Social_Medias_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Sss_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Sss_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Sub_Categories_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Sub_Categories_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Sub_Categories_Sectors_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Sub_Categories_Sectors_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationDelete_Sub_Category_Variations_ItemArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationDelete_Sub_Category_Variations_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
-
 export type MutationUpdate_About_UsArgs = {
   data: Update_About_Us_Input;
 };
-
 
 export type MutationUpdate_About_Us_Features_BatchArgs = {
   data?: InputMaybe<Array<Update_About_Us_Features_Input>>;
@@ -752,12 +680,10 @@ export type MutationUpdate_About_Us_Features_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_About_Us_Features_ItemArgs = {
   data: Update_About_Us_Features_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_About_Us_Features_ItemsArgs = {
   data: Update_About_Us_Features_Input;
@@ -770,7 +696,6 @@ export type MutationUpdate_About_Us_Features_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_About_Us_Specs_BatchArgs = {
   data?: InputMaybe<Array<Update_About_Us_Specs_Input>>;
   filter?: InputMaybe<About_Us_Specs_Filter>;
@@ -781,12 +706,10 @@ export type MutationUpdate_About_Us_Specs_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_About_Us_Specs_ItemArgs = {
   data: Update_About_Us_Specs_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_About_Us_Specs_ItemsArgs = {
   data: Update_About_Us_Specs_Input;
@@ -799,7 +722,6 @@ export type MutationUpdate_About_Us_Specs_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Bank_Accounts_BatchArgs = {
   data?: InputMaybe<Array<Update_Bank_Accounts_Input>>;
   filter?: InputMaybe<Bank_Accounts_Filter>;
@@ -810,12 +732,10 @@ export type MutationUpdate_Bank_Accounts_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Bank_Accounts_ItemArgs = {
   data: Update_Bank_Accounts_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Bank_Accounts_ItemsArgs = {
   data: Update_Bank_Accounts_Input;
@@ -828,7 +748,6 @@ export type MutationUpdate_Bank_Accounts_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Cargo_Company_BatchArgs = {
   data?: InputMaybe<Array<Update_Cargo_Company_Input>>;
   filter?: InputMaybe<Cargo_Company_Filter>;
@@ -839,12 +758,10 @@ export type MutationUpdate_Cargo_Company_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Cargo_Company_ItemArgs = {
   data: Update_Cargo_Company_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Cargo_Company_ItemsArgs = {
   data: Update_Cargo_Company_Input;
@@ -857,21 +774,17 @@ export type MutationUpdate_Cargo_Company_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_ContactArgs = {
   data: Update_Contact_Input;
 };
-
 
 export type MutationUpdate_FooterArgs = {
   data: Update_Footer_Input;
 };
 
-
 export type MutationUpdate_HeaderArgs = {
   data: Update_Header_Input;
 };
-
 
 export type MutationUpdate_Home_Banners_BatchArgs = {
   data?: InputMaybe<Array<Update_Home_Banners_Input>>;
@@ -883,12 +796,10 @@ export type MutationUpdate_Home_Banners_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Home_Banners_ItemArgs = {
   data: Update_Home_Banners_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Home_Banners_ItemsArgs = {
   data: Update_Home_Banners_Input;
@@ -901,7 +812,6 @@ export type MutationUpdate_Home_Banners_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Invoice_Info_BatchArgs = {
   data?: InputMaybe<Array<Update_Invoice_Info_Input>>;
   filter?: InputMaybe<Invoice_Info_Filter>;
@@ -912,12 +822,10 @@ export type MutationUpdate_Invoice_Info_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Invoice_Info_ItemArgs = {
   data: Update_Invoice_Info_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Invoice_Info_ItemsArgs = {
   data: Update_Invoice_Info_Input;
@@ -930,7 +838,6 @@ export type MutationUpdate_Invoice_Info_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Main_Categories_BatchArgs = {
   data?: InputMaybe<Array<Update_Main_Categories_Input>>;
   filter?: InputMaybe<Main_Categories_Filter>;
@@ -941,12 +848,10 @@ export type MutationUpdate_Main_Categories_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Main_Categories_ItemArgs = {
   data: Update_Main_Categories_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Main_Categories_ItemsArgs = {
   data: Update_Main_Categories_Input;
@@ -959,7 +864,6 @@ export type MutationUpdate_Main_Categories_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Orders_BatchArgs = {
   data?: InputMaybe<Array<Update_Orders_Input>>;
   filter?: InputMaybe<Orders_Filter>;
@@ -970,12 +874,10 @@ export type MutationUpdate_Orders_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Orders_ItemArgs = {
   data: Update_Orders_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Orders_ItemsArgs = {
   data: Update_Orders_Input;
@@ -988,41 +890,33 @@ export type MutationUpdate_Orders_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Page__Bank_AccountArgs = {
   data: Update_Page__Bank_Account_Input;
 };
-
 
 export type MutationUpdate_Page__Distance_Selling_AgreementArgs = {
   data: Update_Page__Distance_Selling_Agreement_Input;
 };
 
-
 export type MutationUpdate_Page__HomeArgs = {
   data: Update_Page__Home_Input;
 };
-
 
 export type MutationUpdate_Page__Membership_AgreementArgs = {
   data: Update_Page__Membership_Agreement_Input;
 };
 
-
 export type MutationUpdate_Page__Personal_Data_Protection_LawArgs = {
   data: Update_Page__Personal_Data_Protection_Law_Input;
 };
-
 
 export type MutationUpdate_Page__Privacy_AgreementArgs = {
   data: Update_Page__Privacy_Agreement_Input;
 };
 
-
 export type MutationUpdate_Page__Terms_Of_UseArgs = {
   data: Update_Page__Terms_Of_Use_Input;
 };
-
 
 export type MutationUpdate_Product_Colors_BatchArgs = {
   data?: InputMaybe<Array<Update_Product_Colors_Input>>;
@@ -1034,12 +928,10 @@ export type MutationUpdate_Product_Colors_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Product_Colors_ItemArgs = {
   data: Update_Product_Colors_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Product_Colors_ItemsArgs = {
   data: Update_Product_Colors_Input;
@@ -1052,7 +944,6 @@ export type MutationUpdate_Product_Colors_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Product_Option_Categories_BatchArgs = {
   data?: InputMaybe<Array<Update_Product_Option_Categories_Input>>;
   filter?: InputMaybe<Product_Option_Categories_Filter>;
@@ -1063,12 +954,10 @@ export type MutationUpdate_Product_Option_Categories_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Product_Option_Categories_ItemArgs = {
   data: Update_Product_Option_Categories_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Product_Option_Categories_ItemsArgs = {
   data: Update_Product_Option_Categories_Input;
@@ -1081,7 +970,6 @@ export type MutationUpdate_Product_Option_Categories_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Product_Options_BatchArgs = {
   data?: InputMaybe<Array<Update_Product_Options_Input>>;
   filter?: InputMaybe<Product_Options_Filter>;
@@ -1092,12 +980,10 @@ export type MutationUpdate_Product_Options_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Product_Options_ItemArgs = {
   data: Update_Product_Options_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Product_Options_ItemsArgs = {
   data: Update_Product_Options_Input;
@@ -1110,7 +996,6 @@ export type MutationUpdate_Product_Options_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Product_Variation_Images_BatchArgs = {
   data?: InputMaybe<Array<Update_Product_Variation_Images_Input>>;
   filter?: InputMaybe<Product_Variation_Images_Filter>;
@@ -1121,12 +1006,10 @@ export type MutationUpdate_Product_Variation_Images_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Product_Variation_Images_ItemArgs = {
   data: Update_Product_Variation_Images_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Product_Variation_Images_ItemsArgs = {
   data: Update_Product_Variation_Images_Input;
@@ -1139,7 +1022,6 @@ export type MutationUpdate_Product_Variation_Images_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Product_Variations_BatchArgs = {
   data?: InputMaybe<Array<Update_Product_Variations_Input>>;
   filter?: InputMaybe<Product_Variations_Filter>;
@@ -1150,12 +1032,10 @@ export type MutationUpdate_Product_Variations_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Product_Variations_ItemArgs = {
   data: Update_Product_Variations_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Product_Variations_ItemsArgs = {
   data: Update_Product_Variations_Input;
@@ -1168,7 +1048,6 @@ export type MutationUpdate_Product_Variations_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Products_BatchArgs = {
   data?: InputMaybe<Array<Update_Products_Input>>;
   filter?: InputMaybe<Products_Filter>;
@@ -1179,12 +1058,10 @@ export type MutationUpdate_Products_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Products_ItemArgs = {
   data: Update_Products_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Products_ItemsArgs = {
   data: Update_Products_Input;
@@ -1197,7 +1074,6 @@ export type MutationUpdate_Products_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Purchases_Counts_BatchArgs = {
   data?: InputMaybe<Array<Update_Purchases_Counts_Input>>;
   filter?: InputMaybe<Purchases_Counts_Filter>;
@@ -1208,12 +1084,10 @@ export type MutationUpdate_Purchases_Counts_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Purchases_Counts_ItemArgs = {
   data: Update_Purchases_Counts_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Purchases_Counts_ItemsArgs = {
   data: Update_Purchases_Counts_Input;
@@ -1226,7 +1100,6 @@ export type MutationUpdate_Purchases_Counts_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Sectors_BatchArgs = {
   data?: InputMaybe<Array<Update_Sectors_Input>>;
   filter?: InputMaybe<Sectors_Filter>;
@@ -1237,12 +1110,10 @@ export type MutationUpdate_Sectors_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Sectors_ItemArgs = {
   data: Update_Sectors_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Sectors_ItemsArgs = {
   data: Update_Sectors_Input;
@@ -1255,7 +1126,6 @@ export type MutationUpdate_Sectors_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Social_Medias_BatchArgs = {
   data?: InputMaybe<Array<Update_Social_Medias_Input>>;
   filter?: InputMaybe<Social_Medias_Filter>;
@@ -1266,12 +1136,10 @@ export type MutationUpdate_Social_Medias_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Social_Medias_ItemArgs = {
   data: Update_Social_Medias_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Social_Medias_ItemsArgs = {
   data: Update_Social_Medias_Input;
@@ -1284,7 +1152,6 @@ export type MutationUpdate_Social_Medias_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Sss_BatchArgs = {
   data?: InputMaybe<Array<Update_Sss_Input>>;
   filter?: InputMaybe<Sss_Filter>;
@@ -1295,12 +1162,10 @@ export type MutationUpdate_Sss_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Sss_ItemArgs = {
   data: Update_Sss_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Sss_ItemsArgs = {
   data: Update_Sss_Input;
@@ -1313,7 +1178,6 @@ export type MutationUpdate_Sss_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Sub_Categories_BatchArgs = {
   data?: InputMaybe<Array<Update_Sub_Categories_Input>>;
   filter?: InputMaybe<Sub_Categories_Filter>;
@@ -1324,12 +1188,10 @@ export type MutationUpdate_Sub_Categories_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Sub_Categories_ItemArgs = {
   data: Update_Sub_Categories_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Sub_Categories_ItemsArgs = {
   data: Update_Sub_Categories_Input;
@@ -1342,7 +1204,6 @@ export type MutationUpdate_Sub_Categories_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Sub_Categories_Sectors_BatchArgs = {
   data?: InputMaybe<Array<Update_Sub_Categories_Sectors_Input>>;
   filter?: InputMaybe<Sub_Categories_Sectors_Filter>;
@@ -1353,12 +1214,10 @@ export type MutationUpdate_Sub_Categories_Sectors_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Sub_Categories_Sectors_ItemArgs = {
   data: Update_Sub_Categories_Sectors_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Sub_Categories_Sectors_ItemsArgs = {
   data: Update_Sub_Categories_Sectors_Input;
@@ -1371,7 +1230,6 @@ export type MutationUpdate_Sub_Categories_Sectors_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Sub_Category_Variations_BatchArgs = {
   data?: InputMaybe<Array<Update_Sub_Category_Variations_Input>>;
   filter?: InputMaybe<Sub_Category_Variations_Filter>;
@@ -1382,12 +1240,10 @@ export type MutationUpdate_Sub_Category_Variations_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type MutationUpdate_Sub_Category_Variations_ItemArgs = {
   data: Update_Sub_Category_Variations_Input;
   id: Scalars['ID']['input'];
 };
-
 
 export type MutationUpdate_Sub_Category_Variations_ItemsArgs = {
   data: Update_Sub_Category_Variations_Input;
@@ -1510,16 +1366,13 @@ export type Query = {
   sub_category_variations_by_version?: Maybe<Version_Sub_Category_Variations>;
 };
 
-
 export type QueryAbout_UsArgs = {
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryAbout_Us_By_VersionArgs = {
   version: Scalars['String']['input'];
 };
-
 
 export type QueryAbout_Us_FeaturesArgs = {
   filter?: InputMaybe<About_Us_Features_Filter>;
@@ -1529,7 +1382,6 @@ export type QueryAbout_Us_FeaturesArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryAbout_Us_Features_AggregatedArgs = {
   filter?: InputMaybe<About_Us_Features_Filter>;
@@ -1541,18 +1393,15 @@ export type QueryAbout_Us_Features_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryAbout_Us_Features_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryAbout_Us_Features_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QueryAbout_Us_SpecsArgs = {
   filter?: InputMaybe<About_Us_Specs_Filter>;
@@ -1562,7 +1411,6 @@ export type QueryAbout_Us_SpecsArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryAbout_Us_Specs_AggregatedArgs = {
   filter?: InputMaybe<About_Us_Specs_Filter>;
@@ -1574,18 +1422,15 @@ export type QueryAbout_Us_Specs_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryAbout_Us_Specs_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryAbout_Us_Specs_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QueryBank_AccountsArgs = {
   filter?: InputMaybe<Bank_Accounts_Filter>;
@@ -1595,7 +1440,6 @@ export type QueryBank_AccountsArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryBank_Accounts_AggregatedArgs = {
   filter?: InputMaybe<Bank_Accounts_Filter>;
@@ -1607,18 +1451,15 @@ export type QueryBank_Accounts_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryBank_Accounts_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryBank_Accounts_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QueryCargo_CompanyArgs = {
   filter?: InputMaybe<Cargo_Company_Filter>;
@@ -1628,7 +1469,6 @@ export type QueryCargo_CompanyArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryCargo_Company_AggregatedArgs = {
   filter?: InputMaybe<Cargo_Company_Filter>;
@@ -1640,48 +1480,39 @@ export type QueryCargo_Company_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryCargo_Company_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryCargo_Company_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
 
-
 export type QueryContactArgs = {
   version?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryContact_By_VersionArgs = {
   version: Scalars['String']['input'];
 };
 
-
 export type QueryFooterArgs = {
   version?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryFooter_By_VersionArgs = {
   version: Scalars['String']['input'];
 };
 
-
 export type QueryHeaderArgs = {
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryHeader_By_VersionArgs = {
   version: Scalars['String']['input'];
 };
-
 
 export type QueryHome_BannersArgs = {
   filter?: InputMaybe<Home_Banners_Filter>;
@@ -1691,7 +1522,6 @@ export type QueryHome_BannersArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryHome_Banners_AggregatedArgs = {
   filter?: InputMaybe<Home_Banners_Filter>;
@@ -1703,18 +1533,15 @@ export type QueryHome_Banners_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryHome_Banners_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryHome_Banners_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QueryInvoice_InfoArgs = {
   filter?: InputMaybe<Invoice_Info_Filter>;
@@ -1724,7 +1551,6 @@ export type QueryInvoice_InfoArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryInvoice_Info_AggregatedArgs = {
   filter?: InputMaybe<Invoice_Info_Filter>;
@@ -1736,18 +1562,15 @@ export type QueryInvoice_Info_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryInvoice_Info_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryInvoice_Info_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QueryMain_CategoriesArgs = {
   filter?: InputMaybe<Main_Categories_Filter>;
@@ -1757,7 +1580,6 @@ export type QueryMain_CategoriesArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryMain_Categories_AggregatedArgs = {
   filter?: InputMaybe<Main_Categories_Filter>;
@@ -1769,18 +1591,15 @@ export type QueryMain_Categories_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryMain_Categories_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryMain_Categories_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QueryOrdersArgs = {
   filter?: InputMaybe<Orders_Filter>;
@@ -1790,7 +1609,6 @@ export type QueryOrdersArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryOrders_AggregatedArgs = {
   filter?: InputMaybe<Orders_Filter>;
@@ -1802,88 +1620,71 @@ export type QueryOrders_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryOrders_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryOrders_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
 
-
 export type QueryPage__Bank_AccountArgs = {
   version?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryPage__Bank_Account_By_VersionArgs = {
   version: Scalars['String']['input'];
 };
 
-
 export type QueryPage__Distance_Selling_AgreementArgs = {
   version?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryPage__Distance_Selling_Agreement_By_VersionArgs = {
   version: Scalars['String']['input'];
 };
 
-
 export type QueryPage__HomeArgs = {
   version?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryPage__Home_By_VersionArgs = {
   version: Scalars['String']['input'];
 };
 
-
 export type QueryPage__Membership_AgreementArgs = {
   version?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryPage__Membership_Agreement_By_VersionArgs = {
   version: Scalars['String']['input'];
 };
 
-
 export type QueryPage__Personal_Data_Protection_LawArgs = {
   version?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryPage__Personal_Data_Protection_Law_By_VersionArgs = {
   version: Scalars['String']['input'];
 };
 
-
 export type QueryPage__Privacy_AgreementArgs = {
   version?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryPage__Privacy_Agreement_By_VersionArgs = {
   version: Scalars['String']['input'];
 };
 
-
 export type QueryPage__Terms_Of_UseArgs = {
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryPage__Terms_Of_Use_By_VersionArgs = {
   version: Scalars['String']['input'];
 };
-
 
 export type QueryProduct_ColorsArgs = {
   filter?: InputMaybe<Product_Colors_Filter>;
@@ -1893,7 +1694,6 @@ export type QueryProduct_ColorsArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryProduct_Colors_AggregatedArgs = {
   filter?: InputMaybe<Product_Colors_Filter>;
@@ -1905,18 +1705,15 @@ export type QueryProduct_Colors_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryProduct_Colors_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryProduct_Colors_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QueryProduct_Option_CategoriesArgs = {
   filter?: InputMaybe<Product_Option_Categories_Filter>;
@@ -1926,7 +1723,6 @@ export type QueryProduct_Option_CategoriesArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryProduct_Option_Categories_AggregatedArgs = {
   filter?: InputMaybe<Product_Option_Categories_Filter>;
@@ -1938,18 +1734,15 @@ export type QueryProduct_Option_Categories_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryProduct_Option_Categories_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryProduct_Option_Categories_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QueryProduct_OptionsArgs = {
   filter?: InputMaybe<Product_Options_Filter>;
@@ -1959,7 +1752,6 @@ export type QueryProduct_OptionsArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryProduct_Options_AggregatedArgs = {
   filter?: InputMaybe<Product_Options_Filter>;
@@ -1971,18 +1763,15 @@ export type QueryProduct_Options_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryProduct_Options_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryProduct_Options_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QueryProduct_Variation_ImagesArgs = {
   filter?: InputMaybe<Product_Variation_Images_Filter>;
@@ -1992,7 +1781,6 @@ export type QueryProduct_Variation_ImagesArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryProduct_Variation_Images_AggregatedArgs = {
   filter?: InputMaybe<Product_Variation_Images_Filter>;
@@ -2004,18 +1792,15 @@ export type QueryProduct_Variation_Images_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryProduct_Variation_Images_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryProduct_Variation_Images_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QueryProduct_VariationsArgs = {
   filter?: InputMaybe<Product_Variations_Filter>;
@@ -2025,7 +1810,6 @@ export type QueryProduct_VariationsArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryProduct_Variations_AggregatedArgs = {
   filter?: InputMaybe<Product_Variations_Filter>;
@@ -2037,18 +1821,15 @@ export type QueryProduct_Variations_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryProduct_Variations_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryProduct_Variations_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QueryProductsArgs = {
   filter?: InputMaybe<Products_Filter>;
@@ -2058,7 +1839,6 @@ export type QueryProductsArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryProducts_AggregatedArgs = {
   filter?: InputMaybe<Products_Filter>;
@@ -2070,18 +1850,15 @@ export type QueryProducts_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryProducts_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryProducts_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QueryPurchases_CountsArgs = {
   filter?: InputMaybe<Purchases_Counts_Filter>;
@@ -2091,7 +1868,6 @@ export type QueryPurchases_CountsArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QueryPurchases_Counts_AggregatedArgs = {
   filter?: InputMaybe<Purchases_Counts_Filter>;
@@ -2103,18 +1879,15 @@ export type QueryPurchases_Counts_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QueryPurchases_Counts_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryPurchases_Counts_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QuerySectorsArgs = {
   filter?: InputMaybe<Sectors_Filter>;
@@ -2124,7 +1897,6 @@ export type QuerySectorsArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QuerySectors_AggregatedArgs = {
   filter?: InputMaybe<Sectors_Filter>;
@@ -2136,18 +1908,15 @@ export type QuerySectors_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QuerySectors_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QuerySectors_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QuerySocial_MediasArgs = {
   filter?: InputMaybe<Social_Medias_Filter>;
@@ -2157,7 +1926,6 @@ export type QuerySocial_MediasArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QuerySocial_Medias_AggregatedArgs = {
   filter?: InputMaybe<Social_Medias_Filter>;
@@ -2169,18 +1937,15 @@ export type QuerySocial_Medias_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QuerySocial_Medias_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QuerySocial_Medias_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QuerySssArgs = {
   filter?: InputMaybe<Sss_Filter>;
@@ -2190,7 +1955,6 @@ export type QuerySssArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QuerySss_AggregatedArgs = {
   filter?: InputMaybe<Sss_Filter>;
@@ -2202,18 +1966,15 @@ export type QuerySss_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QuerySss_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QuerySss_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QuerySub_CategoriesArgs = {
   filter?: InputMaybe<Sub_Categories_Filter>;
@@ -2223,7 +1984,6 @@ export type QuerySub_CategoriesArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QuerySub_Categories_AggregatedArgs = {
   filter?: InputMaybe<Sub_Categories_Filter>;
@@ -2235,18 +1995,15 @@ export type QuerySub_Categories_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QuerySub_Categories_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QuerySub_Categories_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QuerySub_Categories_SectorsArgs = {
   filter?: InputMaybe<Sub_Categories_Sectors_Filter>;
@@ -2256,7 +2013,6 @@ export type QuerySub_Categories_SectorsArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QuerySub_Categories_Sectors_AggregatedArgs = {
   filter?: InputMaybe<Sub_Categories_Sectors_Filter>;
@@ -2268,18 +2024,15 @@ export type QuerySub_Categories_Sectors_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QuerySub_Categories_Sectors_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QuerySub_Categories_Sectors_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
-
 
 export type QuerySub_Category_VariationsArgs = {
   filter?: InputMaybe<Sub_Category_Variations_Filter>;
@@ -2289,7 +2042,6 @@ export type QuerySub_Category_VariationsArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type QuerySub_Category_Variations_AggregatedArgs = {
   filter?: InputMaybe<Sub_Category_Variations_Filter>;
@@ -2301,12 +2053,10 @@ export type QuerySub_Category_Variations_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type QuerySub_Category_Variations_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QuerySub_Category_Variations_By_VersionArgs = {
   id: Scalars['ID']['input'];
@@ -2360,216 +2110,173 @@ export type Subscription = {
   sub_category_variations_mutated?: Maybe<Sub_Category_Variations_Mutated>;
 };
 
-
 export type SubscriptionAbout_Us_Features_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionAbout_Us_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionAbout_Us_Specs_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionBank_Accounts_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionCargo_Company_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionContact_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionDirectus_Activity_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionDirectus_Comments_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionDirectus_Files_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionDirectus_Folders_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionDirectus_Notifications_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionDirectus_Presets_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionDirectus_Roles_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionDirectus_Settings_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionDirectus_Shares_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionDirectus_Translations_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionDirectus_Users_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionFooter_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionHeader_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionHome_Banners_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionInvoice_Info_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionMain_Categories_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionOrders_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionPage__Bank_Account_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionPage__Distance_Selling_Agreement_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionPage__Home_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionPage__Membership_Agreement_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionPage__Personal_Data_Protection_Law_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionPage__Privacy_Agreement_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionPage__Terms_Of_Use_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionProduct_Colors_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionProduct_Option_Categories_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionProduct_Options_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionProduct_Variation_Images_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionProduct_Variations_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionProducts_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionPurchases_Counts_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionSectors_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionSocial_Medias_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionSss_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionSub_Categories_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
-
 export type SubscriptionSub_Categories_Sectors_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
-
 
 export type SubscriptionSub_Category_Variations_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
@@ -2586,7 +2293,6 @@ export type About_Us = {
   title?: Maybe<Scalars['String']['output']>;
 };
 
-
 export type About_UsFeaturesArgs = {
   filter?: InputMaybe<About_Us_Features_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -2595,7 +2301,6 @@ export type About_UsFeaturesArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type About_UsSpecsArgs = {
   filter?: InputMaybe<About_Us_Specs_Filter>;
@@ -2614,7 +2319,6 @@ export type About_Us_Features = {
   order?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
 };
-
 
 export type About_Us_FeaturesAbout_Us_IdArgs = {
   filter?: InputMaybe<About_Us_Filter>;
@@ -2713,7 +2417,6 @@ export type About_Us_Specs = {
   title?: Maybe<Scalars['String']['output']>;
 };
 
-
 export type About_Us_SpecsAbout_Us_IdArgs = {
   filter?: InputMaybe<About_Us_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -2722,7 +2425,6 @@ export type About_Us_SpecsAbout_Us_IdArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type About_Us_SpecsIconArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
@@ -3042,7 +2744,9 @@ export type Create_Footer_Input = {
   id?: InputMaybe<Scalars['ID']['input']>;
   long_description?: InputMaybe<Scalars['String']['input']>;
   phone?: InputMaybe<Scalars['String']['input']>;
-  popular_sub_categories?: InputMaybe<Array<InputMaybe<Create_Sub_Categories_Input>>>;
+  popular_sub_categories?: InputMaybe<
+    Array<InputMaybe<Create_Sub_Categories_Input>>
+  >;
   review_url?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   whatsapp?: InputMaybe<Scalars['String']['input']>;
@@ -3107,14 +2811,19 @@ export type Create_Orders_Input = {
 export type Create_Page__Home_Input = {
   banners?: InputMaybe<Array<InputMaybe<Create_Home_Banners_Input>>>;
   id?: InputMaybe<Scalars['ID']['input']>;
-  popular_sub_categories?: InputMaybe<Array<InputMaybe<Create_Sub_Categories_Input>>>;
-  sectoral_sub_categories?: InputMaybe<Array<InputMaybe<Create_Sub_Categories_Input>>>;
+  popular_sub_categories?: InputMaybe<
+    Array<InputMaybe<Create_Sub_Categories_Input>>
+  >;
+  sectoral_sub_categories?: InputMaybe<
+    Array<InputMaybe<Create_Sub_Categories_Input>>
+  >;
 };
 
 export type Create_Product_Colors_Input = {
   color?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type Create_Product_Option_Categories_Input = {
@@ -3145,7 +2854,9 @@ export type Create_Product_Variations_Input = {
   main_option?: InputMaybe<Create_Product_Options_Input>;
   piece_price?: InputMaybe<Scalars['Float']['input']>;
   products_id?: InputMaybe<Create_Products_Input>;
-  purchase_count_prices?: InputMaybe<Array<InputMaybe<Create_Purchases_Counts_Input>>>;
+  purchase_count_prices?: InputMaybe<
+    Array<InputMaybe<Create_Purchases_Counts_Input>>
+  >;
   secondary_option?: InputMaybe<Create_Product_Options_Input>;
   stock_code?: InputMaybe<Scalars['String']['input']>;
   video_url?: InputMaybe<Scalars['String']['input']>;
@@ -3172,6 +2883,7 @@ export type Create_Sectors_Input = {
   description?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  name2?: InputMaybe<Scalars['String']['input']>;
   web_image?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -3200,7 +2912,9 @@ export type Create_Sub_Categories_Input = {
   page__home_sectoral_id?: InputMaybe<Create_Page__Home_Input>;
   sector?: InputMaybe<Array<InputMaybe<Create_Sub_Categories_Sectors_Input>>>;
   slug?: InputMaybe<Scalars['String']['input']>;
-  variations?: InputMaybe<Array<InputMaybe<Create_Sub_Category_Variations_Input>>>;
+  variations?: InputMaybe<
+    Array<InputMaybe<Create_Sub_Category_Variations_Input>>
+  >;
 };
 
 export type Create_Sub_Categories_Sectors_Input = {
@@ -3219,14 +2933,18 @@ export type Create_Sub_Category_Variations_Input = {
 };
 
 export type Date_Filter_Operators = {
-  _between?: InputMaybe<Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>>;
+  _between?: InputMaybe<
+    Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>
+  >;
   _eq?: InputMaybe<Scalars['String']['input']>;
   _gt?: InputMaybe<Scalars['String']['input']>;
   _gte?: InputMaybe<Scalars['String']['input']>;
   _in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   _lt?: InputMaybe<Scalars['String']['input']>;
   _lte?: InputMaybe<Scalars['String']['input']>;
-  _nbetween?: InputMaybe<Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>>;
+  _nbetween?: InputMaybe<
+    Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>
+  >;
   _neq?: InputMaybe<Scalars['String']['input']>;
   _nin?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   _nnull?: InputMaybe<Scalars['Boolean']['input']>;
@@ -3282,7 +3000,6 @@ export type Directus_Activity = {
   user_agent?: Maybe<Scalars['String']['output']>;
 };
 
-
 export type Directus_ActivityUserArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3313,7 +3030,6 @@ export type Directus_Comments = {
   user_updated?: Maybe<Directus_Users>;
 };
 
-
 export type Directus_CommentsUser_CreatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3322,7 +3038,6 @@ export type Directus_CommentsUser_CreatedArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Directus_CommentsUser_UpdatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -3376,7 +3091,6 @@ export type Directus_Files = {
   width?: Maybe<Scalars['Int']['output']>;
 };
 
-
 export type Directus_FilesFolderArgs = {
   filter?: InputMaybe<Directus_Folders_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3386,7 +3100,6 @@ export type Directus_FilesFolderArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type Directus_FilesModified_ByArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3395,7 +3108,6 @@ export type Directus_FilesModified_ByArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Directus_FilesUploaded_ByArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -3457,7 +3169,6 @@ export type Directus_Folders = {
   parent?: Maybe<Directus_Folders>;
 };
 
-
 export type Directus_FoldersParentArgs = {
   filter?: InputMaybe<Directus_Folders_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3496,7 +3207,6 @@ export type Directus_Notifications = {
   timestamp_func?: Maybe<Datetime_Functions>;
 };
 
-
 export type Directus_NotificationsRecipientArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3505,7 +3215,6 @@ export type Directus_NotificationsRecipientArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Directus_NotificationsSenderArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -3543,7 +3252,6 @@ export type Directus_Presets = {
   user?: Maybe<Directus_Users>;
 };
 
-
 export type Directus_PresetsRoleArgs = {
   filter?: InputMaybe<Directus_Roles_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3552,7 +3260,6 @@ export type Directus_PresetsRoleArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Directus_PresetsUserArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -3585,7 +3292,6 @@ export type Directus_Roles = {
   users_func?: Maybe<Count_Functions>;
 };
 
-
 export type Directus_RolesChildrenArgs = {
   filter?: InputMaybe<Directus_Roles_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3595,7 +3301,6 @@ export type Directus_RolesChildrenArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type Directus_RolesParentArgs = {
   filter?: InputMaybe<Directus_Roles_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3604,7 +3309,6 @@ export type Directus_RolesParentArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Directus_RolesUsersArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -3742,7 +3446,6 @@ export type Directus_Settings = {
   visual_editor_urls_func?: Maybe<Count_Functions>;
 };
 
-
 export type Directus_SettingsProject_LogoArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3751,7 +3454,6 @@ export type Directus_SettingsProject_LogoArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Directus_SettingsPublic_BackgroundArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
@@ -3762,7 +3464,6 @@ export type Directus_SettingsPublic_BackgroundArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type Directus_SettingsPublic_FaviconArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3771,7 +3472,6 @@ export type Directus_SettingsPublic_FaviconArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Directus_SettingsPublic_ForegroundArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
@@ -3782,7 +3482,6 @@ export type Directus_SettingsPublic_ForegroundArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type Directus_SettingsPublic_Registration_RoleArgs = {
   filter?: InputMaybe<Directus_Roles_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3791,7 +3490,6 @@ export type Directus_SettingsPublic_Registration_RoleArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Directus_SettingsStorage_Default_FolderArgs = {
   filter?: InputMaybe<Directus_Folders_Filter>;
@@ -3832,7 +3530,6 @@ export type Directus_Shares = {
   user_created?: Maybe<Directus_Users>;
 };
 
-
 export type Directus_SharesRoleArgs = {
   filter?: InputMaybe<Directus_Roles_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3841,7 +3538,6 @@ export type Directus_SharesRoleArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Directus_SharesUser_CreatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -3912,7 +3608,6 @@ export type Directus_Users = {
   token?: Maybe<Scalars['Hash']['output']>;
 };
 
-
 export type Directus_UsersAvatarArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3921,7 +3616,6 @@ export type Directus_UsersAvatarArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Directus_UsersRoleArgs = {
   filter?: InputMaybe<Directus_Roles_Filter>;
@@ -4036,7 +3730,6 @@ export type Footer = {
   whatsapp?: Maybe<Scalars['String']['output']>;
 };
 
-
 export type FooterPopular_Sub_CategoriesArgs = {
   filter?: InputMaybe<Sub_Categories_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4108,7 +3801,6 @@ export type Home_Banners = {
   web_image?: Maybe<Directus_Files>;
 };
 
-
 export type Home_BannersMobile_ImageArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4118,7 +3810,6 @@ export type Home_BannersMobile_ImageArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type Home_BannersPage__Home_IdArgs = {
   filter?: InputMaybe<Page__Home_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4127,7 +3818,6 @@ export type Home_BannersPage__Home_IdArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Home_BannersWeb_ImageArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
@@ -4249,7 +3939,6 @@ export type Invoice_Info = {
   user?: Maybe<Directus_Users>;
 };
 
-
 export type Invoice_InfoUserArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4326,7 +4015,6 @@ export type Main_Categories = {
   sub_categories_func?: Maybe<Count_Functions>;
 };
 
-
 export type Main_CategoriesSub_CategoriesArgs = {
   filter?: InputMaybe<Sub_Categories_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4384,16 +4072,22 @@ export type Main_Categories_Mutated = {
 };
 
 export type Number_Filter_Operators = {
-  _between?: InputMaybe<Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>>;
+  _between?: InputMaybe<
+    Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>
+  >;
   _eq?: InputMaybe<Scalars['GraphQLStringOrFloat']['input']>;
   _gt?: InputMaybe<Scalars['GraphQLStringOrFloat']['input']>;
   _gte?: InputMaybe<Scalars['GraphQLStringOrFloat']['input']>;
   _in?: InputMaybe<Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>>;
   _lt?: InputMaybe<Scalars['GraphQLStringOrFloat']['input']>;
   _lte?: InputMaybe<Scalars['GraphQLStringOrFloat']['input']>;
-  _nbetween?: InputMaybe<Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>>;
+  _nbetween?: InputMaybe<
+    Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>
+  >;
   _neq?: InputMaybe<Scalars['GraphQLStringOrFloat']['input']>;
-  _nin?: InputMaybe<Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>>;
+  _nin?: InputMaybe<
+    Array<InputMaybe<Scalars['GraphQLStringOrFloat']['input']>>
+  >;
   _nnull?: InputMaybe<Scalars['Boolean']['input']>;
   _null?: InputMaybe<Scalars['Boolean']['input']>;
 };
@@ -4421,7 +4115,6 @@ export type Orders = {
   user?: Maybe<Directus_Users>;
 };
 
-
 export type OrdersCargo_CompanyArgs = {
   filter?: InputMaybe<Cargo_Company_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4430,7 +4123,6 @@ export type OrdersCargo_CompanyArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type OrdersInvoice_InfoArgs = {
   filter?: InputMaybe<Invoice_Info_Filter>;
@@ -4441,7 +4133,6 @@ export type OrdersInvoice_InfoArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type OrdersProductArgs = {
   filter?: InputMaybe<Product_Variations_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4450,7 +4141,6 @@ export type OrdersProductArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type OrdersUserArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -4580,7 +4270,6 @@ export type Page__Home = {
   sectoral_sub_categories_func?: Maybe<Count_Functions>;
 };
 
-
 export type Page__HomeBannersArgs = {
   filter?: InputMaybe<Home_Banners_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4590,7 +4279,6 @@ export type Page__HomeBannersArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type Page__HomePopular_Sub_CategoriesArgs = {
   filter?: InputMaybe<Sub_Categories_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4599,7 +4287,6 @@ export type Page__HomePopular_Sub_CategoriesArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Page__HomeSectoral_Sub_CategoriesArgs = {
   filter?: InputMaybe<Sub_Categories_Filter>;
@@ -4690,6 +4377,7 @@ export type Product_Colors = {
   color?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   name?: Maybe<Scalars['String']['output']>;
+  order?: Maybe<Scalars['Int']['output']>;
 };
 
 export type Product_Colors_Aggregated = {
@@ -4711,11 +4399,13 @@ export type Product_Colors_Aggregated_Count = {
   color?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['Int']['output']>;
+  order?: Maybe<Scalars['Int']['output']>;
 };
 
 export type Product_Colors_Aggregated_Fields = {
   __typename?: 'product_colors_aggregated_fields';
   id?: Maybe<Scalars['Float']['output']>;
+  order?: Maybe<Scalars['Float']['output']>;
 };
 
 export type Product_Colors_Filter = {
@@ -4724,6 +4414,7 @@ export type Product_Colors_Filter = {
   color?: InputMaybe<String_Filter_Operators>;
   id?: InputMaybe<Number_Filter_Operators>;
   name?: InputMaybe<String_Filter_Operators>;
+  order?: InputMaybe<Number_Filter_Operators>;
 };
 
 export type Product_Colors_Mutated = {
@@ -4785,7 +4476,6 @@ export type Product_Options = {
   id: Scalars['ID']['output'];
   name?: Maybe<Scalars['String']['output']>;
 };
-
 
 export type Product_OptionsCategoryArgs = {
   filter?: InputMaybe<Product_Option_Categories_Filter>;
@@ -4849,7 +4539,6 @@ export type Product_Variation_Images = {
   small_image?: Maybe<Directus_Files>;
 };
 
-
 export type Product_Variation_ImagesBig_ImageArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4859,7 +4548,6 @@ export type Product_Variation_ImagesBig_ImageArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type Product_Variation_ImagesProduct_Variations_IdArgs = {
   filter?: InputMaybe<Product_Variations_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4868,7 +4556,6 @@ export type Product_Variation_ImagesProduct_Variations_IdArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Product_Variation_ImagesSmall_ImageArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
@@ -4955,7 +4642,6 @@ export type Product_Variations = {
   video_url?: Maybe<Scalars['String']['output']>;
 };
 
-
 export type Product_VariationsColorArgs = {
   filter?: InputMaybe<Product_Colors_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4964,7 +4650,6 @@ export type Product_VariationsColorArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Product_VariationsImagesArgs = {
   filter?: InputMaybe<Product_Variation_Images_Filter>;
@@ -4975,7 +4660,6 @@ export type Product_VariationsImagesArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type Product_VariationsMain_OptionArgs = {
   filter?: InputMaybe<Product_Options_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4984,7 +4668,6 @@ export type Product_VariationsMain_OptionArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Product_VariationsProducts_IdArgs = {
   filter?: InputMaybe<Products_Filter>;
@@ -4995,7 +4678,6 @@ export type Product_VariationsProducts_IdArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type Product_VariationsPurchase_Count_PricesArgs = {
   filter?: InputMaybe<Purchases_Counts_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -5004,7 +4686,6 @@ export type Product_VariationsPurchase_Count_PricesArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Product_VariationsSecondary_OptionArgs = {
   filter?: InputMaybe<Product_Options_Filter>;
@@ -5111,7 +4792,6 @@ export type Products = {
   variatins_func?: Maybe<Count_Functions>;
 };
 
-
 export type ProductsSub_Category_VariationArgs = {
   filter?: InputMaybe<Sub_Category_Variations_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -5121,7 +4801,6 @@ export type ProductsSub_Category_VariationArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type ProductsSub_Category_Variations_IdArgs = {
   filter?: InputMaybe<Sub_Category_Variations_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -5130,7 +4809,6 @@ export type ProductsSub_Category_Variations_IdArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type ProductsVariatinsArgs = {
   filter?: InputMaybe<Product_Variations_Filter>;
@@ -5217,7 +4895,6 @@ export type Purchases_Counts = {
   product_variations_id?: Maybe<Product_Variations>;
 };
 
-
 export type Purchases_CountsProduct_Variations_IdArgs = {
   filter?: InputMaybe<Product_Variations_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -5289,9 +4966,9 @@ export type Sectors = {
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   name?: Maybe<Scalars['String']['output']>;
+  name2?: Maybe<Scalars['String']['output']>;
   web_image?: Maybe<Directus_Files>;
 };
-
 
 export type SectorsWeb_ImageArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
@@ -5321,6 +4998,7 @@ export type Sectors_Aggregated_Count = {
   description?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['Int']['output']>;
+  name2?: Maybe<Scalars['Int']['output']>;
   web_image?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -5335,6 +5013,7 @@ export type Sectors_Filter = {
   description?: InputMaybe<String_Filter_Operators>;
   id?: InputMaybe<Number_Filter_Operators>;
   name?: InputMaybe<String_Filter_Operators>;
+  name2?: InputMaybe<String_Filter_Operators>;
   web_image?: InputMaybe<Directus_Files_Filter>;
 };
 
@@ -5352,7 +5031,6 @@ export type Social_Medias = {
   order?: Maybe<Scalars['Int']['output']>;
   url?: Maybe<Scalars['String']['output']>;
 };
-
 
 export type Social_MediasIconArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
@@ -5498,7 +5176,6 @@ export type Sub_Categories = {
   variations_func?: Maybe<Count_Functions>;
 };
 
-
 export type Sub_CategoriesCard_ImageArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -5507,7 +5184,6 @@ export type Sub_CategoriesCard_ImageArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Sub_CategoriesFooter_IdArgs = {
   filter?: InputMaybe<Footer_Filter>;
@@ -5518,7 +5194,6 @@ export type Sub_CategoriesFooter_IdArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type Sub_CategoriesMain_Categories_IdArgs = {
   filter?: InputMaybe<Main_Categories_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -5527,7 +5202,6 @@ export type Sub_CategoriesMain_Categories_IdArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Sub_CategoriesPage__Home_IdArgs = {
   filter?: InputMaybe<Page__Home_Filter>;
@@ -5538,7 +5212,6 @@ export type Sub_CategoriesPage__Home_IdArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type Sub_CategoriesPage__Home_Sectoral_IdArgs = {
   filter?: InputMaybe<Page__Home_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -5548,7 +5221,6 @@ export type Sub_CategoriesPage__Home_Sectoral_IdArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 export type Sub_CategoriesSectorArgs = {
   filter?: InputMaybe<Sub_Categories_Sectors_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -5557,7 +5229,6 @@ export type Sub_CategoriesSectorArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Sub_CategoriesVariationsArgs = {
   filter?: InputMaybe<Sub_Category_Variations_Filter>;
@@ -5659,7 +5330,6 @@ export type Sub_Categories_Sectors = {
   sub_categories_id?: Maybe<Sub_Categories>;
 };
 
-
 export type Sub_Categories_SectorsSectors_IdArgs = {
   filter?: InputMaybe<Sectors_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -5668,7 +5338,6 @@ export type Sub_Categories_SectorsSectors_IdArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Sub_Categories_SectorsSub_Categories_IdArgs = {
   filter?: InputMaybe<Sub_Categories_Filter>;
@@ -5743,7 +5412,6 @@ export type Sub_Category_Variations = {
   sub_categories_id?: Maybe<Sub_Categories>;
 };
 
-
 export type Sub_Category_VariationsProductsArgs = {
   filter?: InputMaybe<Products_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -5752,7 +5420,6 @@ export type Sub_Category_VariationsProductsArgs = {
   search?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 export type Sub_Category_VariationsSub_Categories_IdArgs = {
   filter?: InputMaybe<Sub_Categories_Filter>;
@@ -5923,7 +5590,9 @@ export type Update_Footer_Input = {
   id?: InputMaybe<Scalars['ID']['input']>;
   long_description?: InputMaybe<Scalars['String']['input']>;
   phone?: InputMaybe<Scalars['String']['input']>;
-  popular_sub_categories?: InputMaybe<Array<InputMaybe<Update_Sub_Categories_Input>>>;
+  popular_sub_categories?: InputMaybe<
+    Array<InputMaybe<Update_Sub_Categories_Input>>
+  >;
   review_url?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   whatsapp?: InputMaybe<Scalars['String']['input']>;
@@ -6008,8 +5677,12 @@ export type Update_Page__Distance_Selling_Agreement_Input = {
 export type Update_Page__Home_Input = {
   banners?: InputMaybe<Array<InputMaybe<Update_Home_Banners_Input>>>;
   id?: InputMaybe<Scalars['ID']['input']>;
-  popular_sub_categories?: InputMaybe<Array<InputMaybe<Update_Sub_Categories_Input>>>;
-  sectoral_sub_categories?: InputMaybe<Array<InputMaybe<Update_Sub_Categories_Input>>>;
+  popular_sub_categories?: InputMaybe<
+    Array<InputMaybe<Update_Sub_Categories_Input>>
+  >;
+  sectoral_sub_categories?: InputMaybe<
+    Array<InputMaybe<Update_Sub_Categories_Input>>
+  >;
 };
 
 export type Update_Page__Membership_Agreement_Input = {
@@ -6040,6 +5713,7 @@ export type Update_Product_Colors_Input = {
   color?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type Update_Product_Option_Categories_Input = {
@@ -6070,7 +5744,9 @@ export type Update_Product_Variations_Input = {
   main_option?: InputMaybe<Update_Product_Options_Input>;
   piece_price?: InputMaybe<Scalars['Float']['input']>;
   products_id?: InputMaybe<Update_Products_Input>;
-  purchase_count_prices?: InputMaybe<Array<InputMaybe<Update_Purchases_Counts_Input>>>;
+  purchase_count_prices?: InputMaybe<
+    Array<InputMaybe<Update_Purchases_Counts_Input>>
+  >;
   secondary_option?: InputMaybe<Update_Product_Options_Input>;
   stock_code?: InputMaybe<Scalars['String']['input']>;
   video_url?: InputMaybe<Scalars['String']['input']>;
@@ -6097,6 +5773,7 @@ export type Update_Sectors_Input = {
   description?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  name2?: InputMaybe<Scalars['String']['input']>;
   web_image?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -6125,7 +5802,9 @@ export type Update_Sub_Categories_Input = {
   page__home_sectoral_id?: InputMaybe<Update_Page__Home_Input>;
   sector?: InputMaybe<Array<InputMaybe<Update_Sub_Categories_Sectors_Input>>>;
   slug?: InputMaybe<Scalars['String']['input']>;
-  variations?: InputMaybe<Array<InputMaybe<Update_Sub_Category_Variations_Input>>>;
+  variations?: InputMaybe<
+    Array<InputMaybe<Update_Sub_Category_Variations_Input>>
+  >;
 };
 
 export type Update_Sub_Categories_Sectors_Input = {
@@ -6345,6 +6024,7 @@ export type Version_Product_Colors = {
   color?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  order?: Maybe<Scalars['Int']['output']>;
 };
 
 export type Version_Product_Option_Categories = {
@@ -6409,6 +6089,7 @@ export type Version_Sectors = {
   description?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  name2?: Maybe<Scalars['String']['output']>;
   web_image?: Maybe<Scalars['ID']['output']>;
 };
 
@@ -6460,473 +6141,1070 @@ export type Version_Sub_Category_Variations = {
   sub_categories_id?: Maybe<Scalars['JSON']['output']>;
 };
 
-export type GetBankAccountsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetBankAccountsQueryVariables = Exact<{ [key: string]: never }>;
 
+export type GetBankAccountsQuery = {
+  __typename?: 'Query';
+  bank_accounts: Array<{
+    __typename?: 'bank_accounts';
+    id: string;
+    bank_name?: string | null;
+    bank_branch?: string | null;
+    currency?: string | null;
+    account_owner?: string | null;
+    iban?: string | null;
+    account_no?: string | null;
+    order?: number | null;
+  }>;
+};
 
-export type GetBankAccountsQuery = { __typename?: 'Query', bank_accounts: Array<{ __typename?: 'bank_accounts', id: string, bank_name?: string | null, bank_branch?: string | null, currency?: string | null, account_owner?: string | null, iban?: string | null, account_no?: string | null, order?: number | null }> };
+export type GetCategoryBarQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetCategoryBarQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetCategoryBarQuery = {
+  __typename?: 'Query';
+  main_categories: Array<{
+    __typename?: 'main_categories';
+    id: string;
+    name?: string | null;
+    slug?: string | null;
+    order?: number | null;
+    sub_categories?: Array<{
+      __typename?: 'sub_categories';
+      name?: string | null;
+      slug?: string | null;
+      order?: number | null;
+    } | null> | null;
+  }>;
+};
 
+export type GetContactQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetCategoryBarQuery = { __typename?: 'Query', main_categories: Array<{ __typename?: 'main_categories', id: string, name?: string | null, slug?: string | null, order?: number | null, sub_categories?: Array<{ __typename?: 'sub_categories', name?: string | null, slug?: string | null, order?: number | null } | null> | null }> };
+export type GetContactQuery = {
+  __typename?: 'Query';
+  contact?: {
+    __typename?: 'contact';
+    phone?: string | null;
+    whatsapp?: string | null;
+    email?: string | null;
+    address?: string | null;
+    work_hours_mid_week?: string | null;
+    work_hours_saturday?: string | null;
+    work_hours_sunday?: string | null;
+    latitude?: string | null;
+    longitude?: string | null;
+  } | null;
+};
 
-export type GetContactQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetCorporateQueryVariables = Exact<{ [key: string]: never }>;
 
+export type GetCorporateQuery = {
+  __typename?: 'Query';
+  about_us?: {
+    __typename?: 'about_us';
+    title?: string | null;
+    content?: string | null;
+    specs?: Array<{
+      __typename?: 'about_us_specs';
+      title?: string | null;
+      description?: string | null;
+    } | null> | null;
+    features?: Array<{
+      __typename?: 'about_us_features';
+      title?: string | null;
+      description?: string | null;
+    } | null> | null;
+  } | null;
+};
 
-export type GetContactQuery = { __typename?: 'Query', contact?: { __typename?: 'contact', phone?: string | null, whatsapp?: string | null, email?: string | null, address?: string | null, work_hours_mid_week?: string | null, work_hours_saturday?: string | null, work_hours_sunday?: string | null, latitude?: string | null, longitude?: string | null } | null };
+export type GetFooterDataQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetCorporateQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetFooterDataQuery = {
+  __typename?: 'Query';
+  footer?: {
+    __typename?: 'footer';
+    title?: string | null;
+    description?: string | null;
+    phone?: string | null;
+    whatsapp?: string | null;
+    email?: string | null;
+    address?: string | null;
+    review_url?: string | null;
+    long_description?: string | null;
+    etbis_url?: string | null;
+    copyright?: string | null;
+    popular_sub_categories?: Array<{
+      __typename?: 'sub_categories';
+      name?: string | null;
+      slug?: string | null;
+      main_categories_id?: {
+        __typename?: 'main_categories';
+        slug?: string | null;
+      } | null;
+    } | null> | null;
+  } | null;
+  social_medias: Array<{
+    __typename?: 'social_medias';
+    url?: string | null;
+    order?: number | null;
+    icon?: {
+      __typename?: 'directus_files';
+      filename_disk?: string | null;
+    } | null;
+  }>;
+};
 
+export type GetHeaderDataQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetCorporateQuery = { __typename?: 'Query', about_us?: { __typename?: 'about_us', title?: string | null, content?: string | null, specs?: Array<{ __typename?: 'about_us_specs', title?: string | null, description?: string | null } | null> | null, features?: Array<{ __typename?: 'about_us_features', title?: string | null, description?: string | null } | null> | null } | null };
+export type GetHeaderDataQuery = {
+  __typename?: 'Query';
+  header?: {
+    __typename?: 'header';
+    phone?: string | null;
+    phone_text?: string | null;
+    whatsapp?: string | null;
+    whatsapp_text?: string | null;
+  } | null;
+  social_medias: Array<{
+    __typename?: 'social_medias';
+    url?: string | null;
+    order?: number | null;
+    icon?: {
+      __typename?: 'directus_files';
+      filename_disk?: string | null;
+    } | null;
+  }>;
+};
 
-export type GetFooterDataQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetHomePageDataQueryVariables = Exact<{ [key: string]: never }>;
 
-
-export type GetFooterDataQuery = { __typename?: 'Query', footer?: { __typename?: 'footer', title?: string | null, description?: string | null, phone?: string | null, whatsapp?: string | null, email?: string | null, address?: string | null, review_url?: string | null, long_description?: string | null, etbis_url?: string | null, copyright?: string | null, popular_sub_categories?: Array<{ __typename?: 'sub_categories', name?: string | null, slug?: string | null, main_categories_id?: { __typename?: 'main_categories', slug?: string | null } | null } | null> | null } | null, social_medias: Array<{ __typename?: 'social_medias', url?: string | null, order?: number | null, icon?: { __typename?: 'directus_files', filename_disk?: string | null } | null }> };
-
-export type GetHeaderDataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetHeaderDataQuery = { __typename?: 'Query', header?: { __typename?: 'header', phone?: string | null, phone_text?: string | null, whatsapp?: string | null, whatsapp_text?: string | null } | null, social_medias: Array<{ __typename?: 'social_medias', url?: string | null, order?: number | null, icon?: { __typename?: 'directus_files', filename_disk?: string | null } | null }> };
-
-export type GetHomePageDataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetHomePageDataQuery = { __typename?: 'Query', page__home?: { __typename?: 'page__home', banners?: Array<{ __typename?: 'home_banners', id: string, category?: string | null, title?: string | null, description?: string | null, button_text?: string | null, button_url?: string | null, order?: number | null, web_image?: { __typename?: 'directus_files', filename_disk?: string | null } | null, mobile_image?: { __typename?: 'directus_files', filename_disk?: string | null } | null } | null> | null, sectoral_sub_categories?: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, order?: number | null, main_categories_id?: { __typename?: 'main_categories', slug?: string | null } | null, sector?: Array<{ __typename?: 'sub_categories_sectors', sectors_id?: { __typename?: 'sectors', id: string } | null } | null> | null } | null> | null, popular_sub_categories?: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, order?: number | null, card_image?: { __typename?: 'directus_files', filename_disk?: string | null } | null, main_categories_id?: { __typename?: 'main_categories', slug?: string | null } | null } | null> | null } | null, sectors: Array<{ __typename?: 'sectors', id: string, name?: string | null, description?: string | null, web_image?: { __typename?: 'directus_files', filename_disk?: string | null } | null }> };
+export type GetHomePageDataQuery = {
+  __typename?: 'Query';
+  page__home?: {
+    __typename?: 'page__home';
+    banners?: Array<{
+      __typename?: 'home_banners';
+      id: string;
+      category?: string | null;
+      title?: string | null;
+      description?: string | null;
+      button_text?: string | null;
+      button_url?: string | null;
+      order?: number | null;
+      web_image?: {
+        __typename?: 'directus_files';
+        filename_disk?: string | null;
+      } | null;
+      mobile_image?: {
+        __typename?: 'directus_files';
+        filename_disk?: string | null;
+      } | null;
+    } | null> | null;
+    sectoral_sub_categories?: Array<{
+      __typename?: 'sub_categories';
+      id: string;
+      name?: string | null;
+      slug?: string | null;
+      order?: number | null;
+      main_categories_id?: {
+        __typename?: 'main_categories';
+        slug?: string | null;
+      } | null;
+      sector?: Array<{
+        __typename?: 'sub_categories_sectors';
+        sectors_id?: { __typename?: 'sectors'; id: string } | null;
+      } | null> | null;
+    } | null> | null;
+    popular_sub_categories?: Array<{
+      __typename?: 'sub_categories';
+      id: string;
+      name?: string | null;
+      slug?: string | null;
+      order?: number | null;
+      card_image?: {
+        __typename?: 'directus_files';
+        filename_disk?: string | null;
+      } | null;
+      main_categories_id?: {
+        __typename?: 'main_categories';
+        slug?: string | null;
+      } | null;
+    } | null> | null;
+  } | null;
+  sectors: Array<{
+    __typename?: 'sectors';
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    web_image?: {
+      __typename?: 'directus_files';
+      filename_disk?: string | null;
+    } | null;
+  }>;
+};
 
 export type GetProductListQueryVariables = Exact<{
   subcategorySlug: Scalars['String']['input'];
   variation?: InputMaybe<Scalars['String']['input']>;
 }>;
 
-
-export type GetProductListQuery = { __typename?: 'Query', sub_categories: Array<{ __typename?: 'sub_categories', id: string, name?: string | null, slug?: string | null, variations?: Array<{ __typename?: 'sub_category_variations', name?: string | null, slug?: string | null, order?: number | null, products?: Array<{ __typename?: 'products', name?: string | null, slug?: string | null, variatins?: Array<{ __typename?: 'product_variations', main_option?: { __typename?: 'product_options', id: string, name?: string | null, category?: { __typename?: 'product_option_categories', name?: string | null } | null } | null, secondary_option?: { __typename?: 'product_options', id: string, name?: string | null, category?: { __typename?: 'product_option_categories', name?: string | null } | null } | null, color?: { __typename?: 'product_colors', id: string, name?: string | null, color?: string | null } | null, images?: Array<{ __typename?: 'product_variation_images', big_image?: { __typename?: 'directus_files', filename_disk?: string | null } | null } | null> | null } | null> | null } | null> | null } | null> | null }> };
+export type GetProductListQuery = {
+  __typename?: 'Query';
+  sub_categories: Array<{
+    __typename?: 'sub_categories';
+    id: string;
+    name?: string | null;
+    slug?: string | null;
+    variations?: Array<{
+      __typename?: 'sub_category_variations';
+      name?: string | null;
+      slug?: string | null;
+      order?: number | null;
+      products?: Array<{
+        __typename?: 'products';
+        name?: string | null;
+        slug?: string | null;
+        variatins?: Array<{
+          __typename?: 'product_variations';
+          main_option?: {
+            __typename?: 'product_options';
+            id: string;
+            name?: string | null;
+            category?: {
+              __typename?: 'product_option_categories';
+              name?: string | null;
+            } | null;
+          } | null;
+          secondary_option?: {
+            __typename?: 'product_options';
+            id: string;
+            name?: string | null;
+            category?: {
+              __typename?: 'product_option_categories';
+              name?: string | null;
+            } | null;
+          } | null;
+          color?: {
+            __typename?: 'product_colors';
+            id: string;
+            name?: string | null;
+            color?: string | null;
+          } | null;
+          images?: Array<{
+            __typename?: 'product_variation_images';
+            big_image?: {
+              __typename?: 'directus_files';
+              filename_disk?: string | null;
+            } | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+    } | null> | null;
+  }>;
+};
 
 export type GetProductDataQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']['input']>;
 }>;
 
-
-export type GetProductDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'products', id: string, name?: string | null, slug?: string | null, sub_category_variation?: { __typename?: 'sub_category_variations', name?: string | null, slug?: string | null } | null, variatins?: Array<{ __typename?: 'product_variations', id: string, piece_price?: number | null, stock_code?: string | null, details?: string | null, video_url?: string | null, main_option?: { __typename?: 'product_options', id: string, name?: string | null, code?: string | null, category?: { __typename?: 'product_option_categories', id: string, name?: string | null } | null } | null, secondary_option?: { __typename?: 'product_options', id: string, name?: string | null, code?: string | null, category?: { __typename?: 'product_option_categories', id: string, name?: string | null } | null } | null, color?: { __typename?: 'product_colors', name?: string | null, color?: string | null } | null, purchase_count_prices?: Array<{ __typename?: 'purchases_counts', id: string, count?: number | null, price?: number | null } | null> | null, images?: Array<{ __typename?: 'product_variation_images', big_image?: { __typename?: 'directus_files', filename_disk?: string | null } | null, small_image?: { __typename?: 'directus_files', filename_disk?: string | null } | null } | null> | null } | null> | null }> };
+export type GetProductDataQuery = {
+  __typename?: 'Query';
+  product_colors: Array<{
+    __typename?: 'product_colors';
+    id: string;
+    name?: string | null;
+    color?: string | null;
+  }>;
+  product_options: Array<{
+    __typename?: 'product_options';
+    id: string;
+    name?: string | null;
+  }>;
+  products: Array<{
+    __typename?: 'products';
+    id: string;
+    name?: string | null;
+    slug?: string | null;
+    sub_category_variation?: {
+      __typename?: 'sub_category_variations';
+      name?: string | null;
+      slug?: string | null;
+    } | null;
+    variatins?: Array<{
+      __typename?: 'product_variations';
+      id: string;
+      piece_price?: number | null;
+      stock_code?: string | null;
+      details?: string | null;
+      video_url?: string | null;
+      main_option?: {
+        __typename?: 'product_options';
+        id: string;
+        name?: string | null;
+        code?: string | null;
+        category?: {
+          __typename?: 'product_option_categories';
+          id: string;
+          name?: string | null;
+        } | null;
+      } | null;
+      secondary_option?: {
+        __typename?: 'product_options';
+        id: string;
+        name?: string | null;
+        code?: string | null;
+        category?: {
+          __typename?: 'product_option_categories';
+          id: string;
+          name?: string | null;
+        } | null;
+      } | null;
+      color?: {
+        __typename?: 'product_colors';
+        name?: string | null;
+        color?: string | null;
+      } | null;
+      purchase_count_prices?: Array<{
+        __typename?: 'purchases_counts';
+        id: string;
+        count?: number | null;
+        price?: number | null;
+      } | null> | null;
+      images?: Array<{
+        __typename?: 'product_variation_images';
+        big_image?: {
+          __typename?: 'directus_files';
+          filename_disk?: string | null;
+        } | null;
+        small_image?: {
+          __typename?: 'directus_files';
+          filename_disk?: string | null;
+        } | null;
+      } | null> | null;
+    } | null> | null;
+  }>;
+};
 
 export type SearchProductsByNameQueryVariables = Exact<{
   keyword: Scalars['String']['input'];
 }>;
 
-
-export type SearchProductsByNameQuery = { __typename?: 'Query', products: Array<{ __typename?: 'products', id: string, name?: string | null, slug?: string | null, variatins?: Array<{ __typename?: 'product_variations', images?: Array<{ __typename?: 'product_variation_images', big_image?: { __typename?: 'directus_files', filename_disk?: string | null } | null } | null> | null } | null> | null }> };
+export type SearchProductsByNameQuery = {
+  __typename?: 'Query';
+  products: Array<{
+    __typename?: 'products';
+    id: string;
+    name?: string | null;
+    slug?: string | null;
+    variatins?: Array<{
+      __typename?: 'product_variations';
+      images?: Array<{
+        __typename?: 'product_variation_images';
+        big_image?: {
+          __typename?: 'directus_files';
+          filename_disk?: string | null;
+        } | null;
+      } | null> | null;
+    } | null> | null;
+  }>;
+};
 
 export type SearchProductsByStockCodeQueryVariables = Exact<{
   stockCode: Scalars['String']['input'];
 }>;
 
+export type SearchProductsByStockCodeQuery = {
+  __typename?: 'Query';
+  products: Array<{
+    __typename?: 'products';
+    id: string;
+    name?: string | null;
+    slug?: string | null;
+    variatins?: Array<{
+      __typename?: 'product_variations';
+      images?: Array<{
+        __typename?: 'product_variation_images';
+        big_image?: {
+          __typename?: 'directus_files';
+          filename_disk?: string | null;
+        } | null;
+      } | null> | null;
+    } | null> | null;
+  }>;
+};
 
-export type SearchProductsByStockCodeQuery = { __typename?: 'Query', products: Array<{ __typename?: 'products', id: string, name?: string | null, slug?: string | null, variatins?: Array<{ __typename?: 'product_variations', images?: Array<{ __typename?: 'product_variation_images', big_image?: { __typename?: 'directus_files', filename_disk?: string | null } | null } | null> | null } | null> | null }> };
+export type GetSssQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetSssQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetSssQuery = { __typename?: 'Query', sss: Array<{ __typename?: 'sss', id: string, question?: string | null, answer?: string | null }> };
+export type GetSssQuery = {
+  __typename?: 'Query';
+  sss: Array<{
+    __typename?: 'sss';
+    id: string;
+    question?: string | null;
+    answer?: string | null;
+  }>;
+};
 
 export type GetOrdersQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
-
-export type GetOrdersQuery = { __typename?: 'Query', orders: Array<{ __typename?: 'orders', id: string, stock_number?: string | null, product_count?: number | null, color_hex?: string | null, color_label?: string | null, main_option?: string | null, secondary_option?: string | null, total_price?: number | null, piece_price?: number | null, total_price_with_tax?: number | null, partial_payment_value?: number | null, status?: string | null, created_at?: any | null, cargo_tracking_number?: string | null, product?: { __typename?: 'product_variations', images?: Array<{ __typename?: 'product_variation_images', small_image?: { __typename?: 'directus_files', filename_disk?: string | null } | null } | null> | null } | null, cargo_company?: { __typename?: 'cargo_company', name?: string | null, cargo_tracking_url?: string | null } | null, invoice_info?: { __typename?: 'invoice_info', full_name?: string | null, tckn?: string | null } | null }>, orders_aggregated: Array<{ __typename?: 'orders_aggregated', count?: { __typename?: 'orders_aggregated_count', id?: number | null } | null }> };
-
+export type GetOrdersQuery = {
+  __typename?: 'Query';
+  orders: Array<{
+    __typename?: 'orders';
+    id: string;
+    stock_number?: string | null;
+    product_count?: number | null;
+    color_hex?: string | null;
+    color_label?: string | null;
+    main_option?: string | null;
+    secondary_option?: string | null;
+    total_price?: number | null;
+    piece_price?: number | null;
+    total_price_with_tax?: number | null;
+    partial_payment_value?: number | null;
+    status?: string | null;
+    created_at?: any | null;
+    cargo_tracking_number?: string | null;
+    product?: {
+      __typename?: 'product_variations';
+      images?: Array<{
+        __typename?: 'product_variation_images';
+        small_image?: {
+          __typename?: 'directus_files';
+          filename_disk?: string | null;
+        } | null;
+      } | null> | null;
+    } | null;
+    cargo_company?: {
+      __typename?: 'cargo_company';
+      name?: string | null;
+      cargo_tracking_url?: string | null;
+    } | null;
+    invoice_info?: {
+      __typename?: 'invoice_info';
+      full_name?: string | null;
+      tckn?: string | null;
+    } | null;
+  }>;
+  orders_aggregated: Array<{
+    __typename?: 'orders_aggregated';
+    count?: {
+      __typename?: 'orders_aggregated_count';
+      id?: number | null;
+    } | null;
+  }>;
+};
 
 export const GetBankAccountsDocument = gql`
-    query GetBankAccounts {
-  bank_accounts {
-    id
-    bank_name
-    bank_branch
-    currency
-    account_owner
-    iban
-    account_no
-    order
-  }
-}
-    `;
-export const GetCategoryBarDocument = gql`
-    query GetCategoryBar {
-  main_categories {
-    id
-    name
-    slug
-    order
-    sub_categories {
-      name
-      slug
+  query GetBankAccounts {
+    bank_accounts {
+      id
+      bank_name
+      bank_branch
+      currency
+      account_owner
+      iban
+      account_no
       order
     }
   }
-}
-    `;
-export const GetContactDocument = gql`
-    query GetContact {
-  contact {
-    phone
-    whatsapp
-    email
-    address
-    work_hours_mid_week
-    work_hours_saturday
-    work_hours_sunday
-    latitude
-    longitude
-  }
-}
-    `;
-export const GetCorporateDocument = gql`
-    query GetCorporate {
-  about_us {
-    title
-    content
-    specs(sort: ["order"]) {
-      title
-      description
-    }
-    features(sort: ["order"]) {
-      title
-      description
-    }
-  }
-}
-    `;
-export const GetFooterDataDocument = gql`
-    query GetFooterData {
-  footer {
-    title
-    description
-    phone
-    whatsapp
-    email
-    address
-    review_url
-    long_description
-    etbis_url
-    copyright
-    popular_sub_categories {
+`;
+export const GetCategoryBarDocument = gql`
+  query GetCategoryBar {
+    main_categories {
+      id
       name
       slug
-      main_categories_id {
+      order
+      sub_categories {
+        name
         slug
+        order
       }
     }
   }
-  social_medias {
-    icon {
-      filename_disk
+`;
+export const GetContactDocument = gql`
+  query GetContact {
+    contact {
+      phone
+      whatsapp
+      email
+      address
+      work_hours_mid_week
+      work_hours_saturday
+      work_hours_sunday
+      latitude
+      longitude
     }
-    url
-    order
   }
-}
-    `;
-export const GetHeaderDataDocument = gql`
-    query GetHeaderData {
-  header {
-    phone
-    phone_text
-    whatsapp
-    whatsapp_text
-  }
-  social_medias {
-    icon {
-      filename_disk
+`;
+export const GetCorporateDocument = gql`
+  query GetCorporate {
+    about_us {
+      title
+      content
+      specs(sort: ["order"]) {
+        title
+        description
+      }
+      features(sort: ["order"]) {
+        title
+        description
+      }
     }
-    url
-    order
   }
-}
-    `;
-export const GetHomePageDataDocument = gql`
-    query GetHomePageData {
-  page__home {
-    banners {
-      id
-      category
+`;
+export const GetFooterDataDocument = gql`
+  query GetFooterData {
+    footer {
       title
       description
-      button_text
-      button_url
+      phone
+      whatsapp
+      email
+      address
+      review_url
+      long_description
+      etbis_url
+      copyright
+      popular_sub_categories {
+        name
+        slug
+        main_categories_id {
+          slug
+        }
+      }
+    }
+    social_medias {
+      icon {
+        filename_disk
+      }
+      url
+      order
+    }
+  }
+`;
+export const GetHeaderDataDocument = gql`
+  query GetHeaderData {
+    header {
+      phone
+      phone_text
+      whatsapp
+      whatsapp_text
+    }
+    social_medias {
+      icon {
+        filename_disk
+      }
+      url
+      order
+    }
+  }
+`;
+export const GetHomePageDataDocument = gql`
+  query GetHomePageData {
+    page__home {
+      banners {
+        id
+        category
+        title
+        description
+        button_text
+        button_url
+        web_image {
+          filename_disk
+        }
+        mobile_image {
+          filename_disk
+        }
+        order
+      }
+      sectoral_sub_categories {
+        id
+        name
+        slug
+        order
+        main_categories_id {
+          slug
+        }
+        sector {
+          sectors_id {
+            id
+          }
+        }
+      }
+      popular_sub_categories {
+        id
+        name
+        slug
+        order
+        card_image {
+          filename_disk
+        }
+        main_categories_id {
+          slug
+        }
+      }
+    }
+    sectors {
+      id
+      name
+      description
       web_image {
         filename_disk
       }
-      mobile_image {
-        filename_disk
-      }
-      order
-    }
-    sectoral_sub_categories {
-      id
-      name
-      slug
-      order
-      main_categories_id {
-        slug
-      }
-      sector {
-        sectors_id {
-          id
-        }
-      }
-    }
-    popular_sub_categories {
-      id
-      name
-      slug
-      order
-      card_image {
-        filename_disk
-      }
-      main_categories_id {
-        slug
-      }
     }
   }
-  sectors {
-    id
-    name
-    description
-    web_image {
-      filename_disk
-    }
-  }
-}
-    `;
+`;
 export const GetProductListDocument = gql`
-    query GetProductList($subcategorySlug: String!, $variation: String) {
-  sub_categories(filter: {slug: {_eq: $subcategorySlug}}, limit: 1) {
-    id
-    name
-    slug
-    variations(filter: {slug: {_eq: $variation}}) {
+  query GetProductList($subcategorySlug: String!, $variation: String) {
+    sub_categories(filter: { slug: { _eq: $subcategorySlug } }, limit: 1) {
+      id
       name
       slug
-      order
-      products {
+      variations(filter: { slug: { _eq: $variation } }) {
         name
         slug
-        variatins {
-          main_option {
-            id
-            name
-            category {
+        order
+        products {
+          name
+          slug
+          variatins {
+            main_option {
+              id
               name
+              category {
+                name
+              }
             }
-          }
-          secondary_option {
-            id
-            name
-            category {
+            secondary_option {
+              id
               name
+              category {
+                name
+              }
             }
-          }
-          color {
-            id
-            name
-            color
-          }
-          images(limit: 1) {
-            big_image {
-              filename_disk
+            color {
+              id
+              name
+              color
+            }
+            images(limit: 1) {
+              big_image {
+                filename_disk
+              }
             }
           }
         }
       }
     }
   }
-}
-    `;
+`;
 export const GetProductDataDocument = gql`
-    query GetProductData($slug: String) {
-  products(filter: {slug: {_eq: $slug}}, limit: 1) {
-    id
-    name
-    slug
-    sub_category_variation {
+  query GetProductData($slug: String) {
+    product_colors(limit: -1) {
+      id
+      name
+      color
+    }
+    product_options(limit: -1) {
+      id
+      name
+    }
+    products(filter: { slug: { _eq: $slug } }, limit: 1) {
+      id
       name
       slug
-    }
-    variatins {
-      id
-      main_option {
-        id
+      sub_category_variation {
         name
-        code
-        category {
+        slug
+      }
+      variatins {
+        id
+        main_option {
           id
           name
+          code
+          category {
+            id
+            name
+          }
         }
-      }
-      secondary_option {
-        id
-        name
-        code
-        category {
+        secondary_option {
           id
           name
+          code
+          category {
+            id
+            name
+          }
         }
-      }
-      color {
-        name
-        color
-      }
-      piece_price
-      stock_code
-      details
-      purchase_count_prices {
-        id
-        count
-        price
-      }
-      images {
-        big_image {
-          filename_disk
+        color {
+          name
+          color
         }
-        small_image {
-          filename_disk
+        piece_price
+        stock_code
+        details
+        purchase_count_prices {
+          id
+          count
+          price
         }
+        images {
+          big_image {
+            filename_disk
+          }
+          small_image {
+            filename_disk
+          }
+        }
+        video_url
       }
-      video_url
     }
   }
-}
-    `;
+`;
 export const SearchProductsByNameDocument = gql`
-    query SearchProductsByName($keyword: String!) {
-  products(filter: {name: {_icontains: $keyword}}, limit: 20) {
-    id
-    name
-    slug
-    variatins(limit: 1) {
-      images(limit: 1) {
-        big_image {
-          filename_disk
-        }
-      }
-    }
-  }
-}
-    `;
-export const SearchProductsByStockCodeDocument = gql`
-    query SearchProductsByStockCode($stockCode: String!) {
-  products(filter: {variatins: {stock_code: {_icontains: $stockCode}}}, limit: 20) {
-    id
-    name
-    slug
-    variatins(limit: 1) {
-      images(limit: 1) {
-        big_image {
-          filename_disk
-        }
-      }
-    }
-  }
-}
-    `;
-export const GetSssDocument = gql`
-    query GetSss {
-  sss {
-    id
-    question
-    answer
-  }
-}
-    `;
-export const GetOrdersDocument = gql`
-    query GetOrders($limit: Int, $offset: Int) {
-  orders(limit: $limit, offset: $offset, sort: ["-created_at"]) {
-    id
-    stock_number
-    product_count
-    color_hex
-    color_label
-    main_option
-    secondary_option
-    total_price
-    piece_price
-    total_price_with_tax
-    partial_payment_value
-    status
-    created_at
-    product {
-      images(limit: 1) {
-        small_image {
-          filename_disk
-        }
-      }
-    }
-    cargo_company {
-      name
-      cargo_tracking_url
-    }
-    cargo_tracking_number
-    invoice_info {
-      full_name
-      tckn
-    }
-  }
-  orders_aggregated {
-    count {
+  query SearchProductsByName($keyword: String!) {
+    products(filter: { name: { _icontains: $keyword } }, limit: 20) {
       id
+      name
+      slug
+      variatins(limit: 1) {
+        images(limit: 1) {
+          big_image {
+            filename_disk
+          }
+        }
+      }
     }
   }
-}
-    `;
-
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
-
-
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
-
-export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
-  return {
-    GetBankAccounts(variables?: GetBankAccountsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetBankAccountsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetBankAccountsQuery>({ document: GetBankAccountsDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetBankAccounts', 'query', variables);
-    },
-    GetCategoryBar(variables?: GetCategoryBarQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCategoryBarQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetCategoryBarQuery>({ document: GetCategoryBarDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCategoryBar', 'query', variables);
-    },
-    GetContact(variables?: GetContactQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetContactQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetContactQuery>({ document: GetContactDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetContact', 'query', variables);
-    },
-    GetCorporate(variables?: GetCorporateQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetCorporateQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetCorporateQuery>({ document: GetCorporateDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetCorporate', 'query', variables);
-    },
-    GetFooterData(variables?: GetFooterDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetFooterDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetFooterDataQuery>({ document: GetFooterDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetFooterData', 'query', variables);
-    },
-    GetHeaderData(variables?: GetHeaderDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetHeaderDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetHeaderDataQuery>({ document: GetHeaderDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetHeaderData', 'query', variables);
-    },
-    GetHomePageData(variables?: GetHomePageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetHomePageDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetHomePageDataQuery>({ document: GetHomePageDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetHomePageData', 'query', variables);
-    },
-    GetProductList(variables: GetProductListQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProductListQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductListQuery>({ document: GetProductListDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProductList', 'query', variables);
-    },
-    GetProductData(variables?: GetProductDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetProductDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductDataQuery>({ document: GetProductDataDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetProductData', 'query', variables);
-    },
-    SearchProductsByName(variables: SearchProductsByNameQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<SearchProductsByNameQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<SearchProductsByNameQuery>({ document: SearchProductsByNameDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'SearchProductsByName', 'query', variables);
-    },
-    SearchProductsByStockCode(variables: SearchProductsByStockCodeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<SearchProductsByStockCodeQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<SearchProductsByStockCodeQuery>({ document: SearchProductsByStockCodeDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'SearchProductsByStockCode', 'query', variables);
-    },
-    GetSss(variables?: GetSssQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetSssQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetSssQuery>({ document: GetSssDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetSss', 'query', variables);
-    },
-    GetOrders(variables?: GetOrdersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<GetOrdersQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetOrdersQuery>({ document: GetOrdersDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'GetOrders', 'query', variables);
+`;
+export const SearchProductsByStockCodeDocument = gql`
+  query SearchProductsByStockCode($stockCode: String!) {
+    products(
+      filter: { variatins: { stock_code: { _icontains: $stockCode } } }
+      limit: 20
+    ) {
+      id
+      name
+      slug
+      variatins(limit: 1) {
+        images(limit: 1) {
+          big_image {
+            filename_disk
+          }
+        }
+      }
     }
+  }
+`;
+export const GetSssDocument = gql`
+  query GetSss {
+    sss {
+      id
+      question
+      answer
+    }
+  }
+`;
+export const GetOrdersDocument = gql`
+  query GetOrders($limit: Int, $offset: Int) {
+    orders(limit: $limit, offset: $offset, sort: ["-created_at"]) {
+      id
+      stock_number
+      product_count
+      color_hex
+      color_label
+      main_option
+      secondary_option
+      total_price
+      piece_price
+      total_price_with_tax
+      partial_payment_value
+      status
+      created_at
+      product {
+        images(limit: 1) {
+          small_image {
+            filename_disk
+          }
+        }
+      }
+      cargo_company {
+        name
+        cargo_tracking_url
+      }
+      cargo_tracking_number
+      invoice_info {
+        full_name
+        tckn
+      }
+    }
+    orders_aggregated {
+      count {
+        id
+      }
+    }
+  }
+`;
+
+export type SdkFunctionWrapper = <T>(
+  action: (requestHeaders?: Record<string, string>) => Promise<T>,
+  operationName: string,
+  operationType?: string,
+  variables?: any
+) => Promise<T>;
+
+const defaultWrapper: SdkFunctionWrapper = (
+  action,
+  _operationName,
+  _operationType,
+  _variables
+) => action();
+
+export function getSdk(
+  client: GraphQLClient,
+  withWrapper: SdkFunctionWrapper = defaultWrapper
+) {
+  return {
+    GetBankAccounts(
+      variables?: GetBankAccountsQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<GetBankAccountsQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetBankAccountsQuery>({
+            document: GetBankAccountsDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'GetBankAccounts',
+        'query',
+        variables
+      );
+    },
+    GetCategoryBar(
+      variables?: GetCategoryBarQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<GetCategoryBarQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetCategoryBarQuery>({
+            document: GetCategoryBarDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'GetCategoryBar',
+        'query',
+        variables
+      );
+    },
+    GetContact(
+      variables?: GetContactQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<GetContactQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetContactQuery>({
+            document: GetContactDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'GetContact',
+        'query',
+        variables
+      );
+    },
+    GetCorporate(
+      variables?: GetCorporateQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<GetCorporateQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetCorporateQuery>({
+            document: GetCorporateDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'GetCorporate',
+        'query',
+        variables
+      );
+    },
+    GetFooterData(
+      variables?: GetFooterDataQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<GetFooterDataQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetFooterDataQuery>({
+            document: GetFooterDataDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'GetFooterData',
+        'query',
+        variables
+      );
+    },
+    GetHeaderData(
+      variables?: GetHeaderDataQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<GetHeaderDataQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetHeaderDataQuery>({
+            document: GetHeaderDataDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'GetHeaderData',
+        'query',
+        variables
+      );
+    },
+    GetHomePageData(
+      variables?: GetHomePageDataQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<GetHomePageDataQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetHomePageDataQuery>({
+            document: GetHomePageDataDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'GetHomePageData',
+        'query',
+        variables
+      );
+    },
+    GetProductList(
+      variables: GetProductListQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<GetProductListQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetProductListQuery>({
+            document: GetProductListDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'GetProductList',
+        'query',
+        variables
+      );
+    },
+    GetProductData(
+      variables?: GetProductDataQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<GetProductDataQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetProductDataQuery>({
+            document: GetProductDataDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'GetProductData',
+        'query',
+        variables
+      );
+    },
+    SearchProductsByName(
+      variables: SearchProductsByNameQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<SearchProductsByNameQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<SearchProductsByNameQuery>({
+            document: SearchProductsByNameDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'SearchProductsByName',
+        'query',
+        variables
+      );
+    },
+    SearchProductsByStockCode(
+      variables: SearchProductsByStockCodeQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<SearchProductsByStockCodeQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<SearchProductsByStockCodeQuery>({
+            document: SearchProductsByStockCodeDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'SearchProductsByStockCode',
+        'query',
+        variables
+      );
+    },
+    GetSss(
+      variables?: GetSssQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<GetSssQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetSssQuery>({
+            document: GetSssDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'GetSss',
+        'query',
+        variables
+      );
+    },
+    GetOrders(
+      variables?: GetOrdersQueryVariables,
+      requestHeaders?: GraphQLClientRequestHeaders,
+      signal?: RequestInit['signal']
+    ): Promise<GetOrdersQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetOrdersQuery>({
+            document: GetOrdersDocument,
+            variables,
+            requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
+            signal,
+          }),
+        'GetOrders',
+        'query',
+        variables
+      );
+    },
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;

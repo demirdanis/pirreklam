@@ -24,6 +24,12 @@ export function getProductDetailMapper(
 
   const variatins = (product.variatins ?? []).filter(Boolean);
 
+  // ─── Build ordered option index from product_options ───────────────────
+  const optionOrderMap = new Map<string, number>();
+  (data.product_options ?? []).forEach((opt, idx) => {
+    if (opt?.id) optionOrderMap.set(opt.id, idx);
+  });
+
   // ─── Main option group ────────────────────────────────────────────────────
   const mainOptionGroupTitle =
     variatins[0]?.main_option?.category?.name ?? 'BASKI SEÇENEKLERİ';
@@ -38,7 +44,11 @@ export function getProductDetailMapper(
 
   const mainOptionGroup: OptionGroup = {
     title: mainOptionGroupTitle,
-    options: Array.from(mainOptionsMap.values()),
+    options: Array.from(mainOptionsMap.values()).sort(
+      (a, b) =>
+        (optionOrderMap.get(a.id) ?? Infinity) -
+        (optionOrderMap.get(b.id) ?? Infinity)
+    ),
   };
 
   // ─── Sub option group ─────────────────────────────────────────────────────
@@ -61,23 +71,46 @@ export function getProductDetailMapper(
     subOptionsMap.size > 0
       ? {
           title: subOptionGroupTitle,
-          options: Array.from(subOptionsMap.values()),
+          options: Array.from(subOptionsMap.values()).sort(
+            (a, b) =>
+              (optionOrderMap.get(a.id) ?? Infinity) -
+              (optionOrderMap.get(b.id) ?? Infinity)
+          ),
         }
       : undefined;
 
   // ─── Colors ───────────────────────────────────────────────────────────────
-  const colorsMap = new Map<string, ColorOption>();
+  // Collect the hex values used in this product's variants
+  const variantColorHexes = new Set<string>();
   for (const variat of variatins) {
-    const c = variat?.color;
-    if (c?.color && !colorsMap.has(c.color)) {
-      colorsMap.set(c.color, {
-        id: c.color,
-        label: c.name ?? c.color,
-        hex: c.color,
-      });
-    }
+    const hex = variat?.color?.color;
+    if (hex) variantColorHexes.add(hex);
   }
-  const colors = Array.from(colorsMap.values());
+
+  // Use the ordered product_colors list from GraphQL, filtered to this product
+  const colors: ColorOption[] = (data.product_colors ?? [])
+    .filter((c) => c?.color && variantColorHexes.has(c.color))
+    .map((c) => ({
+      id: c.color!,
+      label: c.name ?? c.color!,
+      hex: c.color!,
+    }));
+
+  // Fallback: if product_colors is empty, derive from variants (preserves old behavior)
+  if (colors.length === 0) {
+    const colorsMap = new Map<string, ColorOption>();
+    for (const variat of variatins) {
+      const c = variat?.color;
+      if (c?.color && !colorsMap.has(c.color)) {
+        colorsMap.set(c.color, {
+          id: c.color,
+          label: c.name ?? c.color,
+          hex: c.color,
+        });
+      }
+    }
+    colors.push(...colorsMap.values());
+  }
 
   // ─── Variants ─────────────────────────────────────────────────────────────
   const variants: VariantData[] = variatins.map((variat) => {
